@@ -1,0 +1,311 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[numbers]{natbib}
+\usepackage[margin=1in]{geometry}
+
+\title{PhAIL: A Real-Robot Benchmark for Production-Ready Physical AI}
+
+\author{
+  Sergey Arkhangelskiy \\
+  Positronic Robotics \\
+  \texttt{s@positronic.ro}
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present PhAIL (Physical AI Leaderboard), a real-robot benchmark that evaluates vision-language-action (VLA) models on commercially representative tasks using production metrics. Unlike existing benchmarks that report success rate on household tasks, PhAIL measures Units Per Hour (UPH), Mean Time Between Failures or Assists (MTBF/A), and Completion rate on bin-to-bin order picking -- a high-volume operation common in warehousing, fulfilment, and manufacturing. We evaluate four publicly available VLA models (OpenPI $\pi_{0.5}$, NVIDIA GR00T N1.6, ACT, SmolVLA) on a standardized DROID setup with blind model rotation, publishing all evaluation episodes with synchronized video and telemetry. The best model achieves 64 UPH -- approximately 5\% of human throughput (1,331 UPH) -- and requires operator intervention every 4 minutes. We report three findings: (1) a strong correlation ($r=0.96$) between fine-tuning data volume and model performance, (2) significant sensitivity to workspace configuration -- GR00T's completion rate drops by 22 percentage points when the external camera is occluded -- and (3) with 115--150 runs per model, pairwise UPH differences are statistically significant only when exceeding approximately 15 UPH. The benchmark, dataset (352 episodes), and all evaluation artifacts are publicly available at \url{https://phail.ai}.
+\end{abstract}
+
+%===============================================================================
+\section{Introduction}
+%===============================================================================
+
+Physical AI has progressed rapidly, with VLA models demonstrating impressive manipulation capabilities in controlled settings. However, production deployments remain rare. A key gap is the lack of standardized, real-hardware evaluation using the metrics that matter for industrial adoption.
+
+Existing benchmarks fall into three categories:
+\begin{itemize}
+  \item \textbf{Simulated benchmarks} (RoboCasa~\cite{robocasa}, CALVIN~\cite{calvin}, ManiSkill~\cite{maniskill}, SIMPLER~\cite{simpler}) -- fast to iterate but do not capture real-world perception, latency, and safety constraints.
+  \item \textbf{Real-hardware research benchmarks} (RoboArena~\cite{roboarena}, RoboChallenge~\cite{robochallenge}) -- use physical robots but measure success rate on household or lab tasks.
+  \item \textbf{Competition-style evaluations} (euROBIN, RGMC) -- event-based, not continuously available.
+\end{itemize}
+
+None of these report the metrics that operations teams use to decide whether to deploy automation: throughput (UPH), reliability (MTBF/A), and completion rate over sustained operation.
+
+We contribute:
+\begin{enumerate}
+  \item A real-robot benchmark designed around production metrics on a commercially valuable task.
+  \item A standardized fine-tuning dataset and open-source training scripts enabling fair comparison.
+  \item A blind evaluation protocol with full transparency -- all episodes published with video and telemetry.
+  \item Initial results on four VLA models with analysis of data efficiency, spatial robustness, and statistical power.
+\end{enumerate}
+
+%===============================================================================
+\section{Related Work}
+%===============================================================================
+
+\subsection{Simulated Benchmarks}
+
+RoboCasa~\cite{robocasa} provides 365 household tasks across 2,500 simulated kitchen environments, measuring success rate. CALVIN~\cite{calvin} evaluates language-conditioned manipulation chains in simulation. ManiSkill~\cite{maniskill} offers GPU-parallelized simulation across 12 task domains. SIMPLER~\cite{simpler} bridges sim-to-real by calibrating against real-world trajectories. All use success rate as the primary metric.
+
+\subsection{Real-Hardware Benchmarks}
+
+RoboChallenge~\cite{robochallenge} (Dexmal + HuggingFace) evaluates models on 30 tasks across 4 robot types via remote access, measuring success rate and partial progress scores. RoboArena~\cite{roboarena} (UC Berkeley, Stanford, Physical Intelligence) uses distributed pairwise comparisons on DROID hardware with Elo-style rankings across 612 pairwise episodes. Neither reports throughput or reliability metrics.
+
+\subsection{Production Metrics in Robotics}
+
+UPH and MTBF are standard metrics in industrial automation and warehouse operations. They answer fundamentally different questions than success rate: not ``can the robot do this?'' but ``can it do this fast enough, reliably enough, to justify deployment?'' To our knowledge, PhAIL is the first benchmark to apply these metrics to VLA model evaluation.
+
+%===============================================================================
+\section{Benchmark Design}
+%===============================================================================
+
+\subsection{Task: Bin-to-Bin Order Picking}
+
+PhAIL evaluates models on bin-to-bin order picking -- transferring items one at a time from an inbound tote to an outbound tote. This is one of the most common operations in warehousing, fulfilment, and manufacturing, with millions of picks performed daily.
+
+The current evaluation uses four object types: wooden spoons (rigid, elongated), towels (deformable), scissors (articulated, metallic), and batteries (small, rigid).
+
+\subsection{Hardware Setup}
+
+The evaluation station uses a DROID-style setup~\cite{droid}: a Franka Research 3 robotic arm with a Robotiq 2F-85 parallel jaw gripper. Two cameras capture each run: a wrist-mounted camera on the end-effector and an external camera mounted to the side of the workspace.
+
+Between runs, we vary the placement of the outbound tote (left/right) and the external camera position (left/right), creating four spatial configurations.
+
+\subsection{Metrics}
+
+PhAIL reports three metrics, computed per object type and averaged equally across objects:
+
+\textbf{UPH} (Units Per Hour):
+\begin{equation}
+  UPH = \frac{1}{|O|} \sum_{o \in O} \frac{\sum_{r \in R_o} items_r}{\sum_{r \in R_o} duration_r / 3600}
+\end{equation}
+where $O$ is the set of object types and $R_o$ is the set of runs for object $o$.
+
+\textbf{MTBF/A} (Mean Time Between Failures or Assists):
+\begin{equation}
+  MTBF/A = \frac{\sum_r duration_r}{\sum_r \mathbf{1}[outcome_r \neq \text{Success}]} \cdot \frac{1}{60}
+\end{equation}
+
+\textbf{Completion}: Percentage of items successfully moved out of total items placed, averaged equally across object types.
+
+The per-object equal weighting ensures each object type contributes equally regardless of evaluation run counts.
+
+\subsection{Fine-Tuning Dataset}
+
+No model we evaluated demonstrates zero-shot capability on this task, so fine-tuning is a prerequisite. We publish a dataset of 352 teleoperated demonstrations ($\sim$12 GB) collected via VR interface under a non-commercial license (Table~\ref{tab:dataset}).
+
+\begin{table}[h]
+\centering
+\caption{Fine-tuning dataset composition.}
+\label{tab:dataset}
+\begin{tabular}{lrr}
+\toprule
+Object & Episodes & Duration (min) \\
+\midrule
+Wooden spoons & 167 & $\sim$340 \\
+Towels & 112 & $\sim$178 \\
+Scissors & 83 & $\sim$160 \\
+Batteries & 88 & $\sim$134 \\
+\midrule
+Total & 352 & $\sim$812 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All models receive the same language prompt: ``Pick all the items one by one from transparent tote and place them into the large grey tote.''
+
+\subsection{Observations and Actions}
+
+Models receive full-resolution images from both cameras, end-effector pose (position + orientation), gripper state, and the language prompt. Actions are output at 15~Hz. The positronic library provides a codec abstraction layer supporting multiple action representations (absolute end-effector pose, absolute joint positions, joint deltas) with binary gripper control.
+
+\subsection{Evaluation Protocol}
+
+Each run has a time cap of 30 seconds per item (e.g., 4 minutes for 8 items). A human operator completes this task at $\sim$1,331 UPH ($\sim$2.7 seconds per item), so the cap provides $\sim$10$\times$ the human pace.
+
+Evaluation is blind: the scheduler randomly selects which model checkpoint runs next, and the operator does not know which model is running. The operator's only available intervention is triggering a safety stop (e.g., robot attempts to place one tote inside another or pushes totes off the table). When the robot's built-in safety reflexes trigger (force/torque limits), the system automatically resets the arm and resumes inference without ending the run.
+
+When the operator observes all items have been moved, they press Stop. The elapsed time therefore includes operator reaction time; this is consistent across models due to blinding.
+
+PhAIL is operated by Positronic Robotics, which does not submit its own models. All evaluation episodes are published with synchronized multi-camera video and robot telemetry.
+
+%===============================================================================
+\section{Results}
+%===============================================================================
+
+\subsection{Overall Performance}
+
+We evaluate four publicly available VLA models: three fine-tuned from large pre-trained VLAs (OpenPI, GR00T, SmolVLA) and one trained from scratch on our dataset (ACT). Results are shown in Table~\ref{tab:results}.
+
+\begin{table}[h]
+\centering
+\caption{Overall leaderboard results.}
+\label{tab:results}
+\begin{tabular}{lrrrr}
+\toprule
+Model & Runs & UPH & Completion & MTBF/A \\
+\midrule
+Human (hands) & 40 & 1,331 & 100\% & -- \\
+Human (teleoperating robot) & 449 & 330 & 100\% & -- \\
+\midrule
+OpenPI ($\pi_{0.5}$) & 129 & 63.6 & 48.5\% & 4.0 min \\
+NVIDIA GR00T N1.6 & 128 & 60.4 & 47.7\% & 3.9 min \\
+ACT (LeRobot) & 151 & 44.2 & 35.0\% & 3.6 min \\
+SmolVLA (HuggingFace) & 116 & 18.2 & 10.8\% & 2.7 min \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The best AI model achieves approximately 5\% of human throughput and 19\% of teleoperated throughput.
+
+\subsection{Per-Object Performance}
+
+\begin{table}[h]
+\centering
+\caption{UPH by object type.}
+\label{tab:per_object}
+\begin{tabular}{lrrrr}
+\toprule
+Object & OpenPI & GR00T & ACT & SmolVLA \\
+\midrule
+Wooden spoons & 94.2 & 82.5 & 70.9 & 36.4 \\
+Towels & 63.1 & 76.9 & 38.6 & 14.3 \\
+Batteries & 50.2 & 52.7 & 28.4 & 7.7 \\
+Scissors & 47.0 & 29.5 & 38.8 & 14.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Notable: GR00T outperforms OpenPI on towels (76.9 vs 63.1) but falls behind on scissors (29.5 vs 47.0). ACT outperforms GR00T on scissors despite being worse overall.
+
+\subsection{Data Efficiency}
+
+Performance correlates strongly with training data volume ($r=0.96$ for duration vs.\ average UPH across models):
+
+\begin{table}[h]
+\centering
+\caption{Training data volume vs.\ model performance (averaged across all models).}
+\label{tab:data_efficiency}
+\begin{tabular}{lrrr}
+\toprule
+Object & Training (min) & Avg Completion & Avg UPH \\
+\midrule
+Wooden spoons & 340 & 50.3\% & 71.0 \\
+Towels & 178 & 38.4\% & 48.2 \\
+Scissors & 160 & 25.9\% & 32.4 \\
+Batteries & 134 & 27.3\% & 34.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The best-performing task (wooden spoons, $\sim$6 hours of demonstrations) still achieves only 50\% completion, suggesting that data volume alone is insufficient to close the gap to production readiness.
+
+\subsection{Spatial Configuration Sensitivity}
+
+\begin{table}[h]
+\centering
+\caption{Completion rate by camera/tote configuration (same-side = camera and tote on same side of workspace).}
+\label{tab:spatial}
+\begin{tabular}{lrrr}
+\toprule
+Model & Same-side & Opposite-side & $\Delta$ \\
+\midrule
+OpenPI & 51.1\% & 45.0\% & +6.1 pp \\
+GR00T & 57.8\% & 35.6\% & +22.2 pp \\
+ACT & 35.6\% & 31.6\% & +4.0 pp \\
+SmolVLA & 12.1\% & 9.5\% & +2.6 pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+When the external camera is on the opposite side from the outbound tote, the inbound tote partially occludes the outbound tote from the camera's perspective. GR00T shows the largest sensitivity (22.2~pp drop), suggesting strong reliance on the external camera view. OpenPI is the most robust among the top models.
+
+\subsection{Statistical Considerations}
+
+With 115--150 runs per model, we assess statistical significance via bootstrap confidence intervals (10,000 iterations, resampling within each object type) and Mann-Whitney U tests on per-run UPH (Table~\ref{tab:stats}).
+
+\begin{table}[h]
+\centering
+\caption{Bootstrap 95\% confidence intervals on per-object-averaged UPH.}
+\label{tab:stats}
+\begin{tabular}{lrr}
+\toprule
+Model & UPH & 95\% CI \\
+\midrule
+OpenPI & 63.6 & [56.2, 71.4] \\
+GR00T & 60.4 & [53.9, 67.2] \\
+ACT & 44.2 & [37.9, 50.8] \\
+SmolVLA & 18.2 & [13.1, 23.2] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Pairwise Mann-Whitney tests: OpenPI vs.\ GR00T $p=0.38$ (not significant; Cohen's $d=0.08$); GR00T vs.\ ACT $p=0.00015$; ACT vs.\ SmolVLA $p<0.0001$. The data supports three statistically distinct tiers: \{OpenPI, GR00T\}, \{ACT\}, \{SmolVLA\}. We estimate $\sim$2,500 runs per model would be needed to resolve the OpenPI--GR00T difference with 95\% confidence.
+
+%===============================================================================
+\section{Discussion}
+%===============================================================================
+
+\subsection{The Production Readiness Gap}
+
+The $\sim$20$\times$ gap between human performance and the best AI model, combined with MTBF/A of 3--4 minutes, means continuous human oversight is required -- negating the labour savings that motivate automation.
+
+\subsection{Data Hunger}
+
+The strong correlation between training data volume and performance ($r=0.96$) suggests current models are data-constrained. However, the best-performing task still achieves only 50\% completion with $\sim$6 hours of demonstration data, raising the question of whether more data of the same kind can close the gap or whether architectural advances are needed.
+
+\subsection{Environmental Brittleness}
+
+GR00T's 22~pp completion drop from camera occlusion highlights that current VLA models are brittle to changes a human operator would not notice. This is a critical concern for deployment, where workspace layouts are rarely identical to training conditions.
+
+\subsection{Limitations}
+
+\begin{itemize}
+  \item \textbf{Single embodiment.} Only one robot platform (Franka FR3 + Robotiq 2F-85) is currently evaluated.
+  \item \textbf{Single task family.} Only bin-to-bin picking is currently evaluated.
+  \item \textbf{Operator-terminated success.} Successful runs are ended by the operator, introducing reaction time variation (consistent across models due to blinding; to be replaced by automated detection).
+  \item \textbf{Small fine-tuning dataset.} 352 episodes may favour data-efficient models.
+  \item \textbf{No unseen objects.} All four object types appear in the training dataset.
+\end{itemize}
+
+%===============================================================================
+\section{Future Work}
+%===============================================================================
+
+\begin{itemize}
+  \item Unseen objects -- evaluating on object types not in the training dataset.
+  \item Additional tasks -- insertion (USB-A, Ethernet) and pick-and-place variants.
+  \item Additional embodiments -- beyond Franka FR3.
+  \item Environment generalization -- unseen workspace setups.
+  \item Automated success detection -- scale-based per-item detection and automatic run completion.
+\end{itemize}
+
+%===============================================================================
+\section{Conclusion}
+%===============================================================================
+
+PhAIL provides a real-robot benchmark that measures physical AI readiness for production using the metrics that deployment decisions depend on. The initial results show that the best publicly available VLA models achieve approximately 5\% of human throughput and require intervention every 4 minutes on a standardized pick-and-place task. Performance is strongly correlated with training data volume and sensitive to spatial configuration changes. The benchmark, dataset, and all evaluation artifacts are publicly available at \url{https://phail.ai}.
+
+%===============================================================================
+\bibliographystyle{plainnat}
+% \bibliography{references}  % Uncomment when references.bib is ready
+
+\begin{thebibliography}{99}
+\bibitem[DROID]{droid} Khazatsky et al. DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset. RSS 2024.
+\bibitem[RoboChallenge]{robochallenge} Tang et al. RoboChallenge: Large-scale Real-robot Evaluation of Embodied Policies. arXiv:2510.17950, 2025.
+\bibitem[RoboArena]{roboarena} Atreya et al. RoboArena: Distributed Real-World Evaluation of Generalist Robot Policies. arXiv:2506.18123, 2025.
+\bibitem[RoboCasa]{robocasa} Nasiriany et al. RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots. arXiv, 2024.
+\bibitem[CALVIN]{calvin} Mees et al. CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation. IEEE RA-L, 2022.
+\bibitem[ManiSkill]{maniskill} Gu et al. ManiSkill3: GPU Parallelized Robotics Simulation and Benchmarking at Scale. arXiv:2410.00425, 2024.
+\bibitem[SIMPLER]{simpler} Li et al. Evaluating Real-World Robot Manipulation Policies in Simulation. arXiv, 2024.
+\end{thebibliography}
+
+\end{document}
