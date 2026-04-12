@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["scipy", "numpy"]
+# dependencies = ["scipy", "numpy", "pos3>=0.2.0"]
 # ///
 """Statistical analysis of PhAIL leaderboard results.
 
-Loads the same dataset as the production server, replicates per-object UPH
+Loads episode data from the local cache, replicates per-object UPH
 aggregation, then runs bootstrap CIs, Mann-Whitney U tests, and sample-size
 estimates.
 
@@ -13,14 +13,34 @@ Run with:
     uv run scripts/statistical_analysis.py
 """
 
+import json
+import os
 import sys
 from collections import defaultdict
+from pathlib import Path
 
 import numpy as np
+import pos3
 from scipy import stats
 
-sys.path.insert(0, '.')
-from phail.server import BASELINE_MODELS, _leaderboard_group_fn, _prod_predicate
+# ---------------------------------------------------------------------------
+# Constants vendored from phail-website and positronic cfg
+# ---------------------------------------------------------------------------
+
+MODEL_DISPLAY = {
+    'openpi': 'Physical Intelligence Open \u03c0\u2080.\u2085',
+    'groot': 'NVIDIA GR00T N1.6',
+    'smolvla': 'Hugging Face SmolVLA',
+    'act': 'Action Chunking Transformer',
+    'human': 'Human',
+    'teleop': 'Robot teleoperated by Human',
+}
+
+BASELINE_MODELS = {'Human', 'Robot teleoperated by Human'}
+
+# Production variant filter: only include this GR00T variant.
+# Variant = "{experiment_name}:{checkpoint_id}"
+PROD_VARIANTS = {'groot': ('270226-ee_rot6d_rel', '150000')}
 
 MODEL_SHORT = {
     'Physical Intelligence Open \u03c0\u2080.\u2085': 'OpenPI',
@@ -29,9 +49,77 @@ MODEL_SHORT = {
     'Hugging Face SmolVLA': 'SmolVLA',
 }
 
+BASE = Path(os.path.expanduser('~/.cache/positronic/s3/_/inference/phail_final'))
+
+
+# ---------------------------------------------------------------------------
+# Leaderboard group function (vendored from phail-website server.py)
+# ---------------------------------------------------------------------------
+
+def _leaderboard_group_fn(episodes):
+    """Per-object averaged UPH — same aggregation as the production leaderboard."""
+    by_object: dict[str, list] = defaultdict(list)
+    for ep in episodes:
+        by_object[ep['eval.object']].append(ep)
+
+    object_uphs = []
+    for obj_eps in by_object.values():
+        obj_duration = sum(ep.get('eval.duration', 0) for ep in obj_eps)
+        obj_items = sum(ep['eval.successful_items'] for ep in obj_eps)
+        if obj_duration > 0:
+            object_uphs.append(obj_items / (obj_duration / 3600))
+
+    return {
+        'UPH': sum(object_uphs) / len(object_uphs) if object_uphs else None,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Data loading
+# ---------------------------------------------------------------------------
+
+def load_episodes() -> list[dict]:
+    """Load episodes from cached JSON, applying display-name mapping and prod variant filter."""
+    episodes = []
+    for static_path in BASE.rglob('static.json'):
+        with open(static_path) as f:
+            d = json.load(f)
+
+        model_raw = d.get('inference.policy.server.type', '')
+        model_name = MODEL_DISPLAY.get(model_raw)
+        if model_name is None:
+            continue
+
+        # Apply production variant filter (GR00T only)
+        if model_raw in PROD_VARIANTS:
+            exp_name = d.get('inference.policy.server.experiment_name', '')
+            ckpt_id = str(d.get('inference.policy.server.checkpoint_id', ''))
+            required_exp, required_ckpt = PROD_VARIANTS[model_raw]
+            if exp_name != required_exp or ckpt_id != required_ckpt:
+                continue
+
+        duration = d.get('eval.duration', 0) or 0
+        if duration <= 0:
+            continue
+
+        episodes.append({
+            'model': model_name,
+            'eval.object': d.get('eval.object', ''),
+            'eval.successful_items': d.get('eval.successful_items', 0),
+            'eval.total_items': d.get('eval.total_items', 0),
+            'eval.duration': duration,
+            'status': 'Pass' if d.get('eval.outcome') == 'Success' else 'Fail',
+        })
+
+    return episodes
+
+
+# ---------------------------------------------------------------------------
+# Analysis helpers
+# ---------------------------------------------------------------------------
 
 def _duration(ep) -> float:
-    return ep.get('eval.duration') or ep.duration_ns / 1e9
+    return ep.get('eval.duration', 0)
 
 
 def _group_by_object(episodes: list) -> dict[str, list]:
@@ -144,14 +232,9 @@ def ci_overlap_sample_size(
 
 
 def main():
-    import pos3
-    from positronic.cfg.eval import phail_episodes
-    from positronic.dataset import CachedDataset
-    from positronic.dataset.dataset import FilterDataset
-
     with pos3.mirror():
-        ds = CachedDataset(FilterDataset(phail_episodes(), _prod_predicate))
-        episodes = [ep for ep in ds if ep['model'] not in BASELINE_MODELS]
+        episodes = load_episodes()
+    episodes = [ep for ep in episodes if ep['model'] not in BASELINE_MODELS]
 
     print(f'Loaded {len(episodes)} episodes (baselines excluded, prod variant filter applied)\n')
 

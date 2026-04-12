@@ -13,6 +13,7 @@ from collections import defaultdict
 from itertools import combinations
 
 import numpy as np
+import pos3
 from scipy import stats
 
 
@@ -339,7 +340,8 @@ def main():
     print("Aggregation: per-object equal weighting")
     print("=" * 72)
 
-    records = load_episodes()
+    with pos3.mirror():
+        records = load_episodes()
     grouped = group_by_model_object(records)
     models = sorted(grouped.keys())
 

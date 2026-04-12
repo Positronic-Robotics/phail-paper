@@ -8,47 +8,50 @@ import glob
 import os
 from collections import defaultdict
 
+import pos3
+
 
 BASE = os.path.expanduser("~/.cache/positronic/s3/_/inference/phail_final")
 
 # -- Load all episodes -------------------------------------------------------
 episodes = []
-for path in glob.glob(f"{BASE}/**/static.json", recursive=True):
-    d = json.load(open(path))
-    tote = d.get("eval.tote_placement")
-    cam = d.get("eval.external_camera")
-    if not tote or not cam:
-        continue
+with pos3.mirror():
+    for path in glob.glob(f"{BASE}/**/static.json", recursive=True):
+        d = json.load(open(path))
+        tote = d.get("eval.tote_placement")
+        cam = d.get("eval.external_camera")
+        if not tote or not cam:
+            continue
 
-    model_type = d.get("inference.policy.server.type", "unknown")
-    exp_name = d.get("inference.policy.server.experiment_name", "unknown")
+        model_type = d.get("inference.policy.server.type", "unknown")
+        exp_name = d.get("inference.policy.server.experiment_name", "unknown")
 
-    # Normalise model names
-    if model_type == "openpi":
-        model = "pi0.5"
-    elif model_type == "groot":
-        if "rel" in exp_name:
-            model = "GR00T-rel"
+        # Normalise model names
+        if model_type == "openpi":
+            model = "pi0.5"
+        elif model_type == "groot":
+            if "rel" in exp_name:
+                model = "GR00T-rel"
+            else:
+                model = "GR00T"
+        elif model_type == "act":
+            model = "ACT"
+        elif model_type == "smolvla":
+            model = "SmolVLA"
         else:
-            model = "GR00T"
-    elif model_type == "act":
-        model = "ACT"
-    elif model_type == "smolvla":
-        model = "SmolVLA"
-    else:
-        model = model_type
+            model = model_type
 
-    episodes.append({
-        "model": model,
-        "tote": tote,       # left / right
-        "camera": cam,      # left / right
-        "outcome": d.get("eval.outcome", ""),
-        "successful": d.get("eval.successful_items", 0),
-        "total": d.get("eval.total_items", 0),
-        "duration": d.get("eval.duration", 0),
-        "task": d.get("eval.object", ""),
-        "path": path,
-    })
+        episodes.append({
+            "model": model,
+            "tote": tote,       # left / right
+            "camera": cam,      # left / right
+            "outcome": d.get("eval.outcome", ""),
+            "successful": d.get("eval.successful_items", 0),
+            "total": d.get("eval.total_items", 0),
+            "duration": d.get("eval.duration", 0),
+            "task": d.get("eval.object", ""),
+            "path": path,
+        })
 
 print(f"Loaded {len(episodes)} episodes\n")
 

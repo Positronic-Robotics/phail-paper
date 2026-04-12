@@ -10,6 +10,7 @@ import os
 from collections import defaultdict
 
 import numpy as np
+import pos3
 
 
 BASE = os.path.expanduser("~/.cache/positronic/s3/_/inference/phail_final")
@@ -181,6 +182,7 @@ def analyze(episodes):
 
 
 if __name__ == "__main__":
-    episodes = load_episodes()
+    with pos3.mirror():
+        episodes = load_episodes()
     print(f"Loaded {len(episodes)} episodes total\n")
     analyze(episodes)

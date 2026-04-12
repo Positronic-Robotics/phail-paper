@@ -11,6 +11,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
+import pos3
 from scipy import stats
 
 BASE = Path.home() / ".cache/positronic/s3/_/inference/phail_final"
@@ -214,8 +215,9 @@ def per_run_uph_bootstrap(runs, models_sorted, n_boot=10_000, seed=42):
 
 
 def main():
-    print("Loading episodes from", BASE)
-    runs = load_episodes()
+    with pos3.mirror():
+        print("Loading episodes from", BASE)
+        runs = load_episodes()
     print(f"Loaded {sum(len(v) for v in runs.values())} episodes across {len(runs)} models")
 
     models_sorted = print_summary(runs)
