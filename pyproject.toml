@@ -1,16 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "phail-paper"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
+    "matplotlib>=3.10.8",
     "numpy",
     "pos3>=0.2.0",
+    "positronic",
     "scipy",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.uv.sources]
+positronic = { path = "../positronic", editable = true }
 
 [tool.hatch.build.targets.wheel]
-packages = []
+packages = ["build", "toloka"]
