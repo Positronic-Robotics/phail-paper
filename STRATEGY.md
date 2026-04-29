@@ -75,7 +75,7 @@ Use the 128 GR00T + 129 OpenPI prod-variant inference episodes. Compare three me
 |---|---|---|
 | A. Binary success rate (current practice) | Per episode "did it succeed?" (S/N > 0.5) | Fisher's exact / two-proportion z |
 | B. Mean inter-success time per episode | T/S per episode (right-censor when S=0) | Mann-Whitney or KS |
-| C. Pooled per-operation CDF (full framework) | F(t) at thresholds + KS, with cluster bootstrap at episode level | KS / threshold proportion test |
+| C. Pooled per-operation CDF (full framework) | full CDF shape, compared distributionally | KS test with episode-clustered bootstrap; stochastic dominance |
 
 Power-vs-N curve: for each N in {5, 10, 20, 50, 100, 128}, draw N episodes per model with replacement, 1000 reps per N. At each rep compute the p-value under each method. Power = fraction with p < 0.05. Plot all three power curves on one figure.
 
@@ -113,7 +113,7 @@ Strong supporting citations:
 2. Four-problems diagnosis – brief, with evidence (Problems 1, 2, 4 mostly via prior work + small PhAIL examples; Problem 3 sets up the contribution).
 3. Human-referenced operational evaluation – the framework. Time-to-success CDF, right-censoring, % of human, intervention rate as separate axis.
 4. PhAIL – reference implementation. Setup, models, tasks, data collection.
-5. Empirical demonstration – metric disagreements (success-rate vs UPH vs CDF@30s vs intervention rate produce different rankings).
+5. Empirical demonstration – metric disagreements (success-rate vs UPH vs % of human (CDF-derived) vs intervention rate produce different rankings).
 6. Stress tests and assumptions – framework robustness across threshold choices, object mixes, intervention definitions.
 7. Limits and scope – what tasks the framework does/doesn't cover; future work for assembly/insertion.
 8. Related work – Kress-Gazit, RoboArena, Arena-style LLM eval, RL CDFs, NIST ATB, etc.

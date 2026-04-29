@@ -1,228 +1,11 @@
-# PhAIL paper — findings snapshot (2026-04-13)
+# PhAIL paper — findings (2026-04-29)
 
-Working notes captured mid-rewrite, before the Toloka data arrives. The goal
-is to have the paper build from `build/` scripts on top of pos3-mirrored S3
-data, and to rewrite the text around a cleaner metric framework.
+Living document. The authoritative spec is **D1-D10** below. Build conventions
+and what's next are also current. Earlier explorations and the reasoning
+behind decisions we later reversed live in the **Appendix** at the bottom — kept
+for future agents who want to know *why* we ended up where we did.
 
-## Main story (one paragraph)
-
-The original paper frames OpenPI vs GR00T as a close race that "needs 2,500
-runs to separate." That framing is an artifact of the wrong headline metric.
-On 666 pooled episodes from `phail_final` + `phail_act_groot` (baselines
-excluded, GR00T filtered to the prod variant
-`270226-ee_rot6d_rel / ckpt 150000`), OpenPI and GR00T are statistically tied
-on both (a) per-pick success rate `p_attempt = S/A ≈ 78.2%` and
-(b) per-pick cycle time `τ_attempt = T/A ≈ 49 s`. ACT is clearly slower
-*and* less accurate (70% / 61 s). SmolVLA is far behind on both axes
-(42% / 92 s). UPH, MTBF, and completion are all derivable from
-(p_attempt, τ_attempt) plus the time cap — they do not carry independent
-signal.
-
-## Pooled per-model metrics
-
-`A` is approximated as `min(S+1, N)` — exact when the tote is cleared,
-otherwise off by ≤1 (justified by the wooden-spoon multi-item-pick
-observation: sometimes one motion moves 2+ items, but on average
-attempts ≈ successes + 1).
-
-| model   | n   | completion | p_attempt | τ_attempt (s) | τ_slot (s) | UPH  | MTBF (min) | pass rate |
-|---------|-----|-----------:|----------:|--------------:|-----------:|-----:|-----------:|----------:|
-| OpenPI  | 181 | 44.0%      | 78.2%     | 49.1          | 86.9       | 57.4 | 3.4        | 13.8%     |
-| GR00T   | 183 | 45.5%      | 78.2%     | 49.5          | 87.2       | 56.9 | 3.8        | 15.8%     |
-| ACT     | 169 | 33.3%      | 70.3%     | 61.1          | 106.9      | 41.5 | 3.6        |  3.6%     |
-| SmolVLA | 133 | 10.3%      | 41.7%     | 91.7          | 184.4      | 16.4 | 12.5       |  2.3%     |
-
-(Per-episode Pearson correlations: completion↔p_attempt ≈ 0.73,
-p_attempt↔τ_attempt ≈ −0.48, completion↔UPH ≈ 0.78, τ_slot uncorrelated
-with everything, MTBF dominated by pass rate + time cap.)
-
-## Key framing decisions
-
-### 1. State-machine view as the unifying abstraction
-
-Every episode is a walk through:
-
-```
-[start] → [pick] → [place | drop | safety_stop] → [pick] → ... → [done | timeout]
-```
-
-Every paper metric is an aggregate over per-transition (outcome, duration)
-random variables:
-
-- `p_attempt` = P(place | pick started), averaged over attempts
-- `τ_attempt` = E[duration of a pick→outcome transition]
-- `UPH` = 3600 · p_attempt / τ_attempt (ratio, not an independent axis)
-- `completion` = fraction of slots cleared; bounded above by
-  `min(1, (T_cap / τ_attempt) · p_attempt / N)` — the 30s/item cap makes
-  completion underestimate p_attempt whenever the robot doesn't finish
-  the tote in time (e.g. OpenPI: 78% per-pick success but only 44%
-  completion).
-- `MTBF` = T / n_fail, which in our setup is dominated by
-  `T_cap · N / (1 − pass_rate)` and clusters at 3–4 min for all capable
-  models.
-
-Takeaway: report (p_attempt, τ_attempt) as the primary axes; UPH becomes
-a derived throughput. Completion stays as an end-to-end production KPI
-but is acknowledged as cap-limited. MTBF probably gets demoted.
-
-### 2. Why p_attempt ≠ completion
-
-Earlier I claimed "completion = p (by definition)" — that's wrong. The
-benchmark imposes a `30 s × total_items` wall clock per episode (so 240 s
-for 8 items). If a pick takes forever, the remaining slots still count
-against completion, pushing it below p_attempt. Completion is
-production-relevant (it's what the customer sees: items out per tote
-before the timer fires) but it conflates per-pick skill with time budget.
-
-### 3. τ_slot carries no signal
-
-τ_slot = T/N (total time divided by slots, not attempts). All pairwise
-Pearson r with the other metrics < 0.26. Don't plot it; don't report it.
-
-### 4. Per-object ranking is the website's protocol
-
-phail-website computes leaderboard ranks *per object type* and then
-averages; we inherit this in the build scripts via `common._leaderboard_group_fn`
-(to be ported). This matters for the "unseen objects" row because
-rankings need to be recomputed rather than just dropping rows into the
-old table.
-
-## What changed vs the original paper
-
-- **CIs** will use the combined `phail_final + phail_act_groot` pool
-  (666 episodes) instead of just `phail_final`. OpenPI and GR00T CIs
-  should overlap heavily on p_attempt and τ_attempt.
-- **Scaling section** (spoons ablation, GR00T on 25/50/100%) — data is
-  available at `s3://inference/spoons_ablation/`, not yet wired into
-  build scripts.
-- **Unseen objects** (USB-C Boxes) — adds a new row/column to the
-  heatmap and recomputes per-object ranks. USB-C Cables were *not*
-  collected; skip.
-- **Metrics rewrite** — move from UPH-as-headline to
-  (p_attempt, τ_attempt) as the independent axes; UPH stays as a
-  production readout. Drop or demote MTBF. Drop τ_slot.
-- **Scatter plots** from `diag_metrics.py` are not usable for the paper
-  — S/N/A are small integers, so points cluster on a discrete grid and
-  obscure the story. The diagnostics stay in `build/` but don't produce
-  paper figures.
-
-## Build-system conventions (in progress)
-
-- Single repo: `/Users/vertix/Documents/dev/phail-paper/`, private,
-  `Positronic-Robotics/phail-paper` on GitHub.
-- All data paths contain `s3://…` — no hardcoded local cache paths.
-  `build/common.py::SOURCES` is the only place s3 URLs live.
-- `pos3.mirror()` opened once per `load_episodes()` call; `pos3.download()`
-  for each source with `exclude=['*.mp4', '*.parquet']` (we only need
-  `static.json` — videos + parquet are gigabytes and unused for paper
-  analysis) and `delete=False` (avoids crash on leftover partial
-  `*.parquet.<suffix>` files from interrupted downloads).
-- No `make data` target — pos3 *is* the cache; scripts idempotently
-  sync on each run.
-- One figure = one script under `build/`. Shared loaders/constants in
-  `build/common.py`.
-
-## Toloka project review (2026-04-13) — SUPERSEDED
-
-**Status:** This section reviewed the v4 schema (pick / place / drop
-events with per-event timestamps and types). The current spec lives in
-**D9 above**: `place_timestamps_s` + `items_in_target_at_end` +
-`items_in_source_at_end`. Pick events are no longer logged; drop
-events are derived from end-state counts; the per-event "type" field
-is gone. Kept here for context; do not implement against it.
-
-
-
-Project: `PhAIL Episode Metadata Annotation`. Currently configured
-with 10 demo items, GPT-5 LLM QA. Schema (from project Configuration):
-
-| field                     | type     |
-|---------------------------|----------|
-| Object Type               | category (spoons / towels / scissors / batteries / other) |
-| Total Items               | int 0–12 (N) |
-| Items Successfully Moved  | int ≤ Total Items (S) |
-| Target Tote Side          | left / right |
-| Robot Side                | left / right |
-| Operations Log            | array of `{timestamp: seconds, outcome: pick\|place\|drop}` |
-
-Consistency rule: `#place events in log == Items Successfully Moved`.
-
-### What works for the paper
-
-- ✅ N and S per episode — gives us completion = S/N directly, no
-  approximation needed. Matches the metric we already compute from
-  `static.json`.
-- ✅ Per-event timestamps in seconds, accurate to ~2–3 s. Adequate for
-  population-level τ_attempt; noisy for single-episode analysis.
-- ✅ Pick and place as separate events → we get grasp-to-place duration
-  per successful attempt.
-- ✅ Drop events logged → clean p_attempt denominator for "lifted but
-  not placed" outcomes.
-
-### Gaps to flag before scaling up
-
-1. **Failed grasps (no lift) are not logged.** Instructions say "if no
-   items are moved, leave the Operations Log empty." A pick attempt
-   where the gripper closes on nothing and never lifts an item produces
-   no event. This means `p_attempt = #place / #pick` will overestimate
-   true per-attempt success whenever the robot has "air grasps."
-   **Recommend**: redefine `pick` as "gripper close / grasp attempt,"
-   regardless of whether something is lifted. Otherwise we're back to
-   the same `A ≈ S + 1` approximation.
-2. **No `safety_stop` outcome.** The config text hints at an
-   alternative schema with `{moved, dropped, failed_grasp, safety_stop}`
-   per attempt — that version would be strictly better for our state
-   machine, but the current live schema only has pick / place / drop.
-   For episodes that end in safety stop we won't get a clean transition
-   label; the paper can fall back to `eval.outcome` from the inference
-   metadata for episode-level safety-stop flags.
-3. **Multi-item pick ambiguity.** Wooden spoons regularly move 2 items
-   in one motion. If annotators log it as 1 pick + 2 place events with
-   close timestamps the consistency check still passes and we can
-   detect it. If they log 1 pick + 1 place, `Items Successfully Moved`
-   (from counting the target tote) will exceed `#place` events and the
-   LLM QA will flag it. Worth adding a note to the instructions: "log
-   one place event per item that lands in the target tote, even if
-   they came from a single gripper motion."
-4. **Only 10 dataset items.** We have 666 episodes in
-   `phail_final + phail_act_groot` and ~150+ per production model.
-   The task needs to scale or be applied to a representative stratified
-   sample (~100 per model would give tight CIs).
-5. **Timestamp format.** Instructions ask for "seconds as a number" —
-   fine. Config page mentions considering "M:SS" as an alternative; we
-   don't need that, plain seconds is easiest for scripts.
-
-### Demo markup assessment
-
-The demo item I reviewed (item #0, wooden spoons, right target, left
-robot) passed all 6 LLM QA criteria. Operations Log #place count
-matched Items Successfully Moved. Object type selection was correct.
-This suggests the markup quality is workable for a first batch.
-**Recommendation**: address gap #1 (log all grasp attempts, not just
-successful lifts) before scaling, because that's the one that directly
-affects the paper's headline metric (p_attempt). The other gaps are
-secondary and can be handled in analysis.
-
-### Integration with the paper
-
-If Toloka delivers this schema at scale, we get:
-- Honest `p_attempt = #place / (#pick events)` per episode.
-- Honest `τ_attempt = Σ (place.t − pick.t) / #attempts` per episode
-  (clean, no "T/A" approximation).
-- Drop rate (`#drop / #pick`) as a separate transition probability
-  — useful for discussing failure modes.
-- Per-object breakdowns stay consistent with the existing N, S values
-  from `static.json`.
-
-Until gap #1 is fixed, treat Toloka τ_attempt as the authoritative
-cycle time and keep `A ≈ S + 1` as the attempts denominator for
-p_attempt (same as `static.json`-derived metrics), to avoid bias from
-unlogged air-grasps.
-
-## Framework decisions (2026-04-17) – authoritative
-
-These decisions supersede earlier sections where they conflict. When
-building the paper, treat this section as the spec.
+## Framework decisions (D1-D10) — authoritative
 
 ### D1. Philosophy: benchmark as infrastructure (LMSYS-style)
 
@@ -284,19 +67,23 @@ question:
 1. **Time-to-success CDF** `F(t) = P(T ≤ t)` – throughput and soft
    reliability. Shown as the primary figure; tabulated at
    pre-registered thresholds.
-2. **MTBA** (Mean Time Between Assists) – production-side reliability:
+2. **Intervention rate** `r = Σ assists / Σ operations` – reliability,
+   dimensionless, comparable across tasks (this is why it's primary
+   and not MTBA: insertion / assembly / packing all have different op
+   cadences in seconds, but `r` is unit-free).
    ```
-   MTBA  = Σ episode_duration   /   Σ n_assists       # industrial form (minutes)
-   MOBA  = Σ (successes + assists) / Σ assists        # per-operation form
+   r    = Σ assists / Σ (successes + assists)
+   MOBA = 1 / r       = Σ ops / Σ assists           # ops form (= 1 / r)
+   MTBA = Σ episode_duration / Σ assists            # time form, derived
+                                                    # for production reporting
    ```
-   `n_assists = drops_outside + safety_stops + stalls`. Report MTBA in
-   the customer-facing column; MOBA when comparing across tasks of
-   different op cadence (insertion / assembly etc.). Intervention rate
-   = `1 / MOBA` is the same axis in fraction units; pick whichever the
-   audience reads more naturally.
+   `n_assists = drops_outside + safety_stops + stalls`. Report `r`
+   (or its reciprocal MOBA) in the methods/leaderboard. MTBA is a
+   derived, task-specific readout for industrial audiences; quote it
+   alongside but don't compare across tasks with it.
 
 These are independent dimensions. A warehouse operator cares about
-both: how fast is the robot, and how often does it needs attention.
+both: how fast is the robot, and how often does it need attention.
 
 **Honesty note on UPH ↔ MTBA correlation.** When the robot stalls,
 those seconds count in `total_episode_duration`, so a stall-prone
@@ -318,15 +105,21 @@ correlation; we don't pretend to disentangle.
   every task has a human baseline.
 - UPH survives as a derived throughput readout, not as the headline.
 
-Secondary headline: MTBA vs human. Same information as intervention
-rate; production audiences read MTBA more naturally.
+Secondary headline: **intervention rate vs human** (e.g. "model needs
+3× more assists per operation than a human"). MTBA can be quoted in
+the production-facing column for the same axis.
 
-### D6. Thresholds and pre-registration
+### D6. Thresholds: pushed to Appendix
 
-Pre-register CDF-readout thresholds before seeing the results:
-**20 s / 30 s / 60 s**. Report `F(t)` at these points with CIs. The
-30 s point is our current benchmark cap and equals the existing
-"completion" metric honestly framed.
+The main paper does **not** lead with threshold readouts of the CDF.
+Headline comparisons are distributional: the full CDF, KS test,
+stochastic dominance, and % of human (at the human CDF's median).
+Pulling out F(20 s) / F(30 s) / F(60 s) into the leaderboard would
+dilute the contribution into "three pre-registered success rates."
+
+Threshold readouts still exist for legacy comparison with prior work
+that quotes success-rate-at-cap, and for production readers who want
+scalar cells. They live in **Appendix A6**, pre-registered there.
 
 ### D7. Objects and rankings
 
@@ -355,49 +148,24 @@ Pre-register CDF-readout thresholds before seeing the results:
 
 ### D9. Data and reproducibility
 
-- Release the per-episode operations log (see schema below). Anonymise
-  annotator ids.
-- Release the episode-level `static.json` records.
-- Ship `build/common.py` and `build/toloka.py` so readers re-derive
-  any metric they want.
-- Pre-register thresholds and bootstrap seeds in the paper so we are
-  not fishing.
+Per episode, the framework requires two things alongside the existing
+static record:
 
-**Operations-log schema (per episode, JSON sibling of `static.json`):**
+1. **Success timestamps** — episode-relative seconds for each
+   successful operation. Multi-item successes within one motion
+   produce multiple entries with identical (or near-identical)
+   timestamps.
+2. **Intervention count** — per D2.
 
-```jsonc
-{
-  "place_timestamps_s": [12.4, 31.7, 58.2, ...],   // one per item that lands in target
-                                                    // multi-item drops in one motion → repeat ts
-  "items_in_target_at_end": 5,                      // count visible in target tote, final frame
-  "items_in_source_at_end": 2                       // count visible in source tote, final frame
-}
-```
+Together with the static record (object, totals, episode duration,
+outcome class) this is sufficient for every metric in D4 / D5. How the
+data is encoded (field names, file format, on-disk layout) and how
+it's produced (human annotation, telemetry-based autopilot, hybrid)
+is implementation freedom; only the shape above is fixed.
 
-Drops outside the workspace are *derived*, not annotated:
-```
-drop_count = total_items − items_in_target_at_end − items_in_source_at_end
-```
-
-Annotator surface is "mark place timestamps + count items in each tote
-at the final frame" — purely visual, no event-classification judgment.
-Picks aren't logged. Per-drop timestamps aren't logged. Soft-failure
-events aren't logged. Stalls and safety stops aren't logged here
-either — they come from `eval.outcome` in `static.json` and are OR'd
-into the assist count by `build/toloka.py` when computing MTBA.
-
-Consistency rules the LLM QA enforces:
-- `len(place_timestamps_s) == items_in_target_at_end`
-  (annotator's place events match end-state target count)
-- `items_in_target_at_end == eval.successful_items`
-  (annotator agrees with operator's static count; flag mismatches)
-- `items_in_target_at_end + items_in_source_at_end ≤ total_items`
-  (we can't have more items than we started with)
-- timestamps are within `[0, episode_duration_s]` and weakly monotonic.
-
-Same schema applies to autopilot output — `build/autopilot/` produces
-the same JSON next to each episode. Toloka and autopilot are
-interchangeable inputs to the metric pipeline.
+Pre-register the analysis (thresholds per A6, bootstrap seeds) before
+final results. Release the per-episode published data — anonymised —
+so readers can re-derive any metric they prefer.
 
 ### D10. Scaling to future tasks
 
@@ -408,6 +176,25 @@ When PhAIL adds insertion / assembly / other operations:
 - Mixed-task aggregation uses per-task-rank-then-average.
 - Naming is already future-proofed: **intervention rate** (not "drop
   rate"), **time-to-success** (not "time-to-place").
+
+## Build-system conventions
+
+- Single repo: `/Users/vertix/Documents/dev/phail-paper/`, private,
+  `Positronic-Robotics/phail-paper` on GitHub.
+- All data paths contain `s3://…` — no hardcoded local cache paths.
+  `build/common.py::SOURCES` is the only place s3 URLs live.
+- `pos3.mirror()` opened once per `load_episodes()` call; `pos3.download()`
+  for each source with `exclude=['*.mp4', '*.parquet']` (we only need
+  `static.json` — videos + parquet are gigabytes and unused for paper
+  analysis) and `delete=False` (avoids crash on leftover partial
+  `*.parquet.<suffix>` files from interrupted downloads).
+- No `make data` target — pos3 *is* the cache; scripts idempotently
+  sync on each run.
+- One figure = one script under `build/`. Shared loaders/constants in
+  `build/common.py`.
+- Episode data access goes through `positronic.dataset` only — never
+  read parquet/static.json directly. (See user memory: feedback on
+  positronic.dataset API.)
 
 ## What's next (2026-04-28)
 
@@ -454,3 +241,133 @@ When PhAIL adds insertion / assembly / other operations:
 - [ ] `Makefile` – one `make` builds figures + PDF.
 - [ ] Rewrite paper LaTeX: Section 3 around D2–D4 framework, human-
       relative % as headline, CDF as primary figure, MTBA next to it.
+
+---
+
+## Appendix: history and rationale
+
+For future agents who want to know *what we tried and why we changed
+our minds*. The authoritative spec is D1-D10 above; this section is
+context, not instructions.
+
+### A1. From `(p_attempt, τ_attempt)` to time-to-success CDF (Apr 13 → Apr 17)
+
+**What we did first.** Our initial framing decomposed each episode as
+a state machine `pick → place|drop|safety_stop` and reported
+`p_attempt = S/A` (per-attempt success probability) and
+`τ_attempt = T/A` (per-attempt cycle time) as the primary axes, with
+UPH demoted to a derived ratio. `A` was approximated as `min(S+1, N)`
+because the existing Toloka v4 schema didn't reliably log failed
+grasps.
+
+**Why we changed our mind.**
+- `(p_attempt, τ_attempt)` doesn't generalise. Insertion or assembly
+  tasks don't have a clean per-attempt "success probability"; what
+  generalises is "how long until the next successful operation."
+- Reviewer-facing: arguing about the right way to count `A` (with vs
+  without air-grasps) is a methodological footgun. A single random
+  variable T-to-next-success sidesteps the attempt-counting problem.
+- Drops-then-retry are awkward in the (p, τ) framing (do they reduce
+  p? extend τ?) but natural in T (they just add latency to next T).
+
+**What survived.** The pooled per-model numbers below are real
+measurements. Re-frame them in T-CDF / MTBA language when reporting,
+but the sanity-check values still hold.
+
+```
+| model   | n   | completion | UPH  | pass rate |
+|---------|-----|-----------:|-----:|----------:|
+| OpenPI  | 181 | 44.0%      | 57.4 | 13.8%     |
+| GR00T   | 183 | 45.5%      | 56.9 | 15.8%     |
+| ACT     | 169 | 33.3%      | 41.5 |  3.6%     |
+| SmolVLA | 133 | 10.3%      | 16.4 |  2.3%     |
+```
+(Pool: `phail_final + phail_act_groot`, prod variants only,
+baselines excluded. GR00T at experiment `270226-ee_rot6d_rel`
+checkpoint 150000.)
+
+### A2. From per-event Operations Log to end-state counts (Apr 27)
+
+**Toloka v4 schema we started with:**
+```
+Operations Log: array of {timestamp, outcome: pick|place|drop}
+```
+Annotator marked each pick attempt, each place, each drop, with a per-
+event timestamp.
+
+**Gaps we kept hitting.**
+- *Failed grasps weren't logged* — a gripper close on nothing produced
+  no event, biasing p_attempt high.
+- *No `safety_stop` outcome in the schema* — but they exist in
+  practice and are the most operator-impactful failure mode.
+- *Multi-item picks* (wooden spoons) were ambiguous: 1 motion moves 2
+  items → annotators inconsistent about logging 1 vs 2 place events.
+- *Annotator load was high* — three event types × per-event
+  timestamps. Increased rejection rate, increased cost per video.
+
+**v5 redesign.** End-state counts replace the event log:
+`place_timestamps_s` (only for successful landings) +
+`items_in_target_at_end` + `items_in_source_at_end`. Drops are
+derived (`total − target − source`). The annotator's job is purely
+visual: mark when each item enters target, count totes at the final
+frame. No pick/drop event identification at all. Stalls and safety
+stops come from `eval.outcome` in static.json — annotators don't
+need to know about them.
+
+**Why this is robust.** (a) annotators can't get the trichotomy
+wrong because there isn't one; (b) the consistency rule
+`len(places) == items_in_target_at_end` is a one-line LLM QA check;
+(c) drops are derived, so annotators can't introduce systematic bias
+by classifying borderline cases inconsistently.
+
+### A3. Original state-machine framing (now obsolete)
+
+Earlier we modelled every episode as
+`[start] → pick → (place | drop | safety_stop) → pick → ... → done`,
+and treated each transition as a per-attempt random variable. This
+maps cleanly onto pick-and-place but does not generalise: insertion,
+assembly, packing all have richer transition graphs. D2 replaced
+this with the task-agnostic "operation has one of three outcome
+classes" abstraction. The state-machine was a useful intermediate
+step — it forced us to see that per-attempt counting was the
+problem, not the solution.
+
+### A4. UPH as headline → demoted to derived (April)
+
+UPH = items per hour was our original headline. We dropped it as
+*the* headline for two reasons: it's a ratio of the two more
+fundamental quantities (success count, total time); and "% of human
+UPH" generalises across tasks where raw UPH numbers wouldn't be
+directly comparable. UPH still appears as a production-readout column
+in tables — but the comparison story is told in CDF + MTBA.
+
+### A5. MTBF → MTBA (Apr 27)
+
+Positronic's existing leaderboard column is "MTBF/A" (Mean Time
+Between Failures/Assists), computed as
+`total_duration / failed_episode_count`. We considered keeping the
+formula. Two issues: (a) per-episode counting throws away granularity
+when episodes have varying op counts, (b) "failure" was ambiguous
+(any episode that didn't pass cleanly?). D4 replaces it with MTBA per
+*event* (drops + safety stops + stalls), summed across all episodes.
+Same name, sharper denominator. Backward-compatible enough for the
+existing column header to stay.
+
+### A6. CDF threshold readouts (pre-registered; supplementary only)
+
+We considered making `F(20 s)`, `F(30 s)`, `F(60 s)` headline numbers
+in the leaderboard. Decided against it: putting three threshold-success-
+rates next to "% of human" makes the framework look like "binary
+success rate at three pre-registered cutoffs" rather than a
+distributional comparison. Reviewers may miss that the contribution
+is shape-of-distribution comparison (KS, dominance), not point estimates.
+
+We still report these three numbers for: (a) dialogue with prior work
+that quotes success-rate-at-cap, especially the 30 s point which is
+the existing PhAIL benchmark cap and equals "completion at cap" in
+the v1 paper; (b) production readers who want scalar table cells.
+
+**Pre-registered before seeing v5 Toloka labels:** thresholds at
+**20 s, 30 s, 60 s**. Reported in supplementary table with
+episode-clustered bootstrap CIs. No threshold-fishing — these three
+are it. If we want a fourth later, document the addition explicitly.
