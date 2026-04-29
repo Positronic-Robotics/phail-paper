@@ -1,0 +1,402 @@
+[
+  {
+    "ep_dir": "000000000000/000000000293",
+    "model": "ACT",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000028",
+    "model": "ACT",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000117",
+    "model": "ACT",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 2,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000127",
+    "model": "ACT",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000325",
+    "model": "ACT",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000412",
+    "model": "ACT",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 4,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000489",
+    "model": "ACT",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 4
+  },
+  {
+    "ep_dir": "000000000000/000000000464",
+    "model": "ACT",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 4
+  },
+  {
+    "ep_dir": "000000000000/000000000318",
+    "model": "ACT",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 3,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000110",
+    "model": "ACT",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 2,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000091",
+    "model": "ACT",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 3,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000286",
+    "model": "ACT",
+    "object": "Wooden spoons",
+    "outcome": "Success",
+    "S": 8,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000083",
+    "model": "GR00T",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000018",
+    "model": "GR00T",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 3,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000014",
+    "model": "GR00T",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 5,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000123",
+    "model": "GR00T",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000122",
+    "model": "GR00T",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000121",
+    "model": "GR00T",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 3,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000167",
+    "model": "GR00T",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 2,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000152",
+    "model": "GR00T",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 6,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000148",
+    "model": "GR00T",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 6,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000097",
+    "model": "GR00T",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 2,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000055",
+    "model": "GR00T",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 5,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000054",
+    "model": "GR00T",
+    "object": "Wooden spoons",
+    "outcome": "Success",
+    "S": 8,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000189",
+    "model": "OpenPI",
+    "object": "Batteries",
+    "outcome": "Fail",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000024",
+    "model": "OpenPI",
+    "object": "Batteries",
+    "outcome": "Fail",
+    "S": 2,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000306",
+    "model": "OpenPI",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 5,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000214",
+    "model": "OpenPI",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000038",
+    "model": "OpenPI",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 4,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000327",
+    "model": "OpenPI",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 6,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000237",
+    "model": "OpenPI",
+    "object": "Towels",
+    "outcome": "Safety",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000153",
+    "model": "OpenPI",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 4,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000322",
+    "model": "OpenPI",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 6,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000378",
+    "model": "OpenPI",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000374",
+    "model": "OpenPI",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 6,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000283",
+    "model": "OpenPI",
+    "object": "Wooden spoons",
+    "outcome": "Success",
+    "S": 8,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000020",
+    "model": "SmolVLA",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000005",
+    "model": "SmolVLA",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000030",
+    "model": "SmolVLA",
+    "object": "Batteries",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000225",
+    "model": "SmolVLA",
+    "object": "Scissors",
+    "outcome": "Fail",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000145",
+    "model": "SmolVLA",
+    "object": "Scissors",
+    "outcome": "Stalled",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000259",
+    "model": "SmolVLA",
+    "object": "Scissors",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000486",
+    "model": "SmolVLA",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 4
+  },
+  {
+    "ep_dir": "000000000000/000000000497",
+    "model": "SmolVLA",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 4
+  },
+  {
+    "ep_dir": "000000000000/000000000482",
+    "model": "SmolVLA",
+    "object": "Towels",
+    "outcome": "Ran out of time",
+    "S": 1,
+    "N": 4
+  },
+  {
+    "ep_dir": "000000000000/000000000100",
+    "model": "SmolVLA",
+    "object": "Wooden spoons",
+    "outcome": "Safety",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000267",
+    "model": "SmolVLA",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 0,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000431",
+    "model": "SmolVLA",
+    "object": "Wooden spoons",
+    "outcome": "Ran out of time",
+    "S": 5,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000277",
+    "model": "OpenPI",
+    "object": "Wooden spoons",
+    "outcome": "Safety",
+    "S": 5,
+    "N": 8
+  },
+  {
+    "ep_dir": "000000000000/000000000273",
+    "model": "ACT",
+    "object": "Wooden spoons",
+    "outcome": "Stalled",
+    "S": 0,
+    "N": 8
+  }
+]

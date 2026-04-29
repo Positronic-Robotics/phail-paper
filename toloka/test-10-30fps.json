@@ -1,0 +1,52 @@
+[
+  {
+    "video_id": "training/000000000000/000000000310",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/training/000000000000/000000000310/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/training/000000000000/000000000310/image.wrist.mp4"
+  },
+  {
+    "video_id": "training/000000000000/000000000169",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/training/000000000000/000000000169/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/training/000000000000/000000000169/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000290",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000290/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000290/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000126",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000126/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000126/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000406",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000406/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000406/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000382",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000382/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000382/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000518",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000518/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000518/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000204",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000204/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000204/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000431",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000431/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000431/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000302",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000302/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000302/image.wrist.mp4"
+  }
+]
