@@ -1,0 +1,44 @@
+bins:
+  left:
+    source:
+      n: 7619
+      xmax: 0.7412258100509643
+      xmin: 0.2736739531159401
+      ymax: 0.4553965535759923
+      ymin: 0.004326583556830882
+      z_rim: 0.15188973397016525
+      zmax: 0.4650316050648689
+      zmin: 0.10188973397016525
+    target:
+      n: 3377
+      xmax: 0.6931772994995115
+      xmin: 0.297613343000412
+      ymax: -0.012334388494491574
+      ymin: -0.4121819257736206
+      z_rim: 0.19036164104938508
+      zmax: 0.6496724963188172
+      zmin: 0.1403616410493851
+  right:
+    source:
+      n: 5488
+      xmax: 0.7291950011253356
+      xmin: 0.2717660343647003
+      ymax: -0.0015910105593502713
+      ymin: -0.4480001839995384
+      z_rim: 0.1537692975997925
+      zmax: 0.4370563776791094
+      zmin: 0.10376929759979249
+    target:
+      n: 3032
+      xmax: 0.683737486898899
+      xmin: 0.2655479781329632
+      ymax: 0.5541309863328931
+      ymin: 0.0036832244321703886
+      z_rim: 0.19510824501514434
+      zmax: 0.6623897078633296
+      zmin: 0.14510824501514435
+meta:
+  description: Per-(tote_placement, role) axis-aligned bounding boxes derived from
+    inference candidates in candidates.jsonl. xmin..zmax include an isotropic margin;
+    z_rim is the pre-margin p01 z (the bin floor).
+  margin_m: 0.05
