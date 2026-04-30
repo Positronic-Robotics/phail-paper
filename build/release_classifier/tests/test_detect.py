@@ -207,10 +207,10 @@ def test_commanded_release_accidental_drop_then_release_kept():
     n = _HELD_SAMPLES + 30
     ts = _evenly_spaced(n)
     tg_vals = [1.0] * (_HELD_SAMPLES + 20) + [0.0] * 10
-    plateau1 = [0.50] * _HELD_SAMPLES                   # long stable hold (object on jaws)
-    ramp = [0.55, 0.62, 0.68, 0.74, 0.80]                # 5-sample slip / jaws-close-further
-    plateau2 = [0.85] * 15                                # short empty-grasp plateau
-    release = [0.0] * 10                                  # jaws open
+    plateau1 = [0.50] * _HELD_SAMPLES  # long stable hold (object on jaws)
+    ramp = [0.55, 0.62, 0.68, 0.74, 0.80]  # 5-sample slip / jaws-close-further
+    plateau2 = [0.85] * 15  # short empty-grasp plateau
+    release = [0.0] * 10  # jaws open
     g_vals = plateau1 + ramp + plateau2 + release
     cands = _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals)))
     assert len(cands) == 1
@@ -266,7 +266,9 @@ def test_accidental_drop_basic():
     cands = _accidental_drops(TimeSeries(ts=ts, vals=tg), TimeSeries(ts=ts, vals=grip))
     assert len(cands) == 1
     assert cands[0].kind is ReleaseKind.ACCIDENTAL_DROP
-    assert cands[0].ts_ns >= int(ts[499]) and cands[0].ts_ns <= int(ts[500])
+    # ts_ns lands on the plateau end (last in-band sample) so stage-2 samples
+    # ee_xyz at the moment the object was last confirmed in the jaws.
+    assert cands[0].ts_ns == int(ts[499])
 
 
 def test_accidental_drop_short_plateau_filtered():

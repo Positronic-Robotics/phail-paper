@@ -319,9 +319,10 @@ class Verdict(IntEnum):
     """
 
     INVALID = 0
-    SUCCESS = 1
-    FAILURE = 2
-    UNKNOWN = 3
+    SUCCESS = 1  # release in target bin → 1 item placed
+    FAILURE = 2  # release outside any bin → 1 item lost off-table
+    UNKNOWN = 3  # missing pose/pickup data — can't decide
+    NEUTRAL = 4  # release back into source bin — fumble/re-grip, no item placed and no item lost
 
     @property
     def slug(self) -> str:
