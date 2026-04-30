@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from build.release_classifier.classify import _decide
-from build.release_classifier.types import ReleaseFeatures, ReleaseKind, Verdict, XYZ
+from build.release_classifier.types import XYZ, ReleaseFeatures, ReleaseKind, Verdict
 
 
 def _f(**kwargs) -> ReleaseFeatures:
@@ -29,19 +29,17 @@ def test_in_target_no_error_is_success():
     assert 'release_z_above_target_rim' in reasons
 
 
-def test_in_source_is_failure():
+def test_in_source_is_neutral():
+    # Released back into source bin (fumble / re-grip) — neither a real
+    # placement nor a real failure.
     f = _f(release_in_target_bin=False, release_in_source_bin=True)
     verdict, reasons = _decide(f)
-    assert verdict is Verdict.FAILURE
+    assert verdict is Verdict.NEUTRAL
     assert 'release_in_source_bin' in reasons
 
 
 def test_backward_target_to_source_is_failure():
-    f = _f(
-        release_in_target_bin=False,
-        release_in_source_bin=True,
-        paired_close_in_target_bin=True,
-    )
+    f = _f(release_in_target_bin=False, release_in_source_bin=True, paired_close_in_target_bin=True)
     verdict, reasons = _decide(f)
     assert verdict is Verdict.FAILURE
     assert 'backward_target_to_source' in reasons
@@ -79,10 +77,7 @@ def test_repickup_from_target_is_success_with_flag():
     """Pickup-from-target then release-back-to-target = re-arrangement,
     not a fresh placement, but we count it as SUCCESS with a marker so
     downstream can dedupe."""
-    f = _f(
-        release_in_target_bin=True,
-        paired_close_in_target_bin=True,
-    )
+    f = _f(release_in_target_bin=True, paired_close_in_target_bin=True)
     verdict, reasons = _decide(f)
     assert verdict is Verdict.SUCCESS
     assert 'release_in_target_bin' in reasons
