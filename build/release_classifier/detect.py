@@ -39,7 +39,10 @@ Two candidate kinds:
   B. accidental_drop: target_grip stayed >= CMD_THRESHOLD throughout, but grip
      transitioned from a "held on object" plateau (grip in (HELD_MIN, HELD_MAX)
      for >= MIN_HELD_BEFORE_DROP_MS) to "fully closed" (grip > FULLY_CLOSED_MIN)
-     within DROP_WINDOW_MS. Object slipped out, jaws snapped shut.
+     within DROP_WINDOW_MS. Object slipped out, jaws snapped shut. The
+     candidate's timestamp is the *plateau end* (last in-band sample), not
+     the slump moment — that's the last point where we can confirm the
+     object was in the jaws, and stage-2 uses it to localize the drop.
 
 Thresholds are module-level constants so tuning is one file.
 
@@ -132,12 +135,7 @@ def _command_hold_start_ns(tg: TimeSeries, falling_idx: int, rising_ts: np.ndarr
 
 
 def _longest_stable_plateau_ns(
-    g: TimeSeries,
-    command_start_ns: int,
-    falling_ts_ns: int,
-    lo_val: float,
-    hi_val: float,
-    max_range: float,
+    g: TimeSeries, command_start_ns: int, falling_ts_ns: int, lo_val: float, hi_val: float, max_range: float
 ) -> int:
     """Length (ns) of the longest contiguous run within [command_start_ns,
     falling_ts_ns) where every grip sample is in (lo_val, hi_val) AND
@@ -271,10 +269,20 @@ def _commanded_releases(tg: TimeSeries, g: TimeSeries) -> list[ReleaseCandidate]
 
 
 def _accidental_drop_at(plateau_end_ns: int, slump_ts_ns: int, tg: TimeSeries) -> ReleaseCandidate | None:
-    """Validate a (plateau_end, slump) pair and emit a candidate at their midpoint."""
+    """Validate a (plateau_end, slump) pair and emit a candidate at plateau_end.
+
+    plateau_end is the last sample where grip was in the held band — i.e. the
+    last moment we can confirm the gripper had something between the jaws.
+    Stage-2 then samples ``ee_xyz`` at this timestamp, so the bin-membership
+    classification answers "where did the object leave the gripper" rather
+    than "where was the gripper while the jaws were collapsing onto
+    themselves" — which can be tens to hundreds of ms later, by which time
+    the arm has often retreated to a different bin (e.g. back over source
+    for the next pickup). See episode 554 / 32.21s for a concrete case.
+    """
     if not _was_locked_throughout(tg, plateau_end_ns, slump_ts_ns):
         return None
-    return ReleaseCandidate(kind=ReleaseKind.ACCIDENTAL_DROP, ts_ns=(plateau_end_ns + slump_ts_ns) // 2)
+    return ReleaseCandidate(kind=ReleaseKind.ACCIDENTAL_DROP, ts_ns=plateau_end_ns)
 
 
 def _find_slump(g: TimeSeries, run_end: int, plateau_end_ns: int, drop_window_ns: int) -> int | None:
