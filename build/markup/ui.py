@@ -331,10 +331,16 @@ class App:
             return
         self.idx = new_idx
         self.view = self._make_view(new_idx)  # cached: see App.__init__ note
-        self._ensure_textures()
+        # Do NOT decode here. switch_episode runs on dpg's input thread; the
+        # render loop decodes on its own thread inside refresh_frames. Two
+        # simultaneous PyAV decodes (even on different containers) corrupt
+        # libav's malloc state and abort the process — saw a SIGABRT on `.`
+        # with both threads stuck in seek_if_needed / __next__. The render
+        # loop's refresh_frames already rebuilds textures on shape mismatch,
+        # so leave all decode + texture work to it.
         self.last_save_t = None
         if self.view.has_candidate_workflow():
-            self.jump_to_candidate(_first_reviewable(self.view) or 0)
+            self.jump_to_candidate(_first_reviewable(self.view) or 0, auto_play=False)
 
     def _ensure_textures(self) -> None:
         wrist = self.view.frame_at_cursor(self.view.video_wrist)
@@ -481,18 +487,21 @@ class App:
 
     # ---- candidate review ----
 
-    def jump_to_candidate(self, idx: int) -> None:
-        """Navigate to candidate `idx`: seek to ts−CAND_LEAD_IN_S, play."""
+    def jump_to_candidate(self, idx: int, auto_play: bool = True) -> None:
+        """Navigate to candidate `idx`: seek to ts−CAND_LEAD_IN_S. Auto-play
+        by default (used by Enter/Backspace navigation); pass auto_play=False
+        on episode-switch / first-load so the user gets a still frame and can
+        choose when to start watching."""
         if not self.view.has_candidate_workflow():
             return
         idx = max(0, min(len(self.view.candidates) - 1, idx))
         self.view.cand_idx = idx
         c = self.view.candidates[idx]
         self.view.cursor_s = max(0.0, c.ts_s - CAND_LEAD_IN_S)
-        self.view.playing = True
+        self.view.playing = auto_play
         self.view.candidate_paused = False
         self.view.active_field = 'n_successful'
-        self._sync_widget_focus()
+        self._sync_widget_values()
 
     def advance_candidate(self) -> None:
         """Save current annotation state, then move to the next reviewable
@@ -524,7 +533,7 @@ class App:
         if not self.view.has_candidate_workflow():
             return
         self.view.active_field = 'n_out_of_bins' if self.view.active_field == 'n_successful' else 'n_successful'
-        self._sync_widget_focus()
+        self._sync_widget_values()
 
     def set_active_field_value(self, value: int) -> None:
         """Replace the active candidate's active field. Called from digit keys."""
@@ -564,9 +573,14 @@ class App:
         ann.comment = str(text or '')
         self._persist()
 
-    def _sync_widget_focus(self) -> None:
-        """Make dearpygui's focus follow App.active_field, and update widget
-        values from the active annotation."""
+    def _sync_widget_values(self) -> None:
+        """Push the active annotation into the widgets without stealing focus.
+        We deliberately do NOT call dpg.focus_item — keeping focus on the main
+        window means the global digit/Tab/Enter handlers receive keystrokes,
+        instead of digits getting appended into the int widget. The yellow
+        theme border (bound by _bind_active_theme) is the visible cue for
+        which field a digit press will land in. The user can still click into
+        a widget to type directly."""
         ann = self.view.active_annotation()
         if ann is None:
             return
@@ -576,9 +590,8 @@ class App:
             dpg.set_value('inp_n_out_of_bins', ann.n_out_of_bins)
         if dpg.does_item_exist('inp_comment'):
             dpg.set_value('inp_comment', ann.comment)
-        target = 'inp_n_successful' if self.view.active_field == 'n_successful' else 'inp_n_out_of_bins'
-        if dpg.does_item_exist(target):
-            dpg.focus_item(target)
+        if dpg.does_item_exist('main_window'):
+            dpg.focus_item('main_window')
 
     # ---- playback / scrubbing ----
 
@@ -1072,7 +1085,7 @@ def run_ui(
     if app.view.has_candidate_workflow():
         first = _first_reviewable(app.view)
         if first is not None:
-            app.jump_to_candidate(first)
+            app.jump_to_candidate(first, auto_play=False)
         else:
             # All candidates auto-resolved (NEUTRAL only) — show end-of-episode hint.
             app.view.cand_idx = len(app.view.candidates)
