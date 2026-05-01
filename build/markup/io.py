@@ -16,7 +16,9 @@ File schema:
       "candidate_annotations": [            # candidate-driven review (optional)
         {"ts_s": float, "n_successful": int, "n_out_of_bins": int},
         ...
-      ]
+      ],
+      "drop_timestamps_s": [float, ...],    # free-scrub drop events (optional)
+      "reviewed": bool                      # set by annotator when checked end-to-end
     }
 
 `candidate_annotations` is the per-candidate review output: for each stage-1
@@ -24,6 +26,11 @@ release candidate, how many items it successfully placed in the target bin
 and how many ended up outside both bins. When present, `place_timestamps_s`
 is derived (each ts_s repeated `n_successful` times) so old readers keep
 working. `items_in_target_at_end` is sum(n_successful).
+
+`drop_timestamps_s` and `reviewed` are additive. The candidate-review flow
+in candidates mode captures drops as `n_out_of_bins` per candidate; the
+free-scrub flow uses `drop_timestamps_s` for the same purpose at arbitrary
+cursor times. Both flows share the `reviewed` flag.
 """
 
 from __future__ import annotations
@@ -85,22 +92,27 @@ def load_markup(path: Path) -> tuple[list[float], int]:
     return timestamps, items_in_source
 
 
-def load_full(path: Path) -> tuple[list[float], int, list[CandidateAnnotation]]:
-    """Return (place_timestamps_s, items_in_source_at_end, candidate_annotations).
+def load_full(
+    path: Path,
+) -> tuple[list[float], int, list[CandidateAnnotation], list[float], bool]:
+    """Return (place_timestamps_s, items_in_source_at_end, candidate_annotations,
+    drop_timestamps_s, reviewed).
 
     `candidate_annotations` is empty when the file doesn't exist or doesn't
     carry one yet; the caller decides whether to bootstrap from a canonical
     candidates.jsonl.
     """
     if not path.exists():
-        return [], 0, []
+        return [], 0, [], [], False
     with open(path) as f:
         d = json.load(f)
     timestamps = sorted(float(t) for t in (d.get('place_timestamps_s') or []))
     items_in_source = int(d.get('items_in_source_at_end') or 0)
     annotations = [CandidateAnnotation.from_dict(a) for a in d.get('candidate_annotations') or []]
     annotations.sort(key=lambda a: a.ts_s)
-    return timestamps, items_in_source, annotations
+    drops = sorted(float(t) for t in (d.get('drop_timestamps_s') or []))
+    reviewed = bool(d.get('reviewed') or False)
+    return timestamps, items_in_source, annotations, drops, reviewed
 
 
 def save_markup(
@@ -108,6 +120,8 @@ def save_markup(
     place_timestamps_s: list[float],
     items_in_source_at_end: int,
     candidate_annotations: list[CandidateAnnotation] | None = None,
+    drop_timestamps_s: list[float] | None = None,
+    reviewed: bool = False,
 ) -> None:
     """Atomic write of the markup sidecar.
 
@@ -127,6 +141,10 @@ def save_markup(
     }
     if candidate_annotations is not None:
         d['candidate_annotations'] = [a.to_dict() for a in sorted(candidate_annotations, key=lambda x: x.ts_s)]
+    if drop_timestamps_s:
+        d['drop_timestamps_s'] = sorted(round(float(t), 3) for t in drop_timestamps_s)
+    if reviewed:
+        d['reviewed'] = True
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + '.tmp')
     with open(tmp, 'w') as f:

@@ -34,12 +34,17 @@ Usage:
 
 from __future__ import annotations
 
+import faulthandler
 import json
 import logging
 import time
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+
+# Surface a Python+C stack trace if a future PyAV/dearpygui crash slips
+# through the preload guard, instead of exiting silently.
+faulthandler.enable()
 
 import configuronic as cfn
 import dearpygui.dearpygui as dpg
@@ -203,7 +208,9 @@ class EpisodeView:
         self.duration_s = self.ep.duration_ns / 1e9
         self.video_wrist = self.ep['image.wrist']
         self.video_ext = self.ep['image.exterior']
-        legacy_ts, items_in_source, prior_annotations = markup_io.load_full(self.markup_path)
+        legacy_ts, items_in_source, prior_annotations, prior_drops, reviewed = markup_io.load_full(
+            self.markup_path
+        )
         self.items_in_source = items_in_source
         self.candidates: list[Candidate] = candidates or []
         if self.candidates:
@@ -212,6 +219,8 @@ class EpisodeView:
         else:
             self.cand_annotations = list(prior_annotations)
             self.place_timestamps_s = list(legacy_ts)
+        self.drop_timestamps_s: list[float] = list(prior_drops)
+        self.reviewed: bool = reviewed
         self.selected_idx: int | None = 0 if self.place_timestamps_s else None
         self.cursor_s = 0.0
         self.playing = False
@@ -390,10 +399,44 @@ class App:
                 self.view.place_timestamps_s,
                 self.view.items_in_source,
                 candidate_annotations=self.view.cand_annotations,
+                drop_timestamps_s=self.view.drop_timestamps_s,
+                reviewed=self.view.reviewed,
             )
         else:
-            markup_io.save_markup(self.view.markup_path, self.view.place_timestamps_s, self.view.items_in_source)
+            markup_io.save_markup(
+                self.view.markup_path,
+                self.view.place_timestamps_s,
+                self.view.items_in_source,
+                drop_timestamps_s=self.view.drop_timestamps_s,
+                reviewed=self.view.reviewed,
+            )
         self.last_save_t = time.monotonic()
+
+    # ---- additive flags (work in both flows) ----
+
+    def toggle_reviewed(self) -> None:
+        self.view.reviewed = not self.view.reviewed
+        self._persist()
+
+    # ---- free-scrub drop events (no candidate-mode equivalent needed —
+    # candidate mode captures drops as `n_out_of_bins` per candidate) ----
+
+    def add_drop(self) -> None:
+        if self.view.has_candidate_workflow():
+            return  # candidate mode uses n_out_of_bins; drop_timestamps_s is free-scrub-only
+        t = round(self.view.cursor_s, 3)
+        self.view.drop_timestamps_s.append(t)
+        self.view.drop_timestamps_s.sort()
+        self._persist()
+
+    def delete_nearest_drop(self) -> None:
+        if self.view.has_candidate_workflow() or not self.view.drop_timestamps_s:
+            return
+        t = self.view.cursor_s
+        nearest = min(range(len(self.view.drop_timestamps_s)),
+                      key=lambda i: abs(self.view.drop_timestamps_s[i] - t))
+        del self.view.drop_timestamps_s[nearest]
+        self._persist()
 
     # ---- legacy free-scrub mutations (still available without candidates) ----
 
@@ -615,10 +658,12 @@ HELP_LEFT = [
 HELP_RIGHT = [
     'EPISODE',
     '  , / .       previous / next episode',
+    '  R           toggle reviewed (header turns green)',
     '  Q           quit',
     '',
     'FREE SCRUB (no --candidates)',
     '  A           add place at cursor',
+    '  D           add drop at cursor (red tick)',
     '  X           delete selected place',
     '  N / P       next / previous place',
     '  [ / ]       items_in_source_at_end −1 / +1',
@@ -751,6 +796,11 @@ def _setup_ui(app: App) -> None:
         dpg.add_key_press_handler(dpg.mvKey_Comma, callback=lambda s, a: app.switch_episode(app.idx - 1))
         dpg.add_key_press_handler(dpg.mvKey_Period, callback=lambda s, a: app.switch_episode(app.idx + 1))
         dpg.add_key_press_handler(dpg.mvKey_Q, callback=lambda s, a: dpg.stop_dearpygui())
+        dpg.add_key_press_handler(dpg.mvKey_R, callback=lambda s, a: app.toggle_reviewed())
+        # Free-scrub drop events: D adds a drop at the cursor (red tick on the
+        # timeline). Inert in candidate-review mode (n_out_of_bins captures
+        # the same info per candidate).
+        dpg.add_key_press_handler(dpg.mvKey_D, callback=lambda s, a: app.add_drop())
         # Candidate review. Gate keys whose meaning would conflict with
         # typing into the comment field — Enter/Tab/Backspace + digits all
         # have natural in-text meaning.
@@ -824,12 +874,14 @@ def _make_prev_cand_callback(app: App):
 
 def _format_header(app: App) -> str:
     m = app.view.meta
+    badge = '  [REVIEWED]' if app.view.reviewed else ''
     return (
         f'ep {app.idx + 1}/{len(app.episodes)}  {app.view.ref.rel_id}  '
         f'obj={m.get("eval.object", "?")}  N={m.get("eval.total_items", "?")}  '
         f'outcome={m.get("eval.outcome", "?")}  '
         f'model={m.get("model", "?")}  '
         f'ref-S={m.get("eval.successful_items", "?")}'
+        f'{badge}'
     )
 
 
@@ -898,10 +950,19 @@ def _redraw_timeline(app: App) -> None:
             color = (255, 80, 200, 255) if selected else (80, 200, 255, 255)
             thickness = 4 if selected else 3
             dpg.draw_line((x, 0), (x, height), color=color, thickness=thickness, parent='timeline_strip')
+    # Free-scrub drops (red ticks). Rendered in both modes — they read from
+    # disk and may be present on legacy files even in candidate-review mode.
+    for t in app.view.drop_timestamps_s:
+        x = int(t / dur * width)
+        dpg.draw_line((x, 0), (x, height), color=(235, 80, 80, 255), thickness=3, parent='timeline_strip')
 
 
 def _refresh_text(app: App) -> None:
     dpg.set_value('header_text', _format_header(app))
+    dpg.configure_item(
+        'header_text',
+        color=(80, 220, 120) if app.view.reviewed else INACTIVE_COLOR,
+    )
     dpg.set_value(
         'time_text',
         f't = {app.view.cursor_s:6.2f}s / {app.view.duration_s:6.2f}s   {"PLAY" if app.view.playing else "pause"}',
