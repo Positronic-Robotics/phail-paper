@@ -1,0 +1,62 @@
+{
+  "place_timestamps_s": [],
+  "items_in_target_at_end": 0,
+  "items_in_source_at_end": 8,
+  "candidate_annotations": [
+    {
+      "ts_s": 27.017,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 32.607,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 46.776,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 63.352,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 120.139,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 131.107,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 134.807,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 221.693,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 229.975,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    }
+  ],
+  "reviewed": true
+}
