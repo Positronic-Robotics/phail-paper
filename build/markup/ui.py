@@ -1,6 +1,6 @@
 """Manual markup UI for D9 episode logs.
 
-Two flows on the same UI:
+Three flows on the same UI:
 
 1. **Free scrub** (legacy): scrub the wrist + exterior cameras, hit `A` to
    add a place at the cursor, `[/]` to bump items_in_source_at_end. Useful
@@ -16,6 +16,14 @@ Two flows on the same UI:
    FAILURE, respectively); typing a digit replaces the active field, Tab
    toggles which field is active, Enter saves and advances. At the end of
    an episode the `,/.` keys are highlighted so you can switch episodes.
+
+3. **Free scrub with candidate overlay** (calibration / ground-truth pass):
+   pass both `--candidates ...` AND `--free_scrub`. Free-scrub keys are
+   active (A / X / D / [ / ]); candidates render as non-actionable
+   light-blue ticks on the timeline. Lets the annotator see where stage-1
+   fired without being constrained to its event set, which is the right
+   shape for a calibration set: manual is the ground truth, candidates are
+   reference. Stage-1 misses are visible immediately as gaps.
 
 Annotations are saved to `{out_dir}/{rel_id}.json` (auto-save on every
 edit). The source dataset is never modified — pos3 is read-only.
@@ -199,7 +207,13 @@ def _first_reviewable(view: EpisodeView) -> int | None:
 class EpisodeView:
     """Per-episode mutable state."""
 
-    def __init__(self, ref: EpisodeRef, out_dir: Path, candidates: list[Candidate] | None) -> None:
+    def __init__(
+        self,
+        ref: EpisodeRef,
+        out_dir: Path,
+        candidates: list[Candidate] | None,
+        free_scrub: bool = False,
+    ) -> None:
         self.ref = ref
         self.markup_path = markup_io.markup_path(out_dir, ref.rel_id, ref.source)
         self.ep = DiskEpisode(ref.abs_path)
@@ -213,7 +227,13 @@ class EpisodeView:
         )
         self.items_in_source = items_in_source
         self.candidates: list[Candidate] = candidates or []
-        if self.candidates:
+        # `free_scrub=True` forces the free-scrub workflow even when candidates
+        # are loaded — they become a non-actionable timeline overlay so the
+        # annotator can see where stage-1 fired while marking placements
+        # manually. Useful for the calibration set, where manual is the
+        # ground truth (don't bias toward what stage-1 already found).
+        self.free_scrub = free_scrub
+        if self.candidates and not self.free_scrub:
             self.cand_annotations = _bootstrap_annotations(self.candidates, prior_annotations)
             self.place_timestamps_s = markup_io.derive_place_timestamps_from_annotations(self.cand_annotations)
         else:
@@ -246,6 +266,10 @@ class EpisodeView:
         return frame
 
     def has_candidate_workflow(self) -> bool:
+        return bool(self.candidates) and not self.free_scrub
+
+    def has_candidate_overlay(self) -> bool:
+        """Candidates loaded for visualization, regardless of workflow."""
         return bool(self.candidates)
 
     def at_episode_end(self) -> bool:
@@ -269,13 +293,18 @@ class EpisodeView:
 
 class App:
     def __init__(
-        self, episodes: list[EpisodeRef], out_dir: Path, candidates_by_ep: dict[tuple[str, str], list[Candidate]] | None
+        self,
+        episodes: list[EpisodeRef],
+        out_dir: Path,
+        candidates_by_ep: dict[tuple[str, str], list[Candidate]] | None,
+        free_scrub: bool = False,
     ):
         if not episodes:
             raise ValueError('no episodes provided')
         self.episodes = episodes
         self.out_dir = out_dir
         self.candidates_by_ep = candidates_by_ep or {}
+        self.free_scrub = free_scrub
         # We *cache* EpisodeView instances rather than recreate them on every
         # navigation. Tearing down a DiskEpisode (and the libav containers it
         # owns) while a new one's first frame is being decoded triggers a
@@ -319,7 +348,7 @@ class App:
             return self._view_cache[idx]
         ref = self.episodes[idx]
         cands = self.candidates_by_ep.get((ref.source, ref.rel_id)) if self.candidates_by_ep else None
-        view = EpisodeView(ref, self.out_dir, cands)
+        view = EpisodeView(ref, self.out_dir, cands, free_scrub=self.free_scrub)
         self._view_cache[idx] = view
         return view
 
@@ -948,7 +977,10 @@ def _redraw_timeline(app: App) -> None:
     dpg.draw_line((0, y_mid), (width, y_mid), color=(80, 80, 80, 255), thickness=1, parent='timeline_strip')
     cx = int(app.view.cursor_s / dur * width)
     dpg.draw_line((cx, 0), (cx, height), color=(255, 220, 0, 255), thickness=2, parent='timeline_strip')
-    # Stage-1 candidate ticks (light blue) — visible regardless of mode.
+    # Stage-1 candidate ticks (light blue) — drawn whenever a candidates file is
+    # loaded. In candidate-review workflow the active candidate is highlighted
+    # pink; in free-scrub-with-overlay mode the active-candidate concept doesn't
+    # apply and they all render uniformly.
     if app.view.has_candidate_workflow():
         for i, c in enumerate(app.view.candidates):
             x = int(c.ts_s / dur * width)
@@ -956,7 +988,11 @@ def _redraw_timeline(app: App) -> None:
             color = (255, 80, 200, 255) if selected else (80, 200, 255, 255)
             thickness = 4 if selected else 2
             dpg.draw_line((x, 0), (x, height), color=color, thickness=thickness, parent='timeline_strip')
-    else:
+    elif app.view.has_candidate_overlay():
+        for c in app.view.candidates:
+            x = int(c.ts_s / dur * width)
+            dpg.draw_line((x, 0), (x, height), color=(80, 200, 255, 255), thickness=2, parent='timeline_strip')
+    if not app.view.has_candidate_workflow():
         for i, t in enumerate(app.view.place_timestamps_s):
             x = int(t / dur * width)
             selected = i == app.view.selected_idx
@@ -1078,9 +1114,12 @@ def _step_main_loop(app: App, dt: float) -> None:
 
 
 def run_ui(
-    episodes: list[EpisodeRef], out_dir: Path, candidates_by_ep: dict[tuple[str, str], list[Candidate]] | None
+    episodes: list[EpisodeRef],
+    out_dir: Path,
+    candidates_by_ep: dict[tuple[str, str], list[Candidate]] | None,
+    free_scrub: bool = False,
 ) -> None:
-    app = App(episodes, out_dir, candidates_by_ep)
+    app = App(episodes, out_dir, candidates_by_ep, free_scrub=free_scrub)
     _setup_ui(app)
     if app.view.has_candidate_workflow():
         first = _first_reviewable(app.view)
@@ -1164,9 +1203,14 @@ def resolve_episodes(debug_set: str | None, episode_root: str | None, cache_root
 # ---- entry point ----
 
 
-@cfn.config(debug_set=None, episode_root=None, cache_root=None, candidates=None, out_dir=DEFAULT_OUT_DIR)
+@cfn.config(debug_set=None, episode_root=None, cache_root=None, candidates=None, out_dir=DEFAULT_OUT_DIR, free_scrub=False)
 def main(
-    debug_set: str | None, episode_root: str | None, cache_root: str | None, candidates: str | None, out_dir: str
+    debug_set: str | None,
+    episode_root: str | None,
+    cache_root: str | None,
+    candidates: str | None,
+    out_dir: str,
+    free_scrub: bool,
 ) -> None:
     episodes = resolve_episodes(debug_set, episode_root, cache_root)
     if not episodes:
@@ -1181,13 +1225,14 @@ def main(
         for src, _ in candidates_by_ep:
             per_source[src] = per_source.get(src, 0) + 1
         log.info(
-            'loaded candidates for %d (source, ep) keys from %s — %s',
+            'loaded candidates for %d (source, ep) keys from %s — %s%s',
             len(candidates_by_ep),
             cand_path,
             ', '.join(f'{s}={n}' for s, n in sorted(per_source.items())),
+            '  (overlay only — --free_scrub set)' if free_scrub else '',
         )
     log.info('Loaded %d episodes; markup -> %s', len(episodes), out_dir)
-    run_ui(episodes, Path(out_dir).expanduser().resolve(), candidates_by_ep)
+    run_ui(episodes, Path(out_dir).expanduser().resolve(), candidates_by_ep, free_scrub=free_scrub)
 
 
 @pos3.with_mirror()
