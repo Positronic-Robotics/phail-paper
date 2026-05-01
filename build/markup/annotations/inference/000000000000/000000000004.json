@@ -1,0 +1,164 @@
+{
+  "place_timestamps_s": [],
+  "items_in_target_at_end": 0,
+  "items_in_source_at_end": 8,
+  "candidate_annotations": [
+    {
+      "ts_s": 44.772,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 59.828,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 67.677,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 74.546,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 78.653,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 81.66,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 84.918,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 91.636,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 103.961,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 108.448,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 120.391,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 135.113,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 139.63,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 142.341,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 146.382,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 165.611,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 169.056,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 172.678,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 174.147,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 184.478,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 190.447,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 195.048,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 206.069,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 207.401,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 220.93,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    },
+    {
+      "ts_s": 227.737,
+      "n_successful": 0,
+      "n_out_of_bins": 0,
+      "comment": ""
+    }
+  ],
+  "reviewed": true
+}
