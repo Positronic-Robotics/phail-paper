@@ -624,6 +624,29 @@ class App:
 
     # ---- playback / scrubbing ----
 
+    def seek_to_candidate(self, direction: int) -> None:
+        """Seek the cursor to the next (+1) or previous (-1) candidate
+        relative to the current cursor. Used by Enter / Backspace in
+        free-scrub-with-overlay mode to jump between stage-1 events
+        without the candidate-review annotation flow firing.
+
+        A small epsilon guards against re-jumping to the candidate the
+        cursor currently sits on (after a previous jump)."""
+        if not self.view.candidates:
+            return
+        cur = self.view.cursor_s
+        ts_sorted = sorted(c.ts_s for c in self.view.candidates)
+        eps = 0.05
+        if direction > 0:
+            target = next((t for t in ts_sorted if t > cur + eps), None)
+        else:
+            target = next((t for t in reversed(ts_sorted) if t < cur - eps), None)
+        if target is None:
+            return
+        self.view.cursor_s = max(0.0, min(self.view.duration_s, target))
+        self.view.playing = False
+        self.view.candidate_paused = False
+
     def seek(self, delta_s: float) -> None:
         self.view.cursor_s = max(0.0, min(self.view.duration_s, self.view.cursor_s + delta_s))
         self.view.playing = False
@@ -891,7 +914,10 @@ def _make_advance_callback(app: App):
         if _int_field_is_focused():
             # Drop focus first so dearpygui finalizes the value.
             dpg.focus_item('main_window')
-        app.advance_candidate()
+        if app.view.has_candidate_workflow():
+            app.advance_candidate()
+        elif app.view.has_candidate_overlay():
+            app.seek_to_candidate(+1)
 
     return _cb
 
@@ -909,7 +935,10 @@ def _make_prev_cand_callback(app: App):
     def _cb(_sender, _app_data):
         if _comment_is_focused() or _int_field_is_focused():
             return
-        app.goto_prev_candidate()
+        if app.view.has_candidate_workflow():
+            app.goto_prev_candidate()
+        elif app.view.has_candidate_overlay():
+            app.seek_to_candidate(-1)
 
     return _cb
 
