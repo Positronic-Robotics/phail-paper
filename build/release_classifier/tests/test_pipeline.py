@@ -24,7 +24,7 @@ INFERENCE_EP = (
 
 def _disk_episode():
     """Lazy import so the module can load without positronic's heavy deps."""
-    from positronic.dataset.local_dataset import DiskEpisode
+    from positronic.dataset.local_dataset import DiskEpisode  # noqa: PLC0415
 
     return DiskEpisode(INFERENCE_EP)
 
@@ -36,13 +36,16 @@ def episode():
     return _disk_episode()
 
 
-def test_inference_zero_zero_has_34_commanded_releases(episode):
-    # Known-good baseline. See detect.py:HOLD_WINDOW_MIN_MS and
-    # GRIP_STABILITY_BAND; update this count deliberately when those change.
+def test_inference_zero_zero_has_45_commanded_releases(episode):
+    # Known-good baseline for episode 0/0 (inference). See detect.py
+    # HOLD_WINDOW_MIN_MS and GRIP_HELD_BAND_MAX; update these counts
+    # deliberately when those change. Count went 34 -> 45 when we
+    # widened the plateau-band ceiling from 0.95 to 0.998 and dropped
+    # the strict-stability gate (recall-first, precision-to-stage-2).
     cands = run_pipeline(episode)
     n_cmd = sum(1 for c in cands if c.kind is ReleaseKind.COMMANDED_RELEASE)
     n_acc = sum(1 for c in cands if c.kind is ReleaseKind.ACCIDENTAL_DROP)
-    assert n_cmd == 34
+    assert n_cmd == 45
     assert n_acc == 1
 
 
