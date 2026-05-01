@@ -728,8 +728,9 @@ HELP_RIGHT = [
     '',
     'FREE SCRUB (no --candidates)',
     '  A           add place at cursor',
-    '  D           add drop at cursor (red tick)',
     '  X           delete selected place',
+    '  D           add drop at cursor (coral tick)',
+    '  Shift+D     delete drop nearest cursor',
     '  N / P       next / previous place',
     '  [ / ]       items_in_source_at_end −1 / +1',
 ]
@@ -862,10 +863,17 @@ def _setup_ui(app: App) -> None:
         dpg.add_key_press_handler(dpg.mvKey_Period, callback=lambda s, a: app.switch_episode(app.idx + 1))
         dpg.add_key_press_handler(dpg.mvKey_Q, callback=lambda s, a: dpg.stop_dearpygui())
         dpg.add_key_press_handler(dpg.mvKey_R, callback=lambda s, a: app.toggle_reviewed())
-        # Free-scrub drop events: D adds a drop at the cursor (red tick on the
-        # timeline). Inert in candidate-review mode (n_out_of_bins captures
-        # the same info per candidate).
-        dpg.add_key_press_handler(dpg.mvKey_D, callback=lambda s, a: app.add_drop())
+        # Free-scrub drop events: D adds a drop at the cursor (coral tick on
+        # the timeline). Shift+D deletes the drop nearest the cursor. Inert
+        # in candidate-review mode (n_out_of_bins captures the same info
+        # per candidate).
+        def _drop_key(_s, _a):
+            if dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift):
+                app.delete_nearest_drop()
+            else:
+                app.add_drop()
+
+        dpg.add_key_press_handler(dpg.mvKey_D, callback=_drop_key)
         # Candidate review. Gate keys whose meaning would conflict with
         # typing into the comment field — Enter/Tab/Backspace + digits all
         # have natural in-text meaning.
