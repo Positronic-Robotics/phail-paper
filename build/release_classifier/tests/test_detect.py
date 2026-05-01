@@ -24,6 +24,7 @@ import numpy as np
 from build.release_classifier.detect import (
     CMD_THRESHOLD,
     GRIP_FULLY_CLOSED_MIN,
+    GRIP_HELD_BAND_MAX,
     GRIP_STABILITY_BAND,
     HOLD_WINDOW_MIN_MS,
     _accidental_drops,
@@ -133,26 +134,46 @@ def test_commanded_release_phantom_open_filtered():
     assert _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals))) == []
 
 
-def test_commanded_release_jaws_fully_closed_on_themselves_filtered():
-    # Jaws closed all the way (grip ≥ FULLY_CLOSED_MIN = 0.95) means no object
-    # was wedged between them — out-of-band on the upper side, held run = 0.
+def test_commanded_release_jaws_fully_closed_on_themselves_admitted():
+    # Jaws stuck at 0.975 used to be filtered as "no object," but thin
+    # objects (single battery, scissor blade, folded towel) sit in this
+    # zone for the entire hold. The plateau-band ceiling is now
+    # GRIP_HELD_BAND_MAX = 0.998, so 0.975 is admitted as a candidate.
+    # Stage-2 separates "real placement of thin object" from
+    # "closed-empty release" via bin geometry + paired pickup.
     ts = _evenly_spaced(_HELD_SAMPLES + 10)
     tg_vals = [1.0] * _HELD_SAMPLES + [0.0] * 10
     fully_closed = (GRIP_FULLY_CLOSED_MIN + 1.0) / 2  # 0.975
     g_vals = [fully_closed] * (_HELD_SAMPLES + 10)
+    assert fully_closed < GRIP_HELD_BAND_MAX
+    cands = _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals)))
+    assert len(cands) == 1
+    assert cands[0].kind is ReleaseKind.COMMANDED_RELEASE
+
+
+def test_commanded_release_above_saturation_rail_rejected():
+    # `grip == 1.000` is the saturation rail (jaws bottomed-out, no object
+    # present). Above-rail samples never enter the (HELD_MIN, HELD_BAND_MAX)
+    # band — there's nothing to detect.
+    ts = _evenly_spaced(_HELD_SAMPLES + 10)
+    tg_vals = [1.0] * _HELD_SAMPLES + [0.0] * 10
+    g_vals = [1.0] * (_HELD_SAMPLES + 10)
     assert _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals))) == []
 
 
-def test_commanded_release_unstable_grip_filtered():
-    # Half-closed oscillation (fumble): grip swings 0.40↔0.65 along the hold
-    # so max-min exceeds GRIP_STABILITY_BAND — not a real steady grasp even
-    # if the mean stays in the held band and duration clears HOLD_WINDOW_MIN_MS.
+def test_commanded_release_unstable_grip_admitted():
+    # Half-closed oscillation (e.g. policy commands target_grip oscillation
+    # while a towel is being carried) used to be filtered as "not a real
+    # steady grasp," but on real data a wandering grip during the hold
+    # is still a real release whenever target_grip falls right after.
+    # Stage-1 now admits these; precision moves to stage-2 (bin geometry
+    # / paired pickup).
     n = _HELD_SAMPLES + 10
     ts = _evenly_spaced(n)
     tg_vals = [1.0] * _HELD_SAMPLES + [0.0] * 10
     g_vals = [0.66 if i % 2 == 0 else 0.40 for i in range(_HELD_SAMPLES)] + [0.0] * 10
     cands = _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals)))
-    assert not cands, f'range {0.66 - 0.40:.2f} should exceed GRIP_STABILITY_BAND={GRIP_STABILITY_BAND}'
+    assert len(cands) == 1, f'wandering grip (range {0.66 - 0.40:.2f}) must still emit a candidate now'
 
 
 def test_commanded_release_short_hold_filtered():
@@ -176,22 +197,26 @@ def test_commanded_release_glitch_splits_plateau_below_threshold():
     g_vals = [0.5] * _HELD_SAMPLES + [0.0] * 10
     # _HELD_SAMPLES = 75 (1.5 × HOLD_WINDOW_MIN_MS=500ms at 10ms/sample).
     # Glitch at the midpoint splits the held region into two runs of ~37
-    # samples each ≈ 370ms — both under 500ms.
-    g_vals[_HELD_SAMPLES // 2] = 0.99
+    # samples each ≈ 370ms — both under 500ms. To split the run, the glitch
+    # must be ABOVE the band ceiling GRIP_HELD_BAND_MAX (0.998); the old
+    # test used 0.99 which sits inside the new permissive band, so the
+    # glitch had to be moved up to a saturation-rail value.
+    g_vals[_HELD_SAMPLES // 2] = 1.0
     assert _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals))) == []
 
 
 def test_commanded_release_short_glitch_leaves_plateau_intact():
     # A single-sample glitch close to the falling edge still leaves a long
-    # stable plateau ≥ HOLD_WINDOW_MIN_MS *before* it; the candidate passes.
+    # plateau ≥ HOLD_WINDOW_MIN_MS *before* it; the candidate passes.
     # This is the bugfix that recovered cases like inference/110 t=6.26 s,
     # where the gripper's release ramp landed inside the last 200 ms before
-    # target_grip's threshold crossing.
+    # target_grip's threshold crossing. Glitch at saturation rail (1.0) so
+    # it lies ABOVE GRIP_HELD_BAND_MAX and actually splits the in-band run.
     n = _HELD_SAMPLES + 10
     ts = _evenly_spaced(n)
     tg_vals = [1.0] * _HELD_SAMPLES + [0.0] * 10
     g_vals = [0.5] * _HELD_SAMPLES + [0.0] * 10
-    g_vals[_HELD_SAMPLES - 5] = 0.99
+    g_vals[_HELD_SAMPLES - 5] = 1.0
     cands = _commanded_releases(TimeSeries(ts=ts, vals=_v(tg_vals)), TimeSeries(ts=ts, vals=_v(g_vals)))
     assert len(cands) == 1
     assert cands[0].ts_ns == int(ts[_HELD_SAMPLES])

@@ -9,18 +9,28 @@ Polarity convention (verified on inference episode 0/0):
 
 Two candidate kinds:
   A. commanded_release: target_grip 1->0 falling edge, gated by a single
-     "longest stable plateau" check. Within [command_start, falling_edge),
+     "longest in-band plateau" check. Within [command_start, falling_edge),
      find the longest contiguous run where simultaneously
        - target_grip >= CMD_THRESHOLD                           (commanded locked)
-       - grip in (GRIP_HELD_MIN, GRIP_FULLY_CLOSED_MIN)         (held band)
-       - max(grip) - min(grip) < GRIP_STABILITY_BAND            (stable)
-     and require its length >= HOLD_WINDOW_MIN_MS. The stability bound is
-     the "single millimeters" intuition: when the gripper is actually
-     holding something, jaw position barely moves (sensor noise and tiny
-     mechanical play only); fumbles where the gripper oscillates between
-     half-closed states show ~0.15-0.20 grip-units of variation per
-     plateau-segment and get rejected. Empty grasps (grip ≥ FULLY_CLOSED_MIN)
-     and phantom opens (grip ≤ HELD_MIN) fail the in-band part.
+       - grip in (GRIP_HELD_MIN, GRIP_HELD_BAND_MAX)            (held band)
+     and require its length >= HOLD_WINDOW_MIN_MS. Phantom opens
+     (grip ≤ HELD_MIN throughout) fail the in-band part.
+
+     Recall-first rationale: the strict plateau check used to also require
+     `max(grip) - min(grip) < GRIP_STABILITY_BAND` (= 0.05) and capped the
+     band at `GRIP_FULLY_CLOSED_MIN = 0.95`. That rejected real placements
+     in two regimes seen during calibration:
+       (i)  thin objects (battery, scissor blade, folded towel) clamped
+            near the jaw saturation rail — grip sits in (0.95, 1.00) for
+            the whole hold and looks identical to closed-empty.
+       (ii) wandering holds where the policy oscillates `target_grip` and
+            jaws follow — range during the hold reaches 0.12-0.50 even
+            though the object is clearly being carried.
+     Both are real placements that stage-1 cannot distinguish from
+     closed-empty using grip kinematics alone. The 0.95→0.998 ceiling
+     and the dropped stability check trade some stage-1 precision for
+     recall. Stage-2 picks up the precision via bin geometry, paired
+     pickup, and (eventually) vision.
 
      We deliberately do NOT require the plateau to abut the falling edge.
      Two real patterns put the plateau well before the release:
@@ -67,14 +77,24 @@ GRIP_FULLY_CLOSED_MIN: float = 0.95
 GRIP_LOOKBACK_MS: int = 150
 MIN_HELD_BEFORE_DROP_MS: int = 200
 DROP_WINDOW_MS: int = 200
-# Commanded-release gating (see module docstring). Two parameters define
-# the stable-plateau check:
 HOLD_WINDOW_MIN_MS: int = 500
-# `max(grip) - min(grip)` ceiling over the plateau. On v1.0 (~8 cm jaws)
-# real placements run at range ≤ 0.01 (≈ 1 mm of jaw motion) while fumbles
-# at half-closed grip span 0.15-0.20 (≈ 14 mm). 0.05 sits comfortably in
-# the gap and matches the user's "single millimeters" intuition.
+# `max(grip) - min(grip)` ceiling over the plateau in `_longest_stable_plateau_ns`.
+# Kept at 0.05 so `sweep_gates.py` and any future caller that wants the
+# strict-plateau definition still has the historical value available, but
+# `_commanded_releases` deliberately passes a permissive bound (band width)
+# instead — see GRIP_HELD_BAND_MAX rationale below.
 GRIP_STABILITY_BAND: float = 0.05
+# Plateau-band ceiling used by `_commanded_releases`. Set higher than
+# `GRIP_FULLY_CLOSED_MIN=0.95` because thin objects (single AA battery,
+# scissor blade, towel folded thin) get clamped near the jaw saturation
+# rail, sitting in the (0.95, 1.00) zone for the whole hold. The plateau
+# check needs to admit those samples or stage-1 misses the release entirely
+# (recall is unrecoverable downstream — see calibration_check.py findings).
+# 1.000 is the saturation rail (jaws bottomed-out, no object); we stop just
+# below it so candidates emitted above the rail itself are excluded. The
+# precision cost — phantom releases that look held — is paid in stage-2
+# via bin geometry / paired-pickup features, where it is recoverable.
+GRIP_HELD_BAND_MAX: float = 0.998
 
 
 # ---------------------------------------------------------------------------
@@ -256,11 +276,19 @@ def _commanded_releases(tg: TimeSeries, g: TimeSeries) -> list[ReleaseCandidate]
     rising_idx = _rising_edges(tg, CMD_THRESHOLD)
     rising_ts = tg.ts[rising_idx] if len(rising_idx) else np.empty(0, dtype=np.int64)
     min_plateau_ns = HOLD_WINDOW_MIN_MS * 1_000_000
+    # Permissive stability bound: equal to band width so the running-range
+    # check inside `_longest_stable_plateau_ns` never trips. The falling edge
+    # itself is the precision signal for commanded_release; we don't need a
+    # tight stability bound at stage-1. A wandering grip during the hold
+    # (e.g. towels at range 0.12, scissors at 0.25, batteries clamped against
+    # saturation at 0.99 with brief excursions) is still a real hold whenever
+    # the policy commands an open right after.
+    permissive_range = GRIP_HELD_BAND_MAX - GRIP_HELD_MIN
     for idx in falling_idx:
         ts_ns = int(tg.ts[idx])
         cmd_start = _command_hold_start_ns(tg, idx, rising_ts)
         plateau = _longest_stable_plateau_ns(
-            g, cmd_start, ts_ns, GRIP_HELD_MIN, GRIP_FULLY_CLOSED_MIN, GRIP_STABILITY_BAND
+            g, cmd_start, ts_ns, GRIP_HELD_MIN, GRIP_HELD_BAND_MAX, permissive_range
         )
         if plateau < min_plateau_ns:
             continue
