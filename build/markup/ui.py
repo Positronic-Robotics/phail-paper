@@ -1021,12 +1021,17 @@ def _redraw_timeline(app: App) -> None:
         for c in app.view.candidates:
             x = int(c.ts_s / dur * width)
             dpg.draw_line((x, 0), (x, height), color=(80, 200, 255, 255), thickness=2, parent='timeline_strip')
+    # Manual place ticks: green so they're visually distinct from the
+    # light-blue candidate ticks they may sit directly on top of in
+    # free-scrub-overlay mode (saw a "place not visible" report when a
+    # manual tick landed on the same x-pixel as a candidate). Drawn at
+    # double thickness so even when stacked the green dominates.
     if not app.view.has_candidate_workflow():
         for i, t in enumerate(app.view.place_timestamps_s):
             x = int(t / dur * width)
             selected = i == app.view.selected_idx
-            color = (255, 80, 200, 255) if selected else (80, 200, 255, 255)
-            thickness = 4 if selected else 3
+            color = (255, 80, 200, 255) if selected else (60, 220, 110, 255)
+            thickness = 5 if selected else 4
             dpg.draw_line((x, 0), (x, height), color=color, thickness=thickness, parent='timeline_strip')
     # Free-scrub drops (red ticks). Rendered in both modes — they read from
     # disk and may be present on legacy files even in candidate-review mode.
