@@ -1,0 +1,182 @@
+[
+  {
+    "ep_dir": "000000000000/000000000308",
+    "object": "Batteries",
+    "model": "ACT",
+    "class": "A",
+    "S": 1,
+    "pipe_succ": 1,
+    "outcome": "Fail"
+  },
+  {
+    "ep_dir": "000000000000/000000000353",
+    "object": "Towels",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 7,
+    "pipe_succ": 7,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000320",
+    "object": "Towels",
+    "model": "ACT",
+    "class": "A",
+    "S": 3,
+    "pipe_succ": 3,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000280",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 8,
+    "pipe_succ": 8,
+    "outcome": "Success"
+  },
+  {
+    "ep_dir": "000000000000/000000000494",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6",
+    "class": "A",
+    "S": 2,
+    "pipe_succ": 2,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000044",
+    "object": "Scissors",
+    "model": "ACT",
+    "class": "A",
+    "S": 5,
+    "pipe_succ": 5,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000377",
+    "object": "Wooden spoons",
+    "model": "ACT",
+    "class": "A",
+    "S": 6,
+    "pipe_succ": 6,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000169",
+    "object": "Towels",
+    "model": "ACT",
+    "class": "A",
+    "S": 6,
+    "pipe_succ": 6,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000301",
+    "object": "Batteries",
+    "model": "ACT",
+    "class": "A",
+    "S": 1,
+    "pipe_succ": 1,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000425",
+    "object": "Wooden spoons",
+    "model": "Hugging Face SmolVLA",
+    "class": "A",
+    "S": 4,
+    "pipe_succ": 4,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000136",
+    "object": "Wooden spoons",
+    "model": "ACT",
+    "class": "A",
+    "S": 1,
+    "pipe_succ": 1,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000216",
+    "object": "Scissors",
+    "model": "ACT",
+    "class": "A",
+    "S": 1,
+    "pipe_succ": 1,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000315",
+    "object": "Scissors",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 7,
+    "pipe_succ": 7,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000288",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 8,
+    "pipe_succ": 8,
+    "outcome": "Success"
+  },
+  {
+    "ep_dir": "000000000000/000000000333",
+    "object": "Scissors",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 5,
+    "pipe_succ": 5,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000298",
+    "object": "Batteries",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 4,
+    "pipe_succ": 4,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000134",
+    "object": "Wooden spoons",
+    "model": "NVIDIA GR00T N1.6",
+    "class": "A",
+    "S": 7,
+    "pipe_succ": 7,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000046",
+    "object": "Wooden spoons",
+    "model": "NVIDIA GR00T N1.6",
+    "class": "A",
+    "S": 8,
+    "pipe_succ": 8,
+    "outcome": "Success"
+  },
+  {
+    "ep_dir": "000000000000/000000000350",
+    "object": "Scissors",
+    "model": "Physical Intelligence Pi-0",
+    "class": "A",
+    "S": 1,
+    "pipe_succ": 1,
+    "outcome": "Ran out of time"
+  },
+  {
+    "ep_dir": "000000000000/000000000317",
+    "object": "Towels",
+    "model": "ACT",
+    "class": "A",
+    "S": 4,
+    "pipe_succ": 4,
+    "outcome": "Ran out of time"
+  }
+]

@@ -376,8 +376,10 @@ class FeatureName(IntEnum):
     RELEASE_Z_ABOVE_TARGET_RIM = 26
     DISPLACEMENT_XY_CONSISTENT = 27
     HOLD_MS_CONSISTENT_WITH_TRANSIT = 28
-    VERDICT = 29
-    VERDICT_REASONS = 30
+    TARGET_GRIP_RETURNS_HIGH_WITHIN_500MS = 29
+    DISPLACEMENT_XY_ABOVE_MIN_TRANSIT = 30
+    VERDICT = 31
+    VERDICT_REASONS = 32
 
     @property
     def slug(self) -> str:
@@ -454,6 +456,17 @@ class ReleaseFeatures:
     release_z_above_target_rim: bool = False
     displacement_xy_consistent: bool = False
     hold_ms_consistent_with_transit: bool = False
+    # True when target_grip rises back above CMD_THRESHOLD within 500 ms of
+    # the candidate. Signature of a pre-grip clear / regrip probe — gripper
+    # was commanded open just to rearrange before re-closing on the same
+    # object. Used by classify.py to gate the SUCCESS verdict.
+    target_grip_returns_high_within_500ms: bool = False
+    # True when pickup→release horizontal travel >= MIN_TRANSIT_DXY_M. Real
+    # source→target placements move ~0.40-0.50 m (the inter-bin distance);
+    # phantoms are bimodal — many sit at < 0.10 m (the agent opens the
+    # jaws basically where it just closed them, never actually transiting).
+    # Used by classify.py to gate SUCCESS.
+    displacement_xy_above_min_transit: bool = False
     verdict: Verdict = Verdict.INVALID
     verdict_reasons: list[str] = field(default_factory=list)
 

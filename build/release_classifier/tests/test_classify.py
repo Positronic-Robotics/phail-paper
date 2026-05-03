@@ -8,13 +8,16 @@ from build.release_classifier.types import XYZ, ReleaseFeatures, ReleaseKind, Ve
 
 def _f(**kwargs) -> ReleaseFeatures:
     """Build a feature bag with sensible defaults — fill in only the fields
-    each test cares about."""
+    each test cares about. Defaults describe a clean source→target transit
+    (lift past pickup z, full inter-bin xy travel) so SUCCESS gates pass."""
     f = ReleaseFeatures(
         kind=ReleaseKind.COMMANDED_RELEASE,
         ts_s=10.0,
         ee_xyz=XYZ(0.5, 0.4, 0.3),
         paired_close_ee_xyz=XYZ(0.5, -0.2, 0.18),
         hold_ms=2000.0,
+        release_z_above_pickup_z=True,
+        displacement_xy_above_min_transit=True,
     )
     for k, v in kwargs.items():
         setattr(f, k, v)
@@ -71,6 +74,24 @@ def test_no_paired_pickup_is_unknown():
     verdict, reasons = _decide(f)
     assert verdict is Verdict.UNKNOWN
     assert reasons == ['no_paired_pickup']
+
+
+def test_no_lift_is_demoted():
+    """In target geometry but release.z is at or below pickup.z — likely a
+    local probe, not a transit-and-place. Demote to UNKNOWN."""
+    f = _f(release_in_target_bin=True, release_z_above_pickup_z=False)
+    verdict, reasons = _decide(f)
+    assert verdict is Verdict.UNKNOWN
+    assert reasons == ['no_pickup_to_release_lift']
+
+
+def test_no_inter_bin_transit_is_demoted():
+    """In target geometry, lifted, but pickup→release xy travel is below the
+    transit minimum — agent opened the jaws ~where it just closed them."""
+    f = _f(release_in_target_bin=True, displacement_xy_above_min_transit=False)
+    verdict, reasons = _decide(f)
+    assert verdict is Verdict.UNKNOWN
+    assert reasons == ['no_inter_bin_transit']
 
 
 def test_repickup_from_target_is_success_with_flag():

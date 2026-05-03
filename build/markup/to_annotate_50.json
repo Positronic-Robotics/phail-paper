@@ -1,0 +1,252 @@
+[
+  {
+    "ep_dir": "inference/000000000000/000000000033",
+    "object": "Scissors",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000038",
+    "object": "Scissors",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000043",
+    "object": "Scissors",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000047",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000067",
+    "object": "Wooden spoons",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000092",
+    "object": "Wooden spoons",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000115",
+    "object": "Batteries",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000116",
+    "object": "Batteries",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000141",
+    "object": "Scissors",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000150",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000157",
+    "object": "Towels",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000160",
+    "object": "Towels",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000186",
+    "object": "Batteries",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000203",
+    "object": "Batteries",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000232",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000236",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000239",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000249",
+    "object": "Batteries",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000283",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000297",
+    "object": "Batteries",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000299",
+    "object": "Batteries",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000315",
+    "object": "Scissors",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000378",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000384",
+    "object": "Wooden spoons",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000396",
+    "object": "Batteries",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000425",
+    "object": "Wooden spoons",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000438",
+    "object": "Batteries",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000440",
+    "object": "Batteries",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000452",
+    "object": "Scissors",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000508",
+    "object": "Scissors",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000001",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000005",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000057",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000080",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000121",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000144",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000224",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000240",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000253",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000268",
+    "object": "Wooden spoons",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000293",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000332",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000346",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000347",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000387",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000400",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000413",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000427",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000433",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000441",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  }
+]

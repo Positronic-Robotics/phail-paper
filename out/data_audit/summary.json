@@ -1,0 +1,125 @@
+{
+  "total_episodes": 1013,
+  "by_source": {
+    "human": 40,
+    "inference": 524,
+    "training": 449
+  },
+  "tasks_overall": {
+    "Batteries": 237,
+    "Scissors": 215,
+    "Towels": 261,
+    "Wooden spoons": 300
+  },
+  "status_overall": {
+    "Pass": 520,
+    "Safety": 22,
+    "Fail": 471
+  },
+  "per_model": [
+    {
+      "model": "Action Chunking Transformer",
+      "episodes": 151,
+      "pass": 8,
+      "fail": 143,
+      "safety": 0,
+      "episode_pass_rate": 0.053,
+      "items_successful": 369,
+      "items_total": 1072,
+      "item_success_rate": 0.3442,
+      "tasks": {
+        "Batteries": 36,
+        "Scissors": 37,
+        "Towels": 47,
+        "Wooden spoons": 31
+      }
+    },
+    {
+      "model": "Hugging Face SmolVLA",
+      "episodes": 116,
+      "pass": 0,
+      "fail": 101,
+      "safety": 15,
+      "episode_pass_rate": 0.0,
+      "items_successful": 92,
+      "items_total": 852,
+      "item_success_rate": 0.108,
+      "tasks": {
+        "Batteries": 34,
+        "Scissors": 26,
+        "Towels": 27,
+        "Wooden spoons": 29
+      }
+    },
+    {
+      "model": "Human",
+      "episodes": 40,
+      "pass": 40,
+      "fail": 0,
+      "safety": 0,
+      "episode_pass_rate": 1.0,
+      "items_successful": 320,
+      "items_total": 320,
+      "item_success_rate": 1.0,
+      "tasks": {
+        "Batteries": 10,
+        "Scissors": 10,
+        "Towels": 10,
+        "Wooden spoons": 10
+      }
+    },
+    {
+      "model": "NVIDIA GR00T N1.6",
+      "episodes": 128,
+      "pass": 10,
+      "fail": 115,
+      "safety": 3,
+      "episode_pass_rate": 0.0781,
+      "items_successful": 458,
+      "items_total": 952,
+      "item_success_rate": 0.4811,
+      "tasks": {
+        "Batteries": 35,
+        "Scissors": 29,
+        "Towels": 33,
+        "Wooden spoons": 31
+      }
+    },
+    {
+      "model": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "episodes": 129,
+      "pass": 13,
+      "fail": 112,
+      "safety": 4,
+      "episode_pass_rate": 0.1008,
+      "items_successful": 493,
+      "items_total": 996,
+      "item_success_rate": 0.495,
+      "tasks": {
+        "Batteries": 35,
+        "Scissors": 30,
+        "Towels": 32,
+        "Wooden spoons": 32
+      }
+    },
+    {
+      "model": "Robot teleoperated by Human",
+      "episodes": 449,
+      "pass": 449,
+      "fail": 0,
+      "safety": 0,
+      "episode_pass_rate": 1.0,
+      "items_successful": 4496,
+      "items_total": 4496,
+      "item_success_rate": 1.0,
+      "tasks": {
+        "Batteries": 87,
+        "Scissors": 83,
+        "Towels": 112,
+        "Wooden spoons": 167
+      }
+    }
+  ],
+  "episodes_with_public_url": 1013,
+  "episodes_without_public_url": 0
+}

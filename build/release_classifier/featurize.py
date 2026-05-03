@@ -50,6 +50,13 @@ HOLD_MS_MIN: float = 800.0
 HOLD_MS_MAX: float = 15000.0
 INTER_BIN_DIST_TOLERANCE_LO_M: float = 0.10  # how far below the calibrated inter-bin xy distance is still "consistent"
 INTER_BIN_DIST_TOLERANCE_HI_M: float = 0.15  # how far above
+TARGET_GRIP_RETURN_WINDOW_MS: int = 500  # how long after a release we still consider a re-close to be a "pre-grip clear"
+# Minimum pickup→release horizontal travel for a SUCCESS verdict. Empirically
+# (training success p05 ≈ 0.27 m, inference real p05 ≈ 0.32 m, phantoms p50 ≈
+# 0.04 m) the cutoff at 0.20 m drops ~70% of phantoms while keeping ~99% of
+# real placements. Calibrated bins sit ~0.45 m apart, so 0.20 m is comfortably
+# below the legitimate inter-bin transit distance.
+MIN_TRANSIT_DXY_M: float = 0.20
 
 
 # ---------------------------------------------------------------------------
@@ -112,6 +119,45 @@ def _mean_in_window(sig: TimeSeries, lo_ns: int, hi_ns: int) -> float:
     if hi <= lo:
         return float('nan')
     return float(sig.vals[lo:hi].mean())
+
+
+def _is_pre_grip_clear(tg: TimeSeries, g: TimeSeries, ts_ns: int, window_ns: int) -> bool:
+    """A "pre-grip clear" is the agent briefly opening the gripper and
+    re-closing on the same object — a regrip / probe, not a placement.
+
+    Two conditions must hold inside the window after the candidate:
+
+    1. ``target_grip`` is sustainedly back above CMD_THRESHOLD past the
+       100 ms debounce. We use the *median* over (ts + 100 ms, ts + 500 ms]
+       so a single noisy sample on the falling-edge transient doesn't fire.
+
+    2. ``grip`` (the physical jaw position) never dropped below the held
+       band during the same window. If grip falls all the way to "open"
+       (~0.4 or below), the object physically left the jaws — it was a
+       real release, regardless of what target_grip did afterwards.
+
+    The grip co-condition saves real placements where the agent commands
+    open-close-open in quick succession (target_grip rebounds, but the
+    object actually fell during the brief open).
+
+    Both signals must agree. target_grip alone gives false positives on
+    legitimate placements where the agent re-homes the jaws after release;
+    grip alone misses the cases where the gripper never fully opened.
+    """
+    if len(tg.ts) == 0 or len(g.ts) == 0:
+        return False
+    debounce_ns = 100 * 1_000_000
+    tg_lo = int(np.searchsorted(tg.ts, ts_ns + debounce_ns, side='right'))
+    tg_hi = int(np.searchsorted(tg.ts, ts_ns + window_ns, side='right'))
+    if tg_hi <= tg_lo:
+        return False
+    if float(np.median(tg.vals[tg_lo:tg_hi])) < CMD_THRESHOLD:
+        return False
+    g_lo = int(np.searchsorted(g.ts, ts_ns, side='left'))
+    g_hi = int(np.searchsorted(g.ts, ts_ns + window_ns, side='right'))
+    if g_hi <= g_lo:
+        return False
+    return bool(float(g.vals[g_lo:g_hi].min()) >= CMD_THRESHOLD)
 
 
 def _has_error_in_window(err: TimeSeries | None, ts_ns: int, half_ns: int) -> bool:
@@ -460,6 +506,9 @@ def _featurize_one(
 
     f.target_zone_balance_before = balance_before
     f.robot_error_within_500ms = _has_error_in_window(ctx.error, c.ts_ns, ROBOT_ERROR_WINDOW_MS * 1_000_000)
+    f.target_grip_returns_high_within_500ms = _is_pre_grip_clear(
+        ctx.target_grip, ctx.grip, c.ts_ns, TARGET_GRIP_RETURN_WINDOW_MS * 1_000_000
+    )
 
     _fill_bin_features(f, ctx)
     return f
@@ -488,6 +537,7 @@ def _fill_bin_features(f: ReleaseFeatures, ctx: _Context) -> None:
         f.displacement_xy_consistent = (
             ref - INTER_BIN_DIST_TOLERANCE_LO_M <= d <= ref + INTER_BIN_DIST_TOLERANCE_HI_M
         )
+        f.displacement_xy_above_min_transit = d >= MIN_TRANSIT_DXY_M
 
     if math.isfinite(f.hold_ms):
         f.hold_ms_consistent_with_transit = HOLD_MS_MIN <= f.hold_ms <= HOLD_MS_MAX

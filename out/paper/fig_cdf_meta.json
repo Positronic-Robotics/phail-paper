@@ -1,0 +1,59 @@
+{
+  "cohort": "mixed",
+  "objects": null,
+  "models": null,
+  "tau": 240.05055684002582,
+  "rmst_human": 10.486175204984981,
+  "summary": {
+    "OpenPI": {
+      "model_display": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "n_eps": 82,
+      "n_events": 304,
+      "n_censored": 74,
+      "median_T": 28.506488311,
+      "rmst_tau": 60.83117652014203,
+      "pct_of_human": 17.238159451860785,
+      "is_reference": false
+    },
+    "GR00T": {
+      "model_display": "NVIDIA GR00T N1.6",
+      "n_eps": 64,
+      "n_events": 248,
+      "n_censored": 60,
+      "median_T": 24.655,
+      "rmst_tau": 58.763841670670345,
+      "pct_of_human": 17.84460461886164,
+      "is_reference": false
+    },
+    "ACT": {
+      "model_display": "Action Chunking Transformer",
+      "n_eps": 90,
+      "n_events": 290,
+      "n_censored": 83,
+      "median_T": 26.025000000000006,
+      "rmst_tau": 67.45020361098291,
+      "pct_of_human": 15.546543440348517,
+      "is_reference": false
+    },
+    "SmolVLA": {
+      "model_display": "Hugging Face SmolVLA",
+      "n_eps": 33,
+      "n_events": 43,
+      "n_censored": 33,
+      "median_T": 68.56899999999999,
+      "rmst_tau": 111.33680741580373,
+      "pct_of_human": 9.418426348281043,
+      "is_reference": false
+    },
+    "Teleop": {
+      "model_display": "Robot teleoperated by Human",
+      "n_eps": 357,
+      "n_events": 3551,
+      "n_censored": 9,
+      "median_T": 9.242777345,
+      "rmst_tau": 10.486175204984981,
+      "pct_of_human": 100.0,
+      "is_reference": true
+    }
+  }
+}

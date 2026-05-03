@@ -1,0 +1,102 @@
+[
+  {
+    "ep_dir": "inference/000000000000/000000000036",
+    "object": "Scissors",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000048",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000278",
+    "object": "Wooden spoons",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000340",
+    "object": "Scissors",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000343",
+    "object": "Scissors",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000357",
+    "object": "Towels",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000374",
+    "object": "Wooden spoons",
+    "model": "Physical Intelligence Open \u03c0\u2080.\u2085"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000408",
+    "object": "Towels",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000415",
+    "object": "Wooden spoons",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000417",
+    "object": "Wooden spoons",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000421",
+    "object": "Wooden spoons",
+    "model": "Hugging Face SmolVLA"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000456",
+    "object": "Towels",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000485",
+    "object": "Towels",
+    "model": "NVIDIA GR00T N1.6"
+  },
+  {
+    "ep_dir": "inference/000000000000/000000000509",
+    "object": "Scissors",
+    "model": "Action Chunking Transformer"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000027",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000106",
+    "object": "Towels",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000295",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000320",
+    "object": "Scissors",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000372",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  },
+  {
+    "ep_dir": "training/000000000000/000000000385",
+    "object": "Batteries",
+    "model": "Robot teleoperated by Human"
+  }
+]

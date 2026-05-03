@@ -1,0 +1,554 @@
+{
+  "cohort": "mixed",
+  "models": [
+    "Physical Intelligence Open \u03c0\u2080.\u2085",
+    "NVIDIA GR00T N1.6",
+    "Action Chunking Transformer",
+    "Robot teleoperated by Human"
+  ],
+  "objects": [
+    "Batteries",
+    "Wooden spoons",
+    "Towels",
+    "Scissors"
+  ],
+  "results": [
+    {
+      "object": "Batteries",
+      "n_episodes": 132,
+      "tau": 240.0409688751679,
+      "rows": {
+        "OpenPI": {
+          "n_eps": 27,
+          "n_events": 76,
+          "n_censored": 26,
+          "median_T": 35.91414854199999,
+          "rmst_tau": 75.14573306192659,
+          "pct_of_human": 15.36883074992398,
+          "F_at": {
+            "20": 0.3155709342560552,
+            "30": 0.4177245261581364,
+            "60": 0.6672374363958276
+          },
+          "n_safety_stalls": 1,
+          "total_duration_s": 5828.285015265326,
+          "mtba_safety_stalls": 5828.285015265326
+        },
+        "GR00T": {
+          "n_eps": 24,
+          "n_events": 93,
+          "n_censored": 24,
+          "median_T": 30.1,
+          "rmst_tau": 64.58294686586407,
+          "pct_of_human": 17.882461378022853,
+          "F_at": {
+            "20": 0.39886454795908843,
+            "30": 0.4975584281449098,
+            "60": 0.6883626113790097
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 5760.227866208152,
+          "mtba_safety_stalls": null
+        },
+        "ACT": {
+          "n_eps": 20,
+          "n_events": 52,
+          "n_censored": 19,
+          "median_T": 41.749878487000004,
+          "rmst_tau": 85.57795888240634,
+          "pct_of_human": 13.495321319765067,
+          "F_at": {
+            "20": 0.3853268866932943,
+            "30": 0.4568005045196557,
+            "60": 0.6227745346938118
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 4727.596377120353,
+          "mtba_safety_stalls": null
+        },
+        "Teleop": {
+          "n_eps": 61,
+          "n_events": 485,
+          "n_censored": 3,
+          "median_T": 9.562402214999999,
+          "rmst_tau": 11.549020530077165,
+          "pct_of_human": 99.99999999999999,
+          "F_at": {
+            "20": 0.8987076390246751,
+            "30": 0.9751937075162469,
+            "60": 0.9958656179193744
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 5805.983307232,
+          "mtba_safety_stalls": null
+        }
+      },
+      "H1": {
+        "overall": "UNDERPOWERED",
+        "pairs": [
+          {
+            "pair": [
+              "OpenPI",
+              "GR00T"
+            ],
+            "n_a": 27,
+            "n_b": 24,
+            "D": 0.13351111363865553,
+            "p": 0.2613693153423288,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "OpenPI",
+              "ACT"
+            ],
+            "n_a": 27,
+            "n_b": 20,
+            "D": 0.1671930663183011,
+            "p": 0.4512743628185907,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "GR00T",
+              "ACT"
+            ],
+            "n_a": 24,
+            "n_b": 20,
+            "D": 0.1994931288969818,
+            "p": 0.04997501249375312,
+            "status": "UNDERPOWERED"
+          }
+        ]
+      },
+      "H3": {
+        "overall": "HOLDS",
+        "pct_of_human_ranking": [
+          "GR00T",
+          "OpenPI",
+          "ACT"
+        ],
+        "completion_ranking": [
+          "GR00T",
+          "OpenPI",
+          "ACT"
+        ],
+        "pct_values": {
+          "OpenPI": 15.36883074992398,
+          "GR00T": 17.882461378022853,
+          "ACT": 13.495321319765067
+        },
+        "completion_values": {
+          "OpenPI": 0.35648148148148145,
+          "GR00T": 0.484375,
+          "ACT": 0.31875
+        },
+        "flipped_pairs": []
+      }
+    },
+    {
+      "object": "Wooden spoons",
+      "n_episodes": 168,
+      "tau": 240.0324362270767,
+      "rows": {
+        "OpenPI": {
+          "n_eps": 17,
+          "n_events": 93,
+          "n_censored": 12,
+          "median_T": 18.57002541099999,
+          "rmst_tau": 40.642008275056966,
+          "pct_of_human": 24.834142375166543,
+          "F_at": {
+            "20": 0.5514203058272493,
+            "30": 0.7507890587929162,
+            "60": 0.8803787482205998
+          },
+          "n_safety_stalls": 1,
+          "total_duration_s": 3422.456690036968,
+          "mtba_safety_stalls": 3422.456690036968
+        },
+        "GR00T": {
+          "n_eps": 17,
+          "n_events": 92,
+          "n_censored": 13,
+          "median_T": 17.711445857,
+          "rmst_tau": 41.614404885241115,
+          "pct_of_human": 24.25384726031301,
+          "F_at": {
+            "20": 0.5547376054958225,
+            "30": 0.7229478434196228,
+            "60": 0.8284915221169094
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 3571.004493792949,
+          "mtba_safety_stalls": null
+        },
+        "ACT": {
+          "n_eps": 20,
+          "n_events": 100,
+          "n_censored": 15,
+          "median_T": 17.078000000000003,
+          "rmst_tau": 45.7745740225198,
+          "pct_of_human": 22.049564446386977,
+          "F_at": {
+            "20": 0.5521308652604395,
+            "30": 0.6926388291003018,
+            "60": 0.8279326302195439
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 4175.114182795238,
+          "mtba_safety_stalls": null
+        },
+        "Teleop": {
+          "n_eps": 114,
+          "n_events": 1326,
+          "n_censored": 5,
+          "median_T": 9.147037525000002,
+          "rmst_tau": 10.093094199154615,
+          "pct_of_human": 100.0,
+          "F_at": {
+            "20": 0.9819004524886876,
+            "30": 0.9984917043740573,
+            "60": 1.0
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 13693.685563648,
+          "mtba_safety_stalls": null
+        }
+      },
+      "H1": {
+        "overall": "UNDERPOWERED",
+        "pairs": [
+          {
+            "pair": [
+              "OpenPI",
+              "GR00T"
+            ],
+            "n_a": 17,
+            "n_b": 17,
+            "D": 0.07783083915553568,
+            "p": 0.9230384807596201,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "OpenPI",
+              "ACT"
+            ],
+            "n_a": 17,
+            "n_b": 20,
+            "D": 0.15898796711969343,
+            "p": 0.18290854572713644,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "GR00T",
+              "ACT"
+            ],
+            "n_a": 17,
+            "n_b": 20,
+            "D": 0.1894713839712988,
+            "p": 0.07946026986506746,
+            "status": "UNDERPOWERED"
+          }
+        ]
+      },
+      "H3": {
+        "overall": "FAILS_AS_INTENDED",
+        "pct_of_human_ranking": [
+          "OpenPI",
+          "GR00T",
+          "ACT"
+        ],
+        "completion_ranking": [
+          "GR00T",
+          "OpenPI",
+          "ACT"
+        ],
+        "pct_values": {
+          "OpenPI": 24.834142375166543,
+          "GR00T": 24.25384726031301,
+          "ACT": 22.049564446386977
+        },
+        "completion_values": {
+          "OpenPI": 0.6838235294117647,
+          "GR00T": 0.6985294117647058,
+          "ACT": 0.625
+        },
+        "flipped_pairs": [
+          [
+            "OpenPI",
+            "GR00T"
+          ]
+        ]
+      }
+    },
+    {
+      "object": "Towels",
+      "n_episodes": 169,
+      "tau": 240.05055684002582,
+      "rows": {
+        "OpenPI": {
+          "n_eps": 20,
+          "n_events": 80,
+          "n_censored": 18,
+          "median_T": 31.804752978999993,
+          "rmst_tau": 55.67465267355179,
+          "pct_of_human": 17.748681885545952,
+          "F_at": {
+            "20": 0.319596880639593,
+            "30": 0.48969766047969454,
+            "60": 0.7482449395595714
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 4200.284899809078,
+          "mtba_safety_stalls": null
+        },
+        "GR00T": {
+          "n_eps": 14,
+          "n_events": 41,
+          "n_censored": 14,
+          "median_T": 25.311778237000013,
+          "rmst_tau": 74.44351339786948,
+          "pct_of_human": 13.273845554680811,
+          "F_at": {
+            "20": 0.38181818181818195,
+            "30": 0.6000000000000001,
+            "60": 0.7155080213903744
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 2356.5302030970925,
+          "mtba_safety_stalls": null
+        },
+        "ACT": {
+          "n_eps": 29,
+          "n_events": 65,
+          "n_censored": 29,
+          "median_T": 42.521,
+          "rmst_tau": 82.67442206796468,
+          "pct_of_human": 11.952326664936285,
+          "F_at": {
+            "20": 0.3462365591397847,
+            "30": 0.4347693677231943,
+            "60": 0.625318193444778
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 5083.946739840612,
+          "mtba_safety_stalls": null
+        },
+        "Teleop": {
+          "n_eps": 106,
+          "n_events": 981,
+          "n_censored": 0,
+          "median_T": 8.986189343999996,
+          "rmst_tau": 9.881516993911312,
+          "pct_of_human": 100.0,
+          "F_at": {
+            "20": 0.9806320081549439,
+            "30": 1.0,
+            "60": 1.0
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 10035.282720894,
+          "mtba_safety_stalls": null
+        }
+      },
+      "H1": {
+        "overall": "UNDERPOWERED",
+        "pairs": [
+          {
+            "pair": [
+              "OpenPI",
+              "GR00T"
+            ],
+            "n_a": 20,
+            "n_b": 14,
+            "D": 0.14258948467052712,
+            "p": 0.31984007996002,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "OpenPI",
+              "ACT"
+            ],
+            "n_a": 20,
+            "n_b": 29,
+            "D": 0.2114564596412215,
+            "p": 0.018490754622688656,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "GR00T",
+              "ACT"
+            ],
+            "n_a": 14,
+            "n_b": 29,
+            "D": 0.197166861531188,
+            "p": 0.09245377311344327,
+            "status": "UNDERPOWERED"
+          }
+        ]
+      },
+      "H3": {
+        "overall": "HOLDS",
+        "pct_of_human_ranking": [
+          "OpenPI",
+          "GR00T",
+          "ACT"
+        ],
+        "completion_ranking": [
+          "OpenPI",
+          "GR00T",
+          "ACT"
+        ],
+        "pct_values": {
+          "OpenPI": 17.748681885545952,
+          "GR00T": 13.273845554680811,
+          "ACT": 11.952326664936285
+        },
+        "completion_values": {
+          "OpenPI": 0.58125,
+          "GR00T": 0.5,
+          "ACT": 0.375
+        },
+        "flipped_pairs": []
+      }
+    },
+    {
+      "object": "Scissors",
+      "n_episodes": 124,
+      "tau": 240.03949004109018,
+      "rows": {
+        "OpenPI": {
+          "n_eps": 18,
+          "n_events": 55,
+          "n_censored": 18,
+          "median_T": 48.24900000000001,
+          "rmst_tau": 73.97793907002438,
+          "pct_of_human": 15.244152626982014,
+          "F_at": {
+            "20": 0.21095890410958884,
+            "30": 0.29740688211185207,
+            "60": 0.5694778124433588
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 4083.1478565932193,
+          "mtba_safety_stalls": null
+        },
+        "GR00T": {
+          "n_eps": 9,
+          "n_events": 22,
+          "n_censored": 9,
+          "median_T": 55.269,
+          "rmst_tau": 86.89830416570923,
+          "pct_of_human": 12.977594960455388,
+          "F_at": {
+            "20": 0.23648498331479406,
+            "30": 0.3092006991895756,
+            "60": 0.5325418265192616
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 2040.1360830720805,
+          "mtba_safety_stalls": null
+        },
+        "ACT": {
+          "n_eps": 21,
+          "n_events": 73,
+          "n_censored": 20,
+          "median_T": 32.10046527,
+          "rmst_tau": 63.29525510236323,
+          "pct_of_human": 17.81699105863817,
+          "F_at": {
+            "20": 0.347774989288119,
+            "30": 0.4720877087834805,
+            "60": 0.6726162470118568
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 4527.605162800173,
+          "mtba_safety_stalls": null
+        },
+        "Teleop": {
+          "n_eps": 76,
+          "n_events": 759,
+          "n_censored": 1,
+          "median_T": 9.740168837999988,
+          "rmst_tau": 11.277309942130275,
+          "pct_of_human": 100.0,
+          "F_at": {
+            "20": 0.923582861536311,
+            "30": 0.9855070944293004,
+            "60": 1.0
+          },
+          "n_safety_stalls": 0,
+          "total_duration_s": 8803.882681155,
+          "mtba_safety_stalls": null
+        }
+      },
+      "H1": {
+        "overall": "UNDERPOWERED",
+        "pairs": [
+          {
+            "pair": [
+              "OpenPI",
+              "GR00T"
+            ],
+            "n_a": 18,
+            "n_b": 9,
+            "D": 0.13671690176484375,
+            "p": 0.7571214392803598,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "OpenPI",
+              "ACT"
+            ],
+            "n_a": 18,
+            "n_b": 21,
+            "D": 0.1947394244767381,
+            "p": 0.08345827086456771,
+            "status": "UNDERPOWERED"
+          },
+          {
+            "pair": [
+              "GR00T",
+              "ACT"
+            ],
+            "n_a": 9,
+            "n_b": 21,
+            "D": 0.2126500171549247,
+            "p": 0.12393803098450774,
+            "status": "UNDERPOWERED"
+          }
+        ]
+      },
+      "H3": {
+        "overall": "HOLDS",
+        "pct_of_human_ranking": [
+          "ACT",
+          "OpenPI",
+          "GR00T"
+        ],
+        "completion_ranking": [
+          "ACT",
+          "OpenPI",
+          "GR00T"
+        ],
+        "pct_values": {
+          "OpenPI": 15.244152626982014,
+          "GR00T": 12.977594960455388,
+          "ACT": 17.81699105863817
+        },
+        "completion_values": {
+          "OpenPI": 0.375,
+          "GR00T": 0.3194444444444444,
+          "ACT": 0.5059523809523809
+        },
+        "flipped_pairs": []
+      }
+    }
+  ]
+}

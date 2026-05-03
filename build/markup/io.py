@@ -3,10 +3,18 @@
 Markup lives outside the source dataset (which is read-only / synced from S3).
 Each episode's manual markup is one file at:
 
-    {out_dir}/{rel_id}.json
+    {out_dir}/{bucket}/{key}.json
 
-where rel_id is the episode's relative path under the inference root, e.g.
-"000000000000/000000000293". The directory tree mirrors the source layout.
+mirroring the episode's full S3 URL with the scheme stripped. e.g.,
+`s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000293`
+saves to
+`{out_dir}/positronic-public/datasets/phail/v1.0/inference/000000000000/000000000293.json`,
+and `s3://inference/spoons_ablation/000000000000/000000000049` saves to
+`{out_dir}/inference/spoons_ablation/000000000000/000000000049.json`.
+
+The S3 URL is the canonical episode key; the on-disk layout is a 1-to-1
+mirror, so two episodes in different buckets never collide and reverse
+mapping (annotation path → s3 URL) is unambiguous.
 
 File schema:
     {
@@ -65,15 +73,19 @@ class CandidateAnnotation:
         )
 
 
-def markup_path(out_dir: Path, rel_id: str, source: str = '') -> Path:
-    """Sidecar location. We bucket by `source` (inference / training / human)
-    because the dataset re-uses the same numerical rel_ids across sources —
-    `inference/000000000000/000000000028` and `training/000000000000/...028`
-    are different episodes. An empty source maps to a flat layout for
-    backward-compat with pre-source layout files."""
-    if source:
-        return out_dir / source / f'{rel_id}.json'
-    return out_dir / f'{rel_id}.json'
+def markup_path(out_dir: Path, s3_url: str) -> Path:
+    """Sidecar location, mirroring the episode's full s3 path.
+
+    `s3://<bucket>/<key>` → `<out_dir>/<bucket>/<key>.json`. Identical layout
+    underneath `out_dir` to the source dataset's S3 layout, so two episodes
+    in different buckets never collide and a path can be derived unambiguously
+    in either direction. `file://` (local-only) URLs are accepted and use
+    their absolute filesystem path beneath `out_dir`.
+    """
+    if '://' not in s3_url:
+        raise ValueError(f'expected <scheme>://… url, got: {s3_url!r}')
+    tail = s3_url.split('://', 1)[1].rstrip('/')
+    return out_dir / f'{tail}.json'
 
 
 def load_markup(path: Path) -> tuple[list[float], int]:

@@ -1,0 +1,80 @@
+{
+  "cohort": "mixed",
+  "objects": [
+    "Wooden spoons"
+  ],
+  "models": [
+    "Physical Intelligence Open \u03c0\u2080.\u2085",
+    "NVIDIA GR00T N1.6",
+    "Action Chunking Transformer",
+    "Robot teleoperated by Human"
+  ],
+  "tau": 240.0324362270767,
+  "rmst_human": 10.093094199154615,
+  "rows": {
+    "OpenPI": {
+      "n_eps": 17,
+      "n_events": 93,
+      "n_censored": 12,
+      "median_T": 18.57002541099999,
+      "rmst_tau": 40.642008275056966,
+      "pct_of_human": 24.834142375166543,
+      "F_at": {
+        "20": 0.5514203058272493,
+        "30": 0.7507890587929162,
+        "60": 0.8803787482205998
+      },
+      "n_safety_stalls": 1,
+      "total_duration_s": 3422.456690036968,
+      "mtba_safety_stalls": 3422.456690036968
+    },
+    "GR00T": {
+      "n_eps": 17,
+      "n_events": 92,
+      "n_censored": 13,
+      "median_T": 17.711445857,
+      "rmst_tau": 41.614404885241115,
+      "pct_of_human": 24.25384726031301,
+      "F_at": {
+        "20": 0.5547376054958225,
+        "30": 0.7229478434196228,
+        "60": 0.8284915221169094
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 3571.004493792949,
+      "mtba_safety_stalls": null
+    },
+    "ACT": {
+      "n_eps": 20,
+      "n_events": 100,
+      "n_censored": 15,
+      "median_T": 17.078000000000003,
+      "rmst_tau": 45.7745740225198,
+      "pct_of_human": 22.049564446386977,
+      "F_at": {
+        "20": 0.5521308652604395,
+        "30": 0.6926388291003018,
+        "60": 0.8279326302195439
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 4175.114182795238,
+      "mtba_safety_stalls": null
+    },
+    "Teleop": {
+      "n_eps": 114,
+      "n_events": 1326,
+      "n_censored": 5,
+      "median_T": 9.147037525000002,
+      "rmst_tau": 10.093094199154615,
+      "pct_of_human": 100.0,
+      "F_at": {
+        "20": 0.9819004524886876,
+        "30": 0.9984917043740573,
+        "60": 1.0
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 13693.685563648,
+      "mtba_safety_stalls": null
+    }
+  }
+}

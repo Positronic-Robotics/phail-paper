@@ -1,0 +1,15 @@
+{
+  "place_timestamps_s": [
+    11.672,
+    43.691,
+    58.378,
+    126.471,
+    138.454
+  ],
+  "items_in_target_at_end": 5,
+  "items_in_source_at_end": 0,
+  "drop_timestamps_s": [
+    159.454
+  ],
+  "reviewed": true
+}

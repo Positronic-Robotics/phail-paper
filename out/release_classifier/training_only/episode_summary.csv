@@ -1,0 +1,450 @@
+source,rel_path,public_url,model,model_slug,object,tote_placement,outcome,notes,S,N,expected_min,actual,n_commanded,n_accidental,n_orphan_commanded,status,duration_s
+training,000000000000/000000000000,https://phail.ai/episode/524,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,167.948
+training,000000000000/000000000001,https://phail.ai/episode/525,Robot teleoperated by Human,teleop,Towels,,Success,,3,3,3,3,3,0,0,match,60.385
+training,000000000000/000000000002,https://phail.ai/episode/526,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,131.126
+training,000000000000/000000000003,https://phail.ai/episode/527,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,166.894
+training,000000000000/000000000004,https://phail.ai/episode/528,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,151.214
+training,000000000000/000000000005,https://phail.ai/episode/529,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,137.444
+training,000000000000/000000000006,https://phail.ai/episode/530,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,107.933
+training,000000000000/000000000007,https://phail.ai/episode/531,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,110.501
+training,000000000000/000000000008,https://phail.ai/episode/532,Robot teleoperated by Human,teleop,Towels,,Success,,11,11,11,13,13,0,0,extra,102.284
+training,000000000000/000000000009,https://phail.ai/episode/533,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,110.852
+training,000000000000/000000000010,https://phail.ai/episode/534,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,89.447
+training,000000000000/000000000011,https://phail.ai/episode/535,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,107.395
+training,000000000000/000000000012,https://phail.ai/episode/536,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,83.293
+training,000000000000/000000000013,https://phail.ai/episode/537,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,98.261
+training,000000000000/000000000014,https://phail.ai/episode/538,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,172.95
+training,000000000000/000000000015,https://phail.ai/episode/539,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,155.804
+training,000000000000/000000000016,https://phail.ai/episode/540,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,143.097
+training,000000000000/000000000017,https://phail.ai/episode/541,Robot teleoperated by Human,teleop,Towels,,Success,,5,5,5,5,5,0,0,match,49.404
+training,000000000000/000000000018,https://phail.ai/episode/542,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,14,14,0,0,extra,129.181
+training,000000000000/000000000019,https://phail.ai/episode/543,Robot teleoperated by Human,teleop,Towels,,Success,,8,8,8,11,11,2,0,extra,117.512
+training,000000000000/000000000020,https://phail.ai/episode/544,Robot teleoperated by Human,teleop,Towels,,Success,,2,2,2,4,4,0,0,extra,37.185
+training,000000000000/000000000021,https://phail.ai/episode/545,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,112.405
+training,000000000000/000000000022,https://phail.ai/episode/546,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,141.106
+training,000000000000/000000000023,https://phail.ai/episode/547,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,143.787
+training,000000000000/000000000024,https://phail.ai/episode/548,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,109.843
+training,000000000000/000000000025,https://phail.ai/episode/549,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,101.3
+training,000000000000/000000000026,https://phail.ai/episode/550,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,104.582
+training,000000000000/000000000027,https://phail.ai/episode/551,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,95.721
+training,000000000000/000000000028,https://phail.ai/episode/552,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,107.868
+training,000000000000/000000000029,https://phail.ai/episode/553,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,115.134
+training,000000000000/000000000030,https://phail.ai/episode/554,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,2,0,extra,121.219
+training,000000000000/000000000031,https://phail.ai/episode/555,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,9,9,1,0,match,104.954
+training,000000000000/000000000032,https://phail.ai/episode/556,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,77.898
+training,000000000000/000000000033,https://phail.ai/episode/557,Robot teleoperated by Human,teleop,Towels,,Success,,6,6,6,7,7,0,0,extra,56.954
+training,000000000000/000000000034,https://phail.ai/episode/558,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,1,0,extra,93.585
+training,000000000000/000000000035,https://phail.ai/episode/559,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,79.355
+training,000000000000/000000000036,https://phail.ai/episode/560,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,121.397
+training,000000000000/000000000037,https://phail.ai/episode/561,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,1,0,extra,119.09
+training,000000000000/000000000038,https://phail.ai/episode/562,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,1,0,extra,90.364
+training,000000000000/000000000039,https://phail.ai/episode/563,Robot teleoperated by Human,teleop,Towels,,Success,,7,7,7,10,10,2,0,extra,116.079
+training,000000000000/000000000040,https://phail.ai/episode/564,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,137.437
+training,000000000000/000000000041,https://phail.ai/episode/565,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,86.186
+training,000000000000/000000000042,https://phail.ai/episode/566,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,91.402
+training,000000000000/000000000043,https://phail.ai/episode/567,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,1,0,match,84.984
+training,000000000000/000000000044,https://phail.ai/episode/568,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,104.239
+training,000000000000/000000000045,https://phail.ai/episode/569,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,1,0,extra,89.247
+training,000000000000/000000000046,https://phail.ai/episode/570,Robot teleoperated by Human,teleop,Towels,,Success,,3,3,3,3,3,0,0,match,40.406
+training,000000000000/000000000047,https://phail.ai/episode/571,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,83.312
+training,000000000000/000000000048,https://phail.ai/episode/572,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,82.098
+training,000000000000/000000000049,https://phail.ai/episode/573,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,9,9,0,0,match,72.694
+training,000000000000/000000000050,https://phail.ai/episode/574,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,92.734
+training,000000000000/000000000051,https://phail.ai/episode/575,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,92.181
+training,000000000000/000000000052,https://phail.ai/episode/576,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,83.478
+training,000000000000/000000000053,https://phail.ai/episode/577,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,111.927
+training,000000000000/000000000054,https://phail.ai/episode/578,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,79.866
+training,000000000000/000000000055,https://phail.ai/episode/579,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,79.304
+training,000000000000/000000000056,https://phail.ai/episode/580,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,124.306
+training,000000000000/000000000057,https://phail.ai/episode/581,Robot teleoperated by Human,teleop,Towels,,Success,,4,4,4,6,6,0,0,extra,62.107
+training,000000000000/000000000058,https://phail.ai/episode/582,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,91.112
+training,000000000000/000000000059,https://phail.ai/episode/583,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,85.365
+training,000000000000/000000000060,https://phail.ai/episode/584,Robot teleoperated by Human,teleop,Towels,,Success,,1,1,1,1,1,0,0,match,12.048
+training,000000000000/000000000061,https://phail.ai/episode/585,Robot teleoperated by Human,teleop,Towels,,Success,,5,5,5,5,5,0,0,match,53.241
+training,000000000000/000000000062,https://phail.ai/episode/586,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,94.789
+training,000000000000/000000000063,https://phail.ai/episode/587,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,87.449
+training,000000000000/000000000064,https://phail.ai/episode/588,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,1,0,extra,74.772
+training,000000000000/000000000065,https://phail.ai/episode/589,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,98.343
+training,000000000000/000000000066,https://phail.ai/episode/590,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,92.71
+training,000000000000/000000000067,https://phail.ai/episode/591,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,88.974
+training,000000000000/000000000068,https://phail.ai/episode/592,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,82.473
+training,000000000000/000000000069,https://phail.ai/episode/593,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,14,14,1,0,extra,124.319
+training,000000000000/000000000070,https://phail.ai/episode/594,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,16,16,4,0,extra,109.621
+training,000000000000/000000000071,https://phail.ai/episode/595,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,82.079
+training,000000000000/000000000072,https://phail.ai/episode/596,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,68.847
+training,000000000000/000000000073,https://phail.ai/episode/597,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,97.974
+training,000000000000/000000000074,https://phail.ai/episode/598,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,92.612
+training,000000000000/000000000075,https://phail.ai/episode/599,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,89.536
+training,000000000000/000000000076,https://phail.ai/episode/600,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,65.404
+training,000000000000/000000000077,https://phail.ai/episode/601,Robot teleoperated by Human,teleop,Towels,,Success,,7,7,7,8,8,0,0,extra,77.652
+training,000000000000/000000000078,https://phail.ai/episode/602,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,73.965
+training,000000000000/000000000079,https://phail.ai/episode/603,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,93.79
+training,000000000000/000000000080,https://phail.ai/episode/604,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,2,0,extra,93.825
+training,000000000000/000000000081,https://phail.ai/episode/605,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,85.678
+training,000000000000/000000000082,https://phail.ai/episode/606,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,76.54
+training,000000000000/000000000083,https://phail.ai/episode/607,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,1,0,extra,83.688
+training,000000000000/000000000084,https://phail.ai/episode/608,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,80.881
+training,000000000000/000000000085,https://phail.ai/episode/609,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,85.391
+training,000000000000/000000000086,https://phail.ai/episode/610,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,1,0,extra,85.302
+training,000000000000/000000000087,https://phail.ai/episode/611,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,14,14,1,0,extra,103.068
+training,000000000000/000000000088,https://phail.ai/episode/612,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,99.86
+training,000000000000/000000000089,https://phail.ai/episode/613,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,103.881
+training,000000000000/000000000090,https://phail.ai/episode/614,Robot teleoperated by Human,teleop,Towels,,Success,,8,8,8,9,9,0,0,extra,78.175
+training,000000000000/000000000091,https://phail.ai/episode/615,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,1,0,extra,97.565
+training,000000000000/000000000092,https://phail.ai/episode/616,Robot teleoperated by Human,teleop,Towels,,Success,,5,5,5,5,5,0,0,match,44.373
+training,000000000000/000000000093,https://phail.ai/episode/617,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,77.121
+training,000000000000/000000000094,https://phail.ai/episode/618,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,13,13,0,0,extra,99.837
+training,000000000000/000000000095,https://phail.ai/episode/619,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,92.819
+training,000000000000/000000000096,https://phail.ai/episode/620,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,12,12,0,0,extra,100.204
+training,000000000000/000000000097,https://phail.ai/episode/621,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,110.775
+training,000000000000/000000000098,https://phail.ai/episode/622,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,89.074
+training,000000000000/000000000099,https://phail.ai/episode/623,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,98.455
+training,000000000000/000000000100,https://phail.ai/episode/624,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,1,0,match,88.349
+training,000000000000/000000000101,https://phail.ai/episode/625,Robot teleoperated by Human,teleop,Towels,,Success,,8,8,8,9,9,0,0,extra,68.774
+training,000000000000/000000000102,https://phail.ai/episode/626,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,82.883
+training,000000000000/000000000103,https://phail.ai/episode/627,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,85.865
+training,000000000000/000000000104,https://phail.ai/episode/628,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,11,11,0,0,extra,93.665
+training,000000000000/000000000105,https://phail.ai/episode/629,Robot teleoperated by Human,teleop,Towels,,Success,,10,10,10,10,10,0,0,match,84.921
+training,000000000000/000000000106,https://phail.ai/episode/630,Robot teleoperated by Human,teleop,Towels,,Success,,7,7,7,8,8,0,0,extra,93.122
+training,000000000000/000000000107,https://phail.ai/episode/631,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,9,9,0,0,match,77.744
+training,000000000000/000000000108,https://phail.ai/episode/632,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,10,10,0,0,extra,92.173
+training,000000000000/000000000109,https://phail.ai/episode/633,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,10,10,0,0,extra,79.216
+training,000000000000/000000000110,https://phail.ai/episode/634,Robot teleoperated by Human,teleop,Towels,,Success,,8,8,8,8,8,0,0,match,72.942
+training,000000000000/000000000111,https://phail.ai/episode/635,Robot teleoperated by Human,teleop,Towels,,Success,,9,9,9,9,9,0,0,match,76.946
+training,000000000000/000000000112,https://phail.ai/episode/636,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,4,4,4,5,5,1,0,extra,55.415
+training,000000000000/000000000113,https://phail.ai/episode/637,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,1,0,extra,158.063
+training,000000000000/000000000114,https://phail.ai/episode/638,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,2,0,extra,166.244
+training,000000000000/000000000115,https://phail.ai/episode/639,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,3,0,extra,167.237
+training,000000000000/000000000116,https://phail.ai/episode/640,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,7,7,7,17,17,4,0,extra,100.266
+training,000000000000/000000000117,https://phail.ai/episode/641,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,4,0,extra,179.835
+training,000000000000/000000000118,https://phail.ai/episode/642,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,3,0,extra,154.503
+training,000000000000/000000000119,https://phail.ai/episode/643,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,12,12,1,0,match,129.624
+training,000000000000/000000000120,https://phail.ai/episode/644,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,23,23,4,0,extra,164.365
+training,000000000000/000000000121,https://phail.ai/episode/645,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,24,24,4,0,extra,134.53
+training,000000000000/000000000122,https://phail.ai/episode/646,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,27,27,5,0,extra,162.217
+training,000000000000/000000000123,https://phail.ai/episode/647,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,3,0,extra,138.075
+training,000000000000/000000000124,https://phail.ai/episode/648,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,6,6,6,14,14,3,0,extra,78.732
+training,000000000000/000000000125,https://phail.ai/episode/649,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,1,0,extra,130.042
+training,000000000000/000000000126,https://phail.ai/episode/650,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,13,13,4,0,extra,134.245
+training,000000000000/000000000127,https://phail.ai/episode/651,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,2,0,extra,170.462
+training,000000000000/000000000128,https://phail.ai/episode/652,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,2,2,2,3,3,0,0,extra,26.642
+training,000000000000/000000000129,https://phail.ai/episode/653,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,4,0,extra,168.03
+training,000000000000/000000000130,https://phail.ai/episode/654,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,1,0,extra,151.948
+training,000000000000/000000000131,https://phail.ai/episode/655,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,25,25,7,0,extra,155.005
+training,000000000000/000000000132,https://phail.ai/episode/656,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,2,0,extra,156.722
+training,000000000000/000000000133,https://phail.ai/episode/657,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,32,32,5,0,extra,153.667
+training,000000000000/000000000134,https://phail.ai/episode/658,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,18,18,4,0,extra,184.197
+training,000000000000/000000000135,https://phail.ai/episode/659,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,4,0,extra,137.197
+training,000000000000/000000000136,https://phail.ai/episode/660,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,27,27,10,0,extra,171.959
+training,000000000000/000000000137,https://phail.ai/episode/661,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,5,0,extra,139.302
+training,000000000000/000000000138,https://phail.ai/episode/662,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,2,0,extra,190.249
+training,000000000000/000000000139,https://phail.ai/episode/663,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,3,0,extra,114.856
+training,000000000000/000000000140,https://phail.ai/episode/664,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,3,0,extra,132.719
+training,000000000000/000000000141,https://phail.ai/episode/665,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,18,18,4,0,extra,158.54
+training,000000000000/000000000142,https://phail.ai/episode/666,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,4,4,4,5,5,4,0,extra,62.454
+training,000000000000/000000000143,https://phail.ai/episode/667,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,17,17,5,0,extra,207.292
+training,000000000000/000000000144,https://phail.ai/episode/668,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,3,0,extra,114.913
+training,000000000000/000000000145,https://phail.ai/episode/669,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,3,0,extra,164.522
+training,000000000000/000000000146,https://phail.ai/episode/670,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,3,0,extra,155.267
+training,000000000000/000000000147,https://phail.ai/episode/671,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,18,18,2,0,extra,111.421
+training,000000000000/000000000148,https://phail.ai/episode/672,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,13,13,2,0,extra,101.309
+training,000000000000/000000000149,https://phail.ai/episode/673,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,19,19,3,0,extra,115.488
+training,000000000000/000000000150,https://phail.ai/episode/674,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,9,9,0,0,match,77.291
+training,000000000000/000000000151,https://phail.ai/episode/675,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,3,0,extra,133.039
+training,000000000000/000000000152,https://phail.ai/episode/676,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,7,7,7,9,9,0,0,extra,66.011
+training,000000000000/000000000153,https://phail.ai/episode/677,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,8,8,8,15,15,1,0,extra,96.796
+training,000000000000/000000000154,https://phail.ai/episode/678,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,8,8,8,18,18,0,0,extra,98.117
+training,000000000000/000000000155,https://phail.ai/episode/679,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,14,14,3,0,extra,86.497
+training,000000000000/000000000156,https://phail.ai/episode/680,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,15,15,1,0,extra,96.868
+training,000000000000/000000000157,https://phail.ai/episode/681,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,8,8,8,11,11,1,0,extra,72.901
+training,000000000000/000000000158,https://phail.ai/episode/682,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,13,13,1,0,extra,92.792
+training,000000000000/000000000159,https://phail.ai/episode/683,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,16,16,2,0,extra,100.563
+training,000000000000/000000000160,https://phail.ai/episode/684,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,9,9,9,11,11,0,0,extra,80.91
+training,000000000000/000000000161,https://phail.ai/episode/685,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,1,0,extra,137.453
+training,000000000000/000000000162,https://phail.ai/episode/686,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,2,0,extra,154.503
+training,000000000000/000000000163,https://phail.ai/episode/687,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,1,0,extra,167.884
+training,000000000000/000000000164,https://phail.ai/episode/688,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,11,11,11,20,20,2,0,extra,153.394
+training,000000000000/000000000165,https://phail.ai/episode/689,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,126.752
+training,000000000000/000000000166,https://phail.ai/episode/690,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,117.836
+training,000000000000/000000000167,https://phail.ai/episode/691,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,124.975
+training,000000000000/000000000168,https://phail.ai/episode/692,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,2,0,extra,112.079
+training,000000000000/000000000169,https://phail.ai/episode/693,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,133.491
+training,000000000000/000000000170,https://phail.ai/episode/694,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,114.121
+training,000000000000/000000000171,https://phail.ai/episode/695,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,3,0,extra,132.349
+training,000000000000/000000000172,https://phail.ai/episode/696,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,11,11,11,17,17,0,0,extra,124.277
+training,000000000000/000000000173,https://phail.ai/episode/697,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,2,0,extra,126.407
+training,000000000000/000000000174,https://phail.ai/episode/698,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,2,0,extra,113.197
+training,000000000000/000000000175,https://phail.ai/episode/699,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,125.713
+training,000000000000/000000000176,https://phail.ai/episode/700,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,15,15,0,0,extra,108.538
+training,000000000000/000000000177,https://phail.ai/episode/701,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,121.665
+training,000000000000/000000000178,https://phail.ai/episode/702,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,1,0,extra,130.26
+training,000000000000/000000000179,https://phail.ai/episode/703,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,1,0,extra,133.542
+training,000000000000/000000000180,https://phail.ai/episode/704,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,133.709
+training,000000000000/000000000181,https://phail.ai/episode/705,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,137.764
+training,000000000000/000000000182,https://phail.ai/episode/706,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,2,0,extra,134.076
+training,000000000000/000000000183,https://phail.ai/episode/707,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,24,24,1,0,extra,154.915
+training,000000000000/000000000184,https://phail.ai/episode/708,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,3,0,extra,123.565
+training,000000000000/000000000185,https://phail.ai/episode/709,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,3,0,extra,141.118
+training,000000000000/000000000186,https://phail.ai/episode/710,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,2,0,extra,155.12
+training,000000000000/000000000187,https://phail.ai/episode/711,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,0,0,extra,141.954
+training,000000000000/000000000188,https://phail.ai/episode/712,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,1,0,extra,124.274
+training,000000000000/000000000189,https://phail.ai/episode/713,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,2,0,extra,124.039
+training,000000000000/000000000190,https://phail.ai/episode/714,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,1,0,extra,123.942
+training,000000000000/000000000191,https://phail.ai/episode/715,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,0,0,extra,123.539
+training,000000000000/000000000192,https://phail.ai/episode/716,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,107.873
+training,000000000000/000000000193,https://phail.ai/episode/717,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,12,12,1,0,match,96.661
+training,000000000000/000000000194,https://phail.ai/episode/718,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,0,0,extra,119.472
+training,000000000000/000000000195,https://phail.ai/episode/719,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,1,0,extra,115.879
+training,000000000000/000000000196,https://phail.ai/episode/720,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,105.583
+training,000000000000/000000000197,https://phail.ai/episode/721,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,104.304
+training,000000000000/000000000198,https://phail.ai/episode/722,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,15,15,0,0,extra,105.131
+training,000000000000/000000000199,https://phail.ai/episode/723,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,1,0,extra,127.392
+training,000000000000/000000000200,https://phail.ai/episode/724,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,2,0,extra,107.363
+training,000000000000/000000000201,https://phail.ai/episode/725,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,104.762
+training,000000000000/000000000202,https://phail.ai/episode/726,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,13,13,0,0,extra,101.681
+training,000000000000/000000000203,https://phail.ai/episode/727,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,2,0,extra,96.339
+training,000000000000/000000000204,https://phail.ai/episode/728,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,98.431
+training,000000000000/000000000205,https://phail.ai/episode/729,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,109.377
+training,000000000000/000000000206,https://phail.ai/episode/730,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,3,0,extra,94.755
+training,000000000000/000000000207,https://phail.ai/episode/731,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,25,25,4,0,extra,148.16
+training,000000000000/000000000208,https://phail.ai/episode/732,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,94.218
+training,000000000000/000000000209,https://phail.ai/episode/733,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,1,0,extra,108.612
+training,000000000000/000000000210,https://phail.ai/episode/734,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,138.42
+training,000000000000/000000000211,https://phail.ai/episode/735,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,24,24,2,0,extra,138.941
+training,000000000000/000000000212,https://phail.ai/episode/736,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,0,0,extra,130.217
+training,000000000000/000000000213,https://phail.ai/episode/737,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,21,21,5,0,extra,149.387
+training,000000000000/000000000214,https://phail.ai/episode/738,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,0,0,extra,131.204
+training,000000000000/000000000215,https://phail.ai/episode/739,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,111.664
+training,000000000000/000000000216,https://phail.ai/episode/740,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,0,0,extra,109.287
+training,000000000000/000000000217,https://phail.ai/episode/741,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,3,0,extra,120.008
+training,000000000000/000000000218,https://phail.ai/episode/742,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,115.723
+training,000000000000/000000000219,https://phail.ai/episode/743,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,1,0,extra,103.702
+training,000000000000/000000000220,https://phail.ai/episode/744,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,24,24,4,0,extra,135.797
+training,000000000000/000000000221,https://phail.ai/episode/745,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,95.878
+training,000000000000/000000000222,https://phail.ai/episode/746,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,18,18,0,0,extra,128.831
+training,000000000000/000000000223,https://phail.ai/episode/747,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,108.597
+training,000000000000/000000000224,https://phail.ai/episode/748,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,5,0,extra,123.41
+training,000000000000/000000000225,https://phail.ai/episode/749,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,18,18,4,0,extra,116.679
+training,000000000000/000000000226,https://phail.ai/episode/750,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,3,0,extra,123.423
+training,000000000000/000000000227,https://phail.ai/episode/751,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,3,0,extra,114.618
+training,000000000000/000000000228,https://phail.ai/episode/752,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,3,0,extra,135.987
+training,000000000000/000000000229,https://phail.ai/episode/753,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,120.534
+training,000000000000/000000000230,https://phail.ai/episode/754,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,132.075
+training,000000000000/000000000231,https://phail.ai/episode/755,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,22,22,1,0,extra,126.586
+training,000000000000/000000000232,https://phail.ai/episode/756,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,0,0,extra,114.739
+training,000000000000/000000000233,https://phail.ai/episode/757,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,122.704
+training,000000000000/000000000234,https://phail.ai/episode/758,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,12,12,0,0,match,104.533
+training,000000000000/000000000235,https://phail.ai/episode/759,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,21,21,2,0,extra,116.507
+training,000000000000/000000000236,https://phail.ai/episode/760,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,108.711
+training,000000000000/000000000237,https://phail.ai/episode/761,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,2,0,extra,83.323
+training,000000000000/000000000238,https://phail.ai/episode/762,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,1,0,extra,120.365
+training,000000000000/000000000239,https://phail.ai/episode/763,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,93.293
+training,000000000000/000000000240,https://phail.ai/episode/764,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,2,0,extra,128.212
+training,000000000000/000000000241,https://phail.ai/episode/765,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,97.827
+training,000000000000/000000000242,https://phail.ai/episode/766,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,2,0,extra,131.567
+training,000000000000/000000000243,https://phail.ai/episode/767,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,111.419
+training,000000000000/000000000244,https://phail.ai/episode/768,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,123.25
+training,000000000000/000000000245,https://phail.ai/episode/769,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,95.795
+training,000000000000/000000000246,https://phail.ai/episode/770,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,0,0,extra,121.152
+training,000000000000/000000000247,https://phail.ai/episode/771,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,13,13,1,0,extra,99.78
+training,000000000000/000000000248,https://phail.ai/episode/772,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,2,0,extra,109.634
+training,000000000000/000000000249,https://phail.ai/episode/773,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,13,13,0,0,extra,84.36
+training,000000000000/000000000250,https://phail.ai/episode/774,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,113.926
+training,000000000000/000000000251,https://phail.ai/episode/775,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,3,0,extra,107.115
+training,000000000000/000000000252,https://phail.ai/episode/776,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,104.503
+training,000000000000/000000000253,https://phail.ai/episode/777,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,101.819
+training,000000000000/000000000254,https://phail.ai/episode/778,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,126.954
+training,000000000000/000000000255,https://phail.ai/episode/779,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,105.199
+training,000000000000/000000000256,https://phail.ai/episode/780,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,25,25,6,0,extra,144.968
+training,000000000000/000000000257,https://phail.ai/episode/781,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,19,19,1,0,extra,135.751
+training,000000000000/000000000258,https://phail.ai/episode/782,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,147.265
+training,000000000000/000000000259,https://phail.ai/episode/783,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,14,14,1,0,extra,100.565
+training,000000000000/000000000260,https://phail.ai/episode/784,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,2,0,extra,120.287
+training,000000000000/000000000261,https://phail.ai/episode/785,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,2,0,extra,110.676
+training,000000000000/000000000262,https://phail.ai/episode/786,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,97.264
+training,000000000000/000000000263,https://phail.ai/episode/787,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,0,0,extra,100.808
+training,000000000000/000000000264,https://phail.ai/episode/788,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,2,0,extra,99.53
+training,000000000000/000000000265,https://phail.ai/episode/789,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,1,0,extra,110.717
+training,000000000000/000000000266,https://phail.ai/episode/790,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,1,0,extra,142.203
+training,000000000000/000000000267,https://phail.ai/episode/791,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,13,13,13,17,17,1,0,extra,130.045
+training,000000000000/000000000268,https://phail.ai/episode/792,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,1,0,extra,125.276
+training,000000000000/000000000269,https://phail.ai/episode/793,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,18,18,2,0,extra,126.512
+training,000000000000/000000000270,https://phail.ai/episode/794,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,19,19,0,0,extra,117.264
+training,000000000000/000000000271,https://phail.ai/episode/795,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,5,0,extra,131.598
+training,000000000000/000000000272,https://phail.ai/episode/796,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,0,0,extra,112.989
+training,000000000000/000000000273,https://phail.ai/episode/797,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,3,0,extra,123.076
+training,000000000000/000000000274,https://phail.ai/episode/798,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,20,20,1,0,extra,133.752
+training,000000000000/000000000275,https://phail.ai/episode/799,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,16,16,1,0,extra,129.209
+training,000000000000/000000000276,https://phail.ai/episode/800,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,1,0,extra,87.924
+training,000000000000/000000000277,https://phail.ai/episode/801,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,15,15,0,0,extra,107.889
+training,000000000000/000000000278,https://phail.ai/episode/802,Robot teleoperated by Human,teleop,Wooden spoons,,Success,,12,12,12,17,17,0,0,extra,118.617
+training,000000000000/000000000279,https://phail.ai/episode/803,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,23,23,10,0,extra,149.817
+training,000000000000/000000000280,https://phail.ai/episode/804,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,2,0,extra,113.012
+training,000000000000/000000000281,https://phail.ai/episode/805,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,3,0,extra,129.389
+training,000000000000/000000000282,https://phail.ai/episode/806,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,32,32,14,0,extra,193.666
+training,000000000000/000000000283,https://phail.ai/episode/807,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,0,0,extra,137.331
+training,000000000000/000000000284,https://phail.ai/episode/808,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,23,23,5,0,extra,120.419
+training,000000000000/000000000285,https://phail.ai/episode/809,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,26,26,5,0,extra,130.24
+training,000000000000/000000000286,https://phail.ai/episode/810,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,24,24,1,0,extra,130.781
+training,000000000000/000000000287,https://phail.ai/episode/811,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,30,30,5,0,extra,188.608
+training,000000000000/000000000288,https://phail.ai/episode/812,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,1,0,extra,133.021
+training,000000000000/000000000289,https://phail.ai/episode/813,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,1,0,extra,108.654
+training,000000000000/000000000290,https://phail.ai/episode/814,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,17,17,4,0,extra,97.688
+training,000000000000/000000000291,https://phail.ai/episode/815,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,4,0,extra,122.651
+training,000000000000/000000000292,https://phail.ai/episode/816,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,16,16,1,0,extra,101.04
+training,000000000000/000000000293,https://phail.ai/episode/817,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,3,0,extra,94.479
+training,000000000000/000000000294,https://phail.ai/episode/818,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,27,27,7,0,extra,113.831
+training,000000000000/000000000295,https://phail.ai/episode/819,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,22,22,5,0,extra,100.358
+training,000000000000/000000000296,https://phail.ai/episode/820,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,28,28,6,0,extra,138.253
+training,000000000000/000000000297,https://phail.ai/episode/821,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,8,0,extra,147.128
+training,000000000000/000000000298,https://phail.ai/episode/822,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,34,34,10,0,extra,170.154
+training,000000000000/000000000299,https://phail.ai/episode/823,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,23,23,2,0,extra,104.108
+training,000000000000/000000000300,https://phail.ai/episode/824,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,24,24,3,0,extra,91.954
+training,000000000000/000000000301,https://phail.ai/episode/825,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,34,34,3,0,extra,147.706
+training,000000000000/000000000302,https://phail.ai/episode/826,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,23,23,4,0,extra,100.328
+training,000000000000/000000000303,https://phail.ai/episode/827,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,2,0,extra,86.816
+training,000000000000/000000000304,https://phail.ai/episode/828,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,18,18,1,0,extra,79.599
+training,000000000000/000000000305,https://phail.ai/episode/829,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,22,22,3,0,extra,123.837
+training,000000000000/000000000306,https://phail.ai/episode/830,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,2,0,extra,87.899
+training,000000000000/000000000307,https://phail.ai/episode/831,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,25,25,3,0,extra,112.724
+training,000000000000/000000000308,https://phail.ai/episode/832,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,3,0,extra,90.153
+training,000000000000/000000000309,https://phail.ai/episode/833,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,18,18,1,0,extra,73.197
+training,000000000000/000000000310,https://phail.ai/episode/834,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,30,30,13,0,extra,124.253
+training,000000000000/000000000311,https://phail.ai/episode/835,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,15,15,1,0,extra,80.065
+training,000000000000/000000000312,https://phail.ai/episode/836,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,36,36,2,0,extra,149.77
+training,000000000000/000000000313,https://phail.ai/episode/837,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,24,24,1,0,extra,91.546
+training,000000000000/000000000314,https://phail.ai/episode/838,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,16,16,0,0,extra,108.325
+training,000000000000/000000000315,https://phail.ai/episode/839,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,17,17,1,0,extra,78.955
+training,000000000000/000000000316,https://phail.ai/episode/840,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,26,26,4,0,extra,107.859
+training,000000000000/000000000317,https://phail.ai/episode/841,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,32,32,3,0,extra,105.766
+training,000000000000/000000000318,https://phail.ai/episode/842,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,16,16,1,0,extra,82.248
+training,000000000000/000000000319,https://phail.ai/episode/843,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,15,15,1,0,extra,76.089
+training,000000000000/000000000320,https://phail.ai/episode/844,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,1,0,extra,110.231
+training,000000000000/000000000321,https://phail.ai/episode/845,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,18,18,2,0,extra,88.152
+training,000000000000/000000000322,https://phail.ai/episode/846,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,25,25,1,0,extra,101.519
+training,000000000000/000000000323,https://phail.ai/episode/847,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,15,15,0,0,extra,76.658
+training,000000000000/000000000324,https://phail.ai/episode/848,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,25,25,2,0,extra,112.976
+training,000000000000/000000000325,https://phail.ai/episode/849,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,24,24,6,0,extra,104.952
+training,000000000000/000000000326,https://phail.ai/episode/850,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,15,15,0,0,extra,95.068
+training,000000000000/000000000327,https://phail.ai/episode/851,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,5,0,extra,98.265
+training,000000000000/000000000328,https://phail.ai/episode/852,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,18,18,4,0,extra,100.334
+training,000000000000/000000000329,https://phail.ai/episode/853,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,22,22,4,0,extra,97.674
+training,000000000000/000000000330,https://phail.ai/episode/854,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,17,17,4,0,extra,80.571
+training,000000000000/000000000331,https://phail.ai/episode/855,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,13,13,1,0,extra,79.455
+training,000000000000/000000000332,https://phail.ai/episode/856,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,29,29,9,0,extra,122.76
+training,000000000000/000000000333,https://phail.ai/episode/857,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,6,0,extra,137.51
+training,000000000000/000000000334,https://phail.ai/episode/858,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,4,0,extra,121.317
+training,000000000000/000000000335,https://phail.ai/episode/859,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,27,27,10,0,extra,127.01
+training,000000000000/000000000336,https://phail.ai/episode/860,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,18,18,4,0,extra,94.634
+training,000000000000/000000000337,https://phail.ai/episode/861,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,34,34,8,0,extra,145.383
+training,000000000000/000000000338,https://phail.ai/episode/862,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,6,0,extra,106.063
+training,000000000000/000000000339,https://phail.ai/episode/863,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,3,0,extra,111.792
+training,000000000000/000000000340,https://phail.ai/episode/864,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,5,0,extra,100.655
+training,000000000000/000000000341,https://phail.ai/episode/865,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,13,13,2,0,extra,100.064
+training,000000000000/000000000342,https://phail.ai/episode/866,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,22,22,5,0,extra,117.994
+training,000000000000/000000000343,https://phail.ai/episode/867,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,17,17,2,0,extra,103.673
+training,000000000000/000000000344,https://phail.ai/episode/868,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,3,0,extra,90.545
+training,000000000000/000000000345,https://phail.ai/episode/869,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,1,0,extra,104.65
+training,000000000000/000000000346,https://phail.ai/episode/870,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,23,23,1,0,extra,157.277
+training,000000000000/000000000347,https://phail.ai/episode/871,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,14,14,1,0,extra,99.378
+training,000000000000/000000000348,https://phail.ai/episode/872,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,38,38,7,0,extra,170.069
+training,000000000000/000000000349,https://phail.ai/episode/873,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,34,34,6,0,extra,184.904
+training,000000000000/000000000350,https://phail.ai/episode/874,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,5,0,extra,128.121
+training,000000000000/000000000351,https://phail.ai/episode/875,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,30,30,3,0,extra,149.393
+training,000000000000/000000000352,https://phail.ai/episode/876,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,25,25,5,0,extra,136.766
+training,000000000000/000000000353,https://phail.ai/episode/877,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,1,0,extra,139.737
+training,000000000000/000000000354,https://phail.ai/episode/878,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,17,17,3,0,extra,97.494
+training,000000000000/000000000355,https://phail.ai/episode/879,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,20,20,4,0,extra,117.87
+training,000000000000/000000000356,https://phail.ai/episode/880,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,32,32,4,0,extra,171.635
+training,000000000000/000000000357,https://phail.ai/episode/881,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,3,0,extra,137.382
+training,000000000000/000000000358,https://phail.ai/episode/882,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,21,21,6,0,extra,118.368
+training,000000000000/000000000359,https://phail.ai/episode/883,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,26,26,3,0,extra,119.95
+training,000000000000/000000000360,https://phail.ai/episode/884,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,19,19,0,0,extra,103.206
+training,000000000000/000000000361,https://phail.ai/episode/885,Robot teleoperated by Human,teleop,Scissors,,Success,,10,10,10,29,29,8,0,extra,137.944
+training,000000000000/000000000362,https://phail.ai/episode/886,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,0,0,extra,98.992
+training,000000000000/000000000363,https://phail.ai/episode/887,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,1,0,extra,78.184
+training,000000000000/000000000364,https://phail.ai/episode/888,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,26,26,5,0,extra,145.077
+training,000000000000/000000000365,https://phail.ai/episode/889,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,9,9,0,0,extra,79.227
+training,000000000000/000000000366,https://phail.ai/episode/890,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,2,0,extra,81.439
+training,000000000000/000000000367,https://phail.ai/episode/891,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,1,0,extra,86.721
+training,000000000000/000000000368,https://phail.ai/episode/892,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,6,6,0,0,missing,58.298
+training,000000000000/000000000369,https://phail.ai/episode/893,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,0,0,extra,85.599
+training,000000000000/000000000370,https://phail.ai/episode/894,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,2,0,extra,73.904
+training,000000000000/000000000371,https://phail.ai/episode/895,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,18,18,7,0,extra,102.211
+training,000000000000/000000000372,https://phail.ai/episode/896,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,19,19,3,0,extra,136.984
+training,000000000000/000000000373,https://phail.ai/episode/897,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,3,0,extra,97.74
+training,000000000000/000000000374,https://phail.ai/episode/898,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,2,0,extra,106.017
+training,000000000000/000000000375,https://phail.ai/episode/899,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,2,0,extra,81.429
+training,000000000000/000000000376,https://phail.ai/episode/900,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,3,0,extra,79.443
+training,000000000000/000000000377,https://phail.ai/episode/901,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,1,0,extra,82.342
+training,000000000000/000000000378,https://phail.ai/episode/902,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,26,26,2,0,extra,130.054
+training,000000000000/000000000379,https://phail.ai/episode/903,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,22,22,6,0,extra,144.424
+training,000000000000/000000000380,https://phail.ai/episode/904,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,9,9,1,0,extra,92.87
+training,000000000000/000000000381,https://phail.ai/episode/905,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,21,21,1,0,extra,112.825
+training,000000000000/000000000382,https://phail.ai/episode/906,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,0,0,extra,105.88
+training,000000000000/000000000383,https://phail.ai/episode/907,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,20,20,3,0,extra,124.987
+training,000000000000/000000000384,https://phail.ai/episode/908,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,8,8,0,0,match,89.335
+training,000000000000/000000000385,https://phail.ai/episode/909,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,3,0,extra,87.34
+training,000000000000/000000000386,https://phail.ai/episode/910,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,0,0,extra,83.219
+training,000000000000/000000000387,https://phail.ai/episode/911,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,0,0,extra,80.293
+training,000000000000/000000000388,https://phail.ai/episode/912,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,1,0,extra,88.085
+training,000000000000/000000000389,https://phail.ai/episode/913,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,1,0,extra,98.82
+training,000000000000/000000000390,https://phail.ai/episode/914,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,7,7,2,0,missing,48.379
+training,000000000000/000000000391,https://phail.ai/episode/915,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,19,19,2,0,extra,108.675
+training,000000000000/000000000392,https://phail.ai/episode/916,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,0,0,extra,74.773
+training,000000000000/000000000393,https://phail.ai/episode/917,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,8,8,1,0,match,65.828
+training,000000000000/000000000394,https://phail.ai/episode/918,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,0,0,extra,74.083
+training,000000000000/000000000395,https://phail.ai/episode/919,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,6,6,0,0,missing,50.837
+training,000000000000/000000000396,https://phail.ai/episode/920,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,9,9,0,0,extra,75.0
+training,000000000000/000000000397,https://phail.ai/episode/921,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,18,18,3,0,extra,94.277
+training,000000000000/000000000398,https://phail.ai/episode/922,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,0,0,extra,88.553
+training,000000000000/000000000399,https://phail.ai/episode/923,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,9,9,2,0,extra,67.481
+training,000000000000/000000000400,https://phail.ai/episode/924,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,1,0,extra,82.258
+training,000000000000/000000000401,https://phail.ai/episode/925,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,1,0,extra,76.679
+training,000000000000/000000000402,https://phail.ai/episode/926,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,3,0,extra,79.563
+training,000000000000/000000000403,https://phail.ai/episode/927,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,1,0,extra,80.599
+training,000000000000/000000000404,https://phail.ai/episode/928,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,4,0,extra,68.641
+training,000000000000/000000000405,https://phail.ai/episode/929,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,18,18,3,0,extra,139.526
+training,000000000000/000000000406,https://phail.ai/episode/930,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,71.606
+training,000000000000/000000000407,https://phail.ai/episode/931,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,2,0,extra,85.323
+training,000000000000/000000000408,https://phail.ai/episode/932,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,61.217
+training,000000000000/000000000409,https://phail.ai/episode/933,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,74.526
+training,000000000000/000000000410,https://phail.ai/episode/934,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,21,21,1,0,extra,100.601
+training,000000000000/000000000411,https://phail.ai/episode/935,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,2,0,extra,79.201
+training,000000000000/000000000412,https://phail.ai/episode/936,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,12,12,1,0,extra,87.67
+training,000000000000/000000000413,https://phail.ai/episode/937,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,16,16,6,0,extra,108.091
+training,000000000000/000000000414,https://phail.ai/episode/938,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,0,0,extra,89.093
+training,000000000000/000000000415,https://phail.ai/episode/939,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,8,8,1,0,match,59.342
+training,000000000000/000000000416,https://phail.ai/episode/940,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,18,18,1,0,extra,84.187
+training,000000000000/000000000417,https://phail.ai/episode/941,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,2,0,extra,64.445
+training,000000000000/000000000418,https://phail.ai/episode/942,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,1,0,extra,76.431
+training,000000000000/000000000419,https://phail.ai/episode/943,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,8,8,0,0,match,54.886
+training,000000000000/000000000420,https://phail.ai/episode/944,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,7,7,0,0,missing,50.613
+training,000000000000/000000000421,https://phail.ai/episode/945,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,6,6,1,0,missing,43.641
+training,000000000000/000000000422,https://phail.ai/episode/946,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,0,0,extra,79.909
+training,000000000000/000000000423,https://phail.ai/episode/947,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,0,0,extra,73.265
+training,000000000000/000000000424,https://phail.ai/episode/948,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,3,0,extra,71.377
+training,000000000000/000000000425,https://phail.ai/episode/949,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,38,38,5,0,extra,208.015
+training,000000000000/000000000426,https://phail.ai/episode/950,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,53.177
+training,000000000000/000000000427,https://phail.ai/episode/951,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,22,22,4,0,extra,87.407
+training,000000000000/000000000428,https://phail.ai/episode/952,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,0,0,extra,79.039
+training,000000000000/000000000429,https://phail.ai/episode/953,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,18,18,2,0,extra,98.496
+training,000000000000/000000000430,https://phail.ai/episode/954,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,24,24,7,0,extra,111.134
+training,000000000000/000000000431,https://phail.ai/episode/955,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,1,0,extra,86.204
+training,000000000000/000000000432,https://phail.ai/episode/956,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,20,20,0,0,extra,99.418
+training,000000000000/000000000433,https://phail.ai/episode/957,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,1,0,extra,86.907
+training,000000000000/000000000434,https://phail.ai/episode/958,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,62.176
+training,000000000000/000000000435,https://phail.ai/episode/959,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,20,20,6,0,extra,124.687
+training,000000000000/000000000436,https://phail.ai/episode/960,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,2,0,extra,112.746
+training,000000000000/000000000437,https://phail.ai/episode/961,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,2,0,extra,100.943
+training,000000000000/000000000438,https://phail.ai/episode/962,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,21,21,0,0,extra,147.229
+training,000000000000/000000000439,https://phail.ai/episode/963,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,0,0,extra,103.168
+training,000000000000/000000000440,https://phail.ai/episode/964,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,29,29,7,0,extra,156.52
+training,000000000000/000000000441,https://phail.ai/episode/965,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,10,10,0,0,extra,92.505
+training,000000000000/000000000442,https://phail.ai/episode/966,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,11,11,4,0,extra,76.287
+training,000000000000/000000000443,https://phail.ai/episode/967,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,0,0,extra,101.869
+training,000000000000/000000000444,https://phail.ai/episode/968,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,13,13,0,0,extra,100.906
+training,000000000000/000000000445,https://phail.ai/episode/969,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,15,15,1,0,extra,106.526
+training,000000000000/000000000446,https://phail.ai/episode/970,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,17,17,0,0,extra,104.514
+training,000000000000/000000000447,https://phail.ai/episode/971,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,14,14,1,0,extra,85.396
+training,000000000000/000000000448,https://phail.ai/episode/972,Robot teleoperated by Human,teleop,Batteries,,Success,,8,8,8,24,24,5,0,extra,117.447

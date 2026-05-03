@@ -2,12 +2,15 @@
 
 Three flows on the same UI:
 
-1. **Free scrub** (legacy): scrub the wrist + exterior cameras, hit `A` to
-   add a place at the cursor, `[/]` to bump items_in_source_at_end. Useful
-   when you want to mark places without a stage-1 candidate list.
+1. **Free scrub with candidate overlay** (default — calibration / ground-truth):
+   pass `--candidates out/release_classifier/candidates.jsonl`. Free-scrub keys
+   are active (A / X / D / [ / ]); candidates render as non-actionable
+   light-blue ticks on the timeline. Lets the annotator see where stage-1
+   fired without being constrained to its event set — manual is ground
+   truth, candidates are reference. Stage-1 misses are visible immediately
+   as gaps. This is the default when `--candidates` is provided.
 
-2. **Candidate review** (preferred when stage 1+2 has run): pass
-   `--candidates out/release_classifier/candidates.jsonl`. The UI walks
+2. **Candidate review** (opt-in via `--free_scrub=False`): the UI walks
    each stage-1 candidate in order: it seeks 0.5 s *before* the candidate's
    timestamp, plays through, auto-pauses 0.5 s *after* it, and prompts you
    for two integers — `n_successful` (items the gripper actually placed in
@@ -17,20 +20,30 @@ Three flows on the same UI:
    toggles which field is active, Enter saves and advances. At the end of
    an episode the `,/.` keys are highlighted so you can switch episodes.
 
-3. **Free scrub with candidate overlay** (calibration / ground-truth pass):
-   pass both `--candidates ...` AND `--free_scrub`. Free-scrub keys are
-   active (A / X / D / [ / ]); candidates render as non-actionable
-   light-blue ticks on the timeline. Lets the annotator see where stage-1
-   fired without being constrained to its event set, which is the right
-   shape for a calibration set: manual is the ground truth, candidates are
-   reference. Stage-1 misses are visible immediately as gaps.
+3. **Free scrub, no candidates** (legacy): scrub the wrist + exterior
+   cameras, hit `A` to add a place at the cursor, `[/]` to bump
+   items_in_source_at_end. Useful when no stage-1 candidate list exists.
 
-Annotations are saved to `{out_dir}/{rel_id}.json` (auto-save on every
-edit). The source dataset is never modified — pos3 is read-only.
+Annotations are saved at `{out_dir}/{bucket}/{key}.json`, mirroring the
+episode's s3 URL with the scheme stripped (see `markup_path` in `io.py`).
+The s3 URL is the canonical episode key — episodes from different buckets
+never collide. The source dataset is never modified — pos3 is read-only.
 
 Episode list is provided via either:
   --debug_set      build/autopilot/debug_set.json   (curated)
   --episode_root   <dir>                            (walk a tree)
+
+debug_set entries are dicts with these fields (canonical schema):
+  s3_url   — full s3:// URL (canonical episode key — the only required field)
+  rel_id   — optional short label shown in the UI; defaults to the trailing
+             two path segments of s3_url
+  object   — optional, for display
+  model    — optional, for display
+
+Legacy back-compat: an entry can instead carry `ep_dir` (e.g.
+'inference/000000000000/000000000049'), in which case the s3 URL is
+computed by joining with `--cache_root`. Mixed-bucket sets must use
+the canonical schema since cache_root is per-launch.
 
 Both s3:// and local paths work via pos3.
 
@@ -100,8 +113,8 @@ HINT_HIGHLIGHT_COLOR = (255, 100, 100, 255)
 @dataclass
 class EpisodeRef:
     abs_path: Path
-    rel_id: str  # e.g. "000000000000/000000000293"
-    source: str  # 'inference' / 'training' / 'human' — needed because rel_ids collide across sources
+    rel_id: str  # short label shown in UI; the path tail beneath the bucket
+    s3_url: str  # full s3://… URL — canonical episode key (annotation, candidates)
 
 
 @dataclass
@@ -119,21 +132,20 @@ class Candidate:
 # ---------------------------------------------------------------------------
 
 
-def _load_candidates_by_episode(path: Path) -> dict[tuple[str, str], list[Candidate]]:
-    """Group candidates from a stage-2 candidates.jsonl by `(source, rel_path)`.
+def _load_candidates_by_episode(path: Path) -> dict[str, list[Candidate]]:
+    """Group candidates from a stage-2 candidates.jsonl by their s3 URL.
 
-    Keyed by the (source, rel_path) tuple — *not* rel_path alone — because
-    inference/000000000000/000000000028 and training/000000000000/000000000028
-    are different episodes that happen to share a numerical id; merging
-    them in the UI shows wrong timestamps for whichever video the user is
-    actually watching.
+    The s3 URL is the canonical episode key — episodes from different buckets
+    don't collide. candidates.jsonl rows must carry an `s3_dir` field; legacy
+    rows without it must be migrated first (see `candidates.jsonl.bak-pre-s3-key`
+    and the migration in `out/clip_gen/run.py`).
     """
-    out: dict[tuple[str, str], list[Candidate]] = defaultdict(list)
+    out: dict[str, list[Candidate]] = defaultdict(list)
     with open(path) as f:
         for line in f:
             rec = json.loads(line)
             feat = rec.get('features') or {}
-            key = (str(rec.get('source') or ''), str(rec.get('rel_path') or ''))
+            key = str(rec['s3_dir'])
             out[key].append(
                 Candidate(
                     ts_s=float(rec['ts_s']),
@@ -215,7 +227,7 @@ class EpisodeView:
         free_scrub: bool = False,
     ) -> None:
         self.ref = ref
-        self.markup_path = markup_io.markup_path(out_dir, ref.rel_id, ref.source)
+        self.markup_path = markup_io.markup_path(out_dir, ref.s3_url)
         self.ep = DiskEpisode(ref.abs_path)
         self.start_ts = int(self.ep.start_ts)
         self.last_ts = int(self.ep.last_ts)
@@ -347,7 +359,7 @@ class App:
         if idx in self._view_cache:
             return self._view_cache[idx]
         ref = self.episodes[idx]
-        cands = self.candidates_by_ep.get((ref.source, ref.rel_id)) if self.candidates_by_ep else None
+        cands = self.candidates_by_ep.get(ref.s3_url) if self.candidates_by_ep else None
         view = EpisodeView(ref, self.out_dir, cands, free_scrub=self.free_scrub)
         self._view_cache[idx] = view
         return view
@@ -954,26 +966,32 @@ def _make_prev_cand_callback(app: App):
 def _format_header(app: App) -> str:
     m = app.view.meta
     badge = '  [REVIEWED]' if app.view.reviewed else ''
+    S = m.get('eval.successful_items', '?')
+    N = m.get('eval.total_items', '?')
+    notes = (m.get('eval.notes') or '').strip()
+    notes_line = f'\n    notes: "{notes}"' if notes else ''
     return (
-        f'ep {app.idx + 1}/{len(app.episodes)}  {app.view.ref.rel_id}  '
-        f'obj={m.get("eval.object", "?")}  N={m.get("eval.total_items", "?")}  '
-        f'outcome={m.get("eval.outcome", "?")}  '
-        f'model={m.get("model", "?")}  '
-        f'ref-S={m.get("eval.successful_items", "?")}'
-        f'{badge}'
+        f'ep {app.idx + 1}/{len(app.episodes)}  {app.view.ref.rel_id}{badge}\n'
+        f'    {app.view.ref.s3_url}\n'
+        f'    {m.get("model", "?")} / {m.get("eval.object", "?")}    '
+        f'S={S} / N={N}    outcome={m.get("eval.outcome", "?")}'
+        f'{notes_line}'
     )
 
 
 def _format_places(app: App) -> str:
-    if not app.view.place_timestamps_s:
-        return 'places (0): (none)'
-    parts = []
-    for i, t in enumerate(app.view.place_timestamps_s):
-        if i == app.view.selected_idx:
-            parts.append(f'[{t:.2f}s]')
-        else:
-            parts.append(f'{t:.2f}s')
-    return f'places ({len(app.view.place_timestamps_s)}): ' + '  '.join(parts)
+    pts = app.view.place_timestamps_s
+    drops = app.view.drop_timestamps_s
+    if pts:
+        parts = [f'[{t:.2f}s]' if i == app.view.selected_idx else f'{t:.2f}s' for i, t in enumerate(pts)]
+        places_line = f'places ({len(pts)}): ' + '  '.join(parts)
+    else:
+        places_line = 'places (0): (none)'
+    if drops:
+        drops_line = f'drops ({len(drops)}): ' + '  '.join(f'{t:.2f}s' for t in drops)
+    else:
+        drops_line = 'drops (0): (none)'
+    return places_line + '\n' + drops_line
 
 
 def _format_counter(app: App) -> str:
@@ -996,6 +1014,27 @@ def _format_status(app: App) -> str:
     return f'status: saved {age:.1f}s ago'
 
 
+# Verdict palette for candidate ticks. SUCCESS pops (the reviewer is mostly
+# checking those); NEUTRAL is muted (regrips back into source — not interesting);
+# FAILURE is orange (drops outside both bins); UNKNOWN is yellow (ambiguous,
+# may need promotion); INVALID is barely visible.
+_VERDICT_COLORS: dict[str, tuple[int, int, int, int]] = {
+    'success': (80, 200, 255, 255),   # bright cyan — primary review target
+    'neutral': (110, 110, 120, 200),  # muted gray — skip
+    'failure': (240, 140, 80, 255),   # orange — potential drop
+    'unknown': (220, 200, 100, 255),  # pale yellow — ambiguous
+    'invalid': (60, 60, 70, 200),     # barely visible
+}
+
+
+def _verdict_color(v: str) -> tuple[int, int, int, int]:
+    return _VERDICT_COLORS.get(v.lower(), _VERDICT_COLORS['invalid'])
+
+
+def _verdict_thickness(v: str) -> int:
+    return 1 if v.lower() == 'neutral' else 2
+
+
 def _redraw_timeline(app: App) -> None:
     if not dpg.does_item_exist('timeline_strip'):
         return
@@ -1013,22 +1052,30 @@ def _redraw_timeline(app: App) -> None:
     y_mid = height // 2
     dpg.draw_line((0, y_mid), (width, y_mid), color=(80, 80, 80, 255), thickness=1, parent='timeline_strip')
     cx = int(app.view.cursor_s / dur * width)
-    dpg.draw_line((cx, 0), (cx, height), color=(255, 220, 0, 255), thickness=2, parent='timeline_strip')
-    # Stage-1 candidate ticks (light blue) — drawn whenever a candidates file is
-    # loaded. In candidate-review workflow the active candidate is highlighted
-    # pink; in free-scrub-with-overlay mode the active-candidate concept doesn't
-    # apply and they all render uniformly.
+    # Cursor: pure white at thickness 3 so it stays distinguishable from the
+    # pale-yellow UNKNOWN ticks. Background gray with thin gray timeline
+    # baseline → white pops cleanly.
+    dpg.draw_line((cx, 0), (cx, height), color=(255, 255, 255, 255), thickness=3, parent='timeline_strip')
+    # Stage-1 candidate ticks, colored by stage-2 verdict so the reviewer can
+    # tell at a glance which the pipeline thinks are placements (SUCCESS) vs
+    # the rest (regrips, drops, ambiguous). In candidate-review workflow the
+    # active candidate is highlighted pink; otherwise we use the verdict color.
     if app.view.has_candidate_workflow():
         for i, c in enumerate(app.view.candidates):
             x = int(c.ts_s / dur * width)
             selected = i == app.view.cand_idx
-            color = (255, 80, 200, 255) if selected else (80, 200, 255, 255)
-            thickness = 4 if selected else 2
+            color = (255, 80, 200, 255) if selected else _verdict_color(c.verdict)
+            thickness = 4 if selected else _verdict_thickness(c.verdict)
             dpg.draw_line((x, 0), (x, height), color=color, thickness=thickness, parent='timeline_strip')
     elif app.view.has_candidate_overlay():
         for c in app.view.candidates:
             x = int(c.ts_s / dur * width)
-            dpg.draw_line((x, 0), (x, height), color=(80, 200, 255, 255), thickness=2, parent='timeline_strip')
+            dpg.draw_line(
+                (x, 0), (x, height),
+                color=_verdict_color(c.verdict),
+                thickness=_verdict_thickness(c.verdict),
+                parent='timeline_strip',
+            )
     # Manual place ticks: green so they're visually distinct from the
     # light-blue candidate ticks they may sit directly on top of in
     # free-scrub-overlay mode (saw a "place not visible" report when a
@@ -1192,13 +1239,28 @@ def _join_remote(root: str, sub: str) -> str:
     return f'{root.rstrip("/")}/{sub.lstrip("/")}'
 
 
+def _profile_for(url: str) -> pos3.Profile | None:
+    """PUBLIC_PROFILE (anonymous) for the public bucket; default (credentialed)
+    profile elsewhere so private buckets like `s3://inference/…` resolve."""
+    return PUBLIC_PROFILE if url.startswith('s3://positronic-public/') else None
+
+
+def _rel_id_from_s3_url(s3_url: str) -> str:
+    """Trailing two path segments — used as the short label in the UI. Works
+    for any s3 URL since episodes are always at `…/<group>/<id>` granularity."""
+    parts = s3_url.rstrip('/').split('/')
+    return '/'.join(parts[-2:]) if len(parts) >= 2 else parts[-1]
+
+
+_KNOWN_SOURCES = ('inference', 'training', 'human', 'spoons_ablation')
+
+
 def _derive_source(root: str) -> str:
     """Pick the dataset source bucket from the trailing path segment of
-    cache_root or episode_root. The dataset layout is `.../<source>/<rel>`
-    where source ∈ {inference, training, human}; falling back to 'inference'
-    matches the historical default."""
+    cache_root or episode_root. Falls back to 'inference' when the trailing
+    segment isn't one of the recognized source slugs."""
     seg = root.rstrip('/').rsplit('/', 1)[-1]
-    return seg if seg in ('inference', 'training', 'human') else 'inference'
+    return seg if seg in _KNOWN_SOURCES else 'inference'
 
 
 def resolve_episodes(debug_set: str | None, episode_root: str | None, cache_root: str | None) -> list[EpisodeRef]:
@@ -1208,44 +1270,52 @@ def resolve_episodes(debug_set: str | None, episode_root: str | None, cache_root
         log.warning('both --debug_set and --episode_root given; --debug_set wins')
 
     if debug_set is not None:
-        # debug_set may be local (no profile needed) or s3:// (needs the
-        # public profile for credential-free S3 access).
         debug_local = (
-            pos3.download(debug_set, profile=PUBLIC_PROFILE)
+            pos3.download(debug_set, profile=_profile_for(str(debug_set)))
             if str(debug_set).startswith('s3://')
             else pos3.download(debug_set)
         )
         with open(debug_local) as f:
             entries = json.load(f)
         root = cache_root or DEFAULT_CACHE_ROOT
-        source = _derive_source(root)
-        log.info('resolving %d episodes from %s (source=%s)', len(entries), root, source)
+        log.info('resolving %d episodes (cache_root=%s, used only for legacy ep_dir entries)', len(entries), root)
         out = []
         for e in entries:
-            rel_id = e['ep_dir'].strip('/')
-            abs_path = Path(pos3.download(_join_remote(root, rel_id), profile=PUBLIC_PROFILE))
-            out.append(EpisodeRef(abs_path=abs_path, rel_id=rel_id, source=source))
+            # Canonical entry: `s3_url` is the episode key. Optional `rel_id`
+            # overrides the short display label.
+            # Legacy entry (back-compat): `ep_dir` only — joined with cache_root
+            # to derive s3_url.
+            if e.get('s3_url'):
+                s3_url = e['s3_url']
+                rel_id = e.get('rel_id') or _rel_id_from_s3_url(s3_url)
+            else:
+                rel = e['ep_dir'].strip('/')
+                head, _, tail = rel.partition('/')
+                rel_id = tail if head in _KNOWN_SOURCES and tail else rel
+                s3_url = _join_remote(root, rel)
+            abs_path = Path(pos3.download(s3_url, profile=_profile_for(s3_url)))
+            out.append(EpisodeRef(abs_path=abs_path, rel_id=rel_id, s3_url=s3_url))
         return out
 
     root_local = Path(
-        pos3.download(episode_root, profile=PUBLIC_PROFILE)
+        pos3.download(episode_root, profile=_profile_for(str(episode_root)))
         if str(episode_root).startswith('s3://')
         else pos3.download(episode_root)
     )
-    source = _derive_source(episode_root)
-    log.info('resolving episodes from %s (source=%s)', root_local, source)
+    log.info('resolving episodes from %s', root_local)
     out = []
     for static_path in sorted(root_local.rglob('static.json')):
         ep_dir = static_path.parent
         rel_id = ep_dir.relative_to(root_local).as_posix()
-        out.append(EpisodeRef(abs_path=ep_dir, rel_id=rel_id, source=source))
+        s3_url = _join_remote(str(episode_root), rel_id) if str(episode_root).startswith('s3://') else f'file://{ep_dir}'
+        out.append(EpisodeRef(abs_path=ep_dir, rel_id=rel_id, s3_url=s3_url))
     return out
 
 
 # ---- entry point ----
 
 
-@cfn.config(debug_set=None, episode_root=None, cache_root=None, candidates=None, out_dir=DEFAULT_OUT_DIR, free_scrub=False)
+@cfn.config(debug_set=None, episode_root=None, cache_root=None, candidates=None, out_dir=DEFAULT_OUT_DIR, free_scrub=True)
 def main(
     debug_set: str | None,
     episode_root: str | None,
@@ -1257,21 +1327,23 @@ def main(
     episodes = resolve_episodes(debug_set, episode_root, cache_root)
     if not episodes:
         raise SystemExit('no episodes resolved')
-    candidates_by_ep: dict[tuple[str, str], list[Candidate]] | None = None
+    candidates_by_ep: dict[str, list[Candidate]] | None = None
     if candidates:
         cand_path = Path(candidates).expanduser().resolve()
         if not cand_path.exists():
             raise SystemExit(f'--candidates {cand_path} not found')
         candidates_by_ep = _load_candidates_by_episode(cand_path)
+        # Bucket episodes by their s3 URL bucket (purely for the log line; no semantic role).
         per_source: dict[str, int] = {}
-        for src, _ in candidates_by_ep:
-            per_source[src] = per_source.get(src, 0) + 1
+        for s3_url in candidates_by_ep:
+            bucket = s3_url[len('s3://'):].split('/', 1)[0] if s3_url.startswith('s3://') else '?'
+            per_source[bucket] = per_source.get(bucket, 0) + 1
         log.info(
             'loaded candidates for %d (source, ep) keys from %s — %s%s',
             len(candidates_by_ep),
             cand_path,
             ', '.join(f'{s}={n}' for s, n in sorted(per_source.items())),
-            '  (overlay only — --free_scrub set)' if free_scrub else '',
+            '  (overlay only — free_scrub mode)' if free_scrub else '  (candidate-driven review mode)',
         )
     log.info('Loaded %d episodes; markup -> %s', len(episodes), out_dir)
     run_ui(episodes, Path(out_dir).expanduser().resolve(), candidates_by_ep, free_scrub=free_scrub)
