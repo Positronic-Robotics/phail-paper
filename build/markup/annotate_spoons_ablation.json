@@ -1,0 +1,102 @@
+[
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000115",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000070",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000106",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000092",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000045",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000121",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000013",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000064",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000113",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000027",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000103",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000074",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000044",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000050",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000119",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000102",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000108",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000022",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000112",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/spoons_ablation/000000000000/000000000111",
+    "object": "Wooden spoons",
+    "model": "groot"
+  }
+]

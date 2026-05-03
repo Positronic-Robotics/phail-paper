@@ -1,0 +1,56 @@
+{
+  "cohort": "mixed",
+  "objects": [
+    "Wooden spoons"
+  ],
+  "models": [
+    "Physical Intelligence Open \u03c0\u2080.\u2085",
+    "NVIDIA GR00T N1.6",
+    "Action Chunking Transformer",
+    "Robot teleoperated by Human"
+  ],
+  "tau": 240.0324362270767,
+  "rmst_human": 10.093094199154615,
+  "summary": {
+    "OpenPI": {
+      "model_display": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "n_eps": 17,
+      "n_events": 93,
+      "n_censored": 12,
+      "median_T": 18.57002541099999,
+      "rmst_tau": 40.642008275056966,
+      "pct_of_human": 24.834142375166543,
+      "is_reference": false
+    },
+    "GR00T": {
+      "model_display": "NVIDIA GR00T N1.6",
+      "n_eps": 17,
+      "n_events": 92,
+      "n_censored": 13,
+      "median_T": 17.711445857,
+      "rmst_tau": 41.614404885241115,
+      "pct_of_human": 24.25384726031301,
+      "is_reference": false
+    },
+    "ACT": {
+      "model_display": "Action Chunking Transformer",
+      "n_eps": 20,
+      "n_events": 100,
+      "n_censored": 15,
+      "median_T": 17.078000000000003,
+      "rmst_tau": 45.7745740225198,
+      "pct_of_human": 22.049564446386977,
+      "is_reference": false
+    },
+    "Teleop": {
+      "model_display": "Robot teleoperated by Human",
+      "n_eps": 114,
+      "n_events": 1326,
+      "n_censored": 5,
+      "median_T": 9.147037525000002,
+      "rmst_tau": 10.093094199154615,
+      "pct_of_human": 100.0,
+      "is_reference": true
+    }
+  }
+}

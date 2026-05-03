@@ -1,0 +1,62 @@
+[
+  {
+    "video_id": "inference/000000000000/000000000383",
+    "ep_dir": "000000000000/000000000383",
+    "object": "Wooden spoons",
+    "model": "ACT",
+    "total_items": null,
+    "pipeline_S": 4,
+    "stage2_success_count": 4,
+    "note": "holdout",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000383/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000383/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000300",
+    "ep_dir": "000000000000/000000000300",
+    "object": "Batteries",
+    "model": "ACT",
+    "total_items": null,
+    "pipeline_S": 2,
+    "stage2_success_count": 2,
+    "note": "holdout",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000300/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000300/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000020",
+    "ep_dir": "000000000000/000000000020",
+    "object": "Batteries",
+    "model": "Hugging Face SmolVLA",
+    "total_items": null,
+    "pipeline_S": 0,
+    "stage2_success_count": 2,
+    "note": "holdout",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000020/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000020/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000371",
+    "ep_dir": "000000000000/000000000371",
+    "object": "Wooden spoons",
+    "model": "ACT",
+    "total_items": null,
+    "pipeline_S": 8,
+    "stage2_success_count": 6,
+    "note": "holdout",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000371/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000371/image.wrist.mp4"
+  },
+  {
+    "video_id": "inference/000000000000/000000000128",
+    "ep_dir": "000000000000/000000000128",
+    "object": "Scissors",
+    "model": "Hugging Face SmolVLA",
+    "total_items": null,
+    "pipeline_S": 1,
+    "stage2_success_count": 10,
+    "note": "holdout",
+    "external_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000128/image.exterior.mp4",
+    "wrist_url": "https://storage.eu-north1.nebius.cloud/positronic-public/tmp/toloka-30fps/datasets/phail/v1.0/inference/000000000000/000000000128/image.wrist.mp4"
+  }
+]

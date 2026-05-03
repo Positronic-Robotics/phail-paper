@@ -1,0 +1,40 @@
+{
+  "cohort": "mixed",
+  "object": "Wooden spoons",
+  "model_display": "NVIDIA GR00T N1.6",
+  "tau": 240.04365148302168,
+  "rmst_human": 10.093094199154615,
+  "summary": {
+    "25": {
+      "n_eps": 14,
+      "n_events": 47,
+      "n_censored": 13,
+      "median_T": 29.248999999999995,
+      "rmst_tau": 64.76691790392411,
+      "pct_of_human": 15.583718549224175
+    },
+    "50_v2": {
+      "n_eps": 16,
+      "n_events": 56,
+      "n_censored": 16,
+      "median_T": 31.419809777,
+      "rmst_tau": 68.57277785815069,
+      "pct_of_human": 14.718806083710273
+    },
+    "100": {
+      "n_eps": 23,
+      "n_events": 124,
+      "n_censored": 17,
+      "median_T": 25.82960835999998,
+      "rmst_tau": 43.35705660486475,
+      "pct_of_human": 23.27901151394615
+    },
+    "teleop": {
+      "n_eps": 114,
+      "n_events": 1326,
+      "median_T": 9.147037525000002,
+      "rmst_tau": 10.093094199154615,
+      "pct_of_human": 100.0
+    }
+  }
+}

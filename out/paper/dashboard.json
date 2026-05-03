@@ -1,0 +1,190 @@
+{
+  "cohort": "mixed",
+  "tau": 240.05055684002582,
+  "summary": {
+    "n_episodes": 626,
+    "by_source_per_model": {
+      "Robot teleoperated by Human": {
+        "manual": 57,
+        "auto_validated": 300
+      },
+      "Action Chunking Transformer": {
+        "manual": 33,
+        "auto_validated": 57
+      },
+      "NVIDIA GR00T N1.6": {
+        "manual": 46,
+        "auto_validated": 18
+      },
+      "Hugging Face SmolVLA": {
+        "manual": 31,
+        "auto_validated": 2
+      },
+      "Physical Intelligence Open \u03c0\u2080.\u2085": {
+        "manual": 53,
+        "auto_validated": 29
+      }
+    }
+  },
+  "H1": {
+    "overall": "FAILS",
+    "pairs": [
+      {
+        "pair": [
+          "OpenPI",
+          "GR00T"
+        ],
+        "n_a": 82,
+        "n_b": 64,
+        "D": 0.08653176741321511,
+        "p": 0.25037481259370314,
+        "status": "FAILS"
+      },
+      {
+        "pair": [
+          "OpenPI",
+          "ACT"
+        ],
+        "n_a": 82,
+        "n_b": 90,
+        "D": 0.11522393606604997,
+        "p": 0.3633183408295852,
+        "status": "FAILS"
+      },
+      {
+        "pair": [
+          "OpenPI",
+          "SmolVLA"
+        ],
+        "n_a": 82,
+        "n_b": 33,
+        "D": 0.29672253300097107,
+        "p": 0.0004997501249375312,
+        "status": "HOLDS"
+      },
+      {
+        "pair": [
+          "GR00T",
+          "ACT"
+        ],
+        "n_a": 64,
+        "n_b": 90,
+        "D": 0.11793175263310052,
+        "p": 0.1469265367316342,
+        "status": "WEAK"
+      },
+      {
+        "pair": [
+          "GR00T",
+          "SmolVLA"
+        ],
+        "n_a": 64,
+        "n_b": 33,
+        "D": 0.2989284989651506,
+        "p": 0.0004997501249375312,
+        "status": "HOLDS"
+      },
+      {
+        "pair": [
+          "ACT",
+          "SmolVLA"
+        ],
+        "n_a": 90,
+        "n_b": 33,
+        "D": 0.2612964506295563,
+        "p": 0.0074962518740629685,
+        "status": "HOLDS"
+      }
+    ]
+  },
+  "H2": {
+    "overall": "HOLDS",
+    "rows": [
+      [
+        "OpenPI",
+        17.238159451860785,
+        "HOLDS"
+      ],
+      [
+        "GR00T",
+        17.84460461886164,
+        "HOLDS"
+      ],
+      [
+        "ACT",
+        15.546543440348517,
+        "HOLDS"
+      ],
+      [
+        "SmolVLA",
+        9.418426348281043,
+        "HOLDS"
+      ]
+    ]
+  },
+  "H3": {
+    "overall": "HOLDS",
+    "pct_of_human_ranking": [
+      "GR00T",
+      "OpenPI",
+      "ACT",
+      "SmolVLA"
+    ],
+    "completion_ranking": [
+      "GR00T",
+      "OpenPI",
+      "ACT",
+      "SmolVLA"
+    ],
+    "pct_values": {
+      "OpenPI": 17.238159451860785,
+      "GR00T": 17.84460461886164,
+      "ACT": 15.546543440348517,
+      "SmolVLA": 9.418426348281043
+    },
+    "completion_values": {
+      "OpenPI": 0.48323170731707316,
+      "GR00T": 0.521484375,
+      "ACT": 0.4486111111111111,
+      "SmolVLA": 0.16287878787878787
+    },
+    "flipped_pairs": []
+  },
+  "H4": {
+    "overall": "FAILS",
+    "rows": [
+      {
+        "model": "OpenPI",
+        "n_manual": 53,
+        "n_auto": 29,
+        "D": 0.08743776351827115,
+        "p": 0.6296851574212894,
+        "status": "HOLDS"
+      },
+      {
+        "model": "GR00T",
+        "n_manual": 46,
+        "n_auto": 18,
+        "D": 0.21454547321916684,
+        "p": 0.021989005497251374,
+        "status": "FAILS"
+      },
+      {
+        "model": "ACT",
+        "n_manual": 33,
+        "n_auto": 57,
+        "D": 0.1166302568265325,
+        "p": 0.5082458770614693,
+        "status": "WEAK"
+      },
+      {
+        "model": "SmolVLA",
+        "n_manual": 31,
+        "n_auto": 2,
+        "D": 0.47858579997588613,
+        "p": 0.39280359820089955,
+        "status": "UNDERPOWERED"
+      }
+    ]
+  }
+}

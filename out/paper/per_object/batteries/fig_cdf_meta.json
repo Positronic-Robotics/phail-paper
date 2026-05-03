@@ -1,0 +1,56 @@
+{
+  "cohort": "mixed",
+  "objects": [
+    "Batteries"
+  ],
+  "models": [
+    "Physical Intelligence Open \u03c0\u2080.\u2085",
+    "NVIDIA GR00T N1.6",
+    "Action Chunking Transformer",
+    "Robot teleoperated by Human"
+  ],
+  "tau": 240.0409688751679,
+  "rmst_human": 11.549020530077165,
+  "summary": {
+    "OpenPI": {
+      "model_display": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "n_eps": 27,
+      "n_events": 76,
+      "n_censored": 26,
+      "median_T": 35.91414854199999,
+      "rmst_tau": 75.14573306192659,
+      "pct_of_human": 15.36883074992398,
+      "is_reference": false
+    },
+    "GR00T": {
+      "model_display": "NVIDIA GR00T N1.6",
+      "n_eps": 24,
+      "n_events": 93,
+      "n_censored": 24,
+      "median_T": 30.1,
+      "rmst_tau": 64.58294686586407,
+      "pct_of_human": 17.882461378022853,
+      "is_reference": false
+    },
+    "ACT": {
+      "model_display": "Action Chunking Transformer",
+      "n_eps": 20,
+      "n_events": 52,
+      "n_censored": 19,
+      "median_T": 41.749878487000004,
+      "rmst_tau": 85.57795888240634,
+      "pct_of_human": 13.495321319765067,
+      "is_reference": false
+    },
+    "Teleop": {
+      "model_display": "Robot teleoperated by Human",
+      "n_eps": 61,
+      "n_events": 485,
+      "n_censored": 3,
+      "median_T": 9.562402214999999,
+      "rmst_tau": 11.549020530077165,
+      "pct_of_human": 99.99999999999999,
+      "is_reference": true
+    }
+  }
+}

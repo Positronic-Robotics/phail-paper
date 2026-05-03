@@ -1,0 +1,80 @@
+{
+  "cohort": "mixed",
+  "objects": [
+    "Scissors"
+  ],
+  "models": [
+    "Physical Intelligence Open \u03c0\u2080.\u2085",
+    "NVIDIA GR00T N1.6",
+    "Action Chunking Transformer",
+    "Robot teleoperated by Human"
+  ],
+  "tau": 240.03949004109018,
+  "rmst_human": 11.277309942130275,
+  "rows": {
+    "OpenPI": {
+      "n_eps": 18,
+      "n_events": 55,
+      "n_censored": 18,
+      "median_T": 48.24900000000001,
+      "rmst_tau": 73.97793907002438,
+      "pct_of_human": 15.244152626982014,
+      "F_at": {
+        "20": 0.21095890410958884,
+        "30": 0.29740688211185207,
+        "60": 0.5694778124433588
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 4083.1478565932193,
+      "mtba_safety_stalls": null
+    },
+    "GR00T": {
+      "n_eps": 9,
+      "n_events": 22,
+      "n_censored": 9,
+      "median_T": 55.269,
+      "rmst_tau": 86.89830416570923,
+      "pct_of_human": 12.977594960455388,
+      "F_at": {
+        "20": 0.23648498331479406,
+        "30": 0.3092006991895756,
+        "60": 0.5325418265192616
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 2040.1360830720805,
+      "mtba_safety_stalls": null
+    },
+    "ACT": {
+      "n_eps": 21,
+      "n_events": 73,
+      "n_censored": 20,
+      "median_T": 32.10046527,
+      "rmst_tau": 63.29525510236323,
+      "pct_of_human": 17.81699105863817,
+      "F_at": {
+        "20": 0.347774989288119,
+        "30": 0.4720877087834805,
+        "60": 0.6726162470118568
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 4527.605162800173,
+      "mtba_safety_stalls": null
+    },
+    "Teleop": {
+      "n_eps": 76,
+      "n_events": 759,
+      "n_censored": 1,
+      "median_T": 9.740168837999988,
+      "rmst_tau": 11.277309942130275,
+      "pct_of_human": 100.0,
+      "F_at": {
+        "20": 0.923582861536311,
+        "30": 0.9855070944293004,
+        "60": 1.0
+      },
+      "n_safety_stalls": 0,
+      "total_duration_s": 8803.882681155,
+      "mtba_safety_stalls": null
+    }
+  }
+}

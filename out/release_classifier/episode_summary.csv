@@ -1,0 +1,525 @@
+source,rel_path,public_url,model,model_slug,object,tote_placement,outcome,notes,S,N,expected_min,actual,n_commanded,n_accidental,n_orphan_commanded,status,duration_s
+inference,000000000000/000000000000,https://phail.ai/episode/0,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,46,45,1,0,extra,191.07
+inference,000000000000/000000000001,https://phail.ai/episode/1,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Safety,,0,8,0,9,9,0,0,extra,42.059
+inference,000000000000/000000000002,https://phail.ai/episode/2,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Fail,,1,8,1,44,44,0,0,extra,213.15
+inference,000000000000/000000000003,https://phail.ai/episode/3,Action Chunking Transformer,act,Batteries,right,Ran out of time,,5,8,5,26,20,6,0,extra,239.947
+inference,000000000000/000000000004,https://phail.ai/episode/4,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,38,38,0,0,extra,236.849
+inference,000000000000/000000000005,https://phail.ai/episode/5,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,47,46,1,0,extra,239.849
+inference,000000000000/000000000006,https://phail.ai/episode/6,Hugging Face SmolVLA,smolvla,Batteries,right,Fail,,0,8,0,1,1,0,0,extra,14.396
+inference,000000000000/000000000007,https://phail.ai/episode/7,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,2,8,2,6,6,0,0,extra,239.828
+inference,000000000000/000000000008,https://phail.ai/episode/8,Action Chunking Transformer,act,Batteries,right,Ran out of time,,4,8,4,36,30,6,0,extra,239.987
+inference,000000000000/000000000009,https://phail.ai/episode/9,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,29,29,0,0,extra,238.197
+inference,000000000000/000000000010,https://phail.ai/episode/10,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,3,8,3,8,7,1,0,extra,239.284
+inference,000000000000/000000000011,https://phail.ai/episode/11,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,5,8,5,61,53,8,0,extra,238.541
+inference,000000000000/000000000012,https://phail.ai/episode/12,Hugging Face SmolVLA,smolvla,Batteries,right,Fail,,0,8,0,15,13,2,0,extra,71.018
+inference,000000000000/000000000013,https://phail.ai/episode/13,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,7,8,7,24,23,1,0,extra,239.302
+inference,000000000000/000000000014,https://phail.ai/episode/14,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,5,8,5,23,23,0,0,extra,239.087
+inference,000000000000/000000000015,https://phail.ai/episode/15,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,6,8,6,46,46,0,0,extra,239.454
+inference,000000000000/000000000016,https://phail.ai/episode/16,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,1,8,1,28,28,0,0,extra,239.783
+inference,000000000000/000000000017,https://phail.ai/episode/17,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,40,35,5,0,extra,239.746
+inference,000000000000/000000000018,https://phail.ai/episode/18,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,3,8,3,29,28,1,0,extra,239.12
+inference,000000000000/000000000019,https://phail.ai/episode/19,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,4,8,4,30,30,0,0,extra,239.208
+inference,000000000000/000000000020,https://phail.ai/episode/20,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,48,46,2,0,extra,239.666
+inference,000000000000/000000000021,https://phail.ai/episode/21,Hugging Face SmolVLA,smolvla,Batteries,left,Safety,,0,8,0,9,8,1,0,extra,90.083
+inference,000000000000/000000000022,https://phail.ai/episode/22,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,5,8,5,32,29,3,0,extra,239.258
+inference,000000000000/000000000023,https://phail.ai/episode/23,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,63,61,2,0,extra,239.767
+inference,000000000000/000000000024,https://phail.ai/episode/24,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Fail,,2,8,2,48,41,7,0,extra,238.54
+inference,000000000000/000000000025,https://phail.ai/episode/25,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,7,8,7,32,28,4,0,extra,239.276
+inference,000000000000/000000000026,https://phail.ai/episode/26,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,5,8,5,57,53,4,0,extra,239.466
+inference,000000000000/000000000027,https://phail.ai/episode/27,Action Chunking Transformer,act,Batteries,left,Ran out of time,,0,8,0,19,19,0,0,extra,239.969
+inference,000000000000/000000000028,https://phail.ai/episode/28,Action Chunking Transformer,act,Batteries,left,Ran out of time,,1,8,1,18,18,0,0,extra,239.971
+inference,000000000000/000000000029,https://phail.ai/episode/29,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,1,8,1,55,51,4,0,extra,239.716
+inference,000000000000/000000000030,https://phail.ai/episode/30,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,56,46,10,0,extra,239.737
+inference,000000000000/000000000031,https://phail.ai/episode/31,Hugging Face SmolVLA,smolvla,Scissors,right,Safety,,0,8,0,2,2,0,0,extra,14.34
+inference,000000000000/000000000032,https://phail.ai/episode/32,Hugging Face SmolVLA,smolvla,Scissors,right,Stalled,,2,8,2,12,12,0,0,extra,162.495
+inference,000000000000/000000000033,https://phail.ai/episode/33,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,2,8,2,53,52,1,0,extra,239.326
+inference,000000000000/000000000034,https://phail.ai/episode/34,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,56,56,0,0,extra,239.025
+inference,000000000000/000000000035,https://phail.ai/episode/35,Hugging Face SmolVLA,smolvla,Scissors,right,Ran out of time,,0,8,0,56,46,10,0,extra,239.796
+inference,000000000000/000000000036,https://phail.ai/episode/36,Hugging Face SmolVLA,smolvla,Scissors,right,Ran out of time,,2,8,2,35,29,6,0,extra,239.696
+inference,000000000000/000000000037,https://phail.ai/episode/37,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,2,8,2,27,27,0,0,extra,239.483
+inference,000000000000/000000000038,https://phail.ai/episode/38,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,56,49,7,0,extra,238.16
+inference,000000000000/000000000039,https://phail.ai/episode/39,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,3,8,3,63,63,0,0,extra,239.245
+inference,000000000000/000000000040,https://phail.ai/episode/40,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,79,58,21,0,extra,238.219
+inference,000000000000/000000000041,https://phail.ai/episode/41,Hugging Face SmolVLA,smolvla,Scissors,right,Ran out of time,,2,8,2,41,29,12,0,extra,239.702
+inference,000000000000/000000000042,https://phail.ai/episode/42,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,38,38,0,0,extra,239.239
+inference,000000000000/000000000043,https://phail.ai/episode/43,Action Chunking Transformer,act,Scissors,right,Ran out of time,,3,8,3,35,35,0,0,extra,239.952
+inference,000000000000/000000000044,https://phail.ai/episode/44,Action Chunking Transformer,act,Scissors,right,Ran out of time,,5,8,5,59,51,8,0,extra,239.996
+inference,000000000000/000000000045,https://phail.ai/episode/45,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,7,8,7,68,57,11,0,extra,238.523
+inference,000000000000/000000000046,https://phail.ai/episode/46,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,39,36,3,0,extra,181.708
+inference,000000000000/000000000047,https://phail.ai/episode/47,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,7,8,7,34,29,5,0,extra,238.393
+inference,000000000000/000000000048,https://phail.ai/episode/48,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,7,8,7,31,26,5,0,extra,238.646
+inference,000000000000/000000000049,https://phail.ai/episode/49,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,6,8,6,44,42,2,0,extra,239.139
+inference,000000000000/000000000050,https://phail.ai/episode/50,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,4,8,4,45,45,0,0,extra,239.911
+inference,000000000000/000000000051,https://phail.ai/episode/51,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,6,8,6,43,42,1,0,extra,239.951
+inference,000000000000/000000000052,https://phail.ai/episode/52,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,6,8,6,63,63,0,0,extra,239.427
+inference,000000000000/000000000053,https://phail.ai/episode/53,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,7,8,7,63,56,7,0,extra,238.435
+inference,000000000000/000000000054,https://phail.ai/episode/54,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,10,10,0,0,extra,94.632
+inference,000000000000/000000000055,https://phail.ai/episode/55,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,5,8,5,58,57,1,0,extra,239.543
+inference,000000000000/000000000056,https://phail.ai/episode/56,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,6,8,6,68,67,1,0,extra,239.949
+inference,000000000000/000000000057,https://phail.ai/episode/57,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,6,8,6,61,53,8,0,extra,238.934
+inference,000000000000/000000000058,https://phail.ai/episode/58,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,0,8,0,75,75,0,0,extra,239.143
+inference,000000000000/000000000059,https://phail.ai/episode/59,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,4,8,4,10,10,0,0,extra,239.958
+inference,000000000000/000000000060,https://phail.ai/episode/60,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,0,8,0,85,85,0,0,extra,237.095
+inference,000000000000/000000000061,https://phail.ai/episode/61,Action Chunking Transformer,act,Wooden spoons,right,Success,,8,8,8,20,20,0,0,extra,198.718
+inference,000000000000/000000000062,https://phail.ai/episode/62,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,4,8,4,63,63,0,0,extra,239.425
+inference,000000000000/000000000063,https://phail.ai/episode/63,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,7,8,7,66,66,0,0,extra,239.369
+inference,000000000000/000000000064,https://phail.ai/episode/64,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,23,19,4,0,extra,106.882
+inference,000000000000/000000000065,https://phail.ai/episode/65,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,0,8,0,8,8,0,0,extra,239.809
+inference,000000000000/000000000066,https://phail.ai/episode/66,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,0,8,0,83,83,0,0,extra,239.236
+inference,000000000000/000000000067,https://phail.ai/episode/67,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,4,8,4,78,78,0,0,extra,239.917
+inference,000000000000/000000000068,https://phail.ai/episode/68,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,1,8,1,25,25,0,0,extra,238.284
+inference,000000000000/000000000069,https://phail.ai/episode/69,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Safety,,4,8,4,26,24,2,0,extra,152.165
+inference,000000000000/000000000070,https://phail.ai/episode/70,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,6,8,6,53,50,3,0,extra,238.271
+inference,000000000000/000000000071,https://phail.ai/episode/71,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,1,8,1,49,49,0,0,extra,236.884
+inference,000000000000/000000000072,https://phail.ai/episode/72,Hugging Face SmolVLA,smolvla,Batteries,right,Fail,,0,8,0,5,4,1,0,extra,58.197
+inference,000000000000/000000000073,https://phail.ai/episode/73,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.774
+inference,000000000000/000000000074,https://phail.ai/episode/74,Hugging Face SmolVLA,smolvla,Batteries,right,Fail,,0,8,0,23,23,0,0,extra,226.902
+inference,000000000000/000000000075,https://phail.ai/episode/75,Hugging Face SmolVLA,smolvla,Batteries,right,Stalled,,0,8,0,0,0,0,0,match,171.969
+inference,000000000000/000000000076,https://phail.ai/episode/76,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,4,8,4,54,54,0,0,extra,238.957
+inference,000000000000/000000000077,https://phail.ai/episode/77,Hugging Face SmolVLA,smolvla,Batteries,right,Safety,,0,8,0,0,0,0,0,match,100.625
+inference,000000000000/000000000078,https://phail.ai/episode/78,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,0,8,0,37,37,0,0,extra,239.302
+inference,000000000000/000000000079,https://phail.ai/episode/79,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,3,8,3,44,44,0,0,extra,239.204
+inference,000000000000/000000000080,https://phail.ai/episode/80,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.959
+inference,000000000000/000000000081,https://phail.ai/episode/81,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,2,8,2,64,63,1,0,extra,239.35
+inference,000000000000/000000000082,https://phail.ai/episode/82,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,1,1,0,0,extra,239.781
+inference,000000000000/000000000083,https://phail.ai/episode/83,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,1,8,1,53,53,0,0,extra,239.355
+inference,000000000000/000000000084,https://phail.ai/episode/84,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,1,8,1,28,28,0,0,extra,239.687
+inference,000000000000/000000000085,https://phail.ai/episode/85,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.955
+inference,000000000000/000000000086,https://phail.ai/episode/86,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,4,8,4,33,33,0,0,extra,239.267
+inference,000000000000/000000000087,https://phail.ai/episode/87,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Success,,8,8,8,37,37,0,0,extra,210.373
+inference,000000000000/000000000088,https://phail.ai/episode/88,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Fail,,0,8,0,2,2,0,0,extra,30.116
+inference,000000000000/000000000089,https://phail.ai/episode/89,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,4,8,4,15,15,0,0,extra,239.957
+inference,000000000000/000000000090,https://phail.ai/episode/90,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,6,8,6,55,54,1,0,extra,239.45
+inference,000000000000/000000000091,https://phail.ai/episode/91,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,3,8,3,3,3,0,0,match,239.93
+inference,000000000000/000000000092,https://phail.ai/episode/92,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Success,,8,8,8,29,29,0,0,extra,156.565
+inference,000000000000/000000000093,https://phail.ai/episode/93,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,3,8,3,64,64,0,0,extra,239.979
+inference,000000000000/000000000094,https://phail.ai/episode/94,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,0,8,0,11,11,0,0,extra,239.255
+inference,000000000000/000000000095,https://phail.ai/episode/95,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,0,8,0,3,3,0,0,extra,239.939
+inference,000000000000/000000000096,https://phail.ai/episode/96,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,0,8,0,0,0,0,0,match,239.97
+inference,000000000000/000000000097,https://phail.ai/episode/97,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,2,8,2,74,74,0,0,extra,239.014
+inference,000000000000/000000000098,https://phail.ai/episode/98,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,1,8,1,37,37,0,0,extra,239.753
+inference,000000000000/000000000099,https://phail.ai/episode/99,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,5,8,5,66,66,0,0,extra,239.455
+inference,000000000000/000000000100,https://phail.ai/episode/100,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Safety,,0,8,0,29,29,0,0,extra,163.248
+inference,000000000000/000000000101,https://phail.ai/episode/101,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,5,8,5,60,60,0,0,extra,239.031
+inference,000000000000/000000000102,https://phail.ai/episode/102,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,0,8,0,1,1,0,0,extra,237.654
+inference,000000000000/000000000103,https://phail.ai/episode/103,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,2,8,2,59,59,0,0,extra,239.605
+inference,000000000000/000000000104,https://phail.ai/episode/104,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,5,8,5,50,50,0,0,extra,239.325
+inference,000000000000/000000000105,https://phail.ai/episode/105,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,7,8,7,37,36,1,0,extra,239.082
+inference,000000000000/000000000106,https://phail.ai/episode/106,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,1,8,1,22,22,0,0,extra,237.57
+inference,000000000000/000000000107,https://phail.ai/episode/107,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,6,8,6,56,55,1,0,extra,239.488
+inference,000000000000/000000000108,https://phail.ai/episode/108,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,0,8,0,1,1,0,0,extra,239.821
+inference,000000000000/000000000109,https://phail.ai/episode/109,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Stalled,,0,8,0,0,0,0,0,match,14.781
+inference,000000000000/000000000110,https://phail.ai/episode/110,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,2,8,2,32,32,0,0,extra,239.944
+inference,000000000000/000000000111,https://phail.ai/episode/111,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,1,8,1,38,34,4,0,extra,239.744
+inference,000000000000/000000000112,https://phail.ai/episode/112,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,70,70,0,0,extra,239.333
+inference,000000000000/000000000113,https://phail.ai/episode/113,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,82,82,0,0,extra,238.458
+inference,000000000000/000000000114,https://phail.ai/episode/114,Action Chunking Transformer,act,Batteries,left,Ran out of time,,0,8,0,51,51,0,0,extra,239.923
+inference,000000000000/000000000115,https://phail.ai/episode/115,Action Chunking Transformer,act,Batteries,left,Ran out of time,,4,8,4,49,49,0,0,extra,239.944
+inference,000000000000/000000000116,https://phail.ai/episode/116,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,1,8,1,67,67,0,0,extra,239.213
+inference,000000000000/000000000117,https://phail.ai/episode/117,Action Chunking Transformer,act,Batteries,left,Ran out of time,,2,8,2,12,10,2,0,extra,239.965
+inference,000000000000/000000000118,https://phail.ai/episode/118,Action Chunking Transformer,act,Batteries,left,Ran out of time,,0,8,0,13,12,1,0,extra,239.98
+inference,000000000000/000000000119,https://phail.ai/episode/119,Action Chunking Transformer,act,Batteries,left,Ran out of time,,4,8,4,24,24,0,0,extra,239.936
+inference,000000000000/000000000120,https://phail.ai/episode/120,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,3,8,3,32,32,0,0,extra,239.642
+inference,000000000000/000000000121,https://phail.ai/episode/121,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,3,8,3,53,53,0,0,extra,239.116
+inference,000000000000/000000000122,https://phail.ai/episode/122,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,1,8,1,64,64,0,0,extra,239.1
+inference,000000000000/000000000123,https://phail.ai/episode/123,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,0,8,0,41,41,0,0,extra,239.37
+inference,000000000000/000000000124,https://phail.ai/episode/124,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,1,8,1,39,36,3,0,extra,239.68
+inference,000000000000/000000000125,https://phail.ai/episode/125,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,0,8,0,41,41,0,0,extra,239.055
+inference,000000000000/000000000126,https://phail.ai/episode/126,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,3,8,3,19,18,1,0,extra,239.749
+inference,000000000000/000000000127,https://phail.ai/episode/127,Action Chunking Transformer,act,Scissors,left,Ran out of time,,0,8,0,76,73,3,0,extra,239.956
+inference,000000000000/000000000128,https://phail.ai/episode/128,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,1,8,1,36,35,1,0,extra,239.727
+inference,000000000000/000000000129,https://phail.ai/episode/129,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,2,8,2,59,59,0,0,extra,239.498
+inference,000000000000/000000000130,https://phail.ai/episode/130,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,13,13,0,0,extra,107.246
+inference,000000000000/000000000131,https://phail.ai/episode/131,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,7,8,7,54,51,3,0,extra,238.047
+inference,000000000000/000000000132,https://phail.ai/episode/132,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Safety,,0,8,0,4,3,1,0,extra,22.397
+inference,000000000000/000000000133,https://phail.ai/episode/133,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,5,8,5,40,39,1,0,extra,239.233
+inference,000000000000/000000000134,https://phail.ai/episode/134,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,7,8,7,38,37,1,0,extra,239.343
+inference,000000000000/000000000135,https://phail.ai/episode/135,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,11,10,1,0,extra,235.685
+inference,000000000000/000000000136,https://phail.ai/episode/136,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,1,8,1,17,17,0,0,extra,239.928
+inference,000000000000/000000000137,https://phail.ai/episode/137,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,37,32,5,0,extra,191.218
+inference,000000000000/000000000138,https://phail.ai/episode/138,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,7,8,7,59,59,0,0,extra,239.952
+inference,000000000000/000000000139,https://phail.ai/episode/139,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,5,8,5,52,47,5,0,extra,238.345
+inference,000000000000/000000000140,https://phail.ai/episode/140,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,2,8,2,30,30,0,0,extra,238.778
+inference,000000000000/000000000141,https://phail.ai/episode/141,NVIDIA GR00T N1.6,groot,Scissors,left,Safety,,3,8,3,22,21,1,0,extra,121.775
+inference,000000000000/000000000142,https://phail.ai/episode/142,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,0,8,0,20,19,1,0,extra,239.19
+inference,000000000000/000000000143,https://phail.ai/episode/143,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,4,8,4,39,37,2,0,extra,239.214
+inference,000000000000/000000000144,https://phail.ai/episode/144,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,3,8,3,38,36,2,0,extra,238.897
+inference,000000000000/000000000145,https://phail.ai/episode/145,Hugging Face SmolVLA,smolvla,Scissors,left,Stalled,,0,8,0,26,26,0,0,extra,190.341
+inference,000000000000/000000000146,https://phail.ai/episode/146,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,0,8,0,0,0,0,0,match,239.732
+inference,000000000000/000000000147,https://phail.ai/episode/147,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,1,8,1,13,12,1,0,extra,238.327
+inference,000000000000/000000000148,https://phail.ai/episode/148,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,34,23,11,0,extra,239.512
+inference,000000000000/000000000149,https://phail.ai/episode/149,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,5,8,5,20,19,1,0,extra,238.419
+inference,000000000000/000000000150,https://phail.ai/episode/150,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,35,23,12,0,extra,239.301
+inference,000000000000/000000000151,https://phail.ai/episode/151,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,19,12,7,0,extra,239.138
+inference,000000000000/000000000152,https://phail.ai/episode/152,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,48,32,16,0,extra,239.34
+inference,000000000000/000000000153,https://phail.ai/episode/153,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,4,8,4,22,20,2,0,extra,235.587
+inference,000000000000/000000000154,https://phail.ai/episode/154,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,2,8,2,42,35,7,0,extra,239.784
+inference,000000000000/000000000155,https://phail.ai/episode/155,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,0,8,0,1,1,0,0,extra,239.752
+inference,000000000000/000000000156,https://phail.ai/episode/156,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,8,1,35,31,4,0,extra,239.923
+inference,000000000000/000000000157,https://phail.ai/episode/157,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,1,8,1,19,16,3,0,extra,238.625
+inference,000000000000/000000000158,https://phail.ai/episode/158,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,51,45,6,0,extra,238.253
+inference,000000000000/000000000159,https://phail.ai/episode/159,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,40,35,5,0,extra,239.536
+inference,000000000000/000000000160,https://phail.ai/episode/160,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,53,46,7,0,extra,238.275
+inference,000000000000/000000000161,https://phail.ai/episode/161,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,1,8,1,1,1,0,0,match,238.226
+inference,000000000000/000000000162,https://phail.ai/episode/162,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,6,8,6,25,20,5,0,extra,238.908
+inference,000000000000/000000000163,https://phail.ai/episode/163,Hugging Face SmolVLA,smolvla,Towels,right,Fail,,0,8,0,5,5,0,0,extra,41.929
+inference,000000000000/000000000164,https://phail.ai/episode/164,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,5,8,5,50,48,2,0,extra,239.816
+inference,000000000000/000000000165,https://phail.ai/episode/165,Hugging Face SmolVLA,smolvla,Towels,right,Safety,,0,8,0,1,1,0,0,extra,12.349
+inference,000000000000/000000000166,https://phail.ai/episode/166,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,5,8,5,53,44,9,0,extra,239.391
+inference,000000000000/000000000167,https://phail.ai/episode/167,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,2,8,2,18,12,6,0,extra,239.259
+inference,000000000000/000000000168,https://phail.ai/episode/168,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,8,1,23,16,7,0,extra,239.928
+inference,000000000000/000000000169,https://phail.ai/episode/169,Action Chunking Transformer,act,Towels,left,Ran out of time,,6,8,6,30,25,5,0,extra,240.0
+inference,000000000000/000000000170,https://phail.ai/episode/170,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,33,27,6,0,extra,239.417
+inference,000000000000/000000000171,https://phail.ai/episode/171,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,2,8,2,31,29,2,0,extra,239.785
+inference,000000000000/000000000172,https://phail.ai/episode/172,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,6,8,6,36,32,4,0,extra,238.268
+inference,000000000000/000000000173,https://phail.ai/episode/173,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,48,44,4,0,extra,238.015
+inference,000000000000/000000000174,https://phail.ai/episode/174,Hugging Face SmolVLA,smolvla,Towels,right,Safety,,0,8,0,7,7,0,0,extra,35.48
+inference,000000000000/000000000175,https://phail.ai/episode/175,Hugging Face SmolVLA,smolvla,Towels,left,Safety,,0,8,0,8,8,0,0,extra,44.769
+inference,000000000000/000000000176,https://phail.ai/episode/176,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,28,26,2,0,extra,239.108
+inference,000000000000/000000000177,https://phail.ai/episode/177,Action Chunking Transformer,act,Towels,left,Fail,,0,8,0,73,58,15,0,extra,239.96
+inference,000000000000/000000000178,https://phail.ai/episode/178,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,20,16,4,0,extra,239.271
+inference,000000000000/000000000179,https://phail.ai/episode/179,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,6,8,6,43,36,7,0,extra,238.391
+inference,000000000000/000000000180,https://phail.ai/episode/180,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,5,8,5,39,37,2,0,extra,238.413
+inference,000000000000/000000000181,https://phail.ai/episode/181,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,5,8,5,15,15,0,0,extra,239.421
+inference,000000000000/000000000182,https://phail.ai/episode/182,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,7,8,7,36,29,7,0,extra,238.996
+inference,000000000000/000000000183,https://phail.ai/episode/183,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,2,8,2,29,21,8,0,extra,239.222
+inference,000000000000/000000000184,https://phail.ai/episode/184,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,7,8,7,19,15,4,0,extra,239.327
+inference,000000000000/000000000185,https://phail.ai/episode/185,Hugging Face SmolVLA,smolvla,Towels,left,Stalled,,0,8,0,16,16,0,0,extra,88.825
+inference,000000000000/000000000186,https://phail.ai/episode/186,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,3,8,3,60,60,0,0,extra,239.124
+inference,000000000000/000000000187,https://phail.ai/episode/187,Action Chunking Transformer,act,Batteries,right,Stalled,,0,8,0,0,0,0,0,match,164.761
+inference,000000000000/000000000188,https://phail.ai/episode/188,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,1,8,1,61,61,0,0,extra,239.194
+inference,000000000000/000000000189,https://phail.ai/episode/189,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Fail,,0,8,0,3,3,0,0,extra,18.799
+inference,000000000000/000000000190,https://phail.ai/episode/190,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,34,34,0,0,extra,239.821
+inference,000000000000/000000000191,https://phail.ai/episode/191,Hugging Face SmolVLA,smolvla,Batteries,right,Fail,,0,8,0,2,1,1,0,extra,205.965
+inference,000000000000/000000000192,https://phail.ai/episode/192,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,71,71,0,0,extra,239.21
+inference,000000000000/000000000193,https://phail.ai/episode/193,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,5,8,5,34,34,0,0,extra,239.215
+inference,000000000000/000000000194,https://phail.ai/episode/194,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,2,8,2,50,43,7,0,extra,238.278
+inference,000000000000/000000000195,https://phail.ai/episode/195,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,6,8,6,13,13,0,0,extra,239.354
+inference,000000000000/000000000196,https://phail.ai/episode/196,Hugging Face SmolVLA,smolvla,Batteries,left,Stalled,,0,8,0,8,8,0,0,extra,40.913
+inference,000000000000/000000000197,https://phail.ai/episode/197,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,7,8,7,35,35,0,0,extra,239.211
+inference,000000000000/000000000198,https://phail.ai/episode/198,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,7,8,7,53,53,0,0,extra,239.261
+inference,000000000000/000000000199,https://phail.ai/episode/199,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,6,8,6,22,20,2,0,extra,239.305
+inference,000000000000/000000000200,https://phail.ai/episode/200,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,28,26,2,0,extra,234.788
+inference,000000000000/000000000201,https://phail.ai/episode/201,Action Chunking Transformer,act,Batteries,left,Ran out of time,,3,8,3,36,35,1,0,extra,239.996
+inference,000000000000/000000000202,https://phail.ai/episode/202,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,3,8,3,21,21,0,0,extra,239.261
+inference,000000000000/000000000203,https://phail.ai/episode/203,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,5,8,5,23,21,2,0,extra,239.154
+inference,000000000000/000000000204,https://phail.ai/episode/204,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,237.693
+inference,000000000000/000000000205,https://phail.ai/episode/205,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,7,8,7,29,26,3,0,extra,239.39
+inference,000000000000/000000000206,https://phail.ai/episode/206,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.779
+inference,000000000000/000000000207,https://phail.ai/episode/207,Action Chunking Transformer,act,Batteries,left,Ran out of time,,1,8,1,11,9,2,0,extra,239.971
+inference,000000000000/000000000208,https://phail.ai/episode/208,Hugging Face SmolVLA,smolvla,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.751
+inference,000000000000/000000000209,https://phail.ai/episode/209,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Fail,,0,8,0,59,53,6,0,extra,238.5
+inference,000000000000/000000000210,https://phail.ai/episode/210,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,6,8,6,40,39,1,0,extra,238.982
+inference,000000000000/000000000211,https://phail.ai/episode/211,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,71,71,0,0,extra,238.879
+inference,000000000000/000000000212,https://phail.ai/episode/212,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,4,8,4,53,51,2,0,extra,239.257
+inference,000000000000/000000000213,https://phail.ai/episode/213,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,1,8,1,41,38,3,0,extra,238.388
+inference,000000000000/000000000214,https://phail.ai/episode/214,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,1,8,1,74,56,18,0,extra,238.296
+inference,000000000000/000000000215,https://phail.ai/episode/215,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,0,8,0,2,2,0,0,extra,238.612
+inference,000000000000/000000000216,https://phail.ai/episode/216,Action Chunking Transformer,act,Scissors,left,Ran out of time,,1,8,1,14,12,2,0,extra,239.953
+inference,000000000000/000000000217,https://phail.ai/episode/217,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,4,8,4,38,38,0,0,extra,239.303
+inference,000000000000/000000000218,https://phail.ai/episode/218,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,0,8,0,9,9,0,0,extra,236.938
+inference,000000000000/000000000219,https://phail.ai/episode/219,Hugging Face SmolVLA,smolvla,Scissors,left,Fail,,0,8,0,9,9,0,0,extra,195.308
+inference,000000000000/000000000220,https://phail.ai/episode/220,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,0,8,0,31,31,0,0,extra,239.378
+inference,000000000000/000000000221,https://phail.ai/episode/221,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Fail,,1,8,1,48,44,4,0,extra,238.087
+inference,000000000000/000000000222,https://phail.ai/episode/222,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,35,35,0,0,extra,239.012
+inference,000000000000/000000000223,https://phail.ai/episode/223,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,0,8,0,32,31,1,0,extra,239.712
+inference,000000000000/000000000224,https://phail.ai/episode/224,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,8,0,0,0,0,0,match,239.978
+inference,000000000000/000000000225,https://phail.ai/episode/225,Hugging Face SmolVLA,smolvla,Scissors,left,Fail,,0,8,0,9,9,0,0,extra,131.327
+inference,000000000000/000000000226,https://phail.ai/episode/226,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,0,8,0,40,39,1,0,extra,238.072
+inference,000000000000/000000000227,https://phail.ai/episode/227,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,5,8,5,49,49,0,0,extra,239.18
+inference,000000000000/000000000228,https://phail.ai/episode/228,Action Chunking Transformer,act,Scissors,right,Stalled,,0,8,0,0,0,0,0,match,151.123
+inference,000000000000/000000000229,https://phail.ai/episode/229,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,0,8,0,30,30,0,0,extra,239.713
+inference,000000000000/000000000230,https://phail.ai/episode/230,Hugging Face SmolVLA,smolvla,Scissors,right,Fail,,0,8,0,1,1,0,0,extra,21.463
+inference,000000000000/000000000231,https://phail.ai/episode/231,Hugging Face SmolVLA,smolvla,Scissors,left,Fail,,0,8,0,24,24,0,0,extra,239.847
+inference,000000000000/000000000232,https://phail.ai/episode/232,NVIDIA GR00T N1.6,groot,Towels,left,Success,,8,8,8,22,21,1,0,extra,205.822
+inference,000000000000/000000000233,https://phail.ai/episode/233,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,0,8,0,6,6,0,0,extra,239.673
+inference,000000000000/000000000234,https://phail.ai/episode/234,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,7,8,7,30,21,9,0,extra,239.142
+inference,000000000000/000000000235,https://phail.ai/episode/235,Hugging Face SmolVLA,smolvla,Towels,right,Fail,,0,8,0,0,0,0,0,match,11.971
+inference,000000000000/000000000236,https://phail.ai/episode/236,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,4,8,4,30,19,11,0,extra,238.897
+inference,000000000000/000000000237,https://phail.ai/episode/237,Physical Intelligence Open π₀.₅,openpi,Towels,right,Safety,,0,8,0,1,1,0,0,extra,76.521
+inference,000000000000/000000000238,https://phail.ai/episode/238,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,6,8,6,45,32,13,0,extra,239.333
+inference,000000000000/000000000239,https://phail.ai/episode/239,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,3,8,3,20,19,1,0,extra,239.434
+inference,000000000000/000000000240,https://phail.ai/episode/240,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,7,8,7,56,47,9,0,extra,238.701
+inference,000000000000/000000000241,https://phail.ai/episode/241,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,8,0,0,0,0,0,match,239.948
+inference,000000000000/000000000242,https://phail.ai/episode/242,NVIDIA GR00T N1.6,groot,Towels,left,Safety,,3,8,3,9,8,1,0,extra,187.993
+inference,000000000000/000000000243,https://phail.ai/episode/243,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,2,8,2,37,26,11,0,extra,239.789
+inference,000000000000/000000000244,https://phail.ai/episode/244,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Safety,,0,8,0,1,1,0,0,extra,207.485
+inference,000000000000/000000000245,https://phail.ai/episode/245,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,1,8,1,51,48,3,0,extra,239.727
+inference,000000000000/000000000246,https://phail.ai/episode/246,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,0,8,0,101,101,0,0,extra,239.753
+inference,000000000000/000000000247,https://phail.ai/episode/247,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,2,8,2,81,69,12,0,extra,238.53
+inference,000000000000/000000000248,https://phail.ai/episode/248,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.935
+inference,000000000000/000000000249,https://phail.ai/episode/249,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,3,8,3,48,48,0,0,extra,238.893
+inference,000000000000/000000000250,https://phail.ai/episode/250,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,2,8,2,38,38,0,0,extra,239.776
+inference,000000000000/000000000251,https://phail.ai/episode/251,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,3,8,3,61,61,0,0,extra,238.858
+inference,000000000000/000000000252,https://phail.ai/episode/252,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,32,30,2,0,extra,239.703
+inference,000000000000/000000000253,https://phail.ai/episode/253,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,1,8,1,14,14,0,0,extra,238.504
+inference,000000000000/000000000254,https://phail.ai/episode/254,Action Chunking Transformer,act,Scissors,right,Ran out of time,,2,8,2,32,25,7,0,extra,239.969
+inference,000000000000/000000000255,https://phail.ai/episode/255,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,1,8,1,28,28,0,0,extra,239.259
+inference,000000000000/000000000256,https://phail.ai/episode/256,Hugging Face SmolVLA,smolvla,Scissors,right,Fail,,0,8,0,5,5,0,0,extra,36.294
+inference,000000000000/000000000257,https://phail.ai/episode/257,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,2,8,2,18,16,2,0,extra,239.797
+inference,000000000000/000000000258,https://phail.ai/episode/258,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,51,51,0,0,extra,239.207
+inference,000000000000/000000000259,https://phail.ai/episode/259,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,1,8,1,30,29,1,0,extra,239.715
+inference,000000000000/000000000260,https://phail.ai/episode/260,Action Chunking Transformer,act,Scissors,left,Ran out of time,,0,8,0,32,23,9,0,extra,239.965
+inference,000000000000/000000000261,https://phail.ai/episode/261,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,0,8,0,3,2,1,0,extra,237.969
+inference,000000000000/000000000262,https://phail.ai/episode/262,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,0,8,0,37,31,6,0,extra,239.659
+inference,000000000000/000000000263,https://phail.ai/episode/263,Hugging Face SmolVLA,smolvla,Scissors,right,Ran out of time,,0,8,0,0,0,0,0,match,239.779
+inference,000000000000/000000000264,https://phail.ai/episode/264,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Fail,,0,8,0,5,5,0,0,extra,110.52
+inference,000000000000/000000000265,https://phail.ai/episode/265,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,1,8,1,53,48,5,0,extra,238.36
+inference,000000000000/000000000266,https://phail.ai/episode/266,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,2,1,1,0,extra,16.587
+inference,000000000000/000000000267,https://phail.ai/episode/267,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,0,8,0,31,31,0,0,extra,239.784
+inference,000000000000/000000000268,https://phail.ai/episode/268,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,2,8,2,77,77,0,0,extra,239.171
+inference,000000000000/000000000269,https://phail.ai/episode/269,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,0,8,0,0,0,0,0,match,239.95
+inference,000000000000/000000000270,https://phail.ai/episode/270,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,49,44,5,0,extra,187.897
+inference,000000000000/000000000271,https://phail.ai/episode/271,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,5,8,5,39,38,1,0,extra,238.357
+inference,000000000000/000000000272,https://phail.ai/episode/272,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Stalled,,0,8,0,22,22,0,0,extra,134.411
+inference,000000000000/000000000273,https://phail.ai/episode/273,Action Chunking Transformer,act,Wooden spoons,left,Stalled,,0,8,0,132,132,0,0,extra,239.953
+inference,000000000000/000000000274,https://phail.ai/episode/274,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,25,24,1,0,extra,150.462
+inference,000000000000/000000000275,https://phail.ai/episode/275,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,10,10,0,0,extra,100.992
+inference,000000000000/000000000276,https://phail.ai/episode/276,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,7,8,7,23,22,1,0,extra,239.445
+inference,000000000000/000000000277,https://phail.ai/episode/277,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Safety,,5,8,5,22,22,0,0,extra,123.197
+inference,000000000000/000000000278,https://phail.ai/episode/278,Action Chunking Transformer,act,Wooden spoons,left,Success,,8,8,8,22,21,1,0,extra,150.041
+inference,000000000000/000000000279,https://phail.ai/episode/279,Action Chunking Transformer,act,Wooden spoons,right,Success,,8,8,8,52,52,0,0,extra,218.131
+inference,000000000000/000000000280,https://phail.ai/episode/280,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,38,38,0,0,extra,189.511
+inference,000000000000/000000000281,https://phail.ai/episode/281,Action Chunking Transformer,act,Wooden spoons,left,Fail,,2,8,2,6,4,2,0,extra,37.493
+inference,000000000000/000000000282,https://phail.ai/episode/282,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,3,8,3,30,30,0,0,extra,239.969
+inference,000000000000/000000000283,https://phail.ai/episode/283,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,25,22,3,0,extra,140.382
+inference,000000000000/000000000284,https://phail.ai/episode/284,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,0,8,0,103,101,2,0,extra,239.95
+inference,000000000000/000000000285,https://phail.ai/episode/285,Action Chunking Transformer,act,Towels,left,Ran out of time,,7,8,7,15,12,3,0,extra,239.941
+inference,000000000000/000000000286,https://phail.ai/episode/286,Action Chunking Transformer,act,Wooden spoons,left,Success,,8,8,8,25,20,5,0,extra,135.796
+inference,000000000000/000000000287,https://phail.ai/episode/287,Action Chunking Transformer,act,Wooden spoons,left,Success,,8,8,8,13,11,2,0,extra,90.74
+inference,000000000000/000000000288,https://phail.ai/episode/288,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,36,35,1,0,extra,173.145
+inference,000000000000/000000000289,https://phail.ai/episode/289,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,35,34,1,0,extra,169.2
+inference,000000000000/000000000290,https://phail.ai/episode/290,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,5,8,5,27,25,2,0,extra,239.977
+inference,000000000000/000000000291,https://phail.ai/episode/291,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,23,23,0,0,extra,239.501
+inference,000000000000/000000000292,https://phail.ai/episode/292,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Success,,8,8,8,23,22,1,0,extra,186.392
+inference,000000000000/000000000293,https://phail.ai/episode/293,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,13,12,1,0,extra,239.966
+inference,000000000000/000000000294,https://phail.ai/episode/294,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,7,6,1,0,extra,238.36
+inference,000000000000/000000000295,https://phail.ai/episode/295,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,6,8,6,40,33,7,0,extra,239.518
+inference,000000000000/000000000296,https://phail.ai/episode/296,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,73,56,17,0,extra,239.531
+inference,000000000000/000000000297,https://phail.ai/episode/297,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,7,8,7,45,34,11,0,extra,239.529
+inference,000000000000/000000000298,https://phail.ai/episode/298,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,4,8,4,62,54,8,0,extra,238.226
+inference,000000000000/000000000299,https://phail.ai/episode/299,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Success,,8,8,8,26,21,5,0,extra,142.149
+inference,000000000000/000000000300,https://phail.ai/episode/300,Action Chunking Transformer,act,Batteries,right,Fail,,2,8,2,29,28,1,0,extra,239.715
+inference,000000000000/000000000301,https://phail.ai/episode/301,Action Chunking Transformer,act,Batteries,right,Ran out of time,,1,8,1,20,20,0,0,extra,239.951
+inference,000000000000/000000000302,https://phail.ai/episode/302,Action Chunking Transformer,act,Batteries,left,Ran out of time,,4,8,4,10,9,1,0,extra,239.953
+inference,000000000000/000000000303,https://phail.ai/episode/303,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,3,8,3,23,20,3,0,extra,239.598
+inference,000000000000/000000000304,https://phail.ai/episode/304,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,42,32,10,0,extra,240.121
+inference,000000000000/000000000305,https://phail.ai/episode/305,Action Chunking Transformer,act,Batteries,right,Ran out of time,,2,8,2,3,3,0,0,extra,239.949
+inference,000000000000/000000000306,https://phail.ai/episode/306,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,59,44,15,0,extra,239.526
+inference,000000000000/000000000307,https://phail.ai/episode/307,Action Chunking Transformer,act,Batteries,left,Ran out of time,,1,8,1,67,56,11,0,extra,239.959
+inference,000000000000/000000000308,https://phail.ai/episode/308,Action Chunking Transformer,act,Batteries,right,Fail,,1,8,1,5,5,0,0,extra,167.272
+inference,000000000000/000000000309,https://phail.ai/episode/309,Action Chunking Transformer,act,Batteries,right,Ran out of time,,4,8,4,41,36,5,0,extra,239.952
+inference,000000000000/000000000310,https://phail.ai/episode/310,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,13,13,0,0,extra,239.13
+inference,000000000000/000000000311,https://phail.ai/episode/311,Action Chunking Transformer,act,Scissors,left,Ran out of time,,0,8,0,20,19,1,0,extra,239.947
+inference,000000000000/000000000312,https://phail.ai/episode/312,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,69,65,4,0,extra,239.428
+inference,000000000000/000000000313,https://phail.ai/episode/313,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,6,8,6,31,29,2,0,extra,239.454
+inference,000000000000/000000000314,https://phail.ai/episode/314,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,0,8,0,93,70,23,0,extra,239.582
+inference,000000000000/000000000315,https://phail.ai/episode/315,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,7,8,7,63,51,12,0,extra,239.526
+inference,000000000000/000000000316,https://phail.ai/episode/316,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,29,25,4,0,extra,239.52
+inference,000000000000/000000000317,https://phail.ai/episode/317,Action Chunking Transformer,act,Towels,right,Ran out of time,,4,8,4,40,37,3,0,extra,239.957
+inference,000000000000/000000000318,https://phail.ai/episode/318,Action Chunking Transformer,act,Towels,left,Ran out of time,,3,8,3,65,49,16,0,extra,239.932
+inference,000000000000/000000000319,https://phail.ai/episode/319,Action Chunking Transformer,act,Towels,right,Ran out of time,,5,8,5,26,21,5,0,extra,239.941
+inference,000000000000/000000000320,https://phail.ai/episode/320,Action Chunking Transformer,act,Towels,left,Ran out of time,,3,8,3,26,25,1,0,extra,239.953
+inference,000000000000/000000000321,https://phail.ai/episode/321,Action Chunking Transformer,act,Towels,right,Ran out of time,,1,8,1,43,37,6,0,extra,239.941
+inference,000000000000/000000000322,https://phail.ai/episode/322,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,6,8,6,28,24,4,0,extra,239.518
+inference,000000000000/000000000323,https://phail.ai/episode/323,Action Chunking Transformer,act,Towels,right,Ran out of time,,3,8,3,36,28,8,0,extra,239.948
+inference,000000000000/000000000324,https://phail.ai/episode/324,Action Chunking Transformer,act,Scissors,left,Ran out of time,,4,8,4,51,43,8,0,extra,239.735
+inference,000000000000/000000000325,https://phail.ai/episode/325,Action Chunking Transformer,act,Scissors,right,Ran out of time,,1,8,1,61,61,0,0,extra,239.966
+inference,000000000000/000000000326,https://phail.ai/episode/326,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,5,8,5,61,54,7,0,extra,239.306
+inference,000000000000/000000000327,https://phail.ai/episode/327,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,6,8,6,41,33,8,0,extra,239.56
+inference,000000000000/000000000328,https://phail.ai/episode/328,Action Chunking Transformer,act,Scissors,left,Ran out of time,,6,8,6,65,59,6,0,extra,239.954
+inference,000000000000/000000000329,https://phail.ai/episode/329,Action Chunking Transformer,act,Scissors,right,Ran out of time,,6,8,6,41,39,2,0,extra,239.971
+inference,000000000000/000000000330,https://phail.ai/episode/330,Action Chunking Transformer,act,Scissors,left,Ran out of time,,5,8,5,33,33,0,0,extra,239.954
+inference,000000000000/000000000331,https://phail.ai/episode/331,Action Chunking Transformer,act,Scissors,right,Ran out of time,,5,8,5,40,35,5,0,extra,239.949
+inference,000000000000/000000000332,https://phail.ai/episode/332,Action Chunking Transformer,act,Scissors,left,Ran out of time,,4,8,4,48,40,8,0,extra,239.937
+inference,000000000000/000000000333,https://phail.ai/episode/333,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,5,8,5,51,45,6,0,extra,239.566
+inference,000000000000/000000000334,https://phail.ai/episode/334,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,6,8,6,55,42,13,0,extra,239.497
+inference,000000000000/000000000335,https://phail.ai/episode/335,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,7,8,7,37,32,5,0,extra,239.519
+inference,000000000000/000000000336,https://phail.ai/episode/336,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Fail,,1,8,1,29,25,4,0,extra,122.378
+inference,000000000000/000000000337,https://phail.ai/episode/337,Action Chunking Transformer,act,Scissors,right,Ran out of time,,5,8,5,24,24,0,0,extra,239.956
+inference,000000000000/000000000338,https://phail.ai/episode/338,Action Chunking Transformer,act,Scissors,left,Fail,,0,8,0,39,31,8,0,extra,239.958
+inference,000000000000/000000000339,https://phail.ai/episode/339,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,78,70,8,0,extra,239.404
+inference,000000000000/000000000340,https://phail.ai/episode/340,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,2,8,2,73,63,10,0,extra,239.315
+inference,000000000000/000000000341,https://phail.ai/episode/341,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,1,8,1,64,52,12,0,extra,239.747
+inference,000000000000/000000000342,https://phail.ai/episode/342,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,8,0,66,65,1,0,extra,239.986
+inference,000000000000/000000000343,https://phail.ai/episode/343,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,6,8,6,63,48,15,0,extra,239.547
+inference,000000000000/000000000344,https://phail.ai/episode/344,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,44,43,1,0,extra,239.399
+inference,000000000000/000000000345,https://phail.ai/episode/345,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,2,8,2,69,64,5,0,extra,239.427
+inference,000000000000/000000000346,https://phail.ai/episode/346,Action Chunking Transformer,act,Scissors,right,Ran out of time,,1,8,1,69,65,4,0,extra,239.966
+inference,000000000000/000000000347,https://phail.ai/episode/347,Action Chunking Transformer,act,Scissors,left,Ran out of time,,0,8,0,26,26,0,0,extra,239.951
+inference,000000000000/000000000348,https://phail.ai/episode/348,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,2,8,2,61,57,4,0,extra,238.634
+inference,000000000000/000000000349,https://phail.ai/episode/349,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,6,8,6,65,53,12,0,extra,238.263
+inference,000000000000/000000000350,https://phail.ai/episode/350,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,1,8,1,90,88,2,0,extra,239.702
+inference,000000000000/000000000351,https://phail.ai/episode/351,Action Chunking Transformer,act,Towels,right,Ran out of time,,2,8,2,16,14,2,0,extra,239.928
+inference,000000000000/000000000352,https://phail.ai/episode/352,Action Chunking Transformer,act,Towels,left,Ran out of time,,3,8,3,23,18,5,0,extra,239.93
+inference,000000000000/000000000353,https://phail.ai/episode/353,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,7,8,7,21,19,2,0,extra,237.909
+inference,000000000000/000000000354,https://phail.ai/episode/354,Action Chunking Transformer,act,Towels,right,Ran out of time,,5,8,5,32,23,9,0,extra,239.93
+inference,000000000000/000000000355,https://phail.ai/episode/355,Action Chunking Transformer,act,Towels,right,Ran out of time,,3,8,3,19,12,7,0,extra,239.993
+inference,000000000000/000000000356,https://phail.ai/episode/356,Action Chunking Transformer,act,Towels,left,Ran out of time,,5,8,5,40,37,3,0,extra,239.995
+inference,000000000000/000000000357,https://phail.ai/episode/357,Action Chunking Transformer,act,Towels,right,Fail,,3,8,3,12,9,3,0,extra,163.376
+inference,000000000000/000000000358,https://phail.ai/episode/358,Physical Intelligence Open π₀.₅,openpi,Towels,left,Success,,8,8,8,34,32,2,0,extra,239.432
+inference,000000000000/000000000359,https://phail.ai/episode/359,Action Chunking Transformer,act,Towels,left,Ran out of time,,2,8,2,6,6,0,0,extra,238.3
+inference,000000000000/000000000360,https://phail.ai/episode/360,Physical Intelligence Open π₀.₅,openpi,Towels,right,Fail,,5,8,5,46,39,7,0,extra,239.151
+inference,000000000000/000000000361,https://phail.ai/episode/361,Action Chunking Transformer,act,Towels,left,Ran out of time,,2,8,2,16,15,1,0,extra,239.591
+inference,000000000000/000000000362,https://phail.ai/episode/362,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,4,8,4,40,37,3,0,extra,239.521
+inference,000000000000/000000000363,https://phail.ai/episode/363,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,6,8,6,40,35,5,0,extra,239.454
+inference,000000000000/000000000364,https://phail.ai/episode/364,Action Chunking Transformer,act,Towels,right,Ran out of time,,2,8,2,70,52,18,0,extra,239.717
+inference,000000000000/000000000365,https://phail.ai/episode/365,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,2,8,2,41,39,2,0,extra,239.506
+inference,000000000000/000000000366,https://phail.ai/episode/366,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,64,52,12,0,extra,239.515
+inference,000000000000/000000000367,https://phail.ai/episode/367,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,4,8,4,22,20,2,0,extra,239.508
+inference,000000000000/000000000368,https://phail.ai/episode/368,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,55,47,8,0,extra,239.836
+inference,000000000000/000000000369,https://phail.ai/episode/369,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,7,8,7,17,17,0,0,extra,239.422
+inference,000000000000/000000000370,https://phail.ai/episode/370,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Fail,,4,8,4,15,15,0,0,extra,88.353
+inference,000000000000/000000000371,https://phail.ai/episode/371,Action Chunking Transformer,act,Wooden spoons,left,Success,,8,8,8,14,13,1,0,extra,161.159
+inference,000000000000/000000000372,https://phail.ai/episode/372,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Success,,8,8,8,35,30,5,0,extra,143.584
+inference,000000000000/000000000373,https://phail.ai/episode/373,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,3,8,3,61,60,1,0,extra,239.456
+inference,000000000000/000000000374,https://phail.ai/episode/374,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,6,8,6,58,58,0,0,extra,239.433
+inference,000000000000/000000000375,https://phail.ai/episode/375,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,4,8,4,53,53,0,0,extra,239.524
+inference,000000000000/000000000376,https://phail.ai/episode/376,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,3,8,3,51,51,0,0,extra,239.497
+inference,000000000000/000000000377,https://phail.ai/episode/377,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,6,8,6,33,31,2,0,extra,239.475
+inference,000000000000/000000000378,https://phail.ai/episode/378,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,1,8,1,54,54,0,0,extra,239.436
+inference,000000000000/000000000379,https://phail.ai/episode/379,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,1,8,1,49,49,0,0,extra,239.418
+inference,000000000000/000000000380,https://phail.ai/episode/380,Action Chunking Transformer,act,Wooden spoons,right,Success,,8,8,8,73,51,22,0,extra,237.98
+inference,000000000000/000000000381,https://phail.ai/episode/381,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,6,8,6,13,13,0,0,extra,239.616
+inference,000000000000/000000000382,https://phail.ai/episode/382,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,0,8,0,61,60,1,0,extra,239.53
+inference,000000000000/000000000383,https://phail.ai/episode/383,Action Chunking Transformer,act,Wooden spoons,right,Ran out of time,,4,8,4,40,39,1,0,extra,239.563
+inference,000000000000/000000000384,https://phail.ai/episode/384,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,6,8,6,111,111,0,0,extra,239.93
+inference,000000000000/000000000385,https://phail.ai/episode/385,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,3,8,3,67,63,4,0,extra,239.497
+inference,000000000000/000000000386,https://phail.ai/episode/386,Action Chunking Transformer,act,Batteries,right,Ran out of time,,2,8,2,109,106,3,0,extra,239.558
+inference,000000000000/000000000387,https://phail.ai/episode/387,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Fail,,2,8,2,20,19,1,0,extra,99.826
+inference,000000000000/000000000388,https://phail.ai/episode/388,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Fail,,1,8,1,21,21,0,0,extra,125.567
+inference,000000000000/000000000389,https://phail.ai/episode/389,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,44,44,0,0,extra,239.427
+inference,000000000000/000000000390,https://phail.ai/episode/390,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,6,8,6,55,55,0,0,extra,239.528
+inference,000000000000/000000000391,https://phail.ai/episode/391,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,129,127,2,0,extra,239.566
+inference,000000000000/000000000392,https://phail.ai/episode/392,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,2,8,2,63,53,10,0,extra,239.041
+inference,000000000000/000000000393,https://phail.ai/episode/393,Action Chunking Transformer,act,Batteries,right,Fail,,0,8,0,5,5,0,0,extra,110.743
+inference,000000000000/000000000394,https://phail.ai/episode/394,Action Chunking Transformer,act,Batteries,left,Ran out of time,,0,8,0,4,2,2,0,extra,239.896
+inference,000000000000/000000000395,https://phail.ai/episode/395,Action Chunking Transformer,act,Batteries,right,Ran out of time,,7,8,7,9,9,0,0,extra,239.954
+inference,000000000000/000000000396,https://phail.ai/episode/396,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Fail,,1,8,1,7,6,1,0,extra,55.712
+inference,000000000000/000000000397,https://phail.ai/episode/397,Action Chunking Transformer,act,Batteries,left,Ran out of time,,5,8,5,11,11,0,0,extra,239.97
+inference,000000000000/000000000398,https://phail.ai/episode/398,Action Chunking Transformer,act,Batteries,right,Ran out of time,,2,8,2,63,56,7,0,extra,389.589
+inference,000000000000/000000000399,https://phail.ai/episode/399,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,34,34,0,0,extra,239.986
+inference,000000000000/000000000400,https://phail.ai/episode/400,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,5,8,5,55,45,10,0,extra,239.437
+inference,000000000000/000000000401,https://phail.ai/episode/401,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,0,0,0,0,match,119.945
+inference,000000000000/000000000402,https://phail.ai/episode/402,Action Chunking Transformer,act,Towels,left,Ran out of time,,0,4,0,19,16,3,0,extra,119.937
+inference,000000000000/000000000403,https://phail.ai/episode/403,Action Chunking Transformer,act,Towels,left,Ran out of time,,2,4,2,11,7,4,0,extra,119.947
+inference,000000000000/000000000404,https://phail.ai/episode/404,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,0,0,0,0,match,119.971
+inference,000000000000/000000000405,https://phail.ai/episode/405,Action Chunking Transformer,act,Towels,left,Ran out of time,,2,4,2,11,8,3,0,extra,119.955
+inference,000000000000/000000000406,https://phail.ai/episode/406,Action Chunking Transformer,act,Towels,right,Ran out of time,,3,4,3,9,7,2,0,extra,119.949
+inference,000000000000/000000000407,https://phail.ai/episode/407,Action Chunking Transformer,act,Towels,left,Ran out of time,,0,4,0,2,1,1,0,extra,119.965
+inference,000000000000/000000000408,https://phail.ai/episode/408,Action Chunking Transformer,act,Towels,right,Ran out of time,,2,4,2,10,10,0,0,extra,119.963
+inference,000000000000/000000000409,https://phail.ai/episode/409,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,3,4,3,33,25,8,0,extra,119.155
+inference,000000000000/000000000410,https://phail.ai/episode/410,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,28,18,10,0,extra,119.978
+inference,000000000000/000000000411,https://phail.ai/episode/411,Action Chunking Transformer,act,Scissors,right,Ran out of time,,4,8,4,19,15,4,0,extra,239.953
+inference,000000000000/000000000412,https://phail.ai/episode/412,Action Chunking Transformer,act,Scissors,left,Ran out of time,,4,8,4,64,44,20,0,extra,239.967
+inference,000000000000/000000000413,https://phail.ai/episode/413,Action Chunking Transformer,act,Scissors,right,Ran out of time,,5,8,5,35,26,9,0,extra,239.947
+inference,000000000000/000000000414,https://phail.ai/episode/414,Action Chunking Transformer,act,Scissors,left,Ran out of time,,4,8,4,66,46,20,0,extra,239.928
+inference,000000000000/000000000415,https://phail.ai/episode/415,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,5,8,5,36,34,2,0,extra,239.729
+inference,000000000000/000000000416,https://phail.ai/episode/416,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,4,8,4,36,34,2,0,extra,239.889
+inference,000000000000/000000000417,https://phail.ai/episode/417,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,4,8,4,41,41,0,0,extra,239.801
+inference,000000000000/000000000418,https://phail.ai/episode/418,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,0,8,0,46,46,0,0,extra,239.775
+inference,000000000000/000000000419,https://phail.ai/episode/419,Action Chunking Transformer,act,Wooden spoons,left,Ran out of time,,5,8,5,61,61,0,0,extra,239.954
+inference,000000000000/000000000420,https://phail.ai/episode/420,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,2,2,0,0,extra,21.195
+inference,000000000000/000000000421,https://phail.ai/episode/421,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,3,8,3,32,31,1,0,extra,239.843
+inference,000000000000/000000000422,https://phail.ai/episode/422,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,1,1,0,0,extra,14.393
+inference,000000000000/000000000423,https://phail.ai/episode/423,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,5,8,5,34,31,3,0,extra,239.764
+inference,000000000000/000000000424,https://phail.ai/episode/424,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,7,8,7,28,25,3,0,extra,239.755
+inference,000000000000/000000000425,https://phail.ai/episode/425,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,4,8,4,5,4,1,0,extra,239.81
+inference,000000000000/000000000426,https://phail.ai/episode/426,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,3,2,1,0,extra,21.85
+inference,000000000000/000000000427,https://phail.ai/episode/427,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Ran out of time,,0,8,0,22,17,5,0,extra,239.783
+inference,000000000000/000000000428,https://phail.ai/episode/428,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,8,8,0,0,extra,56.104
+inference,000000000000/000000000429,https://phail.ai/episode/429,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,3,8,3,6,6,0,0,extra,239.77
+inference,000000000000/000000000430,https://phail.ai/episode/430,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,6,6,0,0,extra,28.36
+inference,000000000000/000000000431,https://phail.ai/episode/431,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Ran out of time,,5,8,5,41,39,2,0,extra,239.808
+inference,000000000000/000000000432,https://phail.ai/episode/432,Hugging Face SmolVLA,smolvla,Wooden spoons,right,Fail,,0,8,0,1,1,0,0,extra,18.662
+inference,000000000000/000000000433,https://phail.ai/episode/433,Hugging Face SmolVLA,smolvla,Wooden spoons,left,Fail,,2,8,2,37,32,5,0,extra,239.73
+inference,000000000000/000000000434,https://phail.ai/episode/434,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,47,47,0,0,extra,239.852
+inference,000000000000/000000000435,https://phail.ai/episode/435,Hugging Face SmolVLA,smolvla,Batteries,right,Safety,,0,8,0,18,18,0,0,extra,139.074
+inference,000000000000/000000000436,https://phail.ai/episode/436,Action Chunking Transformer,act,Batteries,left,Ran out of time,,1,8,1,60,60,0,0,extra,239.915
+inference,000000000000/000000000437,https://phail.ai/episode/437,Hugging Face SmolVLA,smolvla,Batteries,right,Safety,,0,8,0,1,1,0,0,extra,15.475
+inference,000000000000/000000000438,https://phail.ai/episode/438,Action Chunking Transformer,act,Batteries,right,Ran out of time,,4,8,4,27,27,0,0,extra,239.972
+inference,000000000000/000000000439,https://phail.ai/episode/439,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,6,8,6,54,50,4,0,extra,239.182
+inference,000000000000/000000000440,https://phail.ai/episode/440,Action Chunking Transformer,act,Batteries,left,Ran out of time,,2,8,2,16,14,2,0,extra,239.947
+inference,000000000000/000000000441,https://phail.ai/episode/441,Hugging Face SmolVLA,smolvla,Batteries,left,Safety,,0,8,0,24,24,0,0,extra,91.343
+inference,000000000000/000000000442,https://phail.ai/episode/442,Action Chunking Transformer,act,Batteries,left,Ran out of time,,4,8,4,13,11,2,0,extra,239.982
+inference,000000000000/000000000443,https://phail.ai/episode/443,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,23,22,1,0,extra,239.512
+inference,000000000000/000000000444,https://phail.ai/episode/444,Hugging Face SmolVLA,smolvla,Batteries,left,Ran out of time,,0,8,0,67,66,1,0,extra,239.865
+inference,000000000000/000000000445,https://phail.ai/episode/445,Action Chunking Transformer,act,Batteries,right,Ran out of time,,0,8,0,0,0,0,0,match,239.931
+inference,000000000000/000000000446,https://phail.ai/episode/446,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,8,0,0,0,0,0,match,239.944
+inference,000000000000/000000000447,https://phail.ai/episode/447,Hugging Face SmolVLA,smolvla,Scissors,right,Ran out of time,,0,8,0,30,28,2,0,extra,239.795
+inference,000000000000/000000000448,https://phail.ai/episode/448,Hugging Face SmolVLA,smolvla,Scissors,right,Safety,,0,8,0,4,4,0,0,extra,43.661
+inference,000000000000/000000000449,https://phail.ai/episode/449,Action Chunking Transformer,act,Scissors,left,Ran out of time,,1,8,1,13,8,5,0,extra,239.951
+inference,000000000000/000000000450,https://phail.ai/episode/450,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,4,8,4,70,57,13,0,extra,239.424
+inference,000000000000/000000000451,https://phail.ai/episode/451,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,1,8,1,94,76,18,0,extra,239.431
+inference,000000000000/000000000452,https://phail.ai/episode/452,Action Chunking Transformer,act,Scissors,right,Ran out of time,,2,8,2,46,43,3,0,extra,239.981
+inference,000000000000/000000000453,https://phail.ai/episode/453,Action Chunking Transformer,act,Scissors,left,Ran out of time,,4,8,4,36,34,2,0,extra,239.954
+inference,000000000000/000000000454,https://phail.ai/episode/454,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,4,1,4,4,0,0,extra,119.897
+inference,000000000000/000000000455,https://phail.ai/episode/455,Action Chunking Transformer,act,Towels,right,Ran out of time,,1,4,1,13,10,3,0,extra,119.948
+inference,000000000000/000000000456,https://phail.ai/episode/456,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,4,1,12,9,3,0,extra,119.956
+inference,000000000000/000000000457,https://phail.ai/episode/457,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,2,4,2,18,11,7,0,extra,119.486
+inference,000000000000/000000000458,https://phail.ai/episode/458,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,4,1,1,1,0,0,match,119.955
+inference,000000000000/000000000459,https://phail.ai/episode/459,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,1,4,1,19,18,1,0,extra,119.766
+inference,000000000000/000000000460,https://phail.ai/episode/460,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,2,4,2,5,5,0,0,extra,119.382
+inference,000000000000/000000000461,https://phail.ai/episode/461,Physical Intelligence Open π₀.₅,openpi,Towels,right,Success,,4,4,4,17,16,1,0,extra,119.443
+inference,000000000000/000000000462,https://phail.ai/episode/462,Hugging Face SmolVLA,smolvla,Towels,left,Fail,,0,4,0,24,24,0,0,extra,119.836
+inference,000000000000/000000000463,https://phail.ai/episode/463,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,26,25,1,0,extra,119.971
+inference,000000000000/000000000464,https://phail.ai/episode/464,Action Chunking Transformer,act,Towels,left,Ran out of time,,1,4,1,24,22,2,0,extra,119.969
+inference,000000000000/000000000465,https://phail.ai/episode/465,Action Chunking Transformer,act,Towels,right,Ran out of time,,1,4,1,14,11,3,0,extra,119.953
+inference,000000000000/000000000466,https://phail.ai/episode/466,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,1,4,1,20,19,1,0,extra,119.936
+inference,000000000000/000000000467,https://phail.ai/episode/467,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,1,4,1,18,14,4,0,extra,119.773
+inference,000000000000/000000000468,https://phail.ai/episode/468,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,0,4,0,12,11,1,0,extra,119.878
+inference,000000000000/000000000469,https://phail.ai/episode/469,Action Chunking Transformer,act,Towels,right,Ran out of time,,2,4,2,4,4,0,0,extra,119.977
+inference,000000000000/000000000470,https://phail.ai/episode/470,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,3,4,3,22,21,1,0,extra,119.46
+inference,000000000000/000000000471,https://phail.ai/episode/471,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,2,4,2,21,20,1,0,extra,119.432
+inference,000000000000/000000000472,https://phail.ai/episode/472,Hugging Face SmolVLA,smolvla,Towels,left,Fail,,0,4,0,20,17,3,0,extra,119.826
+inference,000000000000/000000000473,https://phail.ai/episode/473,NVIDIA GR00T N1.6,groot,Towels,right,Success,,4,4,4,9,7,2,0,extra,89.869
+inference,000000000000/000000000474,https://phail.ai/episode/474,Action Chunking Transformer,act,Towels,left,Ran out of time,,0,4,0,1,1,0,0,extra,119.955
+inference,000000000000/000000000475,https://phail.ai/episode/475,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,2,4,2,15,13,2,0,extra,119.229
+inference,000000000000/000000000476,https://phail.ai/episode/476,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,1,4,1,21,21,0,0,extra,119.615
+inference,000000000000/000000000477,https://phail.ai/episode/477,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,1,4,1,12,10,2,0,extra,119.44
+inference,000000000000/000000000478,https://phail.ai/episode/478,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,3,4,3,12,12,0,0,extra,119.361
+inference,000000000000/000000000479,https://phail.ai/episode/479,Action Chunking Transformer,act,Towels,right,Ran out of time,,3,4,3,24,20,4,0,extra,119.975
+inference,000000000000/000000000480,https://phail.ai/episode/480,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,0,4,0,11,11,0,0,extra,119.841
+inference,000000000000/000000000481,https://phail.ai/episode/481,Hugging Face SmolVLA,smolvla,Towels,right,Safety,,0,4,0,3,3,0,0,extra,22.5
+inference,000000000000/000000000482,https://phail.ai/episode/482,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,1,4,1,10,10,0,0,extra,119.797
+inference,000000000000/000000000483,https://phail.ai/episode/483,Action Chunking Transformer,act,Towels,right,Ran out of time,,1,4,1,6,6,0,0,extra,119.958
+inference,000000000000/000000000484,https://phail.ai/episode/484,NVIDIA GR00T N1.6,groot,Towels,left,Fail,,0,4,0,13,12,1,0,extra,119.86
+inference,000000000000/000000000485,https://phail.ai/episode/485,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,1,4,1,20,13,7,0,extra,119.671
+inference,000000000000/000000000486,https://phail.ai/episode/486,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,0,4,0,33,22,11,0,extra,119.791
+inference,000000000000/000000000487,https://phail.ai/episode/487,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,0,4,0,12,10,2,0,extra,119.73
+inference,000000000000/000000000488,https://phail.ai/episode/488,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,3,4,3,27,27,0,0,extra,119.658
+inference,000000000000/000000000489,https://phail.ai/episode/489,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,0,0,0,0,match,119.934
+inference,000000000000/000000000490,https://phail.ai/episode/490,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,2,4,2,24,21,3,0,extra,119.579
+inference,000000000000/000000000491,https://phail.ai/episode/491,Action Chunking Transformer,act,Towels,right,Ran out of time,,1,4,1,1,1,0,0,match,119.938
+inference,000000000000/000000000492,https://phail.ai/episode/492,Action Chunking Transformer,act,Towels,left,Ran out of time,,0,4,0,51,51,0,0,extra,119.942
+inference,000000000000/000000000493,https://phail.ai/episode/493,Action Chunking Transformer,act,Towels,right,Ran out of time,,0,4,0,0,0,0,0,match,119.951
+inference,000000000000/000000000494,https://phail.ai/episode/494,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,2,4,2,22,18,4,0,extra,119.68
+inference,000000000000/000000000495,https://phail.ai/episode/495,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,1,4,1,8,8,0,0,extra,119.996
+inference,000000000000/000000000496,https://phail.ai/episode/496,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,0,4,0,19,19,0,0,extra,119.85
+inference,000000000000/000000000497,https://phail.ai/episode/497,Hugging Face SmolVLA,smolvla,Towels,right,Ran out of time,,0,4,0,1,1,0,0,extra,119.85
+inference,000000000000/000000000498,https://phail.ai/episode/498,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,1,4,1,21,19,2,0,extra,119.843
+inference,000000000000/000000000499,https://phail.ai/episode/499,Action Chunking Transformer,act,Towels,right,Ran out of time,,2,4,2,5,5,0,0,extra,119.957
+inference,000000000000/000000000500,https://phail.ai/episode/500,Hugging Face SmolVLA,smolvla,Towels,left,Ran out of time,,0,4,0,24,19,5,0,extra,119.78
+inference,000000000000/000000000501,https://phail.ai/episode/501,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,0,4,0,15,15,0,0,extra,119.671
+inference,000000000000/000000000502,https://phail.ai/episode/502,Action Chunking Transformer,act,Towels,left,Fail,,1,4,1,6,5,1,0,extra,49.9
+inference,000000000000/000000000503,https://phail.ai/episode/503,Hugging Face SmolVLA,smolvla,Towels,right,Fail,,0,4,0,2,2,0,0,extra,19.965
+inference,000000000000/000000000504,https://phail.ai/episode/504,NVIDIA GR00T N1.6,groot,Towels,left,Fail,,3,4,3,10,10,0,0,extra,76.033
+inference,000000000000/000000000505,https://phail.ai/episode/505,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,4,0,0,0,0,0,match,119.978
+inference,000000000000/000000000506,https://phail.ai/episode/506,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,0,4,0,17,16,1,0,extra,119.738
+inference,000000000000/000000000507,https://phail.ai/episode/507,Action Chunking Transformer,act,Scissors,right,Ran out of time,,3,4,3,19,18,1,0,extra,119.952
+inference,000000000000/000000000508,https://phail.ai/episode/508,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,1,4,1,24,24,0,0,extra,119.822
+inference,000000000000/000000000509,https://phail.ai/episode/509,Action Chunking Transformer,act,Scissors,right,Success,,4,4,4,17,17,0,0,extra,87.185
+inference,000000000000/000000000510,https://phail.ai/episode/510,Action Chunking Transformer,act,Scissors,left,Ran out of time,,2,4,2,6,6,0,0,extra,119.945
+inference,000000000000/000000000511,https://phail.ai/episode/511,Hugging Face SmolVLA,smolvla,Scissors,right,Safety,,0,4,0,6,6,0,0,extra,49.925
+inference,000000000000/000000000512,https://phail.ai/episode/512,Action Chunking Transformer,act,Scissors,left,Ran out of time,,0,4,0,13,13,0,0,extra,119.95
+inference,000000000000/000000000513,https://phail.ai/episode/513,Hugging Face SmolVLA,smolvla,Scissors,right,Stalled,,0,4,0,0,0,0,0,match,52.381
+inference,000000000000/000000000514,https://phail.ai/episode/514,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,4,0,0,0,0,0,match,119.935
+inference,000000000000/000000000515,https://phail.ai/episode/515,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,2,4,2,31,24,7,0,extra,119.659
+inference,000000000000/000000000516,https://phail.ai/episode/516,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,2,4,2,22,22,0,0,extra,119.686
+inference,000000000000/000000000517,https://phail.ai/episode/517,Action Chunking Transformer,act,Scissors,left,Ran out of time,,3,4,3,4,4,0,0,extra,119.941
+inference,000000000000/000000000518,https://phail.ai/episode/518,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,3,4,3,20,20,0,0,extra,119.717
+inference,000000000000/000000000519,https://phail.ai/episode/519,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,0,4,0,12,12,0,0,extra,119.566
+inference,000000000000/000000000520,https://phail.ai/episode/520,Hugging Face SmolVLA,smolvla,Scissors,left,Ran out of time,,3,4,3,24,20,4,0,extra,119.788
+inference,000000000000/000000000521,https://phail.ai/episode/521,NVIDIA GR00T N1.6,groot,Scissors,right,Safety,,0,4,0,0,0,0,0,match,93.198
+inference,000000000000/000000000522,https://phail.ai/episode/522,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,0,4,0,28,22,6,0,extra,119.543
+inference,000000000000/000000000523,https://phail.ai/episode/523,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,4,0,0,0,0,0,match,119.971

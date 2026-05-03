@@ -43,6 +43,23 @@ def _decide(f: ReleaseFeatures) -> tuple[Verdict, list[str]]:
     if f.release_in_target_bin:
         if f.robot_error_within_500ms:
             return Verdict.FAILURE, ['in_target_but_robot_error']
+        # Pre-grip clear / regrip probe: target_grip went low at the candidate
+        # moment but came back above CMD_THRESHOLD within 500 ms. The gripper
+        # was opened to rearrange grasp on the same object, not to release it.
+        # We can't tell from non-visual signals what actually happened, so
+        # demote to UNKNOWN rather than calling it a placement.
+        if f.target_grip_returns_high_within_500ms:
+            return Verdict.UNKNOWN, ['pre_grip_clear']
+        # Transit kinematics gate. A real source→target placement lifts the
+        # object (release.z above pickup.z) and traverses the workspace
+        # (horizontal displacement >= MIN_TRANSIT_DXY_M). Phantoms — local
+        # grip-attempts at low z near the source — fail one or both. Demote
+        # to UNKNOWN: the release is in target geometry but the trajectory
+        # isn't a transit.
+        if not f.release_z_above_pickup_z:
+            return Verdict.UNKNOWN, ['no_pickup_to_release_lift']
+        if not f.displacement_xy_above_min_transit:
+            return Verdict.UNKNOWN, ['no_inter_bin_transit']
         reasons = ['release_in_target_bin']
         if f.release_z_above_target_rim:
             reasons.append('release_z_above_target_rim')
