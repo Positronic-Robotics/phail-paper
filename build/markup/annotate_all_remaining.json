@@ -1,0 +1,202 @@
+[
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000352",
+    "object": "Towels",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000459",
+    "object": "Towels",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000416",
+    "object": "Wooden spoons",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000431",
+    "object": "Wooden spoons",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000400",
+    "object": "Batteries",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000395",
+    "object": "Batteries",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000222",
+    "object": "Scissors",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000202",
+    "object": "Batteries",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000103",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000043",
+    "object": "Scissors",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000326",
+    "object": "Scissors",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000009",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000002",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000259",
+    "object": "Scissors",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000508",
+    "object": "Scissors",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000271",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000255",
+    "object": "Scissors",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000008",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000243",
+    "object": "Batteries",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000429",
+    "object": "Wooden spoons",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000048",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000016",
+    "object": "Batteries",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000067",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000084",
+    "object": "Batteries",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000170",
+    "object": "Towels",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000183",
+    "object": "Towels",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000368",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000017",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000251",
+    "object": "Batteries",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000046",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000359",
+    "object": "Towels",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000520",
+    "object": "Scissors",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://inference/phail_act_groot/000000000000/000000000033",
+    "object": "Batteries",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000424",
+    "object": "Wooden spoons",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000041",
+    "object": "Scissors",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000482",
+    "object": "Towels",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000154",
+    "object": "Towels",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000423",
+    "object": "Wooden spoons",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000171",
+    "object": "Towels",
+    "model": "smolvla"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000498",
+    "object": "Towels",
+    "model": "smolvla"
+  }
+]

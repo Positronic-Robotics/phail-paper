@@ -54,6 +54,18 @@ HTTPS_ROOT = f'https://storage.eu-north1.nebius.cloud/positronic-public/datasets
 
 SOURCES = ('training', 'inference', 'human')
 
+# Private inference datasets that live outside the v1.0 public release. Indexed
+# alongside the public sources so candidate generation, sampling, and analyses
+# can treat them uniformly. Each entry: source-name -> (cache_root, s3_prefix).
+# `cache_root` is read directly from the local pos3 cache; sync separately
+# (e.g. `pos3.sync('s3://inference/phail_act_groot/')`) before running this.
+PRIVATE_SOURCES: dict[str, dict[str, str]] = {
+    'inference_act_groot': {
+        'cache_root': str(Path.home() / '.cache' / 'positronic' / 's3' / '_' / 'inference' / 'phail_act_groot'),
+        's3_prefix': 's3://inference/phail_act_groot',
+    },
+}
+
 # Mirror of positronic.cfg.eval.PHAIL_MODEL_DISPLAY (kept here so this script
 # stays self-contained — no positronic / mujoco import needed).
 MODEL_DISPLAY = {
@@ -151,6 +163,19 @@ def _iter_episodes(local_paths: dict[str, Path]):
             yield source, ep_dir, rel
 
 
+def _iter_private_episodes():
+    """Yield (source, ep_dir, rel_path, s3_prefix) for each configured private source."""
+    for source, cfg in PRIVATE_SOURCES.items():
+        root = Path(cfg['cache_root'])
+        if not root.exists():
+            print(f'  WARN: private source {source} cache root missing: {root} (skipping)')
+            continue
+        for static_path in sorted(root.rglob('static.json')):
+            ep_dir = static_path.parent
+            rel = ep_dir.relative_to(root).as_posix()
+            yield source, ep_dir, rel, cfg['s3_prefix']
+
+
 def _fetch_leaderboard(api_url: str) -> dict:
     """Pull the live leaderboard so we can map S3 episodes to viewer URLs.
 
@@ -213,6 +238,42 @@ def build_records(local_paths: dict[str, Path], by_started: dict[float, int]) ->
             'https_dir': f'{HTTPS_ROOT}/{source}/{rel}',
             'public_url': _public_url(meta, by_started),
             'model': _model_for(source, static),
+            'raw_model_type': static.get('inference.policy.server.type', '') or '',
+            'variant': _format_variant(static),
+            'eval.object': static.get('eval.object', ''),
+            'eval.tote_placement': static.get('eval.tote_placement', ''),
+            'eval.external_camera': static.get('eval.external_camera', ''),
+            'eval.outcome': static.get('eval.outcome', ''),
+            'status': _status_for(static),
+            'eval.successful_items': items_succ,
+            'eval.total_items': items_total,
+            'eval.duration_s': static.get('eval.duration'),
+            'task': static.get('task', ''),
+            'created_ts_ns': meta.get('created_ts_ns'),
+            'created_iso': _iso_from_ns(meta.get('created_ts_ns')),
+            'video_streams': _video_streams(ep_dir),
+        }
+        records.append(rec)
+
+    # Private-source loop: index any configured PRIVATE_SOURCES from the local
+    # cache. These records share the public schema but get per-source s3_dir
+    # prefixes and no leaderboard URL (not on phail.ai). _model_for falls
+    # through to inference.policy.server.type since the source name isn't in
+    # SOURCE_DEFAULT_MODEL.
+    for source, ep_dir, rel, s3_prefix in _iter_private_episodes():
+        static = _read_static(ep_dir)
+        meta = _read_meta(ep_dir)
+
+        items_succ = static.get('eval.successful_items')
+        items_total = static.get('eval.total_items')
+
+        rec = {
+            'source': source,
+            'rel_path': rel,
+            's3_dir': f'{s3_prefix}/{rel}',
+            'https_dir': '',
+            'public_url': None,
+            'model': _model_for('inference', static),
             'raw_model_type': static.get('inference.policy.server.type', '') or '',
             'variant': _format_variant(static),
             'eval.object': static.get('eval.object', ''),

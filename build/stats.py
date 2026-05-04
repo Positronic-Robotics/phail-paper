@@ -26,30 +26,64 @@ class _TSource(Protocol):
     place_ts: list[float]
     duration_s: float
     total_items: int
+    n_inf_events: int  # drops_outside + (1 if safety-stopped). Default 0 if absent.
 
 
-def episode_to_T_pairs(ep: _TSource) -> list[tuple[float, int]]:
-    """Return (T, event) pairs per D3. event=1 uncensored, event=0 right-censored.
+def episode_to_T_pairs(ep: _TSource, multi_grip_threshold_s: float = 0.3) -> list[tuple[float, int]]:
+    """Return (T, event) pairs per D3. event=1 uncensored, event=0 right-censored,
+    and event=1 with T=+inf for hard failures (drops_outside + safety_stops).
 
     A right-censored tail (last place -> episode_end) is emitted only when
     items remained to be placed (len(place_ts) < total_items). Episodes that
     placed every item ('Success') had no further attempt awaited, so the
     residual recording time is not a censored 'time to next success'.
+
+    **Hard failures as T=inf** (per FINDINGS D2/D4 update):
+    - drops_outside_workspace: each item physically lost (gone from the scene)
+      contributes one (inf, 1) ghost event — the operation can never succeed.
+    - safety_stop (eval.outcome == 'Safety'): episode terminated by operator
+      due to dangerous behavior. Contributes one (inf, 1) ghost event for the
+      operation that triggered the stop.
+    - **Stalls and timeouts are NOT T=inf**: the model was simply slow / idle.
+      They live in the censored tail (model could in principle have succeeded
+      with more time). This is the user-confirmed framing.
+
+    The caller supplies the count via `ep.n_inf_events`. Callers that don't
+    populate it (legacy callers) get 0 by default.
+
+    Multi-grip handling: when the annotator marks one candidate with
+    `n_successful=K`, `derive_place_timestamps_from_annotations` emits K
+    identical timestamps (one drop placed K items at once). Each duplicate
+    is a real success but takes ~0 additional time, so we emit `T=0.0` for
+    the K-1 extras and DO NOT advance the inter-arrival anchor — the next
+    distinct release's T is measured from the cluster's first ts. Two places
+    closer than `multi_grip_threshold_s` are treated as one such cluster,
+    which also covers near-duplicate timestamps that round to slightly
+    different values.
     """
     out: list[tuple[float, int]] = []
+    n_inf = int(getattr(ep, 'n_inf_events', 0) or 0)
     if not ep.place_ts:
         if ep.total_items > 0:
             out.append((ep.duration_s, 0))
-        return out
-    prev = 0.0
-    for p in ep.place_ts:
-        out.append((max(p - prev, 1e-6), 1))
-        prev = p
-    fully_completed = len(ep.place_ts) >= ep.total_items > 0
-    if not fully_completed:
-        tail = ep.duration_s - prev
-        if tail > 1e-6:
-            out.append((tail, 0))
+    else:
+        prev_anchor = 0.0
+        last_place: float | None = None
+        for p in sorted(ep.place_ts):
+            if last_place is not None and (p - last_place) < multi_grip_threshold_s:
+                # Multi-grip extra: same physical drop, ~0 extra time.
+                out.append((0.0, 1))
+            else:
+                out.append((p - prev_anchor, 1))
+                prev_anchor = p
+            last_place = p
+        fully_completed = len(ep.place_ts) >= ep.total_items > 0
+        if not fully_completed and last_place is not None:
+            tail = ep.duration_s - last_place
+            if tail > 0:
+                out.append((tail, 0))
+    for _ in range(n_inf):
+        out.append((float('inf'), 1))
     return out
 
 

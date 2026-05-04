@@ -57,6 +57,7 @@ def test_source_from_str_known():
     assert Source.from_str('training') is Source.TRAINING
     assert Source.from_str('inference') is Source.INFERENCE
     assert Source.from_str('human') is Source.HUMAN
+    assert Source.from_str('inference_act_groot') is Source.INFERENCE_ACT_GROOT
     assert Source.from_str('Training') is Source.TRAINING  # case-insensitive
 
 
@@ -100,6 +101,7 @@ def test_eval_object_from_str_display():
     assert EvalObject.from_str('Towels') is EvalObject.TOWELS
     assert EvalObject.from_str('Batteries') is EvalObject.BATTERIES
     assert EvalObject.from_str('Scissors') is EvalObject.SCISSORS
+    assert EvalObject.from_str('USB-C Boxes') is EvalObject.USB_C_BOXES
 
 
 def test_model_from_str_accepts_raw_and_display():

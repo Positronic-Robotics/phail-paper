@@ -1,0 +1,131 @@
+{
+  "cohort": "mixed",
+  "tau": 240,
+  "macro": [
+    {
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "macro_auc": 0.5033323356616238,
+      "ci_lo": 0.45771959962195763,
+      "ci_hi": 0.5493817810982046,
+      "a_short": "OpenPI",
+      "b_short": "GR00T"
+    },
+    {
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "macro_auc": 0.5122133162621235,
+      "ci_lo": 0.46259836009598915,
+      "ci_hi": 0.5578676625548565,
+      "a_short": "OpenPI",
+      "b_short": "ACT"
+    },
+    {
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "macro_auc": 0.5048482553456447,
+      "ci_lo": 0.45116581207980005,
+      "ci_hi": 0.5567344446272628,
+      "a_short": "GR00T",
+      "b_short": "ACT"
+    }
+  ],
+  "per_cell": [
+    {
+      "object": "Batteries",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "auc": 0.47411684117819747,
+      "n_a": 33,
+      "n_b": 33
+    },
+    {
+      "object": "Batteries",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.4899193548387097,
+      "n_a": 33,
+      "n_b": 22
+    },
+    {
+      "object": "Batteries",
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5072393037253945,
+      "n_a": 33,
+      "n_b": 22
+    },
+    {
+      "object": "Scissors",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "auc": 0.5189032697547684,
+      "n_a": 27,
+      "n_b": 17
+    },
+    {
+      "object": "Scissors",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.46059793326496806,
+      "n_a": 27,
+      "n_b": 24
+    },
+    {
+      "object": "Scissors",
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "auc": 0.4444444444444444,
+      "n_a": 17,
+      "n_b": 24
+    },
+    {
+      "object": "Towels",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "auc": 0.45436482773198056,
+      "n_a": 31,
+      "n_b": 30
+    },
+    {
+      "object": "Towels",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5434634743572303,
+      "n_a": 31,
+      "n_b": 32
+    },
+    {
+      "object": "Towels",
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5739427703216005,
+      "n_a": 30,
+      "n_b": 32
+    },
+    {
+      "object": "Wooden spoons",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "auc": 0.5659444039815489,
+      "n_a": 30,
+      "n_b": 28
+    },
+    {
+      "object": "Wooden spoons",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5548725025875859,
+      "n_a": 30,
+      "n_b": 24
+    },
+    {
+      "object": "Wooden spoons",
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "auc": 0.49376650289113944,
+      "n_a": 28,
+      "n_b": 24
+    }
+  ]
+}

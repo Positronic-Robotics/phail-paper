@@ -1,0 +1,152 @@
+[
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000136",
+    "object": "Wooden spoons",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000335",
+    "object": "Scissors",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000116",
+    "object": "Wooden spoons",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000207",
+    "object": "Batteries",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000274",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000282",
+    "object": "Scissors",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000279",
+    "object": "Wooden spoons",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000238",
+    "object": "Wooden spoons",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000470",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000137",
+    "object": "Wooden spoons",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000206",
+    "object": "Wooden spoons",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000068",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000062",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000373",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000367",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000451",
+    "object": "Scissors",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000197",
+    "object": "Batteries",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000201",
+    "object": "Batteries",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000404",
+    "object": "Batteries",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000502",
+    "object": "Towels",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000105",
+    "object": "Wooden spoons",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000151",
+    "object": "Towels",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000227",
+    "object": "Scissors",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000476",
+    "object": "Towels",
+    "model": "groot"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000378",
+    "object": "Wooden spoons",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/training/000000000000/000000000396",
+    "object": "Batteries",
+    "model": "teleop"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000346",
+    "object": "Scissors",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000362",
+    "object": "Towels",
+    "model": "openpi"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000061",
+    "object": "Wooden spoons",
+    "model": "act"
+  },
+  {
+    "s3_url": "s3://positronic-public/datasets/phail/v1.0/inference/000000000000/000000000172",
+    "object": "Towels",
+    "model": "openpi"
+  }
+]

@@ -61,6 +61,17 @@ class Episode:
     contents depend on `cohort_source`:
         - 'manual'         -> from annotation JSON's place_timestamps_s
         - 'auto_validated' -> from candidates.jsonl success-verdict ts_s
+
+    Hard-failure counts (per FINDINGS D2/D4 update):
+        - n_drops_outside: items lost to the workspace (manual annotation
+          drop_timestamps_s + per-candidate n_out_of_bins for manual cohort;
+          stage-2 verdict='failure' count for auto cohort).
+        - had_safety_stop: True iff eval.outcome == 'Safety'.
+        - n_inf_events (property): n_drops_outside + (1 if had_safety_stop).
+          Consumed by stats.episode_to_T_pairs to emit T=inf ghost events.
+
+        Stalls and 'Ran out of time' outcomes are NOT counted as hard
+        failures — they live in the censored tail of the CDF.
     """
 
     s3_url: str
@@ -79,6 +90,12 @@ class Episode:
     place_ts_manual: list[float] = field(default_factory=list)
     succ_cand_ts: list[float] = field(default_factory=list)
     succ_cand_count: int = 0
+    n_drops_outside: int = 0
+    had_safety_stop: bool = False
+
+    @property
+    def n_inf_events(self) -> int:
+        return int(self.n_drops_outside) + (1 if self.had_safety_stop else 0)
 
 
 def _path_to_s3_url(path: Path) -> str:
@@ -165,22 +182,32 @@ def _load_annotations_index() -> dict[str, dict]:
     return out
 
 
-def _load_candidates_index() -> tuple[dict[str, int], dict[str, list[float]]]:
-    """Return (per-episode success-candidate count, per-episode sorted ts_s list)."""
+def _load_candidates_index() -> tuple[dict[str, int], dict[str, list[float]], dict[str, int]]:
+    """Return (success-count-by-url, success-ts-by-url, failure-count-by-url).
+
+    Failure count comes from candidates with stage-2 `verdict == 'failure'`
+    — each is the classifier's best estimate of a drop_outside_workspace.
+    Used for the auto_validated cohort where manual drop annotations
+    are unavailable.
+    """
     succ_count: dict[str, int] = defaultdict(int)
     succ_ts: dict[str, list[float]] = defaultdict(list)
+    fail_count: dict[str, int] = defaultdict(int)
     if not CANDIDATES.exists():
-        return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}
+        return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count)
     with open(CANDIDATES) as f:
         for line in f:
             r = json.loads(line)
             url = r.get('s3_dir')
             if not url:
                 continue
-            if (r.get('features') or {}).get('verdict') == 'success':
+            verdict = (r.get('features') or {}).get('verdict')
+            if verdict == 'success':
                 succ_count[url] += 1
                 succ_ts[url].append(float(r['ts_s']))
-    return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}
+            elif verdict == 'failure':
+                fail_count[url] += 1
+    return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count)
 
 
 def _is_ablation(s3_url: str) -> bool:
@@ -209,7 +236,7 @@ def load(
         raise ValueError(f"cohort must be 'manual' or 'mixed', got {cohort!r}")
 
     annotations = _load_annotations_index()
-    succ_count, succ_ts = _load_candidates_index()
+    succ_count, succ_ts, fail_count = _load_candidates_index()
 
     def _allowed(url: str) -> bool:
         return include_ablation_sets or not _is_ablation(url)
@@ -259,6 +286,36 @@ def load(
         cand_ts = succ_ts.get(url, [])
         place_ts = manual_ts if source == 'manual' else cand_ts
 
+        # Hard-failure count: drops_outside + safety_stop. Source depends on cohort.
+        had_safety = (meta.get('eval_outcome') == 'Safety')
+        if source == 'manual':
+            # Manual annotation is the source of truth: drop_timestamps_s (free-scrub)
+            # plus per-candidate n_out_of_bins (candidate-review). io.py treats them
+            # as additive, so we sum.
+            drops_free = len(ann.get('drop_timestamps_s') or [])
+            drops_cand = sum(int(c.get('n_out_of_bins') or 0)
+                             for c in (ann.get('candidate_annotations') or []))
+            n_drops = drops_free + drops_cand
+        else:
+            # auto_validated: classifier's stage-2 verdict='failure' count is the
+            # best automated proxy for drops_outside.
+            n_drops = fail_count.get(url, 0)
+
+        # Teleop heuristic: by construction every teleop episode succeeds on every
+        # item (the human is moving the arm; soft failures recover; hard failures
+        # don't happen). When the cached static.json says total_items > n_places,
+        # the static value is the wrong one (operator typo, or grip-signal-based
+        # auto-derivation undercounted). Trust the placement count and force
+        # n_inf_events to 0. AUC(teleop vs teleop) → 1.0; the censored tail
+        # disappears for teleop episodes.
+        if meta['model_display'] == 'Robot teleoperated by Human':
+            n_p = len(place_ts)
+            if n_p > 0:
+                meta['total_items'] = n_p
+                meta['successful_items_eval'] = n_p
+            n_drops = 0
+            had_safety = False
+
         out.append(Episode(
             s3_url=url,
             cohort_source=source,
@@ -267,6 +324,8 @@ def load(
             succ_cand_ts=cand_ts,
             succ_cand_count=succ_count.get(url, 0),
             items_in_source=int(ann.get('items_in_source_at_end') or 0),
+            n_drops_outside=n_drops,
+            had_safety_stop=had_safety,
             **meta,
         ))
 

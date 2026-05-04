@@ -28,6 +28,8 @@ import numpy as np
 
 from positronic.dataset.local_dataset import DiskEpisode
 
+from build.data_audit.build_index import PRIVATE_SOURCES
+
 from .pipeline import run as run_pipeline
 from .types import (
     EpisodeResult,
@@ -68,7 +70,7 @@ def _expected_min_for(source: Source, s: int, n: int) -> int:
     one of N items must produce a release. Inference episodes only have S
     successful items in the bin; drops/retries can push the count higher.
     """
-    if source is Source.INFERENCE:
+    if source is Source.INFERENCE or source is Source.INFERENCE_ACT_GROOT:
         return s
     if source is Source.HUMAN:
         return 0  # No robot signals; pipeline can't detect events.
@@ -104,7 +106,7 @@ def _build_episode_result(
         1 for c in candidates if c.kind is ReleaseKind.COMMANDED_RELEASE and c.features.paired_close_ts_ns is None
     )
 
-    if source is Source.INFERENCE:
+    if source is Source.INFERENCE or source is Source.INFERENCE_ACT_GROOT:
         actual = n_commanded + n_accidental
     else:
         actual = n_commanded
@@ -139,6 +141,7 @@ def _build_episode_result(
         public_url=audit_rec.get('public_url'),
         https_dir=audit_rec.get('https_dir', ''),
         video_streams=_video_streams_from(audit_rec),
+        s3_dir=audit_rec.get('s3_dir', ''),
     )
 
 
@@ -203,6 +206,7 @@ def _candidate_record(ep: EpisodeResult, c: ReleaseCandidate) -> dict[str, Any]:
     return {
         'source': ep.source.slug,
         'rel_path': ep.rel_path,
+        's3_dir': ep.s3_dir,
         'public_url': ep.public_url,
         'https_dir': ep.https_dir,
         'model': ep.model.slug,
@@ -259,11 +263,20 @@ def _load_audit_index(path: Path) -> dict[tuple[str, str], dict[str, Any]]:
 def _iter_audit_records(
     index: dict[tuple[str, str], dict[str, Any]], cache: Path, sources: Iterable[Source]
 ) -> Iterable[tuple[Path, dict[str, Any]]]:
+    """Yield (ep_dir, audit_record) for the requested sources.
+
+    Public sources resolve under `cache / source_str / rel`. Private sources
+    listed in `PRIVATE_SOURCES` resolve under their configured `cache_root`
+    (typically `~/.cache/positronic/s3/_/<bucket>/<prefix>`).
+    """
     wanted = {s.slug for s in sources}
     for (source_str, rel), rec in sorted(index.items()):
         if source_str not in wanted:
             continue
-        ep_dir = cache / source_str / rel
+        if source_str in PRIVATE_SOURCES:
+            ep_dir = Path(PRIVATE_SOURCES[source_str]['cache_root']) / rel
+        else:
+            ep_dir = cache / source_str / rel
         if not ep_dir.exists():
             continue
         yield ep_dir, rec
@@ -301,9 +314,40 @@ def _write_summary_csv(path: Path, episodes: list[EpisodeResult]) -> None:
             w.writerow(_summary_row(ep))
 
 
+def _append_summary_csv(path: Path, episodes: list[EpisodeResult]) -> None:
+    """Append rows to an existing summary CSV (used by `--append` runs).
+
+    If the CSV doesn't exist yet, falls back to a fresh write so the schema
+    starts clean. Header is taken from the existing file when present.
+    """
+    if not episodes:
+        return
+    if not path.exists():
+        _write_summary_csv(path, episodes)
+        return
+    with path.open('r', newline='') as f_csv:
+        reader = csv.reader(f_csv)
+        header = next(reader, None)
+    fields = header or list(_summary_row(episodes[0]).keys())
+    with path.open('a', newline='') as f_csv:
+        w = csv.DictWriter(f_csv, fieldnames=fields)
+        for ep in episodes:
+            w.writerow(_summary_row(ep))
+
+
 def run_all(
-    cache: Path, audit_index: Path, out_dir: Path, sources: list[Source], limit: int | None, progress_every: int
+    cache: Path,
+    audit_index: Path,
+    out_dir: Path,
+    sources: list[Source],
+    limit: int | None,
+    progress_every: int,
+    append: bool = False,
 ) -> list[EpisodeResult]:
+    """Run stage-1 over the requested sources, writing candidates.jsonl and
+    episode_summary.csv. With `append=True`, candidates are appended (the
+    summary CSV is still rewritten — pass `--no-summary` workflows separately).
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     candidates_path = out_dir / 'candidates.jsonl'
     summary_path = out_dir / 'episode_summary.csv'
@@ -313,7 +357,8 @@ def run_all(
     episodes: list[EpisodeResult] = []
     n_skipped_no_signals = 0
     t_start = time.time()
-    with candidates_path.open('w') as f_jsonl:
+    open_mode = 'a' if append else 'w'
+    with candidates_path.open(open_mode) as f_jsonl:
         for i, (ep_dir, rec) in enumerate(_iter_audit_records(index, cache, sources)):
             if limit is not None and i >= limit:
                 break
@@ -331,7 +376,12 @@ def run_all(
                     flush=True,
                 )
 
-    _write_summary_csv(summary_path, episodes)
+    if append:
+        # Don't clobber the existing per-episode summary when only adding new
+        # sources; append rows for the new episodes instead.
+        _append_summary_csv(summary_path, episodes)
+    else:
+        _write_summary_csv(summary_path, episodes)
     elapsed = time.time() - t_start
     print()
     print(
@@ -357,6 +407,12 @@ def main() -> None:
     )
     parser.add_argument('--limit', type=int, default=None)
     parser.add_argument('--progress-every', type=int, default=25)
+    parser.add_argument(
+        '--append',
+        action='store_true',
+        help='Append to candidates.jsonl/episode_summary.csv instead of truncating. '
+        'Use when adding a new source (e.g. inference_act_groot) without rerunning the public set.',
+    )
     args = parser.parse_args()
 
     sources = [Source.from_str(s) for s in args.sources]
@@ -367,6 +423,7 @@ def main() -> None:
         sources=sources,
         limit=args.limit,
         progress_every=args.progress_every,
+        append=args.append,
     )
 
 

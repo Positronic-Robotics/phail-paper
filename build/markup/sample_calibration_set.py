@@ -40,7 +40,7 @@ EPISODES_CSV = REPO / 'out' / 'data_audit' / 'episodes.csv'
 ANN_DIR = REPO / 'build' / 'markup' / 'annotations'
 OUT_DIR = REPO / 'build' / 'markup'
 
-OBJECTS = ('Batteries', 'Scissors', 'Towels', 'Wooden spoons')
+OBJECTS = ('Batteries', 'Scissors', 'Towels', 'Wooden spoons', 'USB-C Boxes')
 
 INFERENCE_MODELS = (
     'Action Chunking Transformer',

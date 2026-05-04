@@ -3,37 +3,37 @@
   "object": "Wooden spoons",
   "model_display": "NVIDIA GR00T N1.6",
   "tau": 240.04365148302168,
-  "rmst_human": 10.093094199154615,
+  "rmst_human": 14.020941936568207,
   "summary": {
     "25": {
-      "n_eps": 14,
-      "n_events": 47,
-      "n_censored": 13,
-      "median_T": 29.248999999999995,
-      "rmst_tau": 64.76691790392411,
-      "pct_of_human": 15.583718549224175
+      "n_eps": 19,
+      "n_events": 88,
+      "n_censored": 16,
+      "median_T": 32.149370859,
+      "rmst_tau": 73.97809384434498,
+      "pct_of_human": 18.95282942281432
     },
     "50_v2": {
-      "n_eps": 16,
-      "n_events": 56,
-      "n_censored": 16,
-      "median_T": 31.419809777,
-      "rmst_tau": 68.57277785815069,
-      "pct_of_human": 14.718806083710273
+      "n_eps": 23,
+      "n_events": 89,
+      "n_censored": 23,
+      "median_T": 44.973748258,
+      "rmst_tau": 85.84173357323886,
+      "pct_of_human": 16.33347947779474
     },
     "100": {
-      "n_eps": 23,
-      "n_events": 124,
-      "n_censored": 17,
-      "median_T": 25.82960835999998,
-      "rmst_tau": 43.35705660486475,
-      "pct_of_human": 23.27901151394615
+      "n_eps": 27,
+      "n_events": 156,
+      "n_censored": 19,
+      "median_T": 25.46391521700002,
+      "rmst_tau": 46.046847742213664,
+      "pct_of_human": 30.449298104101146
     },
     "teleop": {
-      "n_eps": 114,
-      "n_events": 1326,
-      "median_T": 9.147037525000002,
-      "rmst_tau": 10.093094199154615,
+      "n_eps": 126,
+      "n_events": 1484,
+      "median_T": 9.220590240999996,
+      "rmst_tau": 14.020941936568207,
       "pct_of_human": 100.0
     }
   }

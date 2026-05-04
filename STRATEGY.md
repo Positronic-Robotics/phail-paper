@@ -1,6 +1,6 @@
 # PhAIL paper – strategy and positioning
 
-**Last updated:** 2026-04-26
+**Last updated:** 2026-05-04. **Authoritative for paper plan:** see `PAPER_PLAN.md` (created 2026-05-03). The "Sharpened headline claim" below has been refined since (hard failures as T=∞ ghost events; %-of-teleop as headline scalar; default-recipe fine-tuning caveat). Where they conflict, `PAPER_PLAN.md` wins.
 
 This document captures positioning, claims, and risk picture. Methodology decisions live in `FINDINGS.md`. Lit-review evidence lives in `LIT_REVIEW.md`.
 
