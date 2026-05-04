@@ -19,7 +19,10 @@ Usage:
 from __future__ import annotations
 
 import json
+import multiprocessing as mp
+import os
 from collections import defaultdict
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from itertools import combinations
 from pathlib import Path
 
@@ -213,13 +216,46 @@ def _trial_pvalues(
     return p, obs
 
 
+# ---- per-(pair, N) worker (top-level so it pickles cleanly) -----------------
+
+def _run_pair_n_task(
+    a_eps_by_obj: dict[str, list[loader.Episode]],
+    b_eps_by_obj: dict[str, list[loader.Episode]],
+    n: int,
+    n_outer: int,
+    n_inner: int,
+    tau: float,
+    seed_seq: np.random.SeedSequence,
+) -> dict[str, dict[str, float]]:
+    """All outer trials for one (pair, N) cell. Self-contained for parallel exec."""
+    rng = np.random.default_rng(seed_seq)
+    ps_by_metric = {m: [] for m in METRICS}
+    obs_by_metric = {m: [] for m in METRICS}
+    for _ in range(n_outer):
+        a_sub = {o: _subsample(a_eps_by_obj.get(o, []), n, rng) for o in OBJECTS}
+        b_sub = {o: _subsample(b_eps_by_obj.get(o, []), n, rng) for o in OBJECTS}
+        p, obs = _trial_pvalues(a_sub, b_sub, tau, n_inner, rng)
+        for m in METRICS:
+            ps_by_metric[m].append(p[m])
+            obs_by_metric[m].append(obs[m])
+    cell: dict[str, dict[str, float]] = {}
+    for m in METRICS:
+        ps = np.array(ps_by_metric[m])
+        effs = np.array(obs_by_metric[m])
+        cell[m] = {
+            'detection_rate': float(np.mean(ps < 0.05)),
+            'mean_p': float(np.mean(ps)),
+            'mean_effect': float(np.mean(effs)),
+        }
+    return cell
+
+
 # ---- main loop --------------------------------------------------------------
 
-@cfn.config(cohort='mixed', n_outer=300, n_inner=200, seed=0, out_dir=str(OUT_DIR))
-def main(cohort: str, n_outer: int, n_inner: int, seed: int, out_dir: str):
+@cfn.config(cohort='mixed', n_outer=300, n_inner=200, seed=0, workers=0, out_dir=str(OUT_DIR))
+def main(cohort: str, n_outer: int, n_inner: int, seed: int, workers: int, out_dir: str):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    rng = np.random.default_rng(seed)
 
     eps = loader.load(cohort=cohort)
     by_mo: dict[tuple[str, str], list[loader.Episode]] = defaultdict(list)
@@ -228,8 +264,11 @@ def main(cohort: str, n_outer: int, n_inner: int, seed: int, out_dir: str):
             by_mo[(e.model_display, e.eval_object)].append(e)
     by_obj_per_model = {m: {o: by_mo.get((m, o), []) for o in OBJECTS} for m in MODELS}
 
+    if workers <= 0:
+        workers = os.cpu_count() or 1
+
     # Print cell counts so the experiment is reproducible / legible.
-    print(f'cohort={cohort}  tau={TAU}  N_outer={n_outer}  N_inner={n_inner}')
+    print(f'cohort={cohort}  tau={TAU}  N_outer={n_outer}  N_inner={n_inner}  workers={workers}')
     print(f'\nCell counts (rows=models, cols=objects):')
     print(f'{"model":12s}  ' + '  '.join(f'{o[:12]:>12s}' for o in OBJECTS))
     for m in MODELS:
@@ -237,45 +276,51 @@ def main(cohort: str, n_outer: int, n_inner: int, seed: int, out_dir: str):
         print(f'{SHORT.get(m, m):12s}  {row}')
 
     pairs = list(combinations(MODELS, 2))
-    results: dict[str, dict] = {}  # keyed by 'A vs B'
+    tasks = [(a, b, n) for (a, b) in pairs for n in N_GRID]
+    # Spawn deterministic per-task SeedSequences so each (pair, N) cell has
+    # its own independent RNG stream — reproducible regardless of completion order.
+    child_ss = np.random.SeedSequence(seed).spawn(len(tasks))
 
+    print(f'\nDispatching {len(tasks)} (pair, N) jobs to {workers} workers...')
+
+    cell_by_pair_n: dict[tuple[str, str, int], dict] = {}
+    # fork avoids pickling episodes — workers inherit by_obj_per_model via COW.
+    ctx = mp.get_context('fork')
+    with ProcessPoolExecutor(max_workers=workers, mp_context=ctx) as ex:
+        future_to_key: dict = {}
+        for (a, b, n), ss in zip(tasks, child_ss):
+            fut = ex.submit(
+                _run_pair_n_task,
+                by_obj_per_model[a], by_obj_per_model[b],
+                n, n_outer, n_inner, TAU, ss,
+            )
+            future_to_key[fut] = (a, b, n)
+        n_done = 0
+        for fut in as_completed(future_to_key):
+            (a, b, n) = future_to_key[fut]
+            cell_by_pair_n[(a, b, n)] = fut.result()
+            n_done += 1
+            cell = cell_by_pair_n[(a, b, n)]
+            row = '  '.join(f'{m}:{cell[m]["detection_rate"]:.2f}' for m in METRICS)
+            print(f'  [{n_done:2d}/{len(tasks)}] {SHORT[a]} vs {SHORT[b]:8s} N={n:3d}  {row}')
+
+    # Reassemble per-pair results in fixed pair × N order.
+    results: dict[str, dict] = {}
     for a, b in pairs:
         key = f'{SHORT[a]} vs {SHORT[b]}'
-        print(f'\n=== {key} ===')
-        per_n: dict[int, dict] = {}
-        for n in N_GRID:
-            ps_by_metric = {m: [] for m in METRICS}
-            obs_by_metric = {m: [] for m in METRICS}
-            for _ in range(n_outer):
-                # Outer trial: subsample N per cell.
-                a_sub = {o: _subsample(by_obj_per_model[a].get(o, []), n, rng) for o in OBJECTS}
-                b_sub = {o: _subsample(by_obj_per_model[b].get(o, []), n, rng) for o in OBJECTS}
-                p, obs = _trial_pvalues(a_sub, b_sub, TAU, n_inner, rng)
-                for m in METRICS:
-                    ps_by_metric[m].append(p[m])
-                    obs_by_metric[m].append(obs[m])
-            cell = {}
-            for m in METRICS:
-                ps = np.array(ps_by_metric[m])
-                effs = np.array(obs_by_metric[m])
-                cell[m] = {
-                    'detection_rate': float(np.mean(ps < 0.05)),
-                    'mean_p': float(np.mean(ps)),
-                    'mean_effect': float(np.mean(effs)),
-                }
-            per_n[n] = cell
-            row = '  '.join(f'{m}:{cell[m]["detection_rate"]:.2f}(p={cell[m]["mean_p"]:.3f})' for m in METRICS)
-            print(f'  N={n:3d}  {row}')
-        # N_0.8 per metric
-        n08 = {}
-        for m in METRICS:
-            n08[m] = next((n for n in N_GRID if per_n[n][m]['detection_rate'] >= 0.8), None)
+        per_n = {n: cell_by_pair_n[(a, b, n)] for n in N_GRID}
+        n08 = {m: next((n for n in N_GRID if per_n[n][m]['detection_rate'] >= 0.8), None)
+               for m in METRICS}
         results[key] = {
             'a': a, 'b': b,
             'a_short': SHORT[a], 'b_short': SHORT[b],
             'per_n': {str(n): per_n[n] for n in N_GRID},
             'n08': n08,
         }
+        print(f'\n=== {key} ===')
+        for n in N_GRID:
+            row = '  '.join(f'{m}:{per_n[n][m]["detection_rate"]:.2f}(p={per_n[n][m]["mean_p"]:.3f})' for m in METRICS)
+            print(f'  N={n:3d}  {row}')
         print(f'  N_0.8: ' + '  '.join(f'{m}={n08[m]}' for m in METRICS))
 
     # ---- save JSON ----

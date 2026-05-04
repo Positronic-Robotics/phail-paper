@@ -7,10 +7,17 @@ local pos3 cache, and joins with `out/release_classifier/candidates.jsonl`.
 Two cohorts:
 - `manual` (default): only `reviewed=true` annotations. T comes from
   `place_timestamps_s` in the JSON.
-- `mixed`: union of `manual` plus auto-validated episodes — those where
-  `count(stage-2 success-verdict candidates) == eval.successful_items`. For
-  auto-validated episodes T comes from candidates' `ts_s`. Manual is always
-  preferred when both apply for the same episode.
+- `mixed`: union of `manual` plus auto-validated episodes. An episode is
+  auto-validated if EITHER
+      (a) `count(stage-2 success-verdict candidates) == eval.successful_items`,
+          i.e. the classifier and the operator agree on the success count, OR
+      (b) `eval.successful_items == 0`, i.e. the operator recorded a complete
+          failure — there is nothing to verify; the episode contributes a
+          single right-censored observation plus any ghost events.
+  For auto-validated episodes T comes from candidates' `ts_s`, except when
+  `successful_items == 0`, in which case T is empty (operator's zero is the
+  ground truth; any classifier "successes" are false positives). Manual is
+  always preferred when both apply for the same episode.
 
 Each `Episode` has `cohort_source ∈ {'manual', 'auto_validated'}` so figures
 can stratify or footnote the auto-validated subset.
@@ -182,32 +189,37 @@ def _load_annotations_index() -> dict[str, dict]:
     return out
 
 
-def _load_candidates_index() -> tuple[dict[str, int], dict[str, list[float]], dict[str, int]]:
-    """Return (success-count-by-url, success-ts-by-url, failure-count-by-url).
+def _load_candidates_index() -> tuple[dict[str, int], dict[str, list[float]], dict[str, int], set[str]]:
+    """Return (success-count-by-url, success-ts-by-url, failure-count-by-url, all-urls).
 
     Failure count comes from candidates with stage-2 `verdict == 'failure'`
     — each is the classifier's best estimate of a drop_outside_workspace.
     Used for the auto_validated cohort where manual drop annotations
-    are unavailable.
+    are unavailable. `all_urls` is every s3_dir seen in candidates.jsonl,
+    including episodes with zero success-verdict candidates — needed so the
+    `mixed` cohort can reach episodes where the operator recorded zero
+    successes (those don't appear in `succ_count`).
     """
     succ_count: dict[str, int] = defaultdict(int)
     succ_ts: dict[str, list[float]] = defaultdict(list)
     fail_count: dict[str, int] = defaultdict(int)
+    all_urls: set[str] = set()
     if not CANDIDATES.exists():
-        return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count)
+        return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count), all_urls
     with open(CANDIDATES) as f:
         for line in f:
             r = json.loads(line)
             url = r.get('s3_dir')
             if not url:
                 continue
+            all_urls.add(url)
             verdict = (r.get('features') or {}).get('verdict')
             if verdict == 'success':
                 succ_count[url] += 1
                 succ_ts[url].append(float(r['ts_s']))
             elif verdict == 'failure':
                 fail_count[url] += 1
-    return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count)
+    return dict(succ_count), {k: sorted(v) for k, v in succ_ts.items()}, dict(fail_count), all_urls
 
 
 def _is_ablation(s3_url: str) -> bool:
@@ -236,7 +248,7 @@ def load(
         raise ValueError(f"cohort must be 'manual' or 'mixed', got {cohort!r}")
 
     annotations = _load_annotations_index()
-    succ_count, succ_ts, fail_count = _load_candidates_index()
+    succ_count, succ_ts, fail_count, all_candidate_urls = _load_candidates_index()
 
     def _allowed(url: str) -> bool:
         return include_ablation_sets or not _is_ablation(url)
@@ -254,7 +266,7 @@ def load(
 
     n_missing_static = 0
     if cohort == 'mixed':
-        for url, n_succ in succ_count.items():
+        for url in all_candidate_urls:
             if url in manual_set:
                 continue
             if not _allowed(url):
@@ -264,7 +276,13 @@ def load(
             if meta is None:
                 n_missing_static += 1
                 continue
-            if n_succ == meta['successful_items_eval']:
+            n_succ = succ_count.get(url, 0)
+            target = meta['successful_items_eval']
+            # Auto-validate when the classifier and operator agree on the
+            # success count, OR when the operator recorded zero successes
+            # (no successes to verify; the episode contributes only censored
+            # tail and ghost events).
+            if n_succ == target or target == 0:
                 selections.append((url, 'auto_validated', annotations.get(url, {})))
 
     out: list[Episode] = []
@@ -284,7 +302,13 @@ def load(
 
         manual_ts = sorted(float(t) for t in (ann.get('place_timestamps_s') or []))
         cand_ts = succ_ts.get(url, [])
-        place_ts = manual_ts if source == 'manual' else cand_ts
+        if source == 'manual':
+            place_ts = manual_ts
+        elif meta['successful_items_eval'] == 0:
+            # Operator's zero is ground truth; classifier "successes" are false positives.
+            place_ts = []
+        else:
+            place_ts = cand_ts
 
         # Hard-failure count: drops_outside + safety_stop. Source depends on cohort.
         had_safety = (meta.get('eval_outcome') == 'Safety')

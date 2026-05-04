@@ -1,8 +1,8 @@
 {
   "cohort": "mixed",
   "tau": 120.0,
-  "n_outer": 200,
-  "n_inner": 100,
+  "n_outer": 300,
+  "n_inner": 200,
   "N_grid": [
     5,
     10,
@@ -26,134 +26,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.085,
-            "mean_p": 0.46094999999999997,
-            "mean_effect": -0.008278394982172105
+            "detection_rate": 0.09666666666666666,
+            "mean_p": 0.44060000000000005,
+            "mean_effect": -0.02571896109504278
           },
           "F60": {
-            "detection_rate": 0.1,
-            "mean_p": 0.4545,
-            "mean_effect": 0.012437960704020937
+            "detection_rate": 0.07,
+            "mean_p": 0.4615833333333333,
+            "mean_effect": 0.004617516820509015
           },
           "RMST": {
-            "detection_rate": 0.095,
-            "mean_p": 0.4611,
-            "mean_effect": -1.5433378610197181
+            "detection_rate": 0.06333333333333334,
+            "mean_p": 0.4599666666666667,
+            "mean_effect": -0.3383228540816805
           },
           "KS": {
-            "detection_rate": 0.13,
-            "mean_p": 0.245990099009901,
-            "mean_effect": 0.28418229246529175
+            "detection_rate": 0.14333333333333334,
+            "mean_p": 0.2919568822553897,
+            "mean_effect": 0.3085844972477485
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 0.075,
-            "mean_p": 0.4292,
-            "mean_effect": -0.014171561003309734
+            "detection_rate": 0.09666666666666666,
+            "mean_p": 0.4653333333333333,
+            "mean_effect": -0.024265977881874175
           },
           "F60": {
-            "detection_rate": 0.055,
-            "mean_p": 0.44339999999999996,
-            "mean_effect": 0.0043040904448374065
+            "detection_rate": 0.07,
+            "mean_p": 0.5127,
+            "mean_effect": 0.002587493063399328
           },
           "RMST": {
-            "detection_rate": 0.105,
-            "mean_p": 0.45549999999999996,
-            "mean_effect": -0.7158593527458652
+            "detection_rate": 0.07333333333333333,
+            "mean_p": 0.5001166666666667,
+            "mean_effect": -0.3499251176568959
           },
           "KS": {
-            "detection_rate": 0.22,
-            "mean_p": 0.2163366336633664,
-            "mean_effect": 0.2138376174721889
+            "detection_rate": 0.14,
+            "mean_p": 0.2629187396351575,
+            "mean_effect": 0.23003646236593775
           }
         },
         "15": {
           "F30": {
-            "detection_rate": 0.105,
-            "mean_p": 0.44784999999999997,
-            "mean_effect": -0.014743425515350272
+            "detection_rate": 0.06666666666666667,
+            "mean_p": 0.4837833333333333,
+            "mean_effect": -0.019223363701770437
           },
           "F60": {
-            "detection_rate": 0.065,
-            "mean_p": 0.48310000000000003,
-            "mean_effect": 0.0036944346335985928
+            "detection_rate": 0.07666666666666666,
+            "mean_p": 0.49633333333333324,
+            "mean_effect": 0.009244358509212609
           },
           "RMST": {
-            "detection_rate": 0.1,
-            "mean_p": 0.47314999999999996,
-            "mean_effect": -0.797671185676671
+            "detection_rate": 0.07,
+            "mean_p": 0.5128166666666667,
+            "mean_effect": -0.8577509158907732
           },
           "KS": {
-            "detection_rate": 0.36,
-            "mean_p": 0.14133663366336635,
-            "mean_effect": 0.19186348741761983
+            "detection_rate": 0.27666666666666667,
+            "mean_p": 0.1964179104477612,
+            "mean_effect": 0.1992560123878341
           }
         },
         "20": {
           "F30": {
-            "detection_rate": 0.05,
-            "mean_p": 0.4745999999999999,
-            "mean_effect": -0.010349020371233484
+            "detection_rate": 0.09333333333333334,
+            "mean_p": 0.49416666666666675,
+            "mean_effect": -0.017324924148059414
           },
           "F60": {
-            "detection_rate": 0.055,
-            "mean_p": 0.49510000000000004,
-            "mean_effect": 0.010069581329820549
+            "detection_rate": 0.06666666666666667,
+            "mean_p": 0.47863333333333336,
+            "mean_effect": 0.007082283284399487
           },
           "RMST": {
-            "detection_rate": 0.075,
-            "mean_p": 0.4683,
-            "mean_effect": -1.427652010638551
+            "detection_rate": 0.07,
+            "mean_p": 0.4730166666666666,
+            "mean_effect": -0.7315844326425652
           },
           "KS": {
-            "detection_rate": 0.455,
-            "mean_p": 0.1401980198019802,
-            "mean_effect": 0.17235287002768002
+            "detection_rate": 0.3333333333333333,
+            "mean_p": 0.15918739635157544,
+            "mean_effect": 0.18008074082860984
           }
         },
         "25": {
           "F30": {
-            "detection_rate": 0.095,
-            "mean_p": 0.47185000000000005,
-            "mean_effect": -0.01177480120522863
+            "detection_rate": 0.12,
+            "mean_p": 0.43245000000000006,
+            "mean_effect": -0.01940872735464824
           },
           "F60": {
-            "detection_rate": 0.085,
-            "mean_p": 0.48180000000000006,
-            "mean_effect": 0.006171319066148422
+            "detection_rate": 0.05333333333333334,
+            "mean_p": 0.4697333333333333,
+            "mean_effect": 0.004399933712944567
           },
           "RMST": {
-            "detection_rate": 0.095,
-            "mean_p": 0.4710000000000001,
-            "mean_effect": -1.142105999080127
+            "detection_rate": 0.056666666666666664,
+            "mean_p": 0.47738333333333327,
+            "mean_effect": -0.4817701714108239
           },
           "KS": {
-            "detection_rate": 0.63,
-            "mean_p": 0.07524752475247526,
-            "mean_effect": 0.16465254096901574
+            "detection_rate": 0.44,
+            "mean_p": 0.12656716417910446,
+            "mean_effect": 0.1675276688903622
           }
         },
         "30": {
           "F30": {
-            "detection_rate": 0.09,
-            "mean_p": 0.46929999999999994,
-            "mean_effect": -0.011455157232649943
+            "detection_rate": 0.09333333333333334,
+            "mean_p": 0.45828333333333326,
+            "mean_effect": -0.02109238910299843
           },
           "F60": {
-            "detection_rate": 0.085,
-            "mean_p": 0.48945,
-            "mean_effect": 0.007648084087322997
+            "detection_rate": 0.06333333333333334,
+            "mean_p": 0.49939999999999996,
+            "mean_effect": 0.005945743628626202
           },
           "RMST": {
-            "detection_rate": 0.085,
-            "mean_p": 0.4621,
-            "mean_effect": -1.2027484544092273
+            "detection_rate": 0.05,
+            "mean_p": 0.48896666666666666,
+            "mean_effect": -0.6443218765331817
           },
           "KS": {
-            "detection_rate": 0.705,
-            "mean_p": 0.05668316831683169,
-            "mean_effect": 0.15675449249818738
+            "detection_rate": 0.61,
+            "mean_p": 0.08388059701492537,
+            "mean_effect": 0.16346690123780036
           }
         }
       },
@@ -172,134 +172,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.095,
-            "mean_p": 0.46649999999999997,
-            "mean_effect": 0.0022427333464556005
+            "detection_rate": 0.11666666666666667,
+            "mean_p": 0.4314166666666667,
+            "mean_effect": -0.007453399212891165
           },
           "F60": {
-            "detection_rate": 0.13,
-            "mean_p": 0.41375,
-            "mean_effect": 0.046863713785733854
+            "detection_rate": 0.14,
+            "mean_p": 0.4400333333333334,
+            "mean_effect": 0.04915011252257942
           },
           "RMST": {
-            "detection_rate": 0.1,
-            "mean_p": 0.43534999999999996,
-            "mean_effect": -4.065054663534229
+            "detection_rate": 0.12666666666666668,
+            "mean_p": 0.44981666666666664,
+            "mean_effect": -3.710828120019903
           },
           "KS": {
-            "detection_rate": 0.165,
-            "mean_p": 0.22485148514851488,
-            "mean_effect": 0.2970911541431122
+            "detection_rate": 0.16,
+            "mean_p": 0.2348590381426202,
+            "mean_effect": 0.32211454495099057
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 0.06,
-            "mean_p": 0.5226000000000001,
-            "mean_effect": 0.007701728349820621
+            "detection_rate": 0.05333333333333334,
+            "mean_p": 0.4804333333333333,
+            "mean_effect": 0.00317126328625862
           },
           "F60": {
-            "detection_rate": 0.13,
-            "mean_p": 0.39050000000000007,
-            "mean_effect": 0.05670330962328638
+            "detection_rate": 0.11666666666666667,
+            "mean_p": 0.41625,
+            "mean_effect": 0.05616214659730475
           },
           "RMST": {
-            "detection_rate": 0.12,
-            "mean_p": 0.4116,
-            "mean_effect": -5.089951679122814
+            "detection_rate": 0.11,
+            "mean_p": 0.43956666666666666,
+            "mean_effect": -4.786611538271835
           },
           "KS": {
-            "detection_rate": 0.345,
-            "mean_p": 0.15504950495049508,
-            "mean_effect": 0.23967320613930787
+            "detection_rate": 0.25333333333333335,
+            "mean_p": 0.19782752902155887,
+            "mean_effect": 0.2520874471869855
           }
         },
         "15": {
           "F30": {
-            "detection_rate": 0.07,
-            "mean_p": 0.47174999999999995,
-            "mean_effect": 0.013001264294973358
+            "detection_rate": 0.08,
+            "mean_p": 0.4792499999999999,
+            "mean_effect": -0.008669420371586372
           },
           "F60": {
-            "detection_rate": 0.225,
-            "mean_p": 0.32894999999999996,
-            "mean_effect": 0.060450968203710376
+            "detection_rate": 0.12333333333333334,
+            "mean_p": 0.37623333333333336,
+            "mean_effect": 0.05016892709613689
           },
           "RMST": {
-            "detection_rate": 0.18,
-            "mean_p": 0.36575,
-            "mean_effect": -5.448932062724355
+            "detection_rate": 0.10333333333333333,
+            "mean_p": 0.42238333333333333,
+            "mean_effect": -3.9211147689097516
           },
           "KS": {
-            "detection_rate": 0.495,
-            "mean_p": 0.10445544554455445,
-            "mean_effect": 0.21460991620924616
+            "detection_rate": 0.39,
+            "mean_p": 0.13081260364842454,
+            "mean_effect": 0.22159369812265184
           }
         },
         "20": {
           "F30": {
-            "detection_rate": 0.095,
-            "mean_p": 0.4809999999999999,
-            "mean_effect": 0.015164916823120054
+            "detection_rate": 0.07666666666666666,
+            "mean_p": 0.4673833333333333,
+            "mean_effect": -0.0033618542675997627
           },
           "F60": {
-            "detection_rate": 0.32,
-            "mean_p": 0.25465,
-            "mean_effect": 0.06366219663461646
+            "detection_rate": 0.16666666666666666,
+            "mean_p": 0.35438333333333333,
+            "mean_effect": 0.05463725047465573
           },
           "RMST": {
-            "detection_rate": 0.23,
-            "mean_p": 0.2861,
-            "mean_effect": -5.732797327924609
+            "detection_rate": 0.11333333333333333,
+            "mean_p": 0.40330000000000005,
+            "mean_effect": -4.3588773070797
           },
           "KS": {
-            "detection_rate": 0.6,
-            "mean_p": 0.07366336633663367,
-            "mean_effect": 0.1965863573224111
+            "detection_rate": 0.4866666666666667,
+            "mean_p": 0.10917081260364843,
+            "mean_effect": 0.2000765578022392
           }
         },
         "25": {
           "F30": {
-            "detection_rate": 0.1,
-            "mean_p": 0.4692,
-            "mean_effect": 0.01767072898972126
+            "detection_rate": 0.07,
+            "mean_p": 0.4900666666666666,
+            "mean_effect": 0.00012309664098436146
           },
           "F60": {
-            "detection_rate": 0.34,
-            "mean_p": 0.23855,
-            "mean_effect": 0.06511811210148977
+            "detection_rate": 0.24666666666666667,
+            "mean_p": 0.29605,
+            "mean_effect": 0.06058193306716625
           },
           "RMST": {
-            "detection_rate": 0.285,
-            "mean_p": 0.2507,
-            "mean_effect": -5.97988337396984
+            "detection_rate": 0.19333333333333333,
+            "mean_p": 0.34335,
+            "mean_effect": -5.041307192027849
           },
           "KS": {
-            "detection_rate": 0.745,
-            "mean_p": 0.0450990099009901,
-            "mean_effect": 0.18833607123103996
+            "detection_rate": 0.6366666666666667,
+            "mean_p": 0.07023217247097845,
+            "mean_effect": 0.1905334794013175
           }
         },
         "30": {
           "F30": {
-            "detection_rate": 0.105,
-            "mean_p": 0.44925,
-            "mean_effect": 0.01552012042221204
+            "detection_rate": 0.056666666666666664,
+            "mean_p": 0.4770166666666667,
+            "mean_effect": -0.0014701992625143563
           },
           "F60": {
-            "detection_rate": 0.425,
-            "mean_p": 0.20485,
-            "mean_effect": 0.06555095221193805
+            "detection_rate": 0.28,
+            "mean_p": 0.29445,
+            "mean_effect": 0.05760589368746698
           },
           "RMST": {
-            "detection_rate": 0.355,
-            "mean_p": 0.23370000000000002,
-            "mean_effect": -5.970828961118516
+            "detection_rate": 0.21333333333333335,
+            "mean_p": 0.33785000000000004,
+            "mean_effect": -4.696095520683766
           },
           "KS": {
-            "detection_rate": 0.855,
-            "mean_p": 0.030148514851485148,
-            "mean_effect": 0.1796521355313199
+            "detection_rate": 0.75,
+            "mean_p": 0.04339966832504146,
+            "mean_effect": 0.18505361485266333
           }
         }
       },
@@ -307,7 +307,7 @@
         "F30": null,
         "F60": null,
         "RMST": null,
-        "KS": 30
+        "KS": null
       }
     },
     "OpenPI vs SmolVLA": {
@@ -318,134 +318,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.8,
-            "mean_p": 0.054400000000000004,
-            "mean_effect": 0.22996002397007537
+            "detection_rate": 0.8666666666666667,
+            "mean_p": 0.029633333333333334,
+            "mean_effect": 0.2658361616319873
           },
           "F60": {
-            "detection_rate": 0.925,
-            "mean_p": 0.023500000000000007,
-            "mean_effect": 0.31351280602740117
+            "detection_rate": 0.9466666666666667,
+            "mean_p": 0.013549999999999998,
+            "mean_effect": 0.3766901947127535
           },
           "RMST": {
-            "detection_rate": 0.92,
-            "mean_p": 0.024850000000000004,
-            "mean_effect": -31.01097231748865
+            "detection_rate": 0.9533333333333334,
+            "mean_p": 0.012566666666666665,
+            "mean_effect": -37.974812177977235
           },
           "KS": {
-            "detection_rate": 0.735,
-            "mean_p": 0.05653465346534654,
-            "mean_effect": 0.4850654721550848
+            "detection_rate": 0.7566666666666667,
+            "mean_p": 0.049850746268656716,
+            "mean_effect": 0.5402851897783932
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 0.975,
-            "mean_p": 0.013000000000000001,
-            "mean_effect": 0.22275414236055394
+            "detection_rate": 0.99,
+            "mean_p": 0.008783333333333334,
+            "mean_effect": 0.2738073615634117
           },
           "F60": {
-            "detection_rate": 0.995,
-            "mean_p": 0.010349999999999996,
-            "mean_effect": 0.30260913240705706
+            "detection_rate": 0.9966666666666667,
+            "mean_p": 0.005633333333333333,
+            "mean_effect": 0.385188460850898
           },
           "RMST": {
-            "detection_rate": 1.0,
-            "mean_p": 0.0103,
-            "mean_effect": -29.906306068135773
+            "detection_rate": 0.9966666666666667,
+            "mean_p": 0.0058,
+            "mean_effect": -38.79336779548032
           },
           "KS": {
-            "detection_rate": 0.985,
-            "mean_p": 0.013168316831683166,
-            "mean_effect": 0.4292066888298895
+            "detection_rate": 0.9766666666666667,
+            "mean_p": 0.009137645107794362,
+            "mean_effect": 0.5031522064352976
           }
         },
         "15": {
           "F30": {
-            "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2202172097809965
+            "detection_rate": 0.9966666666666667,
+            "mean_p": 0.00565,
+            "mean_effect": 0.2708676526689148
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.010049999999999998,
-            "mean_effect": 0.29983150062081865
+            "mean_p": 0.005,
+            "mean_effect": 0.3833880238574312
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -29.659816900746428
+            "mean_p": 0.005,
+            "mean_effect": -38.209617267150996
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.010346534653465347,
-            "mean_effect": 0.4128035792553644
+            "mean_p": 0.005041459369817578,
+            "mean_effect": 0.48327933535897877
           }
         },
         "20": {
           "F30": {
-            "detection_rate": 0.995,
-            "mean_p": 0.010549999999999997,
-            "mean_effect": 0.21944764731915772
+            "detection_rate": 1.0,
+            "mean_p": 0.005,
+            "mean_effect": 0.2747220047332546
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.3019448801060015
+            "mean_p": 0.005,
+            "mean_effect": 0.3867798075374607
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -29.617204324456587
+            "mean_p": 0.005,
+            "mean_effect": -38.76583661436011
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.0099009900990099,
-            "mean_effect": 0.4078164266368641
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.48300589283628265
           }
         },
         "25": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.21879038833544812
+            "mean_p": 0.005,
+            "mean_effect": 0.2780702397422418
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.3020013364748017
+            "mean_p": 0.005,
+            "mean_effect": 0.3887900124487415
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -29.420950977768047
+            "mean_p": 0.005,
+            "mean_effect": -39.10920706684827
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.0099009900990099,
-            "mean_effect": 0.3997600766784295
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.48019562259922355
           }
         },
         "30": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.21830980640994338
+            "mean_p": 0.005,
+            "mean_effect": 0.2757037727510838
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2974006152919666
+            "mean_p": 0.005,
+            "mean_effect": 0.3895132480324206
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -29.106944695461525
+            "mean_p": 0.005,
+            "mean_effect": -39.006626728019256
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.0099009900990099,
-            "mean_effect": 0.39605018164358086
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.4775636707342259
           }
         }
       },
@@ -464,134 +464,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.125,
-            "mean_p": 0.42340000000000005,
-            "mean_effect": 0.010995116641146383
+            "detection_rate": 0.08,
+            "mean_p": 0.4514166666666667,
+            "mean_effect": 0.012645519504783185
           },
           "F60": {
-            "detection_rate": 0.125,
-            "mean_p": 0.38415000000000005,
-            "mean_effect": 0.0479871390543626
+            "detection_rate": 0.12,
+            "mean_p": 0.41208333333333336,
+            "mean_effect": 0.037530715882880754
           },
           "RMST": {
-            "detection_rate": 0.125,
-            "mean_p": 0.40285,
-            "mean_effect": -3.630833706039127
+            "detection_rate": 0.11333333333333333,
+            "mean_p": 0.41734999999999994,
+            "mean_effect": -2.723145084876462
           },
           "KS": {
-            "detection_rate": 0.345,
-            "mean_p": 0.13336633663366337,
-            "mean_effect": 0.3127127896155605
+            "detection_rate": 0.28,
+            "mean_p": 0.15723051409618574,
+            "mean_effect": 0.34786303454662665
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 0.07,
-            "mean_p": 0.4772,
-            "mean_effect": 0.02259973798969118
+            "detection_rate": 0.08,
+            "mean_p": 0.49885,
+            "mean_effect": 0.011704173551814068
           },
           "F60": {
-            "detection_rate": 0.17,
-            "mean_p": 0.36239999999999994,
-            "mean_effect": 0.05349012116093492
+            "detection_rate": 0.11,
+            "mean_p": 0.4228833333333334,
+            "mean_effect": 0.04418962663208999
           },
           "RMST": {
-            "detection_rate": 0.135,
-            "mean_p": 0.40199999999999997,
-            "mean_effect": -4.268585195181539
+            "detection_rate": 0.09,
+            "mean_p": 0.4528666666666667,
+            "mean_effect": -3.2432118314708367
           },
           "KS": {
-            "detection_rate": 0.555,
-            "mean_p": 0.09415841584158419,
-            "mean_effect": 0.25474587212482436
+            "detection_rate": 0.4866666666666667,
+            "mean_p": 0.11325041459369817,
+            "mean_effect": 0.2752000437828238
           }
         },
         "15": {
           "F30": {
-            "detection_rate": 0.1,
-            "mean_p": 0.45425,
-            "mean_effect": 0.019724271233166526
+            "detection_rate": 0.06333333333333334,
+            "mean_p": 0.46616666666666673,
+            "mean_effect": 0.015878736773809615
           },
           "F60": {
-            "detection_rate": 0.21,
-            "mean_p": 0.32630000000000003,
-            "mean_effect": 0.05215789169709924
+            "detection_rate": 0.14333333333333334,
+            "mean_p": 0.3720833333333333,
+            "mean_effect": 0.04842390463988299
           },
           "RMST": {
-            "detection_rate": 0.125,
-            "mean_p": 0.38625,
-            "mean_effect": -3.9309173104503525
+            "detection_rate": 0.12,
+            "mean_p": 0.42234999999999995,
+            "mean_effect": -3.8608676160433335
           },
           "KS": {
-            "detection_rate": 0.65,
-            "mean_p": 0.06267326732673269,
-            "mean_effect": 0.2267214291084832
+            "detection_rate": 0.6633333333333333,
+            "mean_p": 0.05900497512437811,
+            "mean_effect": 0.24797648097169614
           }
         },
         "20": {
           "F30": {
-            "detection_rate": 0.095,
-            "mean_p": 0.39615,
-            "mean_effect": 0.026038920472327243
+            "detection_rate": 0.06333333333333334,
+            "mean_p": 0.48564999999999997,
+            "mean_effect": 0.01767925206412561
           },
           "F60": {
-            "detection_rate": 0.27,
-            "mean_p": 0.23325000000000004,
-            "mean_effect": 0.06075144757801239
+            "detection_rate": 0.15,
+            "mean_p": 0.3493333333333333,
+            "mean_effect": 0.04842765492466929
           },
           "RMST": {
-            "detection_rate": 0.22,
-            "mean_p": 0.29885,
-            "mean_effect": -4.879104930202637
+            "detection_rate": 0.1,
+            "mean_p": 0.3915333333333333,
+            "mean_effect": -3.779842416608427
           },
           "KS": {
-            "detection_rate": 0.795,
-            "mean_p": 0.04123762376237625,
-            "mean_effect": 0.21531173565262438
+            "detection_rate": 0.8433333333333334,
+            "mean_p": 0.03482587064676617,
+            "mean_effect": 0.23185335378710098
           }
         },
         "25": {
           "F30": {
-            "detection_rate": 0.09,
-            "mean_p": 0.40049999999999997,
-            "mean_effect": 0.02906417162799996
+            "detection_rate": 0.06333333333333334,
+            "mean_p": 0.47563333333333335,
+            "mean_effect": 0.019081994840278737
           },
           "F60": {
-            "detection_rate": 0.335,
-            "mean_p": 0.25865000000000005,
-            "mean_effect": 0.0586159361649878
+            "detection_rate": 0.24,
+            "mean_p": 0.3298,
+            "mean_effect": 0.05109639143373833
           },
           "RMST": {
-            "detection_rate": 0.29,
-            "mean_p": 0.3275,
-            "mean_effect": -4.824885014117174
+            "detection_rate": 0.14666666666666667,
+            "mean_p": 0.3895666666666666,
+            "mean_effect": -4.10871202260342
           },
           "KS": {
-            "detection_rate": 0.85,
-            "mean_p": 0.03188118811881188,
-            "mean_effect": 0.20016656827210844
+            "detection_rate": 0.8666666666666667,
+            "mean_p": 0.023101160862354895,
+            "mean_effect": 0.2210977646038007
           }
         },
         "30": {
           "F30": {
-            "detection_rate": 0.14,
-            "mean_p": 0.36345,
-            "mean_effect": 0.02881352537864628
+            "detection_rate": 0.08333333333333333,
+            "mean_p": 0.42793333333333333,
+            "mean_effect": 0.01999205499819631
           },
           "F60": {
-            "detection_rate": 0.41,
-            "mean_p": 0.22375,
-            "mean_effect": 0.05852510686948776
+            "detection_rate": 0.2733333333333333,
+            "mean_p": 0.27613333333333334,
+            "mean_effect": 0.053877721419809545
           },
           "RMST": {
-            "detection_rate": 0.315,
-            "mean_p": 0.27695000000000003,
-            "mean_effect": -4.942808154594572
+            "detection_rate": 0.17,
+            "mean_p": 0.34285,
+            "mean_effect": -4.237594030799764
           },
           "KS": {
-            "detection_rate": 0.94,
-            "mean_p": 0.01826732673267327,
-            "mean_effect": 0.1983931349038542
+            "detection_rate": 0.9466666666666667,
+            "mean_p": 0.01326699834162521,
+            "mean_effect": 0.21297946183993308
           }
         }
       },
@@ -599,7 +599,7 @@
         "F30": null,
         "F60": null,
         "RMST": null,
-        "KS": 25
+        "KS": 20
       }
     },
     "GR00T vs SmolVLA": {
@@ -610,134 +610,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.9,
-            "mean_p": 0.02805,
-            "mean_effect": 0.24027968383025905
+            "detection_rate": 0.9566666666666667,
+            "mean_p": 0.011850000000000001,
+            "mean_effect": 0.3013921497360219
           },
           "F60": {
-            "detection_rate": 0.98,
-            "mean_p": 0.013850000000000003,
-            "mean_effect": 0.30867646942244015
+            "detection_rate": 0.9666666666666667,
+            "mean_p": 0.01205,
+            "mean_effect": 0.38977154680255116
           },
           "RMST": {
-            "detection_rate": 0.97,
-            "mean_p": 0.01375,
-            "mean_effect": -30.07132777203235
+            "detection_rate": 0.9833333333333333,
+            "mean_p": 0.009799999999999998,
+            "mean_effect": -39.3586980778699
           },
           "KS": {
-            "detection_rate": 0.75,
-            "mean_p": 0.05158415841584159,
-            "mean_effect": 0.45449966012550996
+            "detection_rate": 0.7633333333333333,
+            "mean_p": 0.037562189054726365,
+            "mean_effect": 0.5525019350837941
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 1.0,
-            "mean_p": 0.01015,
-            "mean_effect": 0.23494568700330526
+            "detection_rate": 0.9933333333333333,
+            "mean_p": 0.005383333333333334,
+            "mean_effect": 0.2896747059720372
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.30181780666234803
+            "mean_p": 0.00505,
+            "mean_effect": 0.3767589693396484
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -29.311331026016834
+            "mean_p": 0.005033333333333332,
+            "mean_effect": -37.816699244565264
           },
           "KS": {
-            "detection_rate": 0.985,
-            "mean_p": 0.012475247524752476,
-            "mean_effect": 0.407942537230674
+            "detection_rate": 0.98,
+            "mean_p": 0.008225538971807628,
+            "mean_effect": 0.4856115757424754
           }
         },
         "15": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2340880242480678
+            "mean_p": 0.005,
+            "mean_effect": 0.29886376738955095
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.29959573392342675
+            "mean_p": 0.005,
+            "mean_effect": 0.3842380907807901
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -28.956268263045878
+            "mean_p": 0.005,
+            "mean_effect": -38.48758841046324
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.01004950495049505,
-            "mean_effect": 0.3872385239703239
+            "mean_p": 0.005024875621890546,
+            "mean_effect": 0.4758656254053169
           }
         },
         "20": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.22199414682570415
+            "mean_p": 0.005,
+            "mean_effect": 0.292372108238323
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.28663671138982283
+            "mean_p": 0.005,
+            "mean_effect": 0.37692122172213244
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -27.63154543639163
+            "mean_p": 0.005,
+            "mean_effect": -37.86064852786465
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.009950495049504949,
-            "mean_effect": 0.36469641485765364
+            "mean_p": 0.0049917081260364825,
+            "mean_effect": 0.4631048412419051
           }
         },
         "25": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2297966839252229
+            "mean_p": 0.005,
+            "mean_effect": 0.29944345731128164
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.29336667779128733
+            "mean_p": 0.005,
+            "mean_effect": 0.38377470497497734
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -28.187073548406115
+            "mean_p": 0.005,
+            "mean_effect": -38.47912405061714
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.0099009900990099,
-            "mean_effect": 0.3634942370632889
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.46286051402985845
           }
         },
         "30": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.22880544367879807
+            "mean_p": 0.005,
+            "mean_effect": 0.29899273277362626
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2917621555341841
+            "mean_p": 0.005,
+            "mean_effect": 0.38234922305427577
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -28.041796963603183
+            "mean_p": 0.005,
+            "mean_effect": -38.35443097548757
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.0099009900990099,
-            "mean_effect": 0.3564157522822293
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.45627171766523605
           }
         }
       },
@@ -756,134 +756,134 @@
       "per_n": {
         "5": {
           "F30": {
-            "detection_rate": 0.89,
-            "mean_p": 0.0369,
-            "mean_effect": 0.2138561510395049
+            "detection_rate": 0.9333333333333333,
+            "mean_p": 0.0187,
+            "mean_effect": 0.28775071132021746
           },
           "F60": {
-            "detection_rate": 0.9,
-            "mean_p": 0.02835,
-            "mean_effect": 0.2513667745600074
+            "detection_rate": 0.9366666666666666,
+            "mean_p": 0.020033333333333334,
+            "mean_effect": 0.34398345097005145
           },
           "RMST": {
-            "detection_rate": 0.89,
-            "mean_p": 0.02825,
-            "mean_effect": -25.404177748679828
+            "detection_rate": 0.9533333333333334,
+            "mean_p": 0.01815,
+            "mean_effect": -35.79396453793573
           },
           "KS": {
-            "detection_rate": 0.65,
-            "mean_p": 0.06440594059405941,
-            "mean_effect": 0.44242358015531397
+            "detection_rate": 0.7033333333333334,
+            "mean_p": 0.06013266998341626,
+            "mean_effect": 0.521488606162815
           }
         },
         "10": {
           "F30": {
-            "detection_rate": 0.97,
-            "mean_p": 0.01595,
-            "mean_effect": 0.2111494645574104
+            "detection_rate": 0.9966666666666667,
+            "mean_p": 0.0056,
+            "mean_effect": 0.27861236448576565
           },
           "F60": {
-            "detection_rate": 0.98,
-            "mean_p": 0.013649999999999997,
-            "mean_effect": 0.2429029459334584
+            "detection_rate": 0.9866666666666667,
+            "mean_p": 0.006516666666666667,
+            "mean_effect": 0.33288363970322704
           },
           "RMST": {
-            "detection_rate": 0.975,
-            "mean_p": 0.014949999999999998,
-            "mean_effect": -24.804037067524256
+            "detection_rate": 0.9933333333333333,
+            "mean_p": 0.0059,
+            "mean_effect": -34.50344973754087
           },
           "KS": {
-            "detection_rate": 0.895,
-            "mean_p": 0.030198019801980197,
-            "mean_effect": 0.3884266022738968
+            "detection_rate": 0.9133333333333333,
+            "mean_p": 0.0191044776119403,
+            "mean_effect": 0.44958867695020466
           }
         },
         "15": {
           "F30": {
-            "detection_rate": 0.985,
-            "mean_p": 0.011699999999999999,
-            "mean_effect": 0.20486682464579622
+            "detection_rate": 1.0,
+            "mean_p": 0.005,
+            "mean_effect": 0.2808384594629006
           },
           "F60": {
-            "detection_rate": 0.99,
-            "mean_p": 0.0123,
-            "mean_effect": 0.23745011908571578
+            "detection_rate": 1.0,
+            "mean_p": 0.005016666666666667,
+            "mean_effect": 0.3351348182143624
           },
           "RMST": {
-            "detection_rate": 0.99,
-            "mean_p": 0.0125,
-            "mean_effect": -23.64221881039389
+            "detection_rate": 1.0,
+            "mean_p": 0.005016666666666667,
+            "mean_effect": -34.81660039120215
           },
           "KS": {
-            "detection_rate": 0.965,
-            "mean_p": 0.014504950495049507,
-            "mean_effect": 0.3615755320103874
+            "detection_rate": 0.9933333333333333,
+            "mean_p": 0.006965174129353233,
+            "mean_effect": 0.4366581633176862
           }
         },
         "20": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.010049999999999998,
-            "mean_effect": 0.20555492745879367
+            "mean_p": 0.005,
+            "mean_effect": 0.27717851741118843
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2410528031705667
+            "mean_p": 0.005,
+            "mean_effect": 0.32787235670932385
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.010099999999999998,
-            "mean_effect": -24.059637904240667
+            "mean_p": 0.005,
+            "mean_effect": -34.050281321484476
           },
           "KS": {
-            "detection_rate": 0.995,
-            "mean_p": 0.01099009900990099,
-            "mean_effect": 0.3599379562098008
+            "detection_rate": 1.0,
+            "mean_p": 0.0052902155887230495,
+            "mean_effect": 0.4164135952361735
           }
         },
         "25": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.010049999999999998,
-            "mean_effect": 0.1989022833188397
+            "mean_p": 0.005,
+            "mean_effect": 0.2777333966435044
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.010049999999999998,
-            "mean_effect": 0.2340184839810739
+            "mean_p": 0.005,
+            "mean_effect": 0.3301792845355435
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.010049999999999998,
-            "mean_effect": -23.354096022444363
+            "mean_p": 0.005,
+            "mean_effect": -34.10720330945562
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.010297029702970296,
-            "mean_effect": 0.34606980655941394
+            "mean_p": 0.00507462686567164,
+            "mean_effect": 0.4105516509109431
           }
         },
         "30": {
           "F30": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.2001855707015612
+            "mean_p": 0.005,
+            "mean_effect": 0.2731964014552334
           },
           "F60": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": 0.23289665963658146
+            "mean_p": 0.005,
+            "mean_effect": 0.3241500828487334
           },
           "RMST": {
             "detection_rate": 1.0,
-            "mean_p": 0.009999999999999998,
-            "mean_effect": -23.108207196858203
+            "mean_p": 0.005,
+            "mean_effect": -33.48940486281999
           },
           "KS": {
             "detection_rate": 1.0,
-            "mean_p": 0.009950495049504949,
-            "mean_effect": 0.3407128109546722
+            "mean_p": 0.004975124378109452,
+            "mean_effect": 0.4047983841235506
           }
         }
       },

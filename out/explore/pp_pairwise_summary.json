@@ -1,31 +1,31 @@
 {
   "cohort": "mixed",
-  "tau": 240,
+  "tau": 240.0,
   "macro": [
     {
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "NVIDIA GR00T N1.6",
-      "macro_auc": 0.5033323356616238,
-      "ci_lo": 0.45771959962195763,
-      "ci_hi": 0.5493817810982046,
+      "macro_auc": 0.49861834367988167,
+      "ci_lo": 0.45610920989374143,
+      "ci_hi": 0.5407232950230048,
       "a_short": "OpenPI",
       "b_short": "GR00T"
     },
     {
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "Action Chunking Transformer",
-      "macro_auc": 0.5122133162621235,
-      "ci_lo": 0.46259836009598915,
-      "ci_hi": 0.5578676625548565,
+      "macro_auc": 0.5045570450130352,
+      "ci_lo": 0.4543577330702851,
+      "ci_hi": 0.5550559657240615,
       "a_short": "OpenPI",
       "b_short": "ACT"
     },
     {
       "a": "NVIDIA GR00T N1.6",
       "b": "Action Chunking Transformer",
-      "macro_auc": 0.5048482553456447,
-      "ci_lo": 0.45116581207980005,
-      "ci_hi": 0.5567344446272628,
+      "macro_auc": 0.5017338481606621,
+      "ci_lo": 0.44971338053772436,
+      "ci_hi": 0.5501284736590942,
       "a_short": "GR00T",
       "b_short": "ACT"
     }
@@ -35,97 +35,97 @@
       "object": "Batteries",
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "NVIDIA GR00T N1.6",
-      "auc": 0.47411684117819747,
-      "n_a": 33,
-      "n_b": 33
+      "auc": 0.4666252376078374,
+      "n_a": 43,
+      "n_b": 45
     },
     {
       "object": "Batteries",
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "Action Chunking Transformer",
-      "auc": 0.4899193548387097,
-      "n_a": 33,
-      "n_b": 22
+      "auc": 0.47482717687312337,
+      "n_a": 43,
+      "n_b": 31
     },
     {
       "object": "Batteries",
       "a": "NVIDIA GR00T N1.6",
       "b": "Action Chunking Transformer",
-      "auc": 0.5072393037253945,
-      "n_a": 33,
-      "n_b": 22
+      "auc": 0.4965818670850611,
+      "n_a": 45,
+      "n_b": 31
     },
     {
       "object": "Scissors",
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "NVIDIA GR00T N1.6",
-      "auc": 0.5189032697547684,
-      "n_a": 27,
-      "n_b": 17
+      "auc": 0.5602384438402008,
+      "n_a": 35,
+      "n_b": 32
     },
     {
       "object": "Scissors",
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "Action Chunking Transformer",
-      "auc": 0.46059793326496806,
-      "n_a": 27,
-      "n_b": 24
+      "auc": 0.4680546519193234,
+      "n_a": 35,
+      "n_b": 31
     },
     {
       "object": "Scissors",
       "a": "NVIDIA GR00T N1.6",
       "b": "Action Chunking Transformer",
-      "auc": 0.4444444444444444,
-      "n_a": 17,
-      "n_b": 24
+      "auc": 0.41724333522404994,
+      "n_a": 32,
+      "n_b": 31
     },
     {
       "object": "Towels",
       "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
       "b": "NVIDIA GR00T N1.6",
-      "auc": 0.45436482773198056,
-      "n_a": 31,
+      "auc": 0.4430467114930757,
+      "n_a": 42,
+      "n_b": 43
+    },
+    {
+      "object": "Towels",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5506410808019964,
+      "n_a": 42,
+      "n_b": 41
+    },
+    {
+      "object": "Towels",
+      "a": "NVIDIA GR00T N1.6",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5952777357348267,
+      "n_a": 43,
+      "n_b": 41
+    },
+    {
+      "object": "Wooden spoons",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "NVIDIA GR00T N1.6",
+      "auc": 0.5245629817784128,
+      "n_a": 43,
+      "n_b": 41
+    },
+    {
+      "object": "Wooden spoons",
+      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
+      "b": "Action Chunking Transformer",
+      "auc": 0.5247052704576977,
+      "n_a": 43,
       "n_b": 30
     },
     {
-      "object": "Towels",
-      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
-      "b": "Action Chunking Transformer",
-      "auc": 0.5434634743572303,
-      "n_a": 31,
-      "n_b": 32
-    },
-    {
-      "object": "Towels",
-      "a": "NVIDIA GR00T N1.6",
-      "b": "Action Chunking Transformer",
-      "auc": 0.5739427703216005,
-      "n_a": 30,
-      "n_b": 32
-    },
-    {
-      "object": "Wooden spoons",
-      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
-      "b": "NVIDIA GR00T N1.6",
-      "auc": 0.5659444039815489,
-      "n_a": 30,
-      "n_b": 28
-    },
-    {
-      "object": "Wooden spoons",
-      "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
-      "b": "Action Chunking Transformer",
-      "auc": 0.5548725025875859,
-      "n_a": 30,
-      "n_b": 24
-    },
-    {
       "object": "Wooden spoons",
       "a": "NVIDIA GR00T N1.6",
       "b": "Action Chunking Transformer",
-      "auc": 0.49376650289113944,
-      "n_a": 28,
-      "n_b": 24
+      "auc": 0.49783245459871117,
+      "n_a": 41,
+      "n_b": 30
     }
   ]
 }
