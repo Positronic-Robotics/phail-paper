@@ -32,13 +32,14 @@ echo "--- §5.3 pairwise model-vs-model P-P (no teleop anchor) ---"
 uv run python -m build.explore_pp_pairwise --cohort "${COHORT}" --n_boot "${N_BOOT}"
 
 echo
-echo "--- §5.5 sample-efficiency detection-rate curves ---"
+echo "--- §5.2 sample-efficiency detection-rate curves ---"
 uv run python -m build.explore_efficiency --cohort "${COHORT}"
 
 echo
-echo "--- paper-ready figures (out/paper/) ---"
-uv run python -m build.fig_cdf --cohort "${COHORT}"
-uv run python -m build.fig_intervention --cohort "${COHORT}" || echo "  (skipped: fig_intervention not yet wired)"
+echo "--- paper-ready figures and tables (out/paper/) ---"
+uv run python -m build.fig_hero --cohort "${COHORT}"
+uv run python -m build.fig_method_pp --cohort "${COHORT}"
+uv run python -m build.fig_efficiency_clean
 uv run python -m build.tab_leaderboard --cohort "${COHORT}"
 
 echo

@@ -138,6 +138,7 @@ def _bucket(source: str) -> str:
     exclude_files=(),
     include_prefixes=(),
     exclude_models=(),
+    exclude_objects=(),
     seed=42,
 )
 def main(
@@ -148,6 +149,7 @@ def main(
     exclude_files: tuple[str, ...],
     include_prefixes: tuple[str, ...],
     exclude_models: tuple[str, ...],
+    exclude_objects: tuple[str, ...],
     seed: int,
 ):
     """Sample review-needed episodes.
@@ -161,6 +163,10 @@ def main(
     `exclude_models` drops episodes whose candidate `model` slug matches —
     same lowercase slugs used in `candidates.jsonl` (`openpi`, `groot`,
     `act`, `smolvla`, `teleop`). Empty = no restriction.
+
+    `exclude_objects` drops episodes whose candidate `object` slug matches —
+    e.g. `'["usb_c_boxes"]'` to skip the USB-C ablation. Same lowercase
+    slugs used in `candidates.jsonl`. Empty = no restriction.
     """
     if not out_path:
         raise SystemExit('--out_path is required')
@@ -181,9 +187,29 @@ def main(
         by_ep = {k: v for k, v in by_ep.items() if v['model'] not in excl}
         print(f'  exclude_models drops {before - len(by_ep)} episodes ({sorted(excl)})')
 
-    annotated = {k for k in by_ep if _ann_path(k).exists()}
+    if exclude_objects:
+        before = len(by_ep)
+        excl_obj = set(exclude_objects)
+        by_ep = {k: v for k, v in by_ep.items() if v['object'] not in excl_obj}
+        print(f'  exclude_objects drops {before - len(by_ep)} episodes ({sorted(excl_obj)})')
+
+    # "Done" = markup file present AND `reviewed=True`. File existence alone
+    # would exclude partially-annotated episodes (the file is created on the
+    # first edit), causing in-progress work to silently disappear from future
+    # samples.
+    reviewed_set: set[str] = set()
+    for k in by_ep:
+        p = _ann_path(k)
+        if not p.exists():
+            continue
+        try:
+            d = json.load(p.open())
+        except Exception:
+            continue
+        if d.get('reviewed'):
+            reviewed_set.add(k)
     excluded = _load_excluded_s3_urls(list(exclude_files))
-    print(f'already annotated: {len(annotated)};  exclude_files cover: {len(excluded)}')
+    print(f'already reviewed: {len(reviewed_set)};  exclude_files cover: {len(excluded)}')
 
     succ_items = _load_succ_items_v1()
     spoons_urls = [k for k, e in by_ep.items() if e['source'] == 'spoons_ablation']
@@ -201,8 +227,8 @@ def main(
         if e['S'] <= 0:
             funnel[b]['skip_S0'] += 1
             continue
-        if k in annotated:
-            funnel[b]['skip_annotated'] += 1
+        if k in reviewed_set:
+            funnel[b]['skip_reviewed'] += 1
             continue
         if k in excluded:
             funnel[b]['skip_excluded'] += 1
