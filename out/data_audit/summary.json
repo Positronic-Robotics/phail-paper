@@ -1,53 +1,57 @@
 {
-  "total_episodes": 1013,
+  "total_episodes": 1155,
   "by_source": {
     "human": 40,
     "inference": 524,
+    "inference_act_groot": 142,
     "training": 449
   },
   "tasks_overall": {
-    "Batteries": 237,
-    "Scissors": 215,
-    "Towels": 261,
-    "Wooden spoons": 300
+    "Batteries": 255,
+    "Scissors": 225,
+    "Towels": 280,
+    "USB-C Boxes": 72,
+    "Wooden spoons": 323
   },
   "status_overall": {
-    "Pass": 520,
-    "Safety": 22,
-    "Fail": 471
+    "Pass": 530,
+    "Safety": 29,
+    "Fail": 596
   },
   "per_model": [
     {
       "model": "Action Chunking Transformer",
-      "episodes": 151,
+      "episodes": 169,
       "pass": 8,
-      "fail": 143,
+      "fail": 161,
       "safety": 0,
-      "episode_pass_rate": 0.053,
-      "items_successful": 369,
-      "items_total": 1072,
-      "item_success_rate": 0.3442,
+      "episode_pass_rate": 0.0473,
+      "items_successful": 383,
+      "items_total": 1144,
+      "item_success_rate": 0.3348,
       "tasks": {
         "Batteries": 36,
         "Scissors": 37,
-        "Towels": 47,
-        "Wooden spoons": 31
+        "Towels": 46,
+        "USB-C Boxes": 18,
+        "Wooden spoons": 32
       }
     },
     {
       "model": "Hugging Face SmolVLA",
-      "episodes": 116,
+      "episodes": 133,
       "pass": 0,
-      "fail": 101,
-      "safety": 15,
+      "fail": 117,
+      "safety": 16,
       "episode_pass_rate": 0.0,
-      "items_successful": 92,
-      "items_total": 852,
-      "item_success_rate": 0.108,
+      "items_successful": 95,
+      "items_total": 920,
+      "item_success_rate": 0.1033,
       "tasks": {
         "Batteries": 34,
         "Scissors": 26,
         "Towels": 27,
+        "USB-C Boxes": 17,
         "Wooden spoons": 29
       }
     },
@@ -70,36 +74,38 @@
     },
     {
       "model": "NVIDIA GR00T N1.6",
-      "episodes": 128,
-      "pass": 10,
-      "fail": 115,
-      "safety": 3,
-      "episode_pass_rate": 0.0781,
-      "items_successful": 458,
-      "items_total": 952,
-      "item_success_rate": 0.4811,
+      "episodes": 183,
+      "pass": 16,
+      "fail": 162,
+      "safety": 5,
+      "episode_pass_rate": 0.0874,
+      "items_successful": 599,
+      "items_total": 1316,
+      "item_success_rate": 0.4552,
       "tasks": {
-        "Batteries": 35,
-        "Scissors": 29,
-        "Towels": 33,
-        "Wooden spoons": 31
+        "Batteries": 45,
+        "Scissors": 34,
+        "Towels": 43,
+        "USB-C Boxes": 19,
+        "Wooden spoons": 42
       }
     },
     {
       "model": "Physical Intelligence Open \u03c0\u2080.\u2085",
-      "episodes": 129,
-      "pass": 13,
-      "fail": 112,
-      "safety": 4,
-      "episode_pass_rate": 0.1008,
-      "items_successful": 493,
-      "items_total": 996,
-      "item_success_rate": 0.495,
+      "episodes": 181,
+      "pass": 17,
+      "fail": 156,
+      "safety": 8,
+      "episode_pass_rate": 0.0939,
+      "items_successful": 590,
+      "items_total": 1340,
+      "item_success_rate": 0.4403,
       "tasks": {
-        "Batteries": 35,
-        "Scissors": 30,
-        "Towels": 32,
-        "Wooden spoons": 32
+        "Batteries": 43,
+        "Scissors": 35,
+        "Towels": 42,
+        "USB-C Boxes": 18,
+        "Wooden spoons": 43
       }
     },
     {
@@ -120,6 +126,6 @@
       }
     }
   ],
-  "episodes_with_public_url": 1013,
-  "episodes_without_public_url": 0
+  "episodes_with_public_url": 0,
+  "episodes_without_public_url": 1155
 }

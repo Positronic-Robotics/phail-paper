@@ -523,3 +523,145 @@ inference,000000000000/000000000520,https://phail.ai/episode/520,Hugging Face Sm
 inference,000000000000/000000000521,https://phail.ai/episode/521,NVIDIA GR00T N1.6,groot,Scissors,right,Safety,,0,4,0,0,0,0,0,match,93.198
 inference,000000000000/000000000522,https://phail.ai/episode/522,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,0,4,0,28,22,6,0,extra,119.543
 inference,000000000000/000000000523,https://phail.ai/episode/523,Action Chunking Transformer,act,Scissors,right,Ran out of time,,0,4,0,0,0,0,0,match,119.971
+inference_act_groot,000000000000/000000000000,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,41,41,0,0,extra,178.842
+inference_act_groot,000000000000/000000000001,,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,4,8,4,61,61,0,0,extra,239.165
+inference_act_groot,000000000000/000000000002,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,3,8,3,71,71,0,0,extra,239.284
+inference_act_groot,000000000000/000000000003,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,0,8,0,31,30,1,0,extra,238.367
+inference_act_groot,000000000000/000000000004,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,0,8,0,85,85,0,0,extra,239.052
+inference_act_groot,000000000000/000000000005,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Fail,,1,8,1,28,27,1,0,extra,104.92
+inference_act_groot,000000000000/000000000006,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,2,8,2,88,87,1,0,extra,238.983
+inference_act_groot,000000000000/000000000007,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,0,8,0,2,2,0,0,extra,238.576
+inference_act_groot,000000000000/000000000008,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,3,8,3,60,51,9,0,extra,238.465
+inference_act_groot,000000000000/000000000009,,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Success,,8,8,8,32,32,0,0,extra,153.02
+inference_act_groot,000000000000/000000000010,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,28,25,3,0,extra,131.156
+inference_act_groot,000000000000/000000000011,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,3,8,3,22,22,0,0,extra,238.301
+inference_act_groot,000000000000/000000000012,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,47,46,1,0,extra,228.866
+inference_act_groot,000000000000/000000000013,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,right,Ran out of time,,0,8,0,3,3,0,0,extra,238.369
+inference_act_groot,000000000000/000000000014,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Success,,8,8,8,41,39,2,0,extra,203.352
+inference_act_groot,000000000000/000000000015,,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,1,8,1,79,79,0,0,extra,239.086
+inference_act_groot,000000000000/000000000016,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,6,8,6,66,59,7,0,extra,238.448
+inference_act_groot,000000000000/000000000017,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Ran out of time,,4,8,4,49,48,1,0,extra,238.167
+inference_act_groot,000000000000/000000000018,,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,0,8,0,89,83,6,0,extra,238.194
+inference_act_groot,000000000000/000000000019,,NVIDIA GR00T N1.6,groot,Batteries,right,Safety,,1,8,1,14,14,0,0,extra,134.953
+inference_act_groot,000000000000/000000000020,,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,4,8,4,54,53,1,0,extra,239.017
+inference_act_groot,000000000000/000000000021,,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,2,8,2,26,25,1,0,extra,238.13
+inference_act_groot,000000000000/000000000022,,NVIDIA GR00T N1.6,groot,Batteries,left,Safety,,3,8,3,51,51,0,0,extra,215.329
+inference_act_groot,000000000000/000000000023,,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,1,8,1,70,69,1,0,extra,239.124
+inference_act_groot,000000000000/000000000024,,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,5,8,5,42,41,1,0,extra,239.06
+inference_act_groot,000000000000/000000000025,,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,2,8,2,51,51,0,0,extra,239.229
+inference_act_groot,000000000000/000000000026,,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,63,63,0,0,extra,239.299
+inference_act_groot,000000000000/000000000027,,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,0,8,0,67,67,0,0,extra,239.44
+inference_act_groot,000000000000/000000000028,,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,0,8,0,63,57,6,0,extra,238.572
+inference_act_groot,000000000000/000000000029,,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Fail,,0,8,0,14,14,0,0,extra,49.32
+inference_act_groot,000000000000/000000000030,,NVIDIA GR00T N1.6,groot,Batteries,left,Ran out of time,,0,8,0,62,62,0,0,extra,239.414
+inference_act_groot,000000000000/000000000031,,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,0,8,0,29,28,1,0,extra,238.101
+inference_act_groot,000000000000/000000000032,,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,1,8,1,67,66,1,0,extra,238.533
+inference_act_groot,000000000000/000000000033,,Physical Intelligence Open π₀.₅,openpi,Batteries,right,Ran out of time,,1,8,1,67,65,2,0,extra,238.61
+inference_act_groot,000000000000/000000000034,,Physical Intelligence Open π₀.₅,openpi,Batteries,left,Ran out of time,,0,8,0,85,83,2,0,extra,238.293
+inference_act_groot,000000000000/000000000035,,NVIDIA GR00T N1.6,groot,Batteries,right,Ran out of time,,2,8,2,58,56,2,0,extra,239.128
+inference_act_groot,000000000000/000000000036,,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,2,8,2,69,65,4,0,extra,238.596
+inference_act_groot,000000000000/000000000037,,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,0,8,0,73,73,0,0,extra,239.237
+inference_act_groot,000000000000/000000000038,,NVIDIA GR00T N1.6,groot,Scissors,left,Ran out of time,,0,8,0,40,40,0,0,extra,238.966
+inference_act_groot,000000000000/000000000039,,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,61,61,0,0,extra,239.44
+inference_act_groot,000000000000/000000000040,,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,2,8,2,79,72,7,0,extra,238.268
+inference_act_groot,000000000000/000000000041,,NVIDIA GR00T N1.6,groot,Scissors,right,Ran out of time,,1,8,1,60,60,0,0,extra,239.467
+inference_act_groot,000000000000/000000000042,,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,1,8,1,42,41,1,0,extra,238.292
+inference_act_groot,000000000000/000000000043,,Physical Intelligence Open π₀.₅,openpi,Scissors,left,Ran out of time,,1,8,1,82,77,5,0,extra,238.584
+inference_act_groot,000000000000/000000000044,,NVIDIA GR00T N1.6,groot,Scissors,right,Stalled,,0,8,0,0,0,0,0,match,168.538
+inference_act_groot,000000000000/000000000045,,Physical Intelligence Open π₀.₅,openpi,Scissors,right,Ran out of time,,0,8,0,6,6,0,0,extra,237.998
+inference_act_groot,000000000000/000000000046,,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,6,8,6,51,46,5,0,extra,238.496
+inference_act_groot,000000000000/000000000047,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Safety,,1,8,1,11,11,0,0,extra,96.786
+inference_act_groot,000000000000/000000000048,,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,1,8,1,55,48,7,0,extra,238.403
+inference_act_groot,000000000000/000000000049,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,2,8,2,11,10,1,0,extra,238.533
+inference_act_groot,000000000000/000000000050,,NVIDIA GR00T N1.6,groot,Towels,left,Success,,8,8,8,36,30,6,0,extra,227.484
+inference_act_groot,000000000000/000000000051,,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,1,8,1,8,7,1,0,extra,239.238
+inference_act_groot,000000000000/000000000052,,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,2,8,2,11,9,2,0,extra,236.473
+inference_act_groot,000000000000/000000000053,,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,4,8,4,45,34,11,0,extra,239.093
+inference_act_groot,000000000000/000000000054,,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,3,8,3,17,15,2,0,extra,239.624
+inference_act_groot,000000000000/000000000055,,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,1,8,1,30,27,3,0,extra,239.042
+inference_act_groot,000000000000/000000000056,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Safety,,1,8,1,6,6,0,0,extra,91.576
+inference_act_groot,000000000000/000000000057,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Safety,,5,8,5,40,40,0,0,extra,202.521
+inference_act_groot,000000000000/000000000058,,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,5,8,5,39,36,3,0,extra,238.116
+inference_act_groot,000000000000/000000000059,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,0,8,0,51,51,0,0,extra,238.189
+inference_act_groot,000000000000/000000000060,,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,6,8,6,30,26,4,0,extra,238.676
+inference_act_groot,000000000000/000000000061,,Physical Intelligence Open π₀.₅,openpi,Towels,right,Ran out of time,,7,8,7,35,33,2,0,extra,238.096
+inference_act_groot,000000000000/000000000062,,Physical Intelligence Open π₀.₅,openpi,Towels,left,Ran out of time,,2,8,2,54,51,3,0,extra,238.459
+inference_act_groot,000000000000/000000000063,,NVIDIA GR00T N1.6,groot,Towels,right,Success,,8,8,8,28,24,4,0,extra,215.931
+inference_act_groot,000000000000/000000000064,,NVIDIA GR00T N1.6,groot,Towels,left,Ran out of time,,6,8,6,36,36,0,0,extra,239.142
+inference_act_groot,000000000000/000000000065,,NVIDIA GR00T N1.6,groot,Towels,right,Ran out of time,,6,8,6,16,15,1,0,extra,239.361
+inference_act_groot,000000000000/000000000066,,Physical Intelligence Open π₀.₅,openpi,Wooden spoons,left,Success,,8,8,8,31,27,4,0,extra,147.273
+inference_act_groot,000000000000/000000000067,,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,3,8,3,72,72,0,0,extra,239.339
+inference_act_groot,000000000000/000000000068,,NVIDIA GR00T N1.6,groot,Wooden spoons,left,Ran out of time,,5,8,5,63,63,0,0,extra,239.122
+inference_act_groot,000000000000/000000000069,,NVIDIA GR00T N1.6,groot,Wooden spoons,right,Ran out of time,,7,8,7,49,49,0,0,extra,239.24
+inference_act_groot,000000000000/000000000070,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,0,4,0,22,21,1,0,extra,117.024
+inference_act_groot,000000000000/000000000071,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,0,4,0,22,21,1,0,extra,119.743
+inference_act_groot,000000000000/000000000072,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Safety,,0,4,0,16,16,0,0,extra,86.055
+inference_act_groot,000000000000/000000000073,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,1,4,1,29,29,0,0,extra,119.462
+inference_act_groot,000000000000/000000000074,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,1,4,1,23,19,4,0,extra,118.459
+inference_act_groot,000000000000/000000000075,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,0,4,0,31,27,4,0,extra,118.544
+inference_act_groot,000000000000/000000000076,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,6,6,0,0,extra,119.946
+inference_act_groot,000000000000/000000000077,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,1,4,1,25,20,5,0,extra,119.739
+inference_act_groot,000000000000/000000000078,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,0,4,0,15,15,0,0,extra,118.813
+inference_act_groot,000000000000/000000000079,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,0,4,0,26,24,2,0,extra,119.289
+inference_act_groot,000000000000/000000000080,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,7,7,0,0,extra,120.01
+inference_act_groot,000000000000/000000000081,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,0,4,0,33,31,2,0,extra,119.973
+inference_act_groot,000000000000/000000000082,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,0,4,0,20,19,1,0,extra,118.429
+inference_act_groot,000000000000/000000000083,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,1,4,1,5,5,0,0,extra,119.985
+inference_act_groot,000000000000/000000000084,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,1,4,1,17,17,0,0,extra,119.747
+inference_act_groot,000000000000/000000000085,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,3,4,3,20,19,1,0,extra,118.329
+inference_act_groot,000000000000/000000000087,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,3,4,3,20,18,2,0,extra,119.096
+inference_act_groot,000000000000/000000000088,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,1,4,1,18,17,1,0,extra,119.819
+inference_act_groot,000000000000/000000000089,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,1,4,1,19,18,1,0,extra,118.128
+inference_act_groot,000000000000/000000000090,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,0,4,0,32,29,3,0,extra,118.339
+inference_act_groot,000000000000/000000000091,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,0,4,0,28,27,1,0,extra,118.344
+inference_act_groot,000000000000/000000000092,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,27,19,8,0,extra,119.763
+inference_act_groot,000000000000/000000000093,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,1,4,1,8,7,1,0,extra,119.971
+inference_act_groot,000000000000/000000000094,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,2,4,2,42,30,12,0,extra,118.423
+inference_act_groot,000000000000/000000000095,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,0,4,0,20,20,0,0,extra,118.472
+inference_act_groot,000000000000/000000000096,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,17,12,5,0,extra,119.93
+inference_act_groot,000000000000/000000000097,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,2,4,2,21,21,0,0,extra,118.4
+inference_act_groot,000000000000/000000000098,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,0,4,0,0,0,0,0,match,120.012
+inference_act_groot,000000000000/000000000099,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,26,26,0,0,extra,119.956
+inference_act_groot,000000000000/000000000100,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,1,4,1,17,16,1,0,extra,119.989
+inference_act_groot,000000000000/000000000101,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,1,4,1,36,30,6,0,extra,118.573
+inference_act_groot,000000000000/000000000102,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,0,4,0,20,18,2,0,extra,119.075
+inference_act_groot,000000000000/000000000103,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,1,4,1,18,15,3,0,extra,119.085
+inference_act_groot,000000000000/000000000104,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Safety,,0,4,0,4,4,0,0,extra,34.985
+inference_act_groot,000000000000/000000000105,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,15,15,0,0,extra,119.76
+inference_act_groot,000000000000/000000000106,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,0,4,0,31,31,0,0,extra,118.482
+inference_act_groot,000000000000/000000000107,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,34,33,1,0,extra,119.977
+inference_act_groot,000000000000/000000000108,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,1,4,1,7,7,0,0,extra,118.162
+inference_act_groot,000000000000/000000000109,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,1,4,1,29,24,5,0,extra,118.368
+inference_act_groot,000000000000/000000000110,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,0,4,0,15,15,0,0,extra,119.806
+inference_act_groot,000000000000/000000000111,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,21,19,2,0,extra,119.805
+inference_act_groot,000000000000/000000000112,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,0,4,0,18,18,0,0,extra,119.983
+inference_act_groot,000000000000/000000000113,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,2,4,2,24,22,2,0,extra,118.149
+inference_act_groot,000000000000/000000000114,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,0,4,0,13,12,1,0,extra,119.782
+inference_act_groot,000000000000/000000000115,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,0,4,0,29,24,5,0,extra,118.339
+inference_act_groot,000000000000/000000000116,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,0,4,0,0,0,0,0,match,118.176
+inference_act_groot,000000000000/000000000117,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Success,,4,4,4,26,22,4,0,extra,118.079
+inference_act_groot,000000000000/000000000118,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,3,4,3,27,25,2,0,extra,118.544
+inference_act_groot,000000000000/000000000119,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,20,17,3,0,extra,119.745
+inference_act_groot,000000000000/000000000120,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,0,4,0,0,0,0,0,match,119.75
+inference_act_groot,000000000000/000000000121,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,20,17,3,0,extra,119.795
+inference_act_groot,000000000000/000000000122,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,3,4,3,18,17,1,0,extra,119.96
+inference_act_groot,000000000000/000000000123,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,17,16,1,0,extra,119.78
+inference_act_groot,000000000000/000000000124,,Hugging Face SmolVLA,smolvla,USB-C Boxes,right,Ran out of time,,0,4,0,14,14,0,0,extra,119.762
+inference_act_groot,000000000000/000000000125,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,0,4,0,4,4,0,0,extra,119.998
+inference_act_groot,000000000000/000000000126,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,1,4,1,27,22,5,0,extra,118.143
+inference_act_groot,000000000000/000000000127,,Action Chunking Transformer,act,USB-C Boxes,left,Ran out of time,,2,4,2,13,12,1,0,extra,119.976
+inference_act_groot,000000000000/000000000128,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,2,4,2,3,3,0,0,extra,119.965
+inference_act_groot,000000000000/000000000129,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,1,4,1,18,18,0,0,extra,118.119
+inference_act_groot,000000000000/000000000130,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,0,4,0,22,22,0,0,extra,118.45
+inference_act_groot,000000000000/000000000131,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,0,4,0,17,16,1,0,extra,119.918
+inference_act_groot,000000000000/000000000132,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,19,18,1,0,extra,119.761
+inference_act_groot,000000000000/000000000133,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,right,Ran out of time,,3,4,3,29,22,7,0,extra,118.366
+inference_act_groot,000000000000/000000000134,,Physical Intelligence Open π₀.₅,openpi,USB-C Boxes,left,Ran out of time,,1,4,1,15,15,0,0,extra,118.318
+inference_act_groot,000000000000/000000000135,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,2,4,2,14,13,1,0,extra,118.429
+inference_act_groot,000000000000/000000000136,,Hugging Face SmolVLA,smolvla,USB-C Boxes,left,Ran out of time,,0,4,0,31,31,0,0,extra,119.736
+inference_act_groot,000000000000/000000000137,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,2,4,2,21,21,0,0,extra,119.971
+inference_act_groot,000000000000/000000000138,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,3,4,3,21,21,0,0,extra,119.337
+inference_act_groot,000000000000/000000000139,,Action Chunking Transformer,act,USB-C Boxes,right,Ran out of time,,0,4,0,0,0,0,0,match,119.941
+inference_act_groot,000000000000/000000000140,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Ran out of time,,1,4,1,21,17,4,0,extra,119.017
+inference_act_groot,000000000000/000000000141,,NVIDIA GR00T N1.6,groot,USB-C Boxes,right,Ran out of time,,1,4,1,19,19,0,0,extra,119.222
+inference_act_groot,000000000000/000000000142,,NVIDIA GR00T N1.6,groot,USB-C Boxes,left,Success,,4,4,4,14,12,2,0,extra,82.56

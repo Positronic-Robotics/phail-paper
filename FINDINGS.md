@@ -20,23 +20,40 @@ for future agents who want to know *why* we ended up where we did.
 
 Every task decomposes into *operations* (pick-and-place = one item
 landing in target; insertion = one peg seated; etc.). Each operation
-ends in one of three outcome classes:
+ends in one of four outcome classes (updated 2026-05-03):
 
 1. **Success** – target state reached.
 2. **Soft failure** – off-target, robot recovers autonomously. Absorbed
-   into time-to-success; never surfaced as a separate metric.
-3. **Intervention-required failure** – state needs a human to fix
-   (item on floor, peg jammed, part damaged). Surfaced separately.
+   into time-to-success as a longer T; never surfaced as a separate
+   metric.
+3. **Slow / stall** – model is running but not progressing. The
+   un-attempted operation could in principle have succeeded with more
+   time, so it is captured by the **right-censored tail** of the CDF,
+   not as a hard failure. This includes `eval.outcome == 'Stalled'`
+   and `'Ran out of time'`.
+4. **Hard failure** – the operation cannot succeed within the episode.
+   Two sub-cases:
+   - `drops_outside_workspace` – item physically lost (annotator-counted
+     for manual cohort; classifier stage-2 verdict='failure' for auto).
+   - `safety_stop` – episode terminated by operator due to dangerous
+     behavior (`eval.outcome == 'Safety'`); the operation that triggered
+     the stop is dead.
+
+   Hard failures contribute a **T = +∞ ghost event** to the time-to-success
+   stream (event=1, time=infinity). This makes the headline AUC and CDF
+   absorb completion-rate information directly: a model that times out
+   after 3/8 items because it dropped 2 of them outside contributes 3
+   finite events + 2 T=∞ events; a model that just stalls contributes 3
+   finite events + 1 censored tail.
 
 For pick-and-place today:
 - **Success** = item lands in target tote.
 - **Soft failure** = item bounces back into source tote (or anywhere the
   robot can re-grasp without help). Never logged as an event — the
   recovery time absorbs into the next T.
-- **Intervention** = `drops_outside_workspace` ∪ `safety_stops` ∪ `stalls`.
-  Drops_outside come from Toloka annotation; safety_stops and stalls
-  come from `eval.outcome ∈ {Safety, Stalled}` in static.json. Each
-  contributes +1 to the per-episode intervention count.
+- **Hard failure** = `drops_outside_workspace` ∪ `safety_stops`. Each
+  contributes one T=∞ ghost event.
+- **Stalls** are NOT hard failures. They live in the censored tail.
 
 The annotator never has to distinguish "soft" from "hard" inside a tote
 — they just count items that ended up *outside* the workspace. The
@@ -62,28 +79,53 @@ of length `episode_duration`. Never drop them.
 ### D4. Primary metrics
 
 Two complementary numbers, each answering a distinct operational
-question:
+question (updated 2026-05-03 — hard failures now bundled into the CDF
+via T=∞ ghost events; stalls excluded from the intervention rate):
 
-1. **Time-to-success CDF** `F(t) = P(T ≤ t)` – throughput and soft
-   reliability. Shown as the primary figure; tabulated at
-   pre-registered thresholds.
-2. **Intervention rate** `r = Σ assists / Σ operations` – reliability,
-   dimensionless, comparable across tasks (this is why it's primary
-   and not MTBA: insertion / assembly / packing all have different op
-   cadences in seconds, but `r` is unit-free).
-   ```
-   r    = Σ assists / Σ (successes + assists)
-   MOBA = 1 / r       = Σ ops / Σ assists           # ops form (= 1 / r)
-   MTBA = Σ episode_duration / Σ assists            # time form, derived
-                                                    # for production reporting
-   ```
-   `n_assists = drops_outside + safety_stops + stalls`. Report `r`
-   (or its reciprocal MOBA) in the methods/leaderboard. MTBA is a
-   derived, task-specific readout for industrial audiences; quote it
-   alongside but don't compare across tasks with it.
+1. **Time-to-success CDF** `F(t) = P(T ≤ t)` – throughput, soft
+   reliability, AND completion rate jointly. Hard failures
+   (`drops_outside` + `safety_stops`) appear as T=∞ events: they pull
+   the CDF asymptote below 1.0 and inflate RMST. Shown as the primary
+   figure; tabulated at pre-registered thresholds.
 
-These are independent dimensions. A warehouse operator cares about
+   Headline aggregation across heterogeneous objects: **AUC of the P-P
+   plot vs teleop**, equal to `P(T_model < T_teleop)` (probability of
+   superiority). The y=x diagonal is the human-anchored reference.
+   Single dimensionless scalar per (model, object); macro-averaged
+   across objects with stratified episode-clustered bootstrap CI.
+
+2. **Intervention rate** `r = Σ hard_failures / Σ operations` –
+   reliability, dimensionless, comparable across tasks (this is why
+   it's primary and not MTBA: insertion / assembly / packing all have
+   different op cadences in seconds, but `r` is unit-free).
+   ```
+   r    = Σ hard_failures / Σ operations         # operations form
+   MOBA = 1 / r                                  # mean ops between assists
+   MTBA = Σ episode_duration / Σ hard_failures   # time form, derived
+                                                 # for production reporting
+   ```
+   `n_hard_failures = drops_outside + safety_stops`. Stalls are
+   **excluded** from the numerator: they are slow, not unreliable, and
+   already penalize the model through the censored tail of the CDF.
+   Counting them again would double-count the same incident.
+
+   Report `r` (or its reciprocal MOBA) in the methods/leaderboard.
+   MTBA is a derived, task-specific readout for industrial audiences;
+   quote it alongside but don't compare across tasks with it.
+
+These are independent dimensions but partially correlated by design:
+the CDF absorbs completion via T=∞, and `r` is the failure-rate
+denominator that gets you there. A warehouse operator cares about
 both: how fast is the robot, and how often does it need attention.
+
+**Why bundle hard failures into the CDF.** The headline AUC is
+intended as a single rank-able scalar. Without bundling, models with
+many drops but fast on remaining items rank artificially high (the
+ACT vs GR00T artifact, 2026-05-03 analysis). With T=∞ ghost events,
+the headline scalar becomes "probability that a randomly chosen model
+attempt finishes faster than a randomly chosen teleop attempt, where
+un-recoverable losses count as model failures" — interpretable, and
+consistent with operator intuition.
 
 **Honesty note on UPH ↔ MTBA correlation.** When the robot stalls,
 those seconds count in `total_episode_duration`, so a stall-prone
@@ -95,19 +137,43 @@ recover count as active?). We accept the double-counting and call it
 out in the methodology section. Reader sees both columns and the
 correlation; we don't pretend to disentangle.
 
-### D5. Headline scalar: human-relative ratio
+### D5. Headline scalar: %-of-teleop (updated 2026-05-04)
 
-- Primary headline: **% of human operator performance** (model UPH /
-  human UPH), where UPH = `3600 / E[T_observed]` with censoring
-  accounted for. "This model is 38% of a human worker" – no unit
-  conversion, no training needed.
-- Generalizes across tasks (pick-place, insertion, assembly) because
-  every task has a human baseline.
-- UPH survives as a derived throughput readout, not as the headline.
+- Primary headline: **macro-averaged %-of-teleop**, computed cell-wise:
+  `% = RMST_teleop_obj / RMST_model_obj × 100`, then mean across
+  objects (object-balanced). Operationalizes "this model is X% of a
+  human teleoperator's throughput on the same fixture."
+- Cell-wise normalization absorbs object-difficulty differences: each
+  object gets its own teleop reference. Macro-averaging across objects
+  prevents one heavily-sampled object from dominating.
+- Why teleop and not bare-hand human: same fixture, same protocol, same
+  arm. Avoids embodiment confounds. Bare-hand UPH (≈1300 UPH from the
+  whitepaper's literature reference) can be quoted as a *production*
+  upper bound but is not the methodology's anchor.
+- UPH = `3600 / RMST` — preserved as a derived throughput readout in
+  the production-facing column. RMST itself is reported per cell with
+  bootstrap CI.
+- T=∞ ghost events for hard failures (per D2/D4) are essential to the
+  scalar's correctness: they inflate RMST so that a model that fails
+  often is correctly penalized; otherwise pairwise stochastic-dominance
+  metrics reward bimodal "fast-or-fail" distributions in misleading
+  ways (worked example: ACT under teleop-anchored AUC).
 
-Secondary headline: **intervention rate vs human** (e.g. "model needs
-3× more assists per operation than a human"). MTBA can be quoted in
-the production-facing column for the same axis.
+Secondary axis: **intervention rate** `r = (drops + safety) / total_items`
+(stalls excluded — they're already absorbed by the censored tail).
+Reported alongside the headline scalar so readers can see *why* one
+model differs from another (slow vs unreliable).
+
+**Methodology-over-rankings caveat.** All inference models in the
+released benchmark were fine-tuned with their respective default
+open-source recipes; no per-model hyperparameter optimization. The
+per-model %-of-teleop numbers reported in the paper characterize *the
+released-recipe-fine-tuned versions*, not architectural ceilings. The
+paper's contribution is methodological — what *can* be resolved at a
+given depth, what aggregation primitive choices encode, where the
+field-modal N falls short — not a verdict on which architecture is
+"best." This caveat is reiterated in the abstract, §4 (PhAIL design),
+and §6 (limits) of the paper.
 
 ### D6. Thresholds: pushed to Appendix
 
@@ -128,8 +194,13 @@ scalar cells. They live in **Appendix A6**, pre-registered there.
 - Per-object CDFs and per-object rankings go in appendix.
 - Ranking protocol: rank per object, average ranks (same as
   phail-website). Prevents object-mix bias.
-- Unseen objects get their own row in the table and their own CDF
-  overlay in the figure.
+- Unseen objects (e.g. USB-C Boxes) require a per-object teleop
+  anchor for the cell-wise %-of-teleop machinery. Without teleop
+  episodes for an unseen object, the headline scalar is undefined
+  and the per-object CDF cannot be normalized — we exclude such
+  objects from the paper's analyses (decision 2026-05-04: USB-C
+  Boxes is in this category and is therefore deferred to future
+  work). The data still ships with the dataset.
 
 ### D8. Statistical rigor
 

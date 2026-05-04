@@ -87,12 +87,18 @@ class RecallStatus(IntEnum):
 
 @unique
 class Source(IntEnum):
-    """Which subtree of the public dataset an episode comes from."""
+    """Which subtree of the public dataset an episode comes from.
+
+    INFERENCE_ACT_GROOT is a private inference set (s3://inference/phail_act_groot)
+    indexed alongside the public v1.0 release; treat it as inference for recall
+    classification purposes (per-episode S items expected, not N).
+    """
 
     INVALID = 0
     TRAINING = 1
     INFERENCE = 2
     HUMAN = 3
+    INFERENCE_ACT_GROOT = 4
 
     @property
     def slug(self) -> str:
@@ -105,7 +111,12 @@ class Source(IntEnum):
         return _SOURCE_LOOKUP.get(s.lower(), cls.INVALID)
 
 
-_SOURCE_LOOKUP: dict[str, Source] = {'training': Source.TRAINING, 'inference': Source.INFERENCE, 'human': Source.HUMAN}
+_SOURCE_LOOKUP: dict[str, Source] = {
+    'training': Source.TRAINING,
+    'inference': Source.INFERENCE,
+    'human': Source.HUMAN,
+    'inference_act_groot': Source.INFERENCE_ACT_GROOT,
+}
 
 
 @unique
@@ -184,6 +195,7 @@ class EvalObject(IntEnum):
     TOWELS = 2
     BATTERIES = 3
     SCISSORS = 4
+    USB_C_BOXES = 5
 
     @property
     def slug(self) -> str:
@@ -206,6 +218,7 @@ _EVAL_OBJECT_DISPLAY: dict[EvalObject, str] = {
     EvalObject.TOWELS: 'Towels',
     EvalObject.BATTERIES: 'Batteries',
     EvalObject.SCISSORS: 'Scissors',
+    EvalObject.USB_C_BOXES: 'USB-C Boxes',
 }
 _EVAL_OBJECT_LOOKUP: dict[str, EvalObject] = {v.lower(): k for k, v in _EVAL_OBJECT_DISPLAY.items() if v}
 
@@ -560,3 +573,4 @@ class EpisodeResult:
     public_url: str | None
     https_dir: str
     video_streams: list[VideoStream]
+    s3_dir: str = ''

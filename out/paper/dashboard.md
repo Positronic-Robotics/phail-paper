@@ -1,16 +1,16 @@
 # PhAIL hypothesis dashboard
 
-_Generated 2026-05-03T15:50:04 from commit `20ee8c3` (dirty)._
+_Generated 2026-05-03T23:52:21 from commit `cb044d1` (dirty)._
 
-**Cohort:** `mixed`. **τ:** 240s. **Total episodes:** 626.
+**Cohort:** `mixed`. **τ:** 240s. **Total episodes:** 754.
 
 | Model | n (manual) | n (auto) | total |
 |---|---|---|---|
-| OpenPI | 53 | 29 | 82 |
-| GR00T | 46 | 18 | 64 |
-| ACT | 33 | 57 | 90 |
-| SmolVLA | 31 | 2 | 33 |
-| Teleop | 57 | 300 | 357 |
+| OpenPI | 85 | 41 | 126 |
+| GR00T | 70 | 37 | 107 |
+| ACT | 45 | 63 | 108 |
+| SmolVLA | 37 | 2 | 39 |
+| Teleop | 74 | 300 | 374 |
 
 ---
 
@@ -20,12 +20,12 @@ _Per-pair Kolmogorov–Smirnov on the time-to-success CDF; episode-clustered boo
 
 | Pair | n_a | n_b | D | p | status |
 |---|---|---|---|---|---|
-| OpenPI vs GR00T | 82 | 64 | 0.087 | 0.2504 | ✗ **FAILS** |
-| OpenPI vs ACT | 82 | 90 | 0.115 | 0.3633 | ✗ **FAILS** |
-| OpenPI vs SmolVLA | 82 | 33 | 0.297 | 0.0005 | ✓ **HOLDS** |
-| GR00T vs ACT | 64 | 90 | 0.118 | 0.1469 | ~ **WEAK** |
-| GR00T vs SmolVLA | 64 | 33 | 0.299 | 0.0005 | ✓ **HOLDS** |
-| ACT vs SmolVLA | 90 | 33 | 0.261 | 0.0075 | ✓ **HOLDS** |
+| OpenPI vs GR00T | 126 | 107 | 0.055 | 0.4930 | ✗ **FAILS** |
+| OpenPI vs ACT | 126 | 108 | 0.102 | 0.1198 | ~ **WEAK** |
+| OpenPI vs SmolVLA | 126 | 39 | 0.327 | 0.0020 | ✓ **HOLDS** |
+| GR00T vs ACT | 107 | 108 | 0.117 | 0.0719 | ~ **WEAK** |
+| GR00T vs SmolVLA | 107 | 39 | 0.328 | 0.0020 | ✓ **HOLDS** |
+| ACT vs SmolVLA | 108 | 39 | 0.235 | 0.0200 | ✓ **HOLDS** |
 
 ## H2. All policies are sub-human throughput  ✓ **HOLDS**
 
@@ -33,10 +33,10 @@ _Sanity: each policy's point-estimate %-of-human should be well below 100. CI ba
 
 | Model | %-of-human | status |
 |---|---|---|
-| OpenPI | 17.2% | ✓ **HOLDS** |
-| GR00T | 17.8% | ✓ **HOLDS** |
-| ACT | 15.5% | ✓ **HOLDS** |
-| SmolVLA | 9.4% | ✓ **HOLDS** |
+| OpenPI | 18.1% | ✓ **HOLDS** |
+| GR00T | 18.4% | ✓ **HOLDS** |
+| ACT | 14.4% | ✓ **HOLDS** |
+| SmolVLA | 10.2% | ✓ **HOLDS** |
 
 ## H3. %-of-human ranking matches binary-success ranking  ✓ **HOLDS**
 
@@ -55,10 +55,10 @@ _Per-model KS between the manual subset and the auto-validated subset. Large div
 
 | Model | n_manual | n_auto | D | p | status |
 |---|---|---|---|---|---|
-| OpenPI | 53 | 29 | 0.087 | 0.6297 | ✓ **HOLDS** |
-| GR00T | 46 | 18 | 0.215 | 0.0220 | ✗ **FAILS** |
-| ACT | 33 | 57 | 0.117 | 0.5082 | ~ **WEAK** |
-| SmolVLA | 31 | 2 | 0.479 | 0.3928 | ? **UNDERPOWERED** |
+| OpenPI | 85 | 41 | 0.158 | 0.0419 | ✗ **FAILS** |
+| GR00T | 70 | 37 | 0.119 | 0.1038 | ~ **WEAK** |
+| ACT | 45 | 63 | 0.130 | 0.2954 | ~ **WEAK** |
+| SmolVLA | 37 | 2 | 0.442 | 0.5250 | ? **UNDERPOWERED** |
 
 ---
 

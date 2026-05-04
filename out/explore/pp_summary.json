@@ -1,0 +1,95 @@
+{
+  "cohort": "mixed",
+  "tau": 240,
+  "n_boot": 1000,
+  "cells": {
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Batteries": 0.11354245475178956,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Scissors": 0.06620286776420606,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Towels": 0.07077016450238345,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Wooden spoons": 0.17438229312408948,
+    "NVIDIA GR00T N1.6 | Batteries": 0.11124098512033476,
+    "NVIDIA GR00T N1.6 | Scissors": 0.0717449489566309,
+    "NVIDIA GR00T N1.6 | Towels": 0.09367547338991389,
+    "NVIDIA GR00T N1.6 | Wooden spoons": 0.11324644360836601,
+    "Action Chunking Transformer | Batteries": 0.14166256763403837,
+    "Action Chunking Transformer | Scissors": 0.11254414081599391,
+    "Action Chunking Transformer | Towels": 0.10229526257803893,
+    "Action Chunking Transformer | Wooden spoons": 0.19230290972394926,
+    "Hugging Face SmolVLA | Batteries": 0.04228583916083916,
+    "Hugging Face SmolVLA | Scissors": 0.010790562451079056,
+    "Hugging Face SmolVLA | Towels": 0.04830836559501767,
+    "Hugging Face SmolVLA | Wooden spoons": 0.06849503317758844
+  },
+  "macro": {
+    "OpenPI": {
+      "auc": 0.10622444503561713,
+      "auc_lo": 0.0876117142157413,
+      "auc_hi": 0.12453058090917846
+    },
+    "GR00T": {
+      "auc": 0.09747696276881139,
+      "auc_lo": 0.07984422698351754,
+      "auc_hi": 0.11789103642166383
+    },
+    "ACT": {
+      "auc": 0.13720122018800512,
+      "auc_lo": 0.11128392144282322,
+      "auc_hi": 0.16540560274143518
+    },
+    "SmolVLA": {
+      "auc": 0.04246995009613108,
+      "auc_lo": 0.023518603477178046,
+      "auc_hi": 0.0586261215831345
+    }
+  },
+  "pairs": [
+    {
+      "auc_a": 0.10622444503561713,
+      "auc_b": 0.09747696276881139,
+      "diff": 0.008747482266805745,
+      "p": 0.485,
+      "a": "OpenPI",
+      "b": "GR00T"
+    },
+    {
+      "auc_a": 0.10622444503561713,
+      "auc_b": 0.13720122018800512,
+      "diff": -0.03097677515238799,
+      "p": 0.049,
+      "a": "OpenPI",
+      "b": "ACT"
+    },
+    {
+      "auc_a": 0.10622444503561713,
+      "auc_b": 0.04246995009613108,
+      "diff": 0.06375449493948605,
+      "p": 0.0,
+      "a": "OpenPI",
+      "b": "SmolVLA"
+    },
+    {
+      "auc_a": 0.09747696276881139,
+      "auc_b": 0.13720122018800512,
+      "diff": -0.039724257419193734,
+      "p": 0.013,
+      "a": "GR00T",
+      "b": "ACT"
+    },
+    {
+      "auc_a": 0.09747696276881139,
+      "auc_b": 0.04246995009613108,
+      "diff": 0.05500701267268031,
+      "p": 0.0,
+      "a": "GR00T",
+      "b": "SmolVLA"
+    },
+    {
+      "auc_a": 0.13720122018800512,
+      "auc_b": 0.04246995009613108,
+      "diff": 0.09473127009187404,
+      "p": 0.0,
+      "a": "ACT",
+      "b": "SmolVLA"
+    }
+  ]
+}

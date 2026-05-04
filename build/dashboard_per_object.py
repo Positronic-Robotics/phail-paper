@@ -36,7 +36,7 @@ from build.markup import loader
 REPO = Path(__file__).resolve().parents[1]
 OUT_DIR = REPO / 'out' / 'paper' / 'per_object'
 
-DEFAULT_OBJECTS = ('Batteries', 'Wooden spoons', 'Towels', 'Scissors')
+DEFAULT_OBJECTS = ('Batteries', 'Wooden spoons', 'Towels', 'Scissors', 'USB-C Boxes')
 
 
 def _slot(obj: str) -> str:

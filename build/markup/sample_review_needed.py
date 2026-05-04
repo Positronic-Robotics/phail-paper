@@ -40,11 +40,12 @@ ANN_DIR = REPO / 'build' / 'markup' / 'annotations'
 CACHE_PUBLIC = Path.home() / '.cache' / 'positronic' / 's3' / 'positronic-public' / 'positronic-public'
 CACHE_PRIV = Path.home() / '.cache' / 'positronic' / 's3' / '_'
 
-INFERENCE_SOURCES = ('inference', 'spoons_ablation')
+INFERENCE_SOURCES = ('inference', 'spoons_ablation', 'inference_act_groot')
 
 OBJ_LABEL = {
     'wooden_spoons': 'Wooden spoons', 'spoons': 'Wooden spoons',
     'batteries': 'Batteries', 'scissors': 'Scissors', 'towels': 'Towels',
+    'usb_c_boxes': 'USB-C Boxes', 'usb-c boxes': 'USB-C Boxes',
 }
 
 
@@ -136,6 +137,7 @@ def _bucket(source: str) -> str:
     n_human=0,
     exclude_files=(),
     include_prefixes=(),
+    exclude_models=(),
     seed=42,
 )
 def main(
@@ -145,6 +147,7 @@ def main(
     n_human: int,
     exclude_files: tuple[str, ...],
     include_prefixes: tuple[str, ...],
+    exclude_models: tuple[str, ...],
     seed: int,
 ):
     """Sample review-needed episodes.
@@ -154,6 +157,10 @@ def main(
     `'["s3://inference/spoons_ablation/"]'` to sample only from the spoons
     ablation set, or a tuple of training-fraction subdirs. Empty = no
     restriction.
+
+    `exclude_models` drops episodes whose candidate `model` slug matches —
+    same lowercase slugs used in `candidates.jsonl` (`openpi`, `groot`,
+    `act`, `smolvla`, `teleop`). Empty = no restriction.
     """
     if not out_path:
         raise SystemExit('--out_path is required')
@@ -167,6 +174,12 @@ def main(
         prefixes = tuple(include_prefixes)
         by_ep = {k: v for k, v in by_ep.items() if any(k.startswith(p) for p in prefixes)}
         print(f'  include_prefixes restricts to {len(by_ep)}/{before} episodes')
+
+    if exclude_models:
+        before = len(by_ep)
+        excl = set(exclude_models)
+        by_ep = {k: v for k, v in by_ep.items() if v['model'] not in excl}
+        print(f'  exclude_models drops {before - len(by_ep)} episodes ({sorted(excl)})')
 
     annotated = {k for k in by_ep if _ann_path(k).exists()}
     excluded = _load_excluded_s3_urls(list(exclude_files))
