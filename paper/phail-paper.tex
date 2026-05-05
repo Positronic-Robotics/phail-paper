@@ -59,7 +59,7 @@ Empirically, on four frontier VLAs -- OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6
   \item \textbf{PhAIL: open real-world benchmark and reference implementation.} Four frontier VLAs, four trained objects, $\sim$950 episodes including 386 human reference rollouts, full per-rollout artifacts, open-source evaluation framework end-to-end.
 \end{enumerate}
 
-\paragraph{Scope.} The methodological contribution is the comparison primitive, the ranking procedure, the power budget, and the open framework that makes new claims auditable. The per-model rankings are illustrative of what the methodology can resolve at our depth, not architectural pronouncements; we used each repository's default fine-tuning recipe (\S\ref{sec:phail-finetune}). PhAIL is open to submissions.
+\paragraph{Scope.} The methodological contribution is the comparison primitive, the ranking procedure, the power budget, and the open framework that makes new claims auditable. The methodology is task-agnostic -- it applies to any operation with an unambiguous success event and a same-fixture human reference. PhAIL's empirical validation is bin-to-bin pick-and-place across four objects (\S\ref{sec:phail}); other natural fits include insertion, packing, navigation, and articulated manipulation. The per-model rankings are illustrative of what the methodology can resolve at our depth, not architectural pronouncements; we used each repository's default fine-tuning recipe (\S\ref{sec:phail-finetune}). PhAIL is open to submissions.
 
 %===============================================================================
 \section{Related Work}\label{sec:related}
@@ -73,7 +73,7 @@ Empirically, on four frontier VLAs -- OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6
 \section{Time-to-Success CDF as Evaluation Primitive}\label{sec:framework}
 %===============================================================================
 
-The methodology has three components: the random variable and its CDF (\S\ref{sec:framework-T}), the reporting layer (scalars and visualizations derived from the CDF, \S\ref{sec:framework-reporting}), and the ranking layer (paired tests on the CDF, \S\ref{sec:framework-test}). The strict separation between reporting and ranking is the methodological core.
+The methodology has three components: the random variable and its CDF (\S\ref{sec:framework-T}), the reporting layer (scalars and visualizations derived from the CDF, \S\ref{sec:framework-reporting}), and the ranking layer (paired tests on the CDF, \S\ref{sec:framework-test}). The strict separation between reporting and ranking is the methodological core. We use concrete language drawn from our running bin-to-bin pick-and-place setup (formal description in \S\ref{sec:phail}) -- successful placements, items dropped outside the workspace -- but the framework applies unchanged to any operation with an unambiguous success event, a measurable time-to-success, an identifiable notion of \emph{hard failure} (states from which the policy cannot recover, absorbed as $T = \infty$ ghost events; \S\ref{sec:framework-T}), and a same-fixture human-reference baseline.
 
 \subsection{The Random Variable $T$}\label{sec:framework-T}
 
