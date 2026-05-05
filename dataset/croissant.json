@@ -1,0 +1,201 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {"@id": "cr:data", "@type": "@json"},
+    "dataType": {"@id": "cr:dataType", "@type": "@vocab"},
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {"@id": "cr:examples", "@type": "@json"},
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "PhAIL",
+  "description": "PhAIL (Physical AI Leaderboard) is a real-robot evaluation benchmark for vision-language-action (VLA) policies. The dataset contains synchronized exterior and wrist RGB video, end-effector and gripper telemetry, and per-rollout event annotations for approximately 950 robot episodes on a Franka Research 3 with a Robotiq 2F-85 gripper, executing a bin-to-bin pick-and-place task across four object types (Batteries, Scissors, Towels, Wooden spoons). Episodes are produced by four publicly released VLA policies (OpenPI pi-0.5, NVIDIA GR00T N1.6, Action Chunking Transformer, Hugging Face SmolVLA) under each model's default open-source fine-tuning recipe, plus a teleoperated human reference. The dataset doubles as the fine-tuning corpus (training/ subtree) and as the evaluation cohort (inference/ and human/ subtrees). Released alongside an evaluation framework that implements the time-to-success-CDF methodology described in the accompanying paper.",
+  "url": "https://phail.ai",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "version": "1.0",
+  "datePublished": "2026-05-05",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "creator": {
+    "@type": "Organization",
+    "name": "Positronic Robotics",
+    "url": "https://positronic.ro"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Positronic Robotics",
+    "url": "https://positronic.ro"
+  },
+  "citeAs": "@misc{phail2026, title={PhAIL: A Real-Robot VLA Benchmark with Time-to-Success CDFs and Paired Tests}, author={Arkhangelskiy, Sergey}, year={2026}, url={https://phail.ai}}",
+  "keywords": [
+    "vision-language-action models",
+    "real-robot evaluation",
+    "benchmark",
+    "robot manipulation",
+    "evaluation methodology",
+    "time-to-success CDF",
+    "survival analysis",
+    "Kolmogorov-Smirnov test"
+  ],
+
+  "rai:dataLimitations": "Single embodiment: Franka Research 3 manipulator with Robotiq 2F-85 parallel-jaw gripper, fixed external and wrist camera layout, single laboratory environment. Single task primitive: bin-to-bin pick-and-place across four object classes. Each VLA was evaluated under its public repository's default fine-tuning recipe; no per-model hyperparameter or recipe optimization was performed, so the rankings reflect default-recipe performance rather than architectural ceilings. Per-(model, object) cell sizes range from approximately 24 to 45 episodes, which is below the budget required to formally distinguish close pairs of top-tier policies; the accompanying paper quantifies this depth limit and reports detection-rate-vs-N curves.",
+  "rai:dataBiases": "Spatial-configuration sensitivity is present and documented: the relative placement of the external camera and the outbound tote materially affects completion rate (a 22 percentage-point drop is observed for one of the evaluated models when camera and outbound tote sit on opposite sides of the workspace). The teleoperated human reference is collected by a single operator over multiple sessions, which carries operator-specific style; cell-wise normalization to the human reference (Human-Relative Throughput) mitigates this but does not eliminate it. Object selection covers a useful slice of physical regimes (rigid, deformable, articulated, small) but is not exhaustive of pick-and-place workloads.",
+  "rai:personalSensitiveInformation": "None. The dataset contains robot rollout video (camera views of the robot, the inbound and outbound totes, and the manipulated objects) and telemetry only. No human bodies, faces, voices, names, or other personally identifiable information appear in the recorded scenes.",
+  "rai:dataUseCases": "Primary use case: evaluating real-robot vision-language-action policies via time-to-success CDFs and paired statistical tests, as described in the accompanying paper. Secondary use cases: meta-analysis of evaluation methodology for robot learning; sample-efficiency studies comparing binary success-rate-at-threshold against CDF-level ranking tests; cross-deployment comparison of policy throughput against a same-fixture human reference; use of the training subset (352 episodes) as a fine-tuning corpus for pick-and-place policies.",
+  "rai:dataSocialImpact": "Intended positive impact is improved evaluation rigor for real-robot VLA policies, enabling more honest cross-model comparison and reducing the prevalence of cherry-picked binary-threshold leaderboards in robot learning. The dataset itself does not enable harmful capabilities. The worst-case misuse is publication of misleading rankings derived from selectively reported metrics, which is the practice the accompanying methodology is explicitly designed to surface and discourage.",
+  "rai:hasSyntheticData": "No. All episodes are recorded from real-robot rollouts on a physical Franka Research 3 manipulator. No synthetic data, simulated data, or generative augmentation is included.",
+  "rai:wasDerivedFrom": "Hardware configuration follows the DROID protocol (Khazatsky et al., RSS 2024) for camera and gripper layout. The four evaluated VLA policy checkpoints derive from publicly released weights of OpenPI pi-0.5, NVIDIA GR00T N1.6, the Action Chunking Transformer (ACT), and Hugging Face SmolVLA, each fine-tuned on the 352-episode pick-and-place dataset that constitutes the training/ subtree of this release. No third-party datasets were used as input to either the training or the evaluation cohorts.",
+  "rai:wasGeneratedBy": "Episodes were collected at Positronic Robotics' laboratory between November 2025 and May 2026. Each rollout was driven either by a human teleoperator (reference) or by one of the four evaluated VLA policies running inference at the model's native action-chunk frequency. Per-rollout artifacts include synchronized exterior and wrist RGB video, end-effector pose telemetry, gripper command and measurement traces, and event annotations from a high-tier crowd-annotation pipeline (Toloka) augmented by an automated edge-detection autopilot. Both label streams are released; crowd labels are the gold reference and the autopilot is evaluated against them.",
+
+  "distribution": [
+    {
+      "@type": "cr:FileSet",
+      "@id": "inference-telemetry",
+      "name": "inference-telemetry",
+      "description": "Per-episode telemetry (parquet) for VLA inference rollouts: end-effector pose, joint state, gripper command, gripper measurement, action chunks. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "encodingFormat": "application/x-parquet",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/*.parquet"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "inference-video",
+      "name": "inference-video",
+      "description": "Per-episode synchronized exterior and wrist RGB video for VLA inference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "encodingFormat": "video/mp4",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/*.mp4"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "inference-meta",
+      "name": "inference-meta",
+      "description": "Per-episode metadata for VLA inference rollouts: static.json (operator-recorded eval fields including model, object, outcome, item counts) and meta.json (durations, timestamps). Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "encodingFormat": "application/json",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/static.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "human-telemetry",
+      "name": "human-telemetry",
+      "description": "Per-episode telemetry for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "encodingFormat": "application/x-parquet",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/*.parquet"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "human-video",
+      "name": "human-video",
+      "description": "Per-episode synchronized exterior and wrist RGB video for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "encodingFormat": "video/mp4",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/*.mp4"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "human-meta",
+      "name": "human-meta",
+      "description": "Per-episode metadata for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "encodingFormat": "application/json",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/static.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "training-data",
+      "name": "training-data",
+      "description": "352-episode fine-tuning dataset released as the training corpus for the four evaluated VLAs. Contains the same per-episode artifacts (telemetry, video, metadata) as the inference and human subtrees. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/training/.",
+      "encodingFormat": "application/octet-stream",
+      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/training/**"
+    }
+  ],
+
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "episodes",
+      "name": "episodes",
+      "description": "One record per evaluated robot rollout episode. Fields are extracted from per-episode static.json files (operator-recorded outcome and item counts).",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "episodes/model",
+          "name": "model",
+          "description": "Policy that drove the rollout. One of: 'Physical Intelligence Open pi-0.5', 'NVIDIA GR00T N1.6', 'Action Chunking Transformer', 'Hugging Face SmolVLA', or 'Robot teleoperated by Human' for the human reference.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "inference-meta"},
+            "extract": {"jsonPath": "$.eval.model"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "episodes/eval_object",
+          "name": "eval_object",
+          "description": "Object class for the rollout. One of: Batteries, Scissors, Towels, Wooden spoons.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "inference-meta"},
+            "extract": {"jsonPath": "$.eval.object"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "episodes/successful_items",
+          "name": "successful_items",
+          "description": "Number of items the operator confirmed were successfully transferred to the outbound tote at episode end.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {"@id": "inference-meta"},
+            "extract": {"jsonPath": "$.eval.successful_items"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "episodes/total_items",
+          "name": "total_items",
+          "description": "Number of items present in the inbound tote at the start of the episode.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {"@id": "inference-meta"},
+            "extract": {"jsonPath": "$.eval.total_items"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "episodes/outcome",
+          "name": "outcome",
+          "description": "Operator-recorded outcome label. One of: Success, Stalled, Safety, Ran_out_of_time.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "inference-meta"},
+            "extract": {"jsonPath": "$.eval.outcome"}
+          }
+        }
+      ]
+    }
+  ]
+}

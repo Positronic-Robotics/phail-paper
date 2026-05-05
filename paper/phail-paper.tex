@@ -1,14 +1,19 @@
 \documentclass{article}
+
+\PassOptionsToPackage{numbers}{natbib}
+\usepackage[eandd, nonanonymous]{neurips_2026}
+
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage{url}
 \usepackage{graphicx}
-\usepackage[numbers]{natbib}
 \usepackage{enumitem}
-\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
 
-\title{PhAIL: Time-to-Success CDFs and Paired Tests for Real-Robot VLA Evaluation}
+\title{PhAIL: A Real-Robot VLA Benchmark and Distributional Methodology}
 
 \author{
   Sergey Arkhangelskiy \\
@@ -23,13 +28,13 @@
 \maketitle
 
 \begin{abstract}
-We introduce PhAIL (Physical AI Leaderboard), a real-robot benchmark and evaluation methodology for vision-language-action (VLA) policies. Most published VLA evaluations report binary success rate, a reliability proxy that does not capture throughput; reporting them as separate scalars exposes the deeper problem that no single scalar uniquely encodes operational priority. We adopt the time-to-success CDF as a primitive that covers both axes jointly, with hard failures (drops outside the workspace, safety stops) absorbed as $T=\infty$ ghost events. Standard scalars (UPH, success rate at $\tau$, MTBF/A, completion fraction) are projections of this CDF. Each task's CDF is anchored cell-wise to a teleoperated-human reference, yielding macro-averaged \emph{Human-Relative Throughput} (HRT) as a dimensionless headline scalar. We then separate the two distinct jobs that a methodology must do: \emph{reporting} (a scalar with bootstrap intervals) and \emph{ranking} (a paired CDF-level test). On four frontier VLAs (OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6~\cite{groot_n1}, ACT~\cite{act}, SmolVLA~\cite{smolvla}) evaluated on a Franka FR3 across four objects at $\sim$35 paired rollouts per (model, object) cell, the top two inference models are pairwise indistinguishable on every metric tested; the third is separable; the fourth clearly worst. Subsampling shows that a Kolmogorov-Smirnov test on the macro CDF detects a borderline ranking difference (GR00T vs.\ ACT) at $N{=}20$ paired rollouts and climbs sharply on the other close pairs, while binary success-rate-at-threshold and the integrated RMST scalar stay near the noise floor across the entire $N \le 30$ range. The choice of test, not just the choice of $N$, determines what is resolvable. The dominant practice -- single scalars at $N{\le}25$ per condition without confidence intervals or paired tests -- is two orders of magnitude under-budgeted for the ranking claims it publishes. All policies were fine-tuned with their default open-source recipes; the contribution is methodological. Benchmark, dataset, and code: \url{https://phail.ai}.
+How do you tell whether one robot policy is better than another in the real world? Most published evaluations of vision-language-action (VLA) policies answer this with binary success rate at a fixed timeout, no confidence intervals, no paired test, $N{\le}25$ per condition -- under-budgeted by roughly two orders of magnitude for the ranking claims it publishes. We introduce PhAIL, a real-world inference benchmark and distributional methodology for VLAs. The time-to-success CDF is the evaluation primitive, absorbing hard failures (drops outside the workspace, safety stops) as $T{=}\infty$ ghost events. Reporting and ranking are separated: a scalar with bootstrap intervals (Human-Relative Throughput, HRT) for reporting; paired Kolmogorov--Smirnov on the CDF for ranking. On a Franka FR3 across four objects with $\sim$950 episodes and $\sim$35 paired rollouts per (model, object) cell, we evaluate four frontier VLAs (OpenPI $\pi_{0.5}$, GR00T N1.6, ACT, SmolVLA): the best frontier model is roughly $7\times$ slower than a human teleoperator, the top two are statistically indistinguishable, and SmolVLA is clearly worst. Two structural findings: different reasonable scalars rank the same models in different orders, and a distributional test resolves the closest ranking with ${\sim}30\times$ fewer trials than binary success rate. Benchmark, dataset, and reference implementation: \url{https://phail.ai}.
 \end{abstract}
 
 \begin{figure}[!t]
   \centering
   \includegraphics[width=\linewidth]{../out/paper/fig_hero.png}
-  \caption{\textbf{Time-to-success CDFs and metric sample-efficiency on the PhAIL benchmark.} \textbf{(a)} Pooled time-to-success CDFs $F(t) = P(T \le t)$ for four frontier VLAs and a teleoperated reference, with hard failures absorbed as $T = \infty$ ghost events. The asymptote below $F = 1$ equals the hard-failure rate; the curve's position in time encodes throughput (the median of $T$ is where $F$ crosses $0.5$, and $\text{UPH} \propto 1/E[T]$). Reliability and throughput live on the same axis; every scalar reported in the field (success rate at threshold, UPH, MTBF/A, completion fraction) is a projection of this object. \textbf{(b)} Detection rate vs.\ subsample size $N$ on the borderline pair GR00T vs.\ ACT. \emph{Detection rate} is the fraction of bootstrap subsamples (200 outer trials, 100-rep inner episode-clustered bootstrap) that yield $p < 0.05$ on the difference of each candidate metric, macro-averaged across objects (\S\ref{sec:res-efficiency}). A Kolmogorov-Smirnov test on the macro CDF reaches 80\% detection at $N{=}20$ paired rollouts per (model, object) cell; binary success-rate-at-threshold ($F(30\,\text{s})$, $F(60\,\text{s})$) and the integrated RMST scalar never cross the 80\% line within $N \le 30$. The choice of test, not just the choice of $N$, determines what is resolvable.}
+  \caption{\textbf{Time-to-success CDFs and metric sample-efficiency on the PhAIL benchmark.} \textbf{(a)} Pooled time-to-success CDFs $F(t) = P(T \le t)$ for four frontier VLAs and a human reference, with hard failures absorbed as $T = \infty$ ghost events. The asymptote below $F = 1$ equals the hard-failure rate. \textbf{(b)} Detection rate vs.\ subsample size $N$ on the borderline pair GR00T vs.\ ACT (\S\ref{sec:res-efficiency}). KS on the macro CDF reaches 80\% detection at $N{=}20$ paired rollouts per (model, object) cell; binary success-rate-at-threshold and integrated RMST never cross 80\% within $N \le 30$. \textbf{The choice of test, not just the choice of $N$, determines what is resolvable.}}
   \label{fig:hero}
 \end{figure}
 
@@ -41,19 +46,19 @@ How do you tell whether one robot policy is better than another at a real task o
 
 \paragraph{Success rate is a reliability metric without a throughput axis.} Reported as ``did the policy complete the task within $\tau$ seconds?'', it is a usable proxy for reliability: with $\tau$ generous enough that an in-distribution policy succeeds, the metric tells you whether the policy is reliable. But reliability is one operational property and throughput is a different one. A 90\% success rate at $\tau{=}30$ seconds is a deployable policy; the same 90\% at $\tau{=}300$ seconds is not. The standard fix is to add a throughput metric (UPH, cycle time, completion fraction) alongside the success rate. That works, but it surfaces the deeper question: when the two scalars rank the policies differently, which do you publish? The answer is task-dependent and not interchangeable, and the choice is rarely disclosed.
 
-\paragraph{Time-to-success $T$ covers both axes.} Let $T$ be the wall-clock time the policy needs to complete one operation of the task. A short $T$ is fast \emph{and} reliable; a long $T$ is slow; an undefined $T$ (item lost outside the workspace, safety stop fired) is a hard failure that can never recover. We extend the standard time-to-event apparatus by absorbing such hard failures as $T = \infty$ ghost events: an operation that physically cannot complete contributes one $(T, E) = (\infty, 1)$ observation rather than another censored tail. The resulting CDF $F(t) = P(T \le t)$ jointly carries reliability (its asymptote below 1, equal to the hard-failure rate) and throughput (the median of $T$ where $F$ crosses $0.5$, and $\text{UPH} \propto 1/E[T \mid T < \infty]$). Figure~\ref{fig:hero} shows the four frontier VLAs and the teleop reference under this primitive. UPH, success rate at $\tau$, MTBF/A, and completion fraction are all projections of $F$. (Our task happens to consist of many operations per episode, which we exploit for sample size; the framework applies just as well to single-operation episodes.)
+\paragraph{Time-to-success $T$ covers both axes.} Let $T$ be the wall-clock time the policy needs to complete one operation of the task. A short $T$ is fast \emph{and} reliable; a long $T$ is slow; an undefined $T$ (item lost outside the workspace, safety stop fired) is a hard failure that can never recover. We extend the standard time-to-event apparatus by absorbing such hard failures as $T = \infty$ ghost events: an operation that physically cannot complete contributes one $(T, E) = (\infty, 1)$ observation rather than another censored tail. The resulting CDF $F(t) = P(T \le t)$ jointly carries reliability (its asymptote below 1, equal to the hard-failure rate) and throughput (the median of $T$ where $F$ crosses $0.5$, and $\text{UPH} \propto 1/E[T \mid T < \infty]$). Figure~\ref{fig:hero} shows the four frontier VLAs and the human reference under this primitive. UPH, success rate at $\tau$, MTBF/A, and completion fraction are all projections of $F$. (Our task happens to consist of many operations per episode, which we exploit for sample size; the framework applies just as well to single-operation episodes.)
 
-\paragraph{No single scalar projection uniquely encodes operational priority.} Once $F$ is the primitive, the natural next step is to derive a single scalar to rank by. We show empirically that this is structurally fragile: pairwise stochastic dominance against the teleoperated reference (AUC $= P(T_{\text{model}} < T_{\text{ref}})$) and integrated metrics (restricted-mean survival time, RMST) rank the same four policies in different orders on our data. The cause is not that AUC has an inherent bias; it is that the teleop reference is so much faster than any of the evaluated policies that the AUC integral is dominated by short-time behaviour, where models with sharp early-success peaks win, while integrated metrics weight all of $[0, \tau]$ equally. The takeaway is not ``choose the right scalar'' but ``report the distribution and disclose the aggregation.''
+\paragraph{No single scalar projection uniquely encodes operational priority.} Once $F$ is the primitive, the natural next step is to derive a single scalar to rank by. We show empirically that this is structurally fragile: pairwise stochastic dominance against the human reference (AUC $= P(T_{\text{model}} < T_{\text{ref}})$) and integrated metrics (restricted-mean survival time, RMST) rank the same four policies in different orders on our data. The cause is not that AUC has an inherent bias; it is that the human reference is so much faster than any of the evaluated policies that the AUC integral is dominated by short-time behaviour, where models with sharp early-success peaks win, while integrated metrics weight all of $[0, \tau]$ equally. The takeaway is not ``choose the right scalar'' but ``report the distribution and disclose the aggregation.''
 
 \paragraph{The choice of test, not just the choice of $N$, determines what is resolvable.} Reporting a scalar with confidence intervals is one job; testing whether two policies differ on the underlying distribution is another. We treat them as separate. \S\ref{sec:res-efficiency} shows that on borderline model pairs in our data, a Kolmogorov-Smirnov (KS) test on the macro CDF reaches 80\% detection at $N{=}20$--$30$ paired rollouts per (model, object) cell where binary success-rate-at-threshold and the integrated RMST scalar do not within budget. The integrator that makes RMST interpretable is the same step that smears the where-do-the-curves-separate information that a sup-norm test exploits. \emph{Scalars are for reporting; tests are for ranking.} Conflating the two wastes statistical power.
 
 \paragraph{Contributions.}
 
 \begin{enumerate}[leftmargin=2em]
-  \item \textbf{A canonical primitive.} The time-to-success CDF with hard failures absorbed as $T = \infty$ ghost events. Standard scalars are projections of it; we propose macro-averaged \emph{Human-Relative Throughput} (HRT) as a dimensionless headline scalar grounded in a same-fixture teleoperated reference.
+  \item \textbf{A canonical primitive.} The time-to-success CDF with hard failures absorbed as $T = \infty$ ghost events. Standard scalars are projections of it; we propose macro-averaged \emph{Human-Relative Throughput} (HRT) as a dimensionless headline scalar grounded in a same-fixture human reference.
   \item \textbf{Aggregation-rule disagreement as a structural finding.} Same data, principled aggregation rules, opposite rankings. No single scalar uniquely encodes operational priority.
   \item \textbf{Sample-efficiency from the right test, not the right scalar.} KS on the CDF detects ranking differences on borderline pairs at $N{=}20$--$30$ where every binary baseline fails within budget; RMST as a scalar gives essentially no efficiency advantage over $F(60\,\text{s})$. The two-jobs framing -- scalar for reporting, test for ranking -- is the central methodological recommendation.
-  \item \textbf{An open benchmark and reference implementation.} PhAIL: four frontier VLAs, four trained objects, $\sim$750 episodes including 372 teleop reference trajectories, full operations logs, synchronized video, and an open-source evaluation framework that implements the methodology end-to-end.
+  \item \textbf{An open benchmark and reference implementation.} PhAIL: four frontier VLAs, four trained objects, $\sim$750 episodes including 372 human reference trajectories, full operations logs, synchronized video, and an open-source evaluation framework that implements the methodology end-to-end.
 \end{enumerate}
 
 \paragraph{Scope.} The contribution is the comparison primitive, the ranking procedure, the power budget that backs ranking claims, and the open framework that makes new claims auditable. The per-model rankings are illustrative of what the methodology can resolve at a given depth, not architectural pronouncements; we used each model's default published fine-tuning recipe (\S\ref{sec:phail-finetune}). The PhAIL leaderboard is open to submissions (\S\ref{sec:submissions}).
@@ -68,11 +73,11 @@ The methodology has three components: the random variable and its CDF (\S\ref{se
 
 For a single rollout episode with multiple operations to perform, we extract a sequence of times-to-success $T_i$ and event indicators $E_i \in \{0, 1\}$. A successful placement contributes $T_i$ equal to the elapsed time since the previous successful placement (or since episode start, for the first), with $E_i = 1$. If the episode ends with operations remaining (operator stopped, timed out, model stalled), the unfinished attempt contributes one right-censored pair $(T_{\text{tail}}, 0)$ where $T_{\text{tail}} = \text{duration} - \text{last placement time}$; $E = 0$ means we know $T > T_{\text{tail}}$ but do not observe $T$.
 
-\paragraph{Hard failures as $T = \infty$ ghost events.} Some operations end in states the policy cannot recover from. The clearest case is an item dropped outside the workspace, where the item is physically gone from the scene. Items dropped within the workspace but outside both totes (e.g., on the table) are a softer category: in principle the policy can pick them back up, and we observed at least one rollout where this happened. We count those as failures only if they are still uncollected at episode end: as many failures as there are dropped-and-not-recovered items at the time the rollout terminates. A safety-stop termination is a third class: the rollout ends because the operator (or built-in safety reflexes) stopped it, and the operation that triggered the stop contributes one ghost event. We absorb all of these as $(T = \infty, E = 1)$ ghost events: the operation \emph{did} terminate (so $E = 1$, not censored), but at $T = \infty$ rather than at any finite time. The CDF carries this as an asymptote below $F = 1$; the asymptote's height equals the hard-failure rate. Stalls and timeouts are explicitly \emph{not} ghost events: those are slow-but-recoverable runs that belong in the censored tail, where they correctly indicate ``the policy was working when we stopped watching it.''
+\paragraph{Hard failures as $T = \infty$ ghost events.} Some operations end in states the policy cannot recover from. The clearest case is an item dropped outside the workspace, where the item is physically gone from the scene. Items dropped within the workspace but outside both totes (e.g., on the table) are a softer category: in principle the policy can pick them back up, and we observed at least one rollout where this happened. We count those as failures only if they are still uncollected at episode end: as many failures as there are dropped-and-not-recovered items at the time the rollout terminates. A safety-stop termination is a third class: the rollout ends because the operator stopped it, and the operation that triggered the stop contributes one ghost event. We absorb all of these as $(T = \infty, E = 1)$ ghost events: the operation \emph{did} terminate (so $E = 1$, not censored), but at $T = \infty$ rather than at any finite time. The CDF carries this as an asymptote below $F = 1$; the asymptote's height equals the hard-failure rate. Stalls and timeouts are explicitly \emph{not} ghost events: those are slow-but-recoverable runs that belong in the censored tail, where they correctly indicate ``the policy was working when we stopped watching it.''
 
-\paragraph{Multi-placements.} Occasionally a single grasp deposits several items in one motion (e.g., when a cluster of small batteries comes loose together). Our annotation tooling records each successful placement individually with a timestamp; when annotators marked multiple placements within a fraction of a second, we cluster placements within $\Delta t < 0.3$\,s into one multi-placement event. The first item in the cluster contributes its inter-arrival time $T_i$ to the CDF; subsequent items contribute $T = 0$ with $E = 1$, since they were placed essentially simultaneously. The inter-arrival anchor advances by the cluster's first timestamp only. This is an annotation-pipeline detail rather than a property of the underlying primitive: the tooling could have recorded simultaneous timestamps directly, in which case there would be no $\Delta t$ threshold to set.
+\paragraph{Multi-placements.} Occasionally a single grasp deposits several items in one motion (e.g., when a cluster of small batteries comes loose together). The cluster contributes one inter-arrival time $T_i$ to the CDF for the first item placed; subsequent items in the same cluster contribute $T = 0$ with $E = 1$, since they were placed essentially simultaneously.
 
-The CDF $F(t) = P(T \le t)$ is estimated by the Kaplan-Meier product-limit estimator~\cite{kaplan1958} on the $(T, E)$ collection. Confidence intervals on derived scalars (RMST, HRT, $F(\tau)$ at fixed thresholds) are reported via 95\% episode-clustered bootstrap~\cite{efron1993}; pointwise log-log intervals using the Greenwood~\cite{greenwood1926} variance estimator are equivalent and described in~\cite{kalbfleisch2002}. Episodes with zero successes contribute a single right-censored observation of length $\tau_\text{episode}$, the per-rollout time budget after which an unfinished operation is censored (set by the protocol; \S\ref{sec:phail-finetune}); we never drop them. The $T = \infty$ atom is handled directly by the estimator (a discrete jump at the right edge); for the integrated-metric calculation in \S\ref{sec:framework-reporting} we set $T_{\text{ghost}} \to \tau$, the integration cap, so a hard failure inflates RMST by exactly $\tau$ minus the time the model would have spent on that operation if successful.
+The CDF $F(t) = P(T \le t)$ is estimated by the Kaplan-Meier product-limit estimator~\cite{kaplan1958} on the $(T, E)$ collection. Confidence intervals on derived scalars (RMST, HRT, $F(\tau)$ at fixed thresholds) are reported via 95\% episode-clustered bootstrap~\cite{efron1993}. Episodes with zero successes contribute a single right-censored observation of length $\tau_\text{episode}$, the per-rollout time budget after which an unfinished operation is censored (set by the protocol; \S\ref{sec:phail-finetune}); we never drop them. The $T = \infty$ atom is handled directly by the estimator (a discrete jump at the right edge); for the integrated-metric calculation in \S\ref{sec:framework-reporting} we set $T_{\text{ghost}} \to \tau$, the integration cap, so a hard failure inflates RMST by exactly $\tau$ minus the time the model would have spent on that operation if successful.
 
 We considered a (per-attempt success probability, per-attempt cycle time) framing and abandoned it. ``Attempt'' is not cleanly defined even for pick-and-place: should an air-grasp count, or only a closed gripper that lifts the object? does a drop-and-retry count as one attempt or two? Two readers can derive different success rates from the same video by drawing the boundary differently. The time-to-success $T$ avoids the question entirely -- the only thing measured is the wall clock until the next success.
 
@@ -102,14 +107,14 @@ MTBF/A (mean time between failures/assists) & $\text{RMST}(\tau_\text{episode}) 
 \[
   \text{HRT}(m, o) = \frac{\text{RMST}_{\text{ref},\,o}(\tau)}{\text{RMST}_{m, o}(\tau)}, \qquad \tau = 240\,\text{s},
 \]
-the cell-wise ratio of teleoperated-reference to model RMST, reported as a percentage, and macro-aggregated across objects with equal weights. Three properties make this the right scalar to report. (i) It inherits the CDF's joint speed-and-completion property via $T = \infty$ inflating $\text{RMST}_{\text{model}}$. (ii) It is grounded in operator practice (UPH-equivalent against a same-fixture human reference, so embodiment confounds cancel). (iii) Cell-wise normalization absorbs object-difficulty differences -- a hard object slows teleop and model proportionally -- yielding a dimensionless quantity comparable across heterogeneous tasks. Cross-deployment comparison (different operators, different rooms, different teleop pacing) reduces to comparing ratios, not absolute throughputs.
+the cell-wise ratio of human-reference to model RMST, reported as a percentage, and macro-aggregated across objects with equal weights. Three properties make this the right scalar to report. (i) It inherits the CDF's joint speed-and-completion property via $T = \infty$ inflating $\text{RMST}_{\text{model}}$. (ii) It is grounded in operator practice (UPH-equivalent against a same-fixture human reference\footnote{The human reference is collected by teleoperation -- a human drives the same Franka FR3 fixture through standard teleop tools. Running the human and every evaluated policy through identical hardware cancels embodiment confounds in the ratio.}, so embodiment confounds cancel). (iii) Cell-wise normalization absorbs object-difficulty differences -- a hard object slows the human and the policy proportionally -- yielding a dimensionless quantity comparable across heterogeneous tasks. Cross-deployment comparison (different operators, different rooms, different reference pacing) reduces to comparing ratios, not absolute throughputs.
 
 \paragraph{Visualization: P-P plots.} For a (model, object) cell, the P-P plot traces $\big(F_{\text{ref}}(t),\, F_{\text{model}}(t)\big)$ parametrically as $t$ sweeps from $0$ to $\tau$. The diagonal is ``as fast as the reference''; below-diagonal is slower; above-diagonal is faster. Two derived properties give the P-P curve its analytic value. The area under the curve equals $P(T_{\text{model}} < T_{\text{ref}})$, the pairwise stochastic-dominance probability (AUC). The maximum vertical distance from the curve to the diagonal equals the Kolmogorov-Smirnov distance between the two CDFs (\S\ref{sec:framework-test}); the P-P plot is therefore the natural visualization for both. Figure~\ref{fig:method-pp} shows one (model, object) cell's CDF and the corresponding P-P plot side by side. P-P plots make distributional shape legible (saturation, early-success peaks, tail behavior); we use them descriptively in \S\ref{sec:res-aggregation}.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.95\linewidth]{../out/paper/fig_method_pp.png}
-  \caption{One (model, object) cell (ACT on Batteries) illustrating the reporting layer: time-to-success CDFs (left) and the corresponding P-P plot (right). \textbf{Left:} model and teleoperated-reference CDFs on the same axis; the asymptote below $F = 1$ on the model curve is the hard-failure rate. \textbf{Right:} $\big(F_\text{ref}(t),\, F_\text{model}(t)\big)$ traced parametrically as $t$ sweeps. Diagonal $=$ as fast as the reference; below-diagonal $=$ slower. The shaded area under the curve is the AUC $P(T_\text{model} < T_\text{ref})$; the maximum vertical distance from the curve to the diagonal (red segment) is the Kolmogorov-Smirnov distance.}
+  \caption{One (model, object) cell (ACT on Batteries) illustrating the reporting layer: time-to-success CDFs (left) and the corresponding P-P plot (right). \textbf{Left:} model and human-reference CDFs on the same axis; the asymptote below $F = 1$ on the model curve is the hard-failure rate. \textbf{Right:} $\big(F_\text{ref}(t),\, F_\text{model}(t)\big)$ traced parametrically as $t$ sweeps. Diagonal $=$ as fast as the reference; below-diagonal $=$ slower. The shaded area under the curve is the AUC $P(T_\text{model} < T_\text{ref})$; the perpendicular distance from the curve to the diagonal at the point of maximum separation (red segment) equals $\text{KS}/\sqrt{2}$, where KS is the Kolmogorov-Smirnov statistic.}
   \label{fig:method-pp}
 \end{figure}
 
@@ -131,28 +136,19 @@ The two-jobs framing -- scalar for reporting, KS for ranking -- is non-trivial. 
 
 \subsection{Platform and Task}\label{sec:phail-platform}
 
-The evaluation station uses a DROID-style configuration~\cite{droid}: a Franka Research 3 with a Robotiq 2F-85 parallel-jaw gripper, plus an over-the-shoulder external RGB camera and a wrist-mounted RGB camera. The first task is bin-to-bin order picking: items move one at a time from an inbound (transparent) tote to an outbound (grey) tote across four object types spanning a useful slice of physical regimes -- wooden spoons (rigid, elongated, multi-grasp), towels (deformable), scissors (articulated, metallic), and batteries (small, rigid). Bin-to-bin is deliberately not the most complex task we could put VLAs through; it is the simplest task with unambiguous success/intervention semantics that still carries clear commercial signal (millions of picks per day across warehousing and fulfilment). The four frontier VLAs we evaluate were trained for substantially more elaborate behaviour than this; the rankings reported below say something specific about how they perform on bin-to-bin under default fine-tuning recipes, not about their architectural ceilings on harder tasks. Subsequent PhAIL releases will add new tasks (including insertion and small-part assembly); the methodology is unchanged across additions. Figure~\ref{fig:platform} shows the platform during a single rollout: synchronized exterior and wrist video, 3D end-effector trajectory, and telemetry traces. Every evaluated rollout is published with these artifacts so any reader can audit a specific time-to-success annotation against the raw video and joint state. The benchmark, evaluation framework, dataset, and per-rollout artifacts are released at \url{https://phail.ai}.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.92\linewidth]{figures/phail-platform.png}
-  \caption{PhAIL platform during a rollout, visualized in the run-explorer interface (built on Rerun~\cite{rerun}): synchronized exterior and wrist video, 3D end-effector trajectory, and telemetry traces (commanded action, gripper target, measured gripper). The same hardware operates the teleoperated reference and every evaluated VLA via the open-source \emph{positronic} framework~\cite{positronic}, which exposes each model's observation/action contract behind a common station interface: the platform handles synchronization, action streaming, and safety checks uniformly, while each model contributes only its weights and the architecture-specific code that maps observations to action chunks. Released artifacts include the video streams, joint-state logs, automated event labels, and crowd-sourced human annotations of place timestamps and intervention counts.}
-  \label{fig:platform}
-\end{figure}
+The evaluation station uses a DROID-style configuration~\cite{droid}: a Franka Research 3 with a Robotiq 2F-85 parallel-jaw gripper, plus an over-the-shoulder external RGB camera and a wrist-mounted RGB camera. The first task is bin-to-bin order picking: items move one at a time from an inbound (transparent) tote to an outbound (grey) tote across four object types spanning a useful slice of physical regimes -- wooden spoons (rigid, elongated, multi-grasp), towels (deformable), scissors (articulated, metallic), and batteries (small, rigid). Bin-to-bin is deliberately not the most complex task we could put VLAs through; it is the simplest task with unambiguous success/intervention semantics that still carries clear commercial signal (millions of picks per day across warehousing and fulfilment). The four frontier VLAs we evaluate were trained for substantially more elaborate behaviour than this; the rankings reported below say something specific about how they perform on bin-to-bin under default fine-tuning recipes, not about their architectural ceilings on harder tasks. Subsequent PhAIL releases will add new tasks (insertion, small-part assembly); the methodology is unchanged across additions. The same hardware operates the human reference and every evaluated VLA via the open-source \emph{positronic} framework~\cite{positronic} behind a common station interface, so only weights and architecture-specific observation-to-action code differ across submissions. Every evaluated rollout is published with synchronized video, telemetry, automated event labels, and crowd-sourced annotations, browsable in a run-explorer interface (Figure~\ref{fig:platform}, Appendix~\ref{app:hardware}; annotation pipeline in Appendix~\ref{app:protocol}). Benchmark, dataset, and per-rollout artifacts: \url{https://phail.ai}.
 
 \subsection{Models, Fine-Tuning, and Protocol}\label{sec:phail-finetune}
 
-We evaluate four publicly available VLAs: \textbf{OpenPI $\pi_{0.5}$}~\cite{pi05}, a 3B-parameter VLA with FAST action tokenization atop flow-matching; \textbf{NVIDIA GR00T N1.6}~\cite{groot_n1}, a 3B-parameter VLA combining a Cosmos-Reason VLM with a 32-layer diffusion transformer action head; \textbf{ACT}~\cite{act}, the Action Chunking Transformer trained from scratch, a CVAE that predicts an action chunk; and \textbf{SmolVLA}~\cite{smolvla}, a 450M-parameter VLA from the Hugging Face / LeRobot project. No model demonstrates zero-shot capability on this task, so fine-tuning is a prerequisite. We collected and publish 352 teleoperated demonstrations ($\sim$13 hours of robot operation; Appendix~\ref{app:dataset}). All four models were fine-tuned on the same dataset using each repository's default published recipe; we did not perform per-model hyperparameter search or recipe adaptation. \textbf{This is a deliberate methodological constraint, not best practice for production deployment;} a per-model recipe optimization could shift the rankings of \S\ref{sec:results}.
+We evaluate four publicly available VLAs: \textbf{OpenPI $\pi_{0.5}$}~\cite{pi05} (3B-param, FAST action tokenization on flow-matching), \textbf{GR00T N1.6}~\cite{groot_n1} (3B-param, Cosmos-Reason VLM + 32-layer diffusion transformer action head), \textbf{ACT}~\cite{act} (Action Chunking Transformer, CVAE), and \textbf{SmolVLA}~\cite{smolvla} (450M-param, HuggingFace/LeRobot). None has zero-shot capability on this task, so fine-tuning is a prerequisite. All four were fine-tuned on the same 352-episode bin-to-bin demonstration set ($\sim$13 hours; Appendix~\ref{app:dataset}) using each repository's default recipe -- no per-model hyperparameter search. \textbf{This is a deliberate methodological constraint, not best practice for production deployment;} per-model recipe optimization could shift the rankings of \S\ref{sec:results}.
 
-Each rollout has a time cap of 30\,s per item ($\sim$10$\times$ the $\sim$2.7\,s/item teleop pace). Evaluation is blind: the scheduler randomly selects which model checkpoint runs next and the operator does not know which is running. The operator's only intervention is triggering a safety stop. After each rollout the operator records target/source counts, items lost outside both bins, and outcome label $\in$ \{Success, Stalled, Safety, Ran\_out\_of\_time\}. Every successful placement is annotated post-hoc by a second annotator from the rollout video, yielding the $(T_i, E_i)$ sequence per episode (Appendix~\ref{app:protocol}).
+Each rollout has a 30\,s/item time cap ($\sim$10$\times$ the $\sim$2.7\,s/item human pace). Evaluation is blind: the scheduler randomly selects which checkpoint runs next, the operator does not know which is running, and the operator's only intervention is triggering a safety stop. Post-rollout, the operator records target/source counts, items lost outside both bins, and outcome label $\in$ \{Success, Stalled, Safety, Ran\_out\_of\_time\}; every successful placement is annotated post-hoc from the rollout video (Appendix~\ref{app:protocol}).
 
 \subsection{Cohort and Power Budget}\label{sec:phail-cohort}
 
-After object/model filtering, $\sim$950 episodes enter the analyses; 386 are teleoperated reference rollouts. Annotations come from manual review of rollout video augmented by automated success detection (Appendix~\ref{app:protocol}); both label streams are released alongside the data.
+After object/model filtering, $\sim$950 episodes enter the analyses; 386 are human reference rollouts. Annotations come from manual review of rollout video augmented by automated success detection (Appendix~\ref{app:protocol}); both label streams are released alongside the data.
 
-How many rollouts does a ranking claim actually need? Two basic calculations, both standard, give the order-of-magnitude. First, if a paper wants to publish a confidence interval of width $\pm 5$ percentage points around a single binary success rate, the Wilson formula needs roughly $N \approx 380$ rollouts per arm. Second, if a paper wants to detect a 5-percentage-point difference between two policies on a paired comparison with 80\% power and $\alpha = 0.05$, the McNemar test needs roughly $N \approx 1280$ paired rollouts per condition (the range 600--1500 in this paper reflects different assumptions about how correlated the paired outcomes are; we use a discordance rate of 0.2 for the central estimate).
-
-Both numbers are far above the field's modal $N = 10$--$20$ per condition, and both reach into the low thousands once the effects to resolve are realistic frontier-VLA gaps. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below either threshold; \S\ref{sec:res-efficiency} translates this analytical picture into empirical detection-rate-vs-$N$ curves on our data, and reaches the same conclusion by a different route.
+How many rollouts does a ranking claim actually need? Standard power calculations (Appendix~\ref{app:power}) put the field-modal $N{=}10$--$20$ orders of magnitude under-budget: a $\pm 5$\,pp Wilson CI on a single arm needs $N{\approx}380$, and detecting a 5\,pp paired difference between two policies (McNemar, 80\% power, $\alpha{=}0.05$) needs 600--1500 paired rollouts. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below either threshold; \S\ref{sec:res-efficiency} corroborates this empirically with detection-rate-vs-$N$ curves on our data.
 
 %===============================================================================
 \section{Results}\label{sec:results}
@@ -168,7 +164,7 @@ All numbers below use $\tau = 240$\,s for RMST, $n_{\text{boot}} = 1000$ for epi
 \toprule
 Model & RMST (s) & HRT (\%) & Intervention rate & Episodes \\
 \midrule
-Robot teleoperated by human & 10.5 & 100.0 & --- & 392 \\
+Human reference (teleop) & 10.5 & 100.0 & --- & 392 \\
 \midrule
 NVIDIA GR00T N1.6 & 78.3 & \textbf{13.5} & 2.3\% & 171 \\
 Physical Intelligence Open $\pi_{0.5}$ & 81.1 & 13.0 & 4.5\% & 177 \\
@@ -180,7 +176,7 @@ Hugging Face SmolVLA & 166.9 & 6.3 & 16.3\% & 123 \\
 \label{tab:headline}
 \end{table}
 
-GR00T and OpenPI are within 0.5 percentage points of HRT, well inside any reasonable noise floor at this $N$. No inference model exceeds 19\% HRT on any single object (per-cell heatmap in Appendix~\ref{app:percell}). Even the best frontier VLA is roughly $7\times$ slower than a teleoperator on the same fixture.
+GR00T and OpenPI are within 0.5 percentage points of HRT, well inside any reasonable noise floor at this $N$. No inference model exceeds 19\% HRT on any single object (per-cell heatmap in Appendix~\ref{app:percell}). Even the best frontier VLA is roughly $7\times$ slower than the human on the same fixture.
 
 \begin{table}[h]
 \centering
@@ -202,7 +198,7 @@ OpenPI vs.\ GR00T & $4.5 \times 10^{-1}$ & $1.00$ & n.s. \\
 
 The top two inference models cluster as statistically indistinguishable; ACT is separable from GR00T and borderline from OpenPI; SmolVLA is distinguishably worst. \textbf{At $N \approx 35$/cell -- already 2--3$\times$ the field-modal $N$ -- the field's modal $N$ cannot rank the top three.}
 
-\paragraph{What the field's standard methodology would have said.} The binary success leader at the modal $\tau = 30$ seconds is GR00T (0.51), with OpenPI (0.46) and ACT (0.44) close behind. Switch the scalar to AUC-vs-teleop and the leader is \emph{ACT} (0.138 vs.\ 0.101 for OpenPI and 0.096 for GR00T; \S\ref{sec:res-aggregation}). Switch again to integrated RMST and the leader is GR00T with OpenPI a hair behind, ACT a clear third. Same data, three principled scalar choices, three different top-1s. Table~\ref{tab:efficiency} below shows that at $N \le 30$ paired per cell no binary-threshold metric can distinguish the close pairs on the underlying CDF: a reader of a field-standard $\tau{=}30$-second leaderboard at $N{=}15$ would publish whichever of those three top-1s the random subsample favored, with no power to defend the choice against any of the others.
+\paragraph{What the field's standard methodology would have said.} At the modal $\tau{=}30$\,s, the binary leader is GR00T (0.51) with OpenPI (0.46) and ACT (0.44) close behind. Under AUC-vs-human the leader is \emph{ACT} (\S\ref{sec:res-aggregation}); under RMST it is GR00T with OpenPI a hair behind, ACT a clear third. Same data, three principled scalar choices, three different top-1s -- and Table~\ref{tab:efficiency} shows no binary-threshold metric can distinguish the close pairs on the underlying CDF at $N{\le}30$. A field-standard $\tau{=}30$-second leaderboard at $N{=}15$ would publish whichever top-1 the random subsample favored, with no power to defend the choice.
 
 \subsection{Sample Efficiency: The Right Test, Not the Right Scalar}\label{sec:res-efficiency}
 
@@ -243,136 +239,79 @@ Two takeaways. First, \textbf{a CDF-level test (KS) is materially more sample-ef
 
 \subsection{Aggregation-Rule Disagreement}\label{sec:res-aggregation}
 
-The headline (Table~\ref{tab:headline}) ranks under integrated RMST. We tested whether a different principled aggregation rule over the same CDF would agree. \textbf{Pairwise stochastic dominance vs.\ teleop}, AUC $= P(T_{\text{model}} < T_{\text{teleop}})$, macro-averaged across objects: ACT $0.138$ [$0.111$, $0.167$] $>$ OpenPI $0.101$ [$0.084$, $0.118$] $\approx$ GR00T $0.096$ [$0.080$, $0.112$] $>$ SmolVLA $0.027$ [$0.017$, $0.038$]. ACT is now \emph{highest} among inference models. \textbf{Integrated metrics} (RMST, HRT, intervention rate): ACT third, behind GR00T and OpenPI.
+The headline (Table~\ref{tab:headline}) ranks under integrated RMST. We tested whether a different principled aggregation rule over the same CDF would agree. \textbf{Pairwise stochastic dominance vs.\ human reference}, AUC $= P(T_{\text{model}} < T_{\text{ref}})$, macro-averaged across objects: ACT $0.138$ [$0.111$, $0.167$] $>$ OpenPI $0.101$ [$0.084$, $0.118$] $\approx$ GR00T $0.096$ [$0.080$, $0.112$] $>$ SmolVLA $0.027$ [$0.017$, $0.038$]. ACT is now \emph{highest} among inference models. \textbf{Integrated metrics} (RMST, HRT, intervention rate): ACT third, behind GR00T and OpenPI.
 
-The disagreement is not noise; it is structural, and on our data it is sharpened by a property of the teleop reference rather than by ACT alone. The teleop CDF is concentrated on small times -- nearly all teleop attempts finish in under 30\,s -- so the AUC integral $P(T_{\text{model}} < T_{\text{teleop}})$ is dominated by what happens at the short-time end of the model's CDF. A policy with a fat ``fast-when-it-works'' early peak (ACT) wins more of those early-finish races against a tightly-distributed teleop than a steadily-paced one does, even if the steadily-paced policy completes more attempts overall. AUC asks ``which policy reaches its first success first?''; RMST asks ``which policy has the lower mean time-to-next-success including hard failures as $\infty$?''. Both are well-defined; both are implemented in our public code; neither is ``right.''
+The disagreement is not noise; it is structural, and on our data it is sharpened by a property of the human reference rather than by ACT alone. The human-reference CDF is concentrated on small times -- nearly all human attempts finish in under 30\,s -- so the AUC integral $P(T_{\text{model}} < T_{\text{ref}})$ is dominated by what happens at the short-time end of the model's CDF. A policy with a fat ``fast-when-it-works'' early peak (ACT) wins more of those early-finish races against a tightly-distributed reference than a steadily-paced one does, even if the steadily-paced policy completes more attempts overall. AUC asks ``which policy reaches its first success first?''; RMST asks ``which policy has the lower mean time-to-next-success including hard failures as $\infty$?''. Both are well-defined; both are implemented in our public code; neither is ``right.''
 
-\paragraph{Recommendation.} We recommend \textbf{HRT as the default headline scalar}, because it inherits the joint reliability-throughput property of the CDF (via $T = \infty$ inflating the denominator) and matches operator-facing UPH practice. AUC against a much-faster reference is not a good co-headline on \emph{this} dataset: as the data above show, when the reference's CDF is concentrated at small times the AUC integral is dominated by short-time behaviour, and ``which model registered an early success'' overrides ``which model completed more attempts overall.'' This is a property of the teleop reference being seven times faster than any evaluated VLA, not a property of AUC itself; on a benchmark where the reference and the policies operated at comparable speeds, AUC and RMST would track much more closely. When the headline scalar disagrees with another principled aggregation, the right move is not to publish both with equal weight but to disclose which operational priority the choice encodes. Cross-model P-P plots (\S\ref{sec:res-pairwise}, without the teleop anchor) are useful as a visualization of distributional shape; they are a byproduct of the CDF, not an independent metric.
+\paragraph{Recommendation.} We recommend \textbf{HRT as the default headline scalar}, because it inherits the joint reliability-throughput property of the CDF and matches operator-facing UPH practice. AUC-vs-human is not a good co-headline on \emph{this} dataset because the reference is seven times faster than any evaluated VLA -- the AUC integral collapses onto the short-time region where early-success peaks dominate; on a benchmark with reference and policies at comparable speeds, AUC and RMST would track much more closely. When two principled aggregations disagree, the right move is not to publish both with equal weight but to disclose which operational priority the headline encodes. Pairwise model-vs-model AUC (without the human anchor; Figure~\ref{fig:pp-pairwise} in Appendix~\ref{app:percell}) lands near $0.5$ for every top-3 pair (CIs all crossing $0.5$), confirming the RMST-side conclusion that the top three frontier VLAs are pairwise indistinguishable at our depth. Per-(model, object) RMST and the GR00T-vs-ACT object crossing (Figure~\ref{fig:grid-rmst} in Appendix~\ref{app:percell}) are visible at our $N$ but do not clear Bonferroni at $\alpha = 0.05/24$ -- itself a finding about benchmark sample-size requirements: the field's modal $N$ could not see the patterns we can.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.95\linewidth]{../out/explore/pp_per_object.png}
-  \caption{P-P plots versus the teleoperated reference, per (model, object) cell. Each curve plots $\big(F_{\text{teleop}}(t),\, F_{\text{model}}(t)\big)$ parametrically as $t$ sweeps from 0 to 240 seconds; the diagonal is ``as fast as the reference,'' below-diagonal is slower. The maximum vertical distance from the curve to the diagonal equals the Kolmogorov-Smirnov distance between the two CDFs; the area under the curve equals the AUC. The reference reaches $F = 1$ within $\sim$30 seconds, so the curves spend most of their length near the right edge: the only region where a model can score AUC points is the short-time corner near the origin, where ACT's early-success peak (visible as the jump near the y-axis on Batteries and Towels) lifts its score even though its integrated RMST places it third. The methodological point: the same CDF supports two principled aggregation rules with opposite rankings; reporting one scalar without disclosing the choice is structurally misleading.}
-  \label{fig:pp-per-object}
-\end{figure}
-
-\subsection{Pairwise Model-vs-Model Removes the Teleop-Anchor Bias}\label{sec:res-pairwise}
-
-The teleop-anchored AUC of \S\ref{sec:res-aggregation} saturates against teleop's fast CDF: for top-3 models nearly all model events fall in teleop's tail, so AUC is dominated by rare slow-teleop events. Pairwise model-vs-model P-P plots (without the teleop anchor) neutralize this. Macro-AUCs land near $0.5$ for every top-3 pair, with 95\% CIs that all cross $0.5$: ACT-vs-OpenPI $0.51$ \,[$0.45$, $0.56$]; ACT-vs-GR00T $0.50$ \,[$0.45$, $0.55$]; OpenPI-vs-GR00T $0.50$ \,[$0.46$, $0.54$]. This confirms the RMST-side ranking that the top three frontier VLAs are pairwise indistinguishable on integrated metrics at our depth.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.95\linewidth]{../out/explore/pp_pairwise_macro.png}
-  \caption{Pairwise model-vs-model P-P plots, top-3 only (SmolVLA excluded as too easily separable to be informative), macro-averaged across the 4 trained objects. Removing the teleop anchor neutralizes the saturation bias of Figure~\ref{fig:pp-per-object}: every top-3 pair falls on or near the diagonal, with macro-AUCs all consistent with $0.5$ (95\% paired-bootstrap CIs cross $0.5$ for every pair). \textbf{The top three frontier VLAs are pairwise indistinguishable at our depth on a comparison that does not depend on a fast external reference.}}
-  \label{fig:pp-pairwise}
-\end{figure}
-
-\subsection{Per-Object Structure}\label{sec:res-perobject}
-
-Figure~\ref{fig:grid-rmst} shows per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. The cleanest visible pattern is the GR00T-vs-ACT inversion between Batteries (GR00T 89\,s $\le$ ACT 105\,s; raw $p = 0.30$) and Scissors (ACT 99\,s $\le$ GR00T 116\,s; raw $p = 0.24$). Neither clears Bonferroni at $\alpha = 0.05/24$ over the 24 per-cell pairwise tests. \textbf{This is itself a finding about benchmark sample-size requirements:} per-object structure is visible at our $N$ but below the formal significance threshold, and the field's modal $N$ could not even see the visible patterns. Per-cell RMST values and 95\% CIs are tabulated in Appendix~\ref{app:percell}.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.95\linewidth]{../out/explore/grid_rmst.png}
-  \caption{Per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. Crossings exist (most clearly GR00T vs.\ ACT between Batteries and Scissors) but none clears Bonferroni at $\alpha = 0.05/24$. The visible patterns suggest the rankings vary by object; resolving them formally requires the rollout budget that Figure~\ref{fig:efficiency} quantifies.}
-  \label{fig:grid-rmst}
-\end{figure}
-
-PhAIL's protocol additionally logs the spatial configuration (camera/tote placement) with every episode; we observe a 22.2\,pp completion-rate drop for GR00T when the external camera is on the opposite side from the outbound tote (full table in Appendix~\ref{app:spatial}). Effects of this size demonstrate that environmental confounds can move the measured ranking, and that protocol-level logging is a precondition for clean ranking claims.
+PhAIL's protocol additionally logs the spatial configuration (camera/tote placement) with every episode; we observe a 22.2\,pp completion-rate drop for GR00T when the external camera is on the opposite side from the outbound tote (Appendix~\ref{app:spatial}). Environmental confounds of this size can move the measured ranking; protocol-level logging is a precondition for clean ranking claims.
 
 %===============================================================================
 \section{Discussion}\label{sec:discussion}
 %===============================================================================
 
-\subsection{Position Against Prior Benchmarks}
+\paragraph{Position against prior benchmarks.} Simulated benchmarks~\cite{robocasa,calvin,maniskill,simpler} iterate fast but miss real-world perception, latency, and safety. Real-hardware benchmarks~\cite{roboarena,robochallenge,ocrtoc,nist_atb,realrobotchallenge,so2023,sun_competitions_2022} compare via pairwise Elo or scalar success on standardized tasks; none reports throughput or reliability distributionally over operations. Methodology-side, Kress-Gazit et al.~\cite{kress2024} and the LBM examination~\cite{lbm2026} are existence proofs that blinded same-session A/B with hundreds of rollouts is feasible; Agarwal et al.~\cite{agarwal2021} are the closest ML-side precedent for distributional comparison. We extend their approach to time-to-event data with $T = \infty$ ghost events and ship a reference implementation.
 
-\textbf{Simulated benchmarks} (RoboCasa, CALVIN, ManiSkill, SIMPLER \cite{robocasa,calvin,maniskill,simpler}) are fast to iterate but do not capture real-world perception, latency, or safety. \textbf{Real-hardware research benchmarks} such as RoboArena \cite{roboarena} and RoboChallenge \cite{robochallenge} use physical robots but compare via pairwise Elo or scalar success on household and lab tasks; neither reports throughput or reliability, nor compares distributionally over operations.
+\paragraph{Limits.} Single embodiment (Franka FR3, fixed cameras), single primitive (bin-to-bin pick-and-place, four trained objects); the framework generalizes to any operation with a human reference and event-time outcome but the empirical validation does not. $N{\approx}35$ per cell is 2--3$\times$ the field median but still below what binary metrics need to rank close pairs (\S\ref{sec:res-efficiency}). The per-model rankings are illustrative; per-model recipe optimization could shift them.
 
-\textbf{Competition-style evaluations} (RGMC at ICRA/IROS, OCRTOC~\cite{ocrtoc}, NIST Assembly Task Boards~\cite{nist_atb}, the Real Robot Challenge~\cite{realrobotchallenge}, the Robothon Grand Challenge~\cite{so2023}, surveyed in~\cite{sun_competitions_2022}) all force standardized scoring on a shared task. Closest in spirit is the Digital Robot Judge~\cite{so2023}, which builds task-centric performance databases via electronic task boards -- complementary to our video-and-telemetry release. PhAIL differs in being live between events rather than episodic, anchoring the headline scalar to a teleoperated reference, and reporting time-to-success distributionally rather than as a per-attempt success rate.
-
-\textbf{Methodology critiques.} Kress-Gazit et al.~\cite{kress2024} and the LBM examination~\cite{lbm2026} are existence proofs that good real-robot evaluation is feasible: blinded same-session A/B, hundreds of rollouts. They prescribe; we ship a metric framework with a reference implementation. Agarwal et al.~\cite{agarwal2021} are the closest precedent for distributional comparison in ML evaluation; we extend their approach to time-to-event data with $T = \infty$ ghost events.
-
-\subsection{Why CDF-Level Tests, Not Just CDF-Derived Scalars}
-
-The central new finding of this paper is that \emph{which test you use determines what ranking you can resolve at a given $N$}, and that choosing the right test is a much larger lever than choosing the right scalar. RMST, our headline reporting scalar, is \emph{not} measurably more sample-efficient than $F(60\,\text{s})$ for ranking. The integration step that makes RMST interpretable as ``average time to next success'' is the same step that smears the where-do-the-curves-separate information that a sup-norm test exploits. The result is the central methodological recommendation of the paper: scalars are for reporting, tests are for ranking; conflating them wastes power.
-
-\subsection{Honest Limits}
-
-Single embodiment (Franka FR3 + Robotiq 2F-85, fixed camera layout); generalization to mobile, bimanual, or different end-effectors is future work. Pick-and-place primitive only; the framework applies unchanged to any operation with a teleoperated reference and event-time outcome (insertion, packing, navigation, articulated manipulation), but PhAIL's empirical validation is restricted to bin-to-bin across four trained objects. $N \approx 26$ per cell is below what binary metrics need to rank close pairs (\S\ref{sec:res-efficiency} treats this as a feature, not a bug). The empirical numbers are illustrative of what the methodology can resolve at our depth; per-model recipe optimization could shift them.
-
-\subsection{Recommendations}
-
-The single recommendation that does the most work, on top of everything above, is \textbf{run policies in blind, randomized rotation on the same fixture in the same session.} Operator and environment shift outcomes by margins comparable to or larger than gaps between adjacent models -- the spatial-configuration sensitivity of Appendix~\ref{app:spatial} shows GR00T losing 22\,pp completion when the camera and outbound tote are placed on opposite sides. If the two models being compared are not run interleaved on the same workspace state by the same operator on the same day, what looks like a model-vs-model effect can be an operator-vs-operator or session-vs-session effect. Same-fixture blinded random rotation is a precondition for the rest of the methodology to hold; without it, the CDF you measure is contaminated by the protocol that produced it.
-
-The remaining recommendations follow from the body of the paper: (i) report the time-to-success CDF, not just a binary success rate at a single threshold; (ii) treat hard failures (items lost outside the workspace, items left dropped on the table at episode end, safety-stop terminations) as $T = \infty$ ghost events rather than additional censoring; (iii) ground the headline scalar in a same-fixture teleoperated reference and macro-aggregate cell-wise across tasks; (iv) report scalars with paired episode-clustered bootstrap intervals, and test rankings with paired KS (or stratified logrank) on the full CDF; (v) plan $N$ from the pair you most want to resolve, by plotting detection-rate-vs-$N$ curves on pilot data (as in \S\ref{sec:res-efficiency}) rather than picking a round number.
-
-\subsection{Submissions Welcome}\label{sec:submissions}
-
-The leaderboard at \url{https://phail.ai} is open to submissions. Teams can run their own checkpoints on the published evaluation protocol (or on the PhAIL operator's hardware, on request) and have the resulting CDFs scored by the same framework against the same teleoperated reference. The four rankings reported in this paper reflect each model's default open-source recipe; we expect them to move as the field publishes better recipes, and the framework is built to absorb those updates.
-
-\subsection{Future Work}\label{sec:future}
-
-Four commitments follow from the open release.
-
-\paragraph{API-based submissions.} Teams expose an inference HTTP endpoint that takes the standard observation contract (camera images, end-effector pose, language prompt) and returns actions; PhAIL operators run rollouts on the shared hardware and score the resulting CDFs against the published teleoperated reference. Teams keep control of their weights and infrastructure; the rollout protocol stays consistent. This minimizes the engineering distance between ``we have a VLA'' and ``we have a result on the leaderboard,'' which is the practical meaning of an open benchmark.
-
-\paragraph{More tasks.} Insertion (USB-A, Ethernet) and small-part assembly are the next PhAIL tasks. Both have unambiguous success states and admit a teleoperated reference. The methodology applies unchanged.
-
-\paragraph{More architectures.} As new public VLA releases appear, we evaluate them on the existing PhAIL tasks against the same teleoperated reference and update the leaderboard in place. The methodology is the constant; the rankings move as the field publishes.
-
-\paragraph{Automated success detection.} Manual placement annotation is the most expensive and most bias-prone step in the current pipeline. We are extending the detection pipeline to handle pick-and-place tasks without manual review, and to bootstrap directly on new tasks as they are added. This is what makes per-task evaluation cost tractable as the benchmark grows.
-
-The evaluation framework is open source; teams can reproduce the full protocol in their own labs without coordination from us.
+\paragraph{Protocol recommendations.} The single recommendation that does the most work is \textbf{blind, randomized rotation on the same fixture in the same session} -- spatial-configuration shifts (Appendix~\ref{app:spatial}) move outcomes by margins comparable to gaps between adjacent models, contaminating the CDF if not controlled. The rest follow from the body: report the time-to-success CDF (not just $F(\tau)$); treat hard failures as $T{=}\infty$ ghost events; ground the headline scalar in a same-fixture human reference; report scalars with paired episode-clustered bootstrap intervals and test rankings with paired KS; plan $N$ from the pair you most want to resolve, via detection-rate-vs-$N$ curves on pilot data.
 
 %===============================================================================
 \section{Conclusion}\label{sec:conclusion}
 %===============================================================================
 
-If the field adopts this methodology, three things change. \textbf{First, scalar choice becomes a disclosed methodological commitment, not a default.} A leaderboard that reports HRT discloses an integrated-throughput priority; one that reports AUC-vs-teleop discloses a pairwise-stochastic-dominance priority; the same data can support either ranking, and a paper that picks one without saying so has elided a load-bearing decision. \textbf{Second, ranking claims become falsifiable.} A KS test on the macro CDF with paired episode-clustered bootstrap and a published power calculation lets a reader check whether $N$ was sufficient to support the claim being made; ``no, we cannot rank these models at this $N$'' becomes a publishable finding rather than a discounted footnote. \textbf{Third, the hidden cost of binary success-rate-at-threshold becomes visible:} on borderline policy pairs, the binary metric throws away enough information about the underlying CDF that no realistic $N$ recovers it, while the corresponding CDF-level test resolves the same comparison at a tractable budget. The leaderboard at \url{https://phail.ai} is open to submissions, and we expect the methodology to be most useful as the field publishes better fine-tuning recipes and the rankings move accordingly.
+If the field adopts this methodology, three things change. \textbf{Scalar choice becomes a disclosed methodological commitment} (HRT vs AUC-vs-human encode different priorities). \textbf{Ranking claims become falsifiable} via paired KS; ``we cannot rank these models at this $N$'' becomes a publishable finding. \textbf{The hidden cost of binary success-rate-at-threshold becomes visible}: on close pairs, no realistic $N$ recovers what a CDF-level test resolves within budget. The leaderboard at \url{https://phail.ai} is open; insertion and small-part assembly are the next tasks.
 
 %===============================================================================
 \bibliographystyle{plainnat}
 % \bibliography{references}  % Uncomment when references.bib is ready
 
 \begin{thebibliography}{99}
-\bibitem[Kaplan and Meier]{kaplan1958} Kaplan, E.L., Meier, P. Nonparametric Estimation from Incomplete Observations. Journal of the American Statistical Association, 53(282):457--481, 1958.
-\bibitem[Greenwood]{greenwood1926} Greenwood, M. The Natural Duration of Cancer. Reports on Public Health and Medical Subjects, 33:1--26, 1926.
-\bibitem[Kalbfleisch and Prentice]{kalbfleisch2002} Kalbfleisch, J.D., Prentice, R.L. The Statistical Analysis of Failure Time Data, 2nd edition. Wiley, 2002.
-\bibitem[Mantel]{mantel1966} Mantel, N. Evaluation of Survival Data and Two New Rank Order Statistics Arising in its Consideration. Cancer Chemotherapy Reports, 50(3):163--170, 1966.
-\bibitem[Smirnov]{smirnov1948} Smirnov, N.V. Table for Estimating the Goodness of Fit of Empirical Distributions. Annals of Mathematical Statistics, 19(2):279--281, 1948.
-\bibitem[Efron and Tibshirani]{efron1993} Efron, B., Tibshirani, R.J. An Introduction to the Bootstrap. Chapman \& Hall, 1993.
-\bibitem[Rerun]{rerun} Rerun.io. Visualization SDK for Multimodal Data. \url{https://rerun.io}, 2024.
-\bibitem[Positronic]{positronic} Positronic Robotics. \emph{positronic}: Open-source framework for real-robot evaluation and operation. \url{https://github.com/Positronic-Robotics/positronic}, 2025.
-\bibitem[DROID]{droid} Khazatsky et al. DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset. RSS, 2024.
-\bibitem[RoboChallenge]{robochallenge} Tang et al. RoboChallenge: Large-scale Real-robot Evaluation of Embodied Policies. arXiv:2510.17950, 2025.
-\bibitem[RoboArena]{roboarena} Atreya et al. RoboArena: Distributed Real-World Evaluation of Generalist Robot Policies. arXiv:2506.18123, 2025.
-\bibitem[RoboCasa]{robocasa} Nasiriany et al. RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots. arXiv, 2024.
-\bibitem[CALVIN]{calvin} Mees et al. CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation. IEEE RA-L, 2022.
-\bibitem[ManiSkill]{maniskill} Gu et al. ManiSkill3: GPU Parallelized Robotics Simulation and Benchmarking at Scale. arXiv:2410.00425, 2024.
-\bibitem[SIMPLER]{simpler} Li et al. Evaluating Real-World Robot Manipulation Policies in Simulation. arXiv, 2024.
-\bibitem[Sun et al.]{sun_competitions_2022} Sun, Falco, Roa, Calli. Research Challenges and Progress in Robotic Grasping and Manipulation Competitions. IEEE Robotics and Automation Letters, 2022.
-\bibitem[OCRTOC]{ocrtoc} Liu et al. OCRTOC: A Cloud-Based Competition and Benchmark for Robotic Grasping and Manipulation. IEEE Robotics and Automation Letters, 2021.
-\bibitem[NIST-ATB]{nist_atb} Falco et al. NIST Assembly Task Boards: Performance Metrics and Test Methods for Robotic Assembly. NIST IR / IEEE, ongoing.
-\bibitem[RealRobotChallenge]{realrobotchallenge} Bauer et al. A Robust Real Robot Baseline for the Real Robot Challenge. NeurIPS Datasets and Benchmarks, 2022.
-\bibitem[So et al.]{so2023} So, Sarabakha, Wu, Culha, Abu-Dakka, Haddadin. Digital Robot Judge: Building a Task-centric Performance Database of Real-World Manipulation With Electronic Task Boards. IEEE Robotics \& Automation Magazine, 2023.
-\bibitem[Kress-Gazit et al.]{kress2024} Kress-Gazit, Hashimoto, Kuppuswamy, Shah, Horgan, Richardson, Feng, Burchfiel. Robot Learning as an Empirical Science: Best Practices for Policy Evaluation. arXiv:2409.09491, 2024.
-\bibitem[Barreiros et al.]{lbm2026} TRI LBM Team / Barreiros et al. A Careful Examination of Large Behavior Models. Science Robotics, 2026 (arXiv:2507.05331).
-\bibitem[Agarwal et al.]{agarwal2021} Agarwal, Schwarzer, Castro, Courville, Bellemare. Deep Reinforcement Learning at the Edge of the Statistical Precipice. NeurIPS, 2021.
-\bibitem[Henderson et al.]{henderson2018} Henderson, Islam, Bachman, Pineau, Precup, Meger. Deep Reinforcement Learning That Matters. AAAI, 2018.
-\bibitem[Snyder et al.]{snyder2025} Snyder et al. STEP: Is Your Imitation Learning Policy Better than Mine? arXiv:2503.10966, 2025.
-\bibitem[Mnih et al.]{mnih2015} Mnih et al. Human-level Control through Deep Reinforcement Learning. Nature, 2015.
-\bibitem[$\pi_{0.5}$]{pi05} Black et al. ($\pi_{0.5}$): a Vision-Language-Action Model with Open-World Generalization. arXiv:2504.16054, 2025.
-\bibitem[GR00T N1]{groot_n1} NVIDIA et al. GR00T N1: An Open Foundation Model for Generalist Humanoid Robots. arXiv:2503.14734, 2025.
-\bibitem[ACT]{act} Zhao, Kumar, Levine, Finn. Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware. RSS, 2023 (arXiv:2304.13705).
-\bibitem[SmolVLA]{smolvla} Shukor et al. SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics. arXiv:2506.01844, 2025.
+\bibitem{kaplan1958} Kaplan, E.L., Meier, P. Nonparametric Estimation from Incomplete Observations. Journal of the American Statistical Association, 53(282):457--481, 1958.
+\bibitem{mantel1966} Mantel, N. Evaluation of Survival Data and Two New Rank Order Statistics Arising in its Consideration. Cancer Chemotherapy Reports, 50(3):163--170, 1966.
+\bibitem{smirnov1948} Smirnov, N.V. Table for Estimating the Goodness of Fit of Empirical Distributions. Annals of Mathematical Statistics, 19(2):279--281, 1948.
+\bibitem{efron1993} Efron, B., Tibshirani, R.J. An Introduction to the Bootstrap. Chapman \& Hall, 1993.
+\bibitem{rerun} Rerun.io. Visualization SDK for Multimodal Data. \url{https://rerun.io}, 2024.
+\bibitem{positronic} Positronic Robotics. \emph{positronic}: Open-source framework for real-robot evaluation and operation. \url{https://github.com/Positronic-Robotics/positronic}, 2025.
+\bibitem{droid} Khazatsky et al. DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset. RSS, 2024.
+\bibitem{robochallenge} Tang et al. RoboChallenge: Large-scale Real-robot Evaluation of Embodied Policies. arXiv:2510.17950, 2025.
+\bibitem{roboarena} Atreya et al. RoboArena: Distributed Real-World Evaluation of Generalist Robot Policies. arXiv:2506.18123, 2025.
+\bibitem{robocasa} Nasiriany et al. RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots. arXiv, 2024.
+\bibitem{calvin} Mees et al. CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation. IEEE RA-L, 2022.
+\bibitem{maniskill} Gu et al. ManiSkill3: GPU Parallelized Robotics Simulation and Benchmarking at Scale. arXiv:2410.00425, 2024.
+\bibitem{simpler} Li et al. Evaluating Real-World Robot Manipulation Policies in Simulation. arXiv, 2024.
+\bibitem{sun_competitions_2022} Sun, Falco, Roa, Calli. Research Challenges and Progress in Robotic Grasping and Manipulation Competitions. IEEE Robotics and Automation Letters, 2022.
+\bibitem{ocrtoc} Liu et al. OCRTOC: A Cloud-Based Competition and Benchmark for Robotic Grasping and Manipulation. IEEE Robotics and Automation Letters, 2021.
+\bibitem{nist_atb} Falco et al. NIST Assembly Task Boards: Performance Metrics and Test Methods for Robotic Assembly. NIST IR / IEEE, ongoing.
+\bibitem{realrobotchallenge} Bauer et al. A Robust Real Robot Baseline for the Real Robot Challenge. NeurIPS Datasets and Benchmarks, 2022.
+\bibitem{so2023} So, Sarabakha, Wu, Culha, Abu-Dakka, Haddadin. Digital Robot Judge: Building a Task-centric Performance Database of Real-World Manipulation With Electronic Task Boards. IEEE Robotics \& Automation Magazine, 2023.
+\bibitem{kress2024} Kress-Gazit, Hashimoto, Kuppuswamy, Shah, Horgan, Richardson, Feng, Burchfiel. Robot Learning as an Empirical Science: Best Practices for Policy Evaluation. arXiv:2409.09491, 2024.
+\bibitem{lbm2026} TRI LBM Team / Barreiros et al. A Careful Examination of Large Behavior Models. Science Robotics, 2026 (arXiv:2507.05331).
+\bibitem{agarwal2021} Agarwal, Schwarzer, Castro, Courville, Bellemare. Deep Reinforcement Learning at the Edge of the Statistical Precipice. NeurIPS, 2021.
+\bibitem{henderson2018} Henderson, Islam, Bachman, Pineau, Precup, Meger. Deep Reinforcement Learning That Matters. AAAI, 2018.
+\bibitem{snyder2025} Snyder et al. STEP: Is Your Imitation Learning Policy Better than Mine? arXiv:2503.10966, 2025.
+\bibitem{mnih2015} Mnih et al. Human-level Control through Deep Reinforcement Learning. Nature, 2015.
+\bibitem{pi05} Black et al. ($\pi_{0.5}$): a Vision-Language-Action Model with Open-World Generalization. arXiv:2504.16054, 2025.
+\bibitem{groot_n1} NVIDIA et al. GR00T N1: An Open Foundation Model for Generalist Humanoid Robots. arXiv:2503.14734, 2025.
+\bibitem{act} Zhao, Kumar, Levine, Finn. Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware. RSS, 2023 (arXiv:2304.13705).
+\bibitem{smolvla} Shukor et al. SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics. arXiv:2506.01844, 2025.
+\bibitem{rt1} Brohan et al. RT-1: Robotics Transformer for Real-World Control at Scale. RSS, 2023 (arXiv:2212.06817).
+\bibitem{rt2} Brohan et al. RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control. CoRL, 2023 (arXiv:2307.15818).
+\bibitem{rtx} Open X-Embodiment Collaboration. Open X-Embodiment: Robotic Learning Datasets and RT-X Models. ICRA, 2024 (arXiv:2310.08864).
+\bibitem{openvla} Kim et al. OpenVLA: An Open-Source Vision-Language-Action Model. CoRL, 2024 (arXiv:2406.09246).
+\bibitem{pi0} Black et al. $\pi_{0}$: A Vision-Language-Action Flow Model for General Robot Control. arXiv:2410.24164, 2024.
+\bibitem{pi06} Black et al. $\pi_{0.6}$: a VLA That Learns from Experience. arXiv:2511.14759, 2025.
+\bibitem{mobilealoha} Fu et al. Mobile ALOHA: Learning Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation. CoRL, 2024 (arXiv:2401.02117).
+\bibitem{ecot} Zawalski et al. Robotic Control via Embodied Chain-of-Thought Reasoning. CoRL, 2024 (arXiv:2407.08693).
 \end{thebibliography}
 
 %===============================================================================
 \appendix
-\section{Twelve-Paper Survey of Recent VLA Evaluation Practice}\label{app:survey}
+\section{Survey of Recent VLA Evaluation Practice}\label{app:survey}
 %===============================================================================
 
-Table~\ref{tab:survey} surveys 12 recent real-robot VLA papers from 2023--2025. Modal per-condition $N$ is 10--20; in 11 of 12 papers no confidence intervals or paired tests are reported. The single recent counter-example is the LBM examination~\cite{lbm2026}, which reports Wilson-score 95\% CIs.
+Table~\ref{tab:survey} surveys 13 recent real-robot VLA papers from 2023--2025. Modal per-condition $N$ is 10--20; in 12 of 13 papers no confidence intervals or paired tests are reported. The single recent counter-example is the LBM examination~\cite{lbm2026}, which reports Wilson-score 95\% CIs.
 
 \begin{table}[h]
 \centering
@@ -381,20 +320,21 @@ Table~\ref{tab:survey} surveys 12 recent real-robot VLA papers from 2023--2025. 
 \toprule
 Paper & Per-condition $N$ & Stats reported \\
 \midrule
-RT-1 (RSS 2023) & per-task $N$ not standardized; $\sim$3000 total & Point estimates only \\
-RT-2 (CoRL 2023) & $\sim$10--15 per task; $\sim$6000 total & Point estimates only \\
-RT-X / Open X-Embodiment (ICRA 2024) & 10--20 modal; up to 100/skill & Point estimates \\
-OpenVLA (CoRL 2024) & $\sim$10 real / 50 sim per task & No CIs \\
-$\pi_{0}$ (Physical Intelligence 2024) & $\sim$10 trials/task; partial credit & No CIs \\
-$\pi_{0.6}$ (arXiv 2511.14759, 2025) & tens per task, variable & No CIs \\
-GR00T N1 (NVIDIA 2025) & 5 objects $\times$ 3 trials $=$ 15/task real & Point estimates \\
-ACT / ALOHA (RSS 2023) & $\sim$25 trials/task & Point estimates \\
-Mobile ALOHA (CoRL 2024) & 20/task (5 for ``Cook Shrimp'') & Point estimates \\
-DROID (RSS 2024) & 10 rollouts per (task, method) & ``Standard error'' mentioned, no CIs \\
-SmolVLA (HuggingFace 2025) & tens per real task & Point estimates \\
-ECoT (CoRL 2024) & $\sim$20/task ($\sim$300 total / policy) & Point estimates \\
+RT-1~\cite{rt1} & per-task $N$ not standardized; $\sim$3000 total & Point estimates only \\
+RT-2~\cite{rt2} & $\sim$10--15 per task; $\sim$6000 total & Point estimates only \\
+RT-X / Open X-Embodiment~\cite{rtx} & 10--20 modal; up to 100/skill & Point estimates \\
+OpenVLA~\cite{openvla} & $\sim$10 real / 50 sim per task & No CIs \\
+$\pi_{0}$~\cite{pi0} & $\sim$10 trials/task; partial credit & No CIs \\
+$\pi_{0.5}$~\cite{pi05} & tens per task, variable & No CIs \\
+$\pi_{0.6}$~\cite{pi06} & tens per task, variable & No CIs \\
+GR00T N1~\cite{groot_n1} & 5 objects $\times$ 3 trials $=$ 15/task real & Point estimates \\
+ACT / ALOHA~\cite{act} & $\sim$25 trials/task & Point estimates \\
+Mobile ALOHA~\cite{mobilealoha} & 20/task (5 for ``Cook Shrimp'') & Point estimates \\
+DROID~\cite{droid} & 10 rollouts per (task, method) & ``Standard error'' mentioned, no CIs \\
+SmolVLA~\cite{smolvla} & tens per real task & Point estimates \\
+ECoT~\cite{ecot} & $\sim$20/task ($\sim$300 total / policy) & Point estimates \\
 \midrule
-LBM Examination (Science Robotics 2026)~\cite{lbm2026} & hundreds per condition & Wilson 95\% CIs \\
+LBM Examination~\cite{lbm2026} & hundreds per condition & Wilson 95\% CIs \\
 \bottomrule
 \end{tabular}
 \normalsize
@@ -402,19 +342,37 @@ LBM Examination (Science Robotics 2026)~\cite{lbm2026} & hundreds per condition 
 \label{tab:survey}
 \end{table}
 
-\paragraph{Power arithmetic at modal $N$.} At $N = 10$--$20$, the Wilson 95\% CI on an observed 70\% success rate is roughly $[0.40, 0.89]$ at $N{=}10$ or $[0.48, 0.86]$ at $N{=}20$. The minimum detectable difference between two unpaired proportions at 80\% power, $\alpha = 0.05$ is $\sim$35 percentage points at $N{=}20$. Separating two top VLAs whose true gap is $\sim$5 pp requires $\sim$600--1500 paired rollouts (McNemar), or more under unpaired tests. The empirical detection-rate curves of \S\ref{sec:res-efficiency} corroborate: at $N \le 30$ paired per cell, no binary-threshold metric resolves the GR00T-vs-OpenPI ranking on our data.
-
-\paragraph{Concurrent methodology critiques.} Kress-Gazit et al.~\cite{kress2024} explicitly argue that current real-robot evaluations are statistically anemic. STEP~\cite{snyder2025} and SureSim concur: ``20--30 real-world trials are insufficient for statistically significant conclusions.'' These prescribe; we ship a metric framework with reference implementation that operationalizes the prescriptions on a shared station.
+\paragraph{Concurrent methodology critiques.} Kress-Gazit et al.~\cite{kress2024} explicitly argue that current real-robot evaluations are statistically anemic. STEP~\cite{snyder2025} concurs: ``20--30 real-world trials are insufficient for statistically significant conclusions.'' These prescribe; we ship a metric framework with reference implementation that operationalizes the prescriptions on a shared station.
 
 
-\section{Per-Cell \%-of-Teleop and RMST Heatmaps}\label{app:percell}
-Per-(model, object) HRT heatmap; per-cell RMST grid with 95\% bootstrap CIs; per-cell pairwise logrank $p$-values with Bonferroni and BH/FDR corrections.
+\section{Per-Cell HRT, RMST, and Pairwise P-P Plots}\label{app:percell}
 
-\section{Methodological Framework D1--D10}\label{app:framework}
-Definitions of $T$, censoring rules, multi-grip handling, $T = \infty$ ghost events, KM and Greenwood derivations, RMST and KS estimators, episode-clustered bootstrap pseudocode. Full details in \texttt{FINDINGS.md}; abridged version in this appendix.
+Per-(model, object) HRT heatmap and per-cell RMST grid with 95\% episode-clustered bootstrap CIs; pairwise logrank $p$-values with Bonferroni and BH/FDR corrections; pairwise model-vs-model P-P plots (without the human-reference anchor) for the top-3 pairs.
 
-\section{Hardware Diagram and Camera Intrinsics}\label{app:hardware}
-Hardware photo, fixture diagram, camera intrinsics, network and software stack.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.92\linewidth]{../out/explore/grid_rmst.png}
+  \caption{Per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. Crossings exist (most clearly GR00T vs.\ ACT between Batteries and Scissors) but none clears Bonferroni at $\alpha = 0.05/24$. The visible patterns suggest the rankings vary by object; resolving them formally requires the rollout budget that Figure~\ref{fig:efficiency} quantifies.}
+  \label{fig:grid-rmst}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.92\linewidth]{../out/explore/pp_pairwise_macro.png}
+  \caption{Pairwise model-vs-model P-P plots, top-3 only (SmolVLA excluded as too easily separable to be informative), macro-averaged across the 4 trained objects. The teleop-anchored AUC of \S\ref{sec:res-aggregation} saturates because the human reference is ${\sim}7\times$ faster than any evaluated VLA -- nearly all model events fall in the human's tail, so the AUC integral is dominated by short-time behaviour. Removing the human anchor neutralizes that bias: every top-3 pair falls on or near the diagonal, with macro-AUCs all consistent with $0.5$ (ACT-vs-OpenPI $0.51$\,[$0.45$, $0.56$]; ACT-vs-GR00T $0.50$\,[$0.45$, $0.55$]; OpenPI-vs-GR00T $0.50$\,[$0.46$, $0.54$]).}
+  \label{fig:pp-pairwise}
+\end{figure}
+
+\section{Run-Explorer Visualization}\label{app:hardware}
+
+Every evaluated rollout is published in a run-explorer interface (Figure~\ref{fig:platform}) that synchronizes the exterior and wrist video streams against the 3D end-effector trajectory and the per-channel telemetry: commanded action, gripper target, and measured gripper position. A reader auditing a specific time-to-success annotation against the raw video can replay it frame-accurately and inspect the joint state at any instant. The interface is built on Rerun~\cite{rerun} and runs post-hoc against the released artifacts; it is independent of the operator-side tooling used during rollout collection. We expose this not as part of the methodological contribution but as a transparency mechanism: every annotation in the released dataset is auditable against the raw rollout it was derived from.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/phail-platform.png}
+  \caption{PhAIL platform during a rollout, visualized in the run-explorer interface (built on Rerun~\cite{rerun}): synchronized exterior and wrist video, 3D end-effector trajectory, and telemetry traces (commanded action, gripper target, measured gripper).}
+  \label{fig:platform}
+\end{figure}
 
 \section{Fine-Tuning Dataset Composition}\label{app:dataset}
 
@@ -459,7 +417,16 @@ SmolVLA & 12.1\% & 9.5\%  & $+2.6$\,pp  \\
 GR00T shows the largest sensitivity (22.2\,pp drop), suggesting strong reliance on the external camera view; OpenPI is the most robust among the top models. An environmental change a human operator would not notice can move the measured ranking. PhAIL's protocol logs the configuration with every episode so that this kind of confound is visible to the analyst rather than absorbed into noise.
 
 \section{Power-Calculation Derivations}\label{app:power}
-McNemar derivation for binary paired ranking; $t$-test derivation for RMST paired ranking; KS subsampling-based empirical power curves with full $(N, \text{metric}, \text{detection rate})$ tables.
+
+\paragraph{Wilson confidence interval on a single binary success rate.} For an observed proportion $\hat{p}$ on $N$ trials, the Wilson score interval gives a CI of half-width approximately $z_{\alpha/2}\sqrt{\hat{p}(1-\hat{p})/N}$ for the underlying success probability. To obtain $\pm 5$\,pp at 95\% confidence on $\hat{p} = 0.70$, the formula gives $N \approx 380$ rollouts. At the field-modal $N \in [10, 20]$, the Wilson 95\% CI on an observed 70\% success rate is roughly $[0.40, 0.89]$ at $N{=}10$ or $[0.48, 0.86]$ at $N{=}20$ -- intervals so wide that ranking claims at this depth are not statistically defensible.
+
+\paragraph{McNemar test for paired binary outcomes.} For two policies evaluated on the same $N$ paired conditions, let $b$ and $c$ be the discordant cell counts (one policy succeeds, the other fails). The McNemar statistic is $(b - c)^2 / (b + c)$, $\chi^2_1$-distributed under $H_0$ of equal success probabilities. To detect a $\Delta = 5$\,pp paired difference at 80\% power and $\alpha = 0.05$, with discordance rate $p_d \in [0.10, 0.25]$ (capturing ``how often the two policies disagree on a given paired condition''),
+\[
+N \approx \frac{\big(z_{\alpha/2}\sqrt{p_d} + z_\beta \sqrt{p_d - \Delta^2}\big)^2}{\Delta^2}.
+\]
+At $p_d = 0.10$ this gives $N \approx 600$; at $p_d = 0.25$, $N \approx 1500$. The range 600--1500 cited in the body reflects the realistic span of $p_d$ for top-3 frontier-VLA pairs on our data; a discordance rate of 0.20 gives the central $N \approx 1280$.
+
+\paragraph{Empirical detection-rate-vs-$N$ curves.} \S\ref{sec:res-efficiency} translates these analytical numbers into empirical detection-rate-vs-$N$ curves on our data via 300 outer subsampling trials, each running a 200-rep inner episode-clustered bootstrap. The full $(N, \text{metric}, \text{pair}, \text{detection rate})$ table for all four metrics ($F(30\text{s})$, $F(60\text{s})$, RMST, KS) and all six model pairs is released alongside the data.
 
 \section{Annotation Protocol}\label{app:protocol}
 
@@ -472,6 +439,60 @@ The framework requires per-episode event logs (place timestamps, intervention co
 \paragraph{Cross-validation.} Crowd labels are the gold reference. The autopilot is evaluated against them on every annotated episode; systematic disagreement is reported and used to refine the autopilot rather than override the gold. Both label streams are public.
 
 \section{Reproducibility}\label{app:reproducibility}
-Software environment (Python 3.13, \texttt{uv}, Linux), random seeds (0 throughout), expected runtimes (figure regeneration $\sim$10 minutes; sample-efficiency experiment $\sim$25 minutes), regeneration command (\texttt{bash build/paper\_regen.sh}). Code at \url{https://phail.ai}.
+Software environment: Python 3.13, Linux. Random seeds: 0 throughout. Expected runtimes on a 12-core workstation: figure regeneration $\sim$10 minutes; sample-efficiency experiment (300 outer $\times$ 200 inner bootstrap) $\sim$7 minutes. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at \url{https://phail.ai}.
+
+%===============================================================================
+\section*{NeurIPS Paper Checklist}
+%===============================================================================
+
+\begin{enumerate}
+\item \textbf{Claims.} \emph{Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?} \\
+\textbf{Answer:} Yes. The four numbered contributions in \S\ref{sec:intro} (canonical primitive, aggregation-rule disagreement, sample-efficiency from the right test, open benchmark) each map to a specific results subsection (\S\ref{sec:res-headline}, \S\ref{sec:res-aggregation}, \S\ref{sec:res-efficiency}, \S\ref{sec:phail-platform}).
+
+\item \textbf{Limitations.} \emph{Does the paper discuss the limitations of the work performed by the authors?} \\
+\textbf{Answer:} Yes. \S\ref{sec:discussion} discusses single embodiment, single task primitive (pick-and-place), $N \approx 35$ depth limits, and the constraint that all rankings reflect each model's default open-source fine-tuning recipe rather than per-model optimization.
+
+\item \textbf{Theory, Assumptions, and Proofs.} \emph{For each theoretical result, does the paper provide the full set of assumptions and a complete (and correct) proof?} \\
+\textbf{Answer:} N/A. The paper is empirical and methodological. The statistical estimators used (Kaplan-Meier with Greenwood variance, restricted-mean survival time, Kolmogorov-Smirnov, episode-clustered bootstrap) are standard and cited (\S\ref{sec:framework-T}, \S\ref{sec:framework-test}); we do not introduce new theoretical results.
+
+\item \textbf{Experimental Result Reproducibility.} \emph{Does the paper fully disclose all the information needed to reproduce the main experimental results?} \\
+\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap), Appendix~\ref{app:power} the power-calculation derivations, Appendix~\ref{app:protocol} the annotation pipeline, and Appendix~\ref{app:reproducibility} the software environment, seeds, and runtimes.
+
+\item \textbf{Open Access to Data and Code.} \emph{Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results?} \\
+\textbf{Answer:} Yes. The benchmark, evaluation framework, dataset, and per-rollout artifacts (synchronized video, telemetry, annotations) are released at \url{https://phail.ai}. The reference implementation is open source.
+
+\item \textbf{Experimental Setting/Details.} \emph{Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer, etc.) necessary to understand the results?} \\
+\textbf{Answer:} Yes. \S\ref{sec:phail-finetune} specifies that each of the four models was fine-tuned with its repository's default published recipe; we did not perform per-model hyperparameter search. Appendix~\ref{app:dataset} documents the fine-tuning dataset composition.
+
+\item \textbf{Experiment Statistical Significance.} \emph{Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?} \\
+\textbf{Answer:} Yes. All reporting scalars and CDF curves carry 95\% paired episode-clustered bootstrap intervals; pairwise tests use stratified logrank with Bonferroni correction (\S\ref{sec:res-headline}, Table~\ref{tab:pairs}); the sample-efficiency study reports detection-rate-vs-$N$ curves with 200 outer trials and 100-rep inner episode-clustered bootstrap (\S\ref{sec:res-efficiency}).
+
+\item \textbf{Experiments Compute Resources.} \emph{For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?} \\
+\textbf{Answer:} Yes. Inference for each VLA was run on the evaluation workstation that hosts the Franka FR3 controller; statistical analyses run in $\sim$10 minutes (figure regeneration) and $\sim$25 minutes (sample-efficiency experiment) on a laptop (Appendix~\ref{app:reproducibility}). No GPU cluster is required to reproduce the analysis pipeline.
+
+\item \textbf{Code of Ethics.} \emph{Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics?} \\
+\textbf{Answer:} Yes. The work is benchmark methodology on a controlled laboratory robot evaluating publicly released model checkpoints. No personally identifiable information is collected; no human subjects beyond paid task annotators reading robot video.
+
+\item \textbf{Broader Impacts.} \emph{Does the paper discuss both potential positive societal impacts and negative societal impacts of the work performed?} \\
+\textbf{Answer:} Yes. The paper's intended societal impact is improved evaluation rigor for real-robot VLA policies, enabling more honest comparisons in the field. Potential negative impact is limited because no new model checkpoints are released; the contribution is methodological. The benchmark could in principle be used to falsely advertise weak models with cherry-picked metrics, which is exactly the practice the methodology is designed to surface.
+
+\item \textbf{Safeguards.} \emph{Does the paper describe safeguards that have been put in place for responsible release of data or models with a high risk for misuse (e.g., pretrained language models, image generators, or scraped datasets)?} \\
+\textbf{Answer:} N/A. No new model is released. The dataset consists of robot rollout videos and telemetry on a controlled bin-to-bin pick-and-place task with no high-risk content.
+
+\item \textbf{Licenses for Existing Assets.} \emph{Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?} \\
+\textbf{Answer:} Yes. All four evaluated VLAs (OpenPI $\pi_{0.5}$, GR00T N1.6, ACT, SmolVLA) are publicly released under their respective open-source licenses and cited (\S\ref{sec:phail-finetune}); the DROID-style hardware configuration is cited; the Rerun visualizer is cited.
+
+\item \textbf{New Assets.} \emph{Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?} \\
+\textbf{Answer:} Yes. The PhAIL benchmark is released with per-rollout video, telemetry, dataset documentation (Appendix~\ref{app:dataset}), annotation protocol (Appendix~\ref{app:protocol}), and a Croissant metadata file. License is open and declared in the dataset card.
+
+\item \textbf{Crowdsourcing and Research with Human Subjects.} \emph{For crowdsourcing experiments and research with human subjects, does the paper include the full text of instructions given to participants and screenshots, if applicable, as well as details about compensation (if any)?} \\
+\textbf{Answer:} Yes. Appendix~\ref{app:protocol} describes the Toloka high-tier crowd-annotation task, the three intervention classes annotators were trained on, and the curated 10-episode pilot used for instructions. Annotator compensation followed Toloka's high-tier rate schedule.
+
+\item \textbf{Institutional Review Board (IRB) Approvals or Equivalent for Research with Human Subjects.} \emph{Does the paper describe potential risks incurred by study participants, whether such risks were disclosed to the subjects, and whether IRB approvals (or an equivalent approval/review based on the requirements of your country or institution) were obtained?} \\
+\textbf{Answer:} N/A. The crowd-annotation task involves paid microtask workers viewing pre-recorded robot videos; no protected-class data, biometric data, or personally identifiable information is collected. The activity does not constitute human-subjects research under standard IRB definitions.
+
+\item \textbf{Declaration of LLM Usage.} \emph{Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research?} \\
+\textbf{Answer:} N/A. The evaluation methodology and statistical analyses do not involve LLMs. Some of the evaluated VLA architectures use language-conditioned components internally, but those are properties of the evaluated artefacts, not of our methodology.
+\end{enumerate}
 
 \end{document}

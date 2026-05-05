@@ -1,15 +1,15 @@
 {
   "cohort": "mixed",
   "tau": 240.0,
-  "n_boot": 1000,
+  "n_boot": 100,
   "cells": {
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Batteries": {
       "n_eps": 43,
       "n_events": 122,
       "n_censored": 41,
       "rmst": 97.2015776412308,
-      "rmst_lo": 79.31375725179183,
-      "rmst_hi": 119.8460856737742,
+      "rmst_lo": 76.00148076487865,
+      "rmst_hi": 126.00475268451972,
       "median_T": 45.221000000000004
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Scissors": {
@@ -17,8 +17,8 @@
       "n_events": 109,
       "n_censored": 35,
       "rmst": 93.77386206532968,
-      "rmst_lo": 71.63185613820278,
-      "rmst_hi": 119.13337549064124,
+      "rmst_lo": 74.91279908420805,
+      "rmst_hi": 123.53046256606929,
       "median_T": 50.964
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Towels": {
@@ -26,8 +26,8 @@
       "n_events": 174,
       "n_censored": 40,
       "rmst": 78.62131869739329,
-      "rmst_lo": 64.62311134812313,
-      "rmst_hi": 96.3522983257983,
+      "rmst_lo": 65.24175853492396,
+      "rmst_hi": 97.8466782216191,
       "median_T": 37.483134002000014
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Wooden spoons": {
@@ -35,8 +35,8 @@
       "n_events": 224,
       "n_censored": 31,
       "rmst": 54.749710990985804,
-      "rmst_lo": 42.35904247880665,
-      "rmst_hi": 70.25579597057057,
+      "rmst_lo": 41.76105001230189,
+      "rmst_hi": 69.80070165458717,
       "median_T": 20.34
     },
     "NVIDIA GR00T N1.6 | Batteries": {
@@ -44,8 +44,8 @@
       "n_events": 155,
       "n_censored": 45,
       "rmst": 88.61893151487186,
-      "rmst_lo": 71.29755499247258,
-      "rmst_hi": 107.49868006036303,
+      "rmst_lo": 73.50928730655694,
+      "rmst_hi": 99.75123204751473,
       "median_T": 33.700386069
     },
     "NVIDIA GR00T N1.6 | Scissors": {
@@ -53,8 +53,8 @@
       "n_events": 57,
       "n_censored": 32,
       "rmst": 115.62891822879375,
-      "rmst_lo": 96.97986248377984,
-      "rmst_hi": 140.8866478554294,
+      "rmst_lo": 95.77801377012615,
+      "rmst_hi": 134.4819837418246,
       "median_T": 74.266
     },
     "NVIDIA GR00T N1.6 | Towels": {
@@ -62,8 +62,8 @@
       "n_events": 196,
       "n_censored": 39,
       "rmst": 71.26430040321728,
-      "rmst_lo": 58.134869324255696,
-      "rmst_hi": 86.78759855011887,
+      "rmst_lo": 60.88312167573952,
+      "rmst_hi": 85.9198193657836,
       "median_T": 24.914470685000005
     },
     "NVIDIA GR00T N1.6 | Wooden spoons": {
@@ -71,8 +71,8 @@
       "n_events": 208,
       "n_censored": 30,
       "rmst": 59.05624683033936,
-      "rmst_lo": 45.86432891505841,
-      "rmst_hi": 75.6723087398479,
+      "rmst_lo": 45.41910528429531,
+      "rmst_hi": 75.14211134846462,
       "median_T": 20.635999999999996
     },
     "Action Chunking Transformer | Batteries": {
@@ -80,8 +80,8 @@
       "n_events": 75,
       "n_censored": 30,
       "rmst": 105.08883572788193,
-      "rmst_lo": 87.46894225341173,
-      "rmst_hi": 128.8397546018386,
+      "rmst_lo": 90.41312531731023,
+      "rmst_hi": 124.7794435408707,
       "median_T": 44.992308111
     },
     "Action Chunking Transformer | Scissors": {
@@ -89,8 +89,8 @@
       "n_events": 102,
       "n_censored": 30,
       "rmst": 98.52873363666527,
-      "rmst_lo": 72.2378062038703,
-      "rmst_hi": 127.90140681901121,
+      "rmst_lo": 69.2215524922899,
+      "rmst_hi": 134.16014347645608,
       "median_T": 50.97858614600001
     },
     "Action Chunking Transformer | Towels": {
@@ -98,8 +98,8 @@
       "n_events": 88,
       "n_censored": 41,
       "rmst": 105.54707933278877,
-      "rmst_lo": 87.5661103625366,
-      "rmst_hi": 126.13030026618866,
+      "rmst_lo": 85.81053694035667,
+      "rmst_hi": 124.56418012120254,
       "median_T": 52.857574721
     },
     "Action Chunking Transformer | Wooden spoons": {
@@ -107,8 +107,8 @@
       "n_events": 172,
       "n_censored": 24,
       "rmst": 83.08990527527979,
-      "rmst_lo": 47.52925804578935,
-      "rmst_hi": 122.91739059791571,
+      "rmst_lo": 44.933541460241436,
+      "rmst_hi": 118.42325958226947,
       "median_T": 22.643
     },
     "Hugging Face SmolVLA | Batteries": {
@@ -116,8 +116,8 @@
       "n_events": 36,
       "n_censored": 29,
       "rmst": 198.7566031420124,
-      "rmst_lo": 169.02006310317586,
-      "rmst_hi": 223.17029138456928,
+      "rmst_lo": 165.09791140231565,
+      "rmst_hi": 220.9279403622334,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Scissors": {
@@ -125,8 +125,8 @@
       "n_events": 27,
       "n_censored": 24,
       "rmst": 169.37552510723276,
-      "rmst_lo": 138.9045538862971,
-      "rmst_hi": 202.18864773879193,
+      "rmst_lo": 139.5713891808536,
+      "rmst_hi": 202.42644806835105,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Towels": {
@@ -134,8 +134,8 @@
       "n_events": 23,
       "n_censored": 26,
       "rmst": 178.18383840736837,
-      "rmst_lo": 141.51095999283356,
-      "rmst_hi": 216.78537478584025,
+      "rmst_lo": 136.34170682327036,
+      "rmst_hi": 217.83328137838467,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Wooden spoons": {
@@ -143,45 +143,45 @@
       "n_events": 65,
       "n_censored": 29,
       "rmst": 126.67908457782674,
-      "rmst_lo": 93.84331808613523,
-      "rmst_hi": 165.5470440346198,
+      "rmst_lo": 95.34615381292646,
+      "rmst_hi": 167.46938216971097,
       "median_T": 83.557
     },
     "Robot teleoperated by Human | Batteries": {
-      "n_eps": 66,
-      "n_events": 525,
+      "n_eps": 69,
+      "n_events": 549,
       "n_censored": 0,
-      "rmst": 11.474418724651432,
-      "rmst_lo": 10.661684093386803,
-      "rmst_hi": 12.291961321495796,
-      "median_T": 9.522156801000001
+      "rmst": 11.325516995340614,
+      "rmst_lo": 10.685704812859976,
+      "rmst_hi": 11.991061617701368,
+      "median_T": 9.483807662
     },
     "Robot teleoperated by Human | Scissors": {
-      "n_eps": 78,
-      "n_events": 779,
+      "n_eps": 79,
+      "n_events": 788,
       "n_censored": 0,
-      "rmst": 11.387506773770236,
-      "rmst_lo": 10.771980934195215,
-      "rmst_hi": 12.001173230604346,
-      "median_T": 9.855981024999991
+      "rmst": 11.37949083346065,
+      "rmst_lo": 10.770971479102776,
+      "rmst_hi": 11.806755929492432,
+      "median_T": 9.827596683
     },
     "Robot teleoperated by Human | Towels": {
-      "n_eps": 109,
-      "n_events": 1011,
+      "n_eps": 110,
+      "n_events": 1021,
       "n_censored": 0,
-      "rmst": 9.91979443227202,
-      "rmst_lo": 9.52138512365516,
-      "rmst_hi": 10.355778310422608,
-      "median_T": 9.003071293000005
+      "rmst": 9.903606435873632,
+      "rmst_lo": 9.521642041769606,
+      "rmst_hi": 10.35316628198561,
+      "median_T": 8.999633524000004
     },
     "Robot teleoperated by Human | Wooden spoons": {
-      "n_eps": 133,
-      "n_events": 1536,
+      "n_eps": 138,
+      "n_events": 1594,
       "n_censored": 0,
-      "rmst": 10.162964783905606,
-      "rmst_lo": 9.864526818708882,
-      "rmst_hi": 10.449202696030788,
-      "median_T": 9.181000695
+      "rmst": 10.20323896366314,
+      "rmst_lo": 9.878188646593616,
+      "rmst_hi": 10.551565011699388,
+      "median_T": 9.214162508999998
     }
   },
   "pairwise": {

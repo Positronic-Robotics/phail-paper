@@ -28,7 +28,7 @@ sup |F_a-F_b| over [0,τ]. Detection rate is the fraction of trials with p<0.05.
 - F60: 3/6 pairs detectable; median N₀.₈ = 5
 - RMST: 3/6 pairs detectable; median N₀.₈ = 5
 - KS: 4/6 pairs detectable; median N₀.₈ = 10
-- Mean detection rate at N=30 across all 6 pairs: F30=0.54, F60=0.60, RMST=0.57, KS=0.88.
+- Mean detection rate at N=30 across all 6 pairs: F30=0.54, F60=0.59, RMST=0.57, KS=0.89.
 
 ## Honest assessment
 
