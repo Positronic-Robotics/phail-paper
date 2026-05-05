@@ -41,14 +41,14 @@ SHORT = {
     'NVIDIA GR00T N1.6': 'GR00T',
     'Action Chunking Transformer': 'ACT',
     'Hugging Face SmolVLA': 'SmolVLA',
-    TELEOP: 'Teleop',
+    TELEOP: 'Human',
 }
 COLORS = {
     'OpenPI': '#1f77b4',
     'GR00T': '#d62728',
     'ACT': '#9467bd',
     'SmolVLA': '#ff7f0e',
-    'Teleop': '#000000',
+    'Human': '#000000',
 }
 METRIC_COLORS = {'F30': '#888888', 'F60': '#555555', 'RMST': '#1f77b4', 'KS': '#d62728'}
 METRIC_LABELS = {'F30': 'F(30s) – binary', 'F60': 'F(60s) – binary', 'RMST': 'RMST – integrated CDF', 'KS': 'KS – CDF-level test'}
@@ -88,7 +88,7 @@ def _cdf_with_ci(eps, grid, n_boot=200, seed=0):
 
 
 def panel_cdfs(ax, by_model):
-    grid = np.linspace(0, 240, 300)
+    grid = np.linspace(0, 120, 300)
     order = (TELEOP, 'NVIDIA GR00T N1.6', 'Physical Intelligence Open π₀.₅',
              'Action Chunking Transformer', 'Hugging Face SmolVLA')
     for m in order:
@@ -103,13 +103,13 @@ def panel_cdfs(ax, by_model):
         lw = 3.2 if m == TELEOP else 2.2
         ax.fill_between(grid, F_lo, F_hi, color=COLORS[short], alpha=0.15)
         ax.plot(grid, F, label=short, color=COLORS[short], linewidth=lw)
-    ax.set_xlim(0, 240)
+    ax.set_xlim(0, 120)
     ax.set_ylim(0, 1.02)
     ax.set_xlabel('Time t (seconds)', fontsize=11)
     ax.set_ylabel('F(t) = P(T ≤ t)', fontsize=11)
     ax.set_title('(a) Time-to-success CDFs (T=∞ ghost events absorbed)',
                  loc='left', fontsize=12, fontweight='bold')
-    ax.legend(loc='center right', fontsize=10, frameon=True)
+    ax.legend(loc='lower right', fontsize=10, frameon=True)
     ax.grid(True, alpha=0.3)
     ax.tick_params(labelsize=10)
 
