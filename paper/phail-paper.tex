@@ -267,6 +267,8 @@ PhAIL's protocol additionally logs the spatial configuration (camera/tote placem
 \section{Conclusion}\label{sec:conclusion}
 %===============================================================================
 
+We introduced PhAIL, an open real-robot benchmark and distributional evaluation methodology for vision-language-action policies. The methodology adopts the time-to-success CDF as primitive, separates \emph{reporting} (Human-Relative Throughput) from \emph{ranking} (paired Kolmogorov--Smirnov on the macro CDF), and anchors to a same-fixture human reference. Evaluating four frontier VLAs across four objects, two structural findings emerged: principled aggregation rules over the same CDF yield opposite top-1 rankings, and paired KS detects ranking differences roughly $30\times$ more sample-efficiently than binary success-rate baselines.
+
 If the field adopts this methodology, three things change. \textbf{Scalar choice becomes a disclosed commitment} (HRT and AUC-vs-human encode different priorities). \textbf{Ranking claims become falsifiable} via paired KS: ``we cannot rank these at this $N$'' becomes a publishable finding. \textbf{The hidden cost of binary thresholds becomes visible}: on close pairs, no realistic $N$ recovers what a CDF-level test resolves within budget. PhAIL (\url{https://phail.ai}) is open to submissions; insertion and small-part assembly are next.
 
 %===============================================================================
