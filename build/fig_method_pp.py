@@ -33,14 +33,14 @@ SHORT = {
     'NVIDIA GR00T N1.6': 'GR00T',
     'Action Chunking Transformer': 'ACT',
     'Hugging Face SmolVLA': 'SmolVLA',
-    TELEOP: 'Teleop',
+    TELEOP: 'Human',
 }
 COLORS = {
     'OpenPI': '#1f77b4',
     'GR00T': '#d62728',
     'ACT': '#9467bd',
     'SmolVLA': '#ff7f0e',
-    'Teleop': '#000000',
+    'Human': '#000000',
 }
 
 
@@ -65,7 +65,7 @@ def panel_cdf(ax, eps_model, eps_ref, model_short, tau):
     grid = np.linspace(0, tau, 400)
     F_ref = _F_on_grid(eps_ref, grid)
     F_model = _F_on_grid(eps_model, grid)
-    ax.plot(grid, F_ref, color=COLORS['Teleop'], linewidth=3.0, label='Teleop reference')
+    ax.plot(grid, F_ref, color=COLORS['Human'], linewidth=3.0, label='Human reference')
     ax.plot(grid, F_model, color=COLORS[model_short], linewidth=2.4, label=model_short)
     ax.set_xlim(0, tau)
     ax.set_ylim(0, 1.02)
@@ -87,17 +87,24 @@ def panel_pp(ax, eps_model, eps_ref, model_short, tau):
     ax.fill_between(F_ref, 0, F_model, color=COLORS[model_short], alpha=0.18,
                     label='AUC = P(T_model < T_ref)')
     ax.plot(F_ref, F_model, color=COLORS[model_short], linewidth=2.4,
-            label=f'{model_short} vs Teleop')
+            label=f'{model_short} vs Human')
+    # KS = max vertical distance from curve to diagonal.
+    # We draw the perpendicular drop from the curve point to the diagonal:
+    # perpendicular distance = KS / sqrt(2). Foot of perpendicular on y=x is
+    # the midpoint of the curve point's vertical projection.
     idx = int(np.argmax(np.abs(F_ref - F_model)))
-    x_ks = float(F_ref[idx])
-    ks_val = abs(F_ref[idx] - F_model[idx])
-    ax.plot([x_ks, x_ks], [F_model[idx], x_ks], color='#d62728',
-            linewidth=2.4, label=f'KS = {ks_val:.2f}')
+    xc, yc = float(F_ref[idx]), float(F_model[idx])
+    mid = (xc + yc) / 2.0
+    ks_val = abs(yc - xc)
+    ax.plot([xc, mid], [yc, mid], color='#d62728', linewidth=2.6,
+            solid_capstyle='round',
+            label=f'KS = {ks_val:.2f}  (⊥ drop = KS/√2)')
+    ax.scatter([xc], [yc], color='#d62728', s=28, zorder=5)
     ax.set_xlim(0, 1.02)
     ax.set_ylim(0, 1.02)
-    ax.set_xlabel(r'$F_{\mathrm{ref}}(t)$  [Teleop]', fontsize=11)
+    ax.set_xlabel(r'$F_{\mathrm{ref}}(t)$  [Human]', fontsize=11)
     ax.set_ylabel(rf'$F_{{\mathrm{{model}}}}(t)$  [{model_short}]', fontsize=11)
-    ax.set_title(f'(b) P-P plot — {model_short} vs Teleop', loc='left', fontsize=12, fontweight='bold')
+    ax.set_title(f'(b) P-P plot — {model_short} vs Human', loc='left', fontsize=12, fontweight='bold')
     ax.legend(loc='upper left', fontsize=9, frameon=True)
     ax.grid(True, alpha=0.3)
     ax.tick_params(labelsize=10)

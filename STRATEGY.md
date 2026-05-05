@@ -1,3 +1,14 @@
+We should get rid of teleop in the paper. We should find a better name for it. Overall, we can say that we believe that we should compare models to the human baseline. In our case, we use teleoperation dataset that we collected, Something along these lines.
+
+The vertical line on P-P plot as demonstration for KS read poorly. Though it is theoretically right, it reads poorly. The diagonal line (perpendicular to diagonal) would read better and it is just \sqrt{2} less than KS metric.
+
+(or built-in safety reflexes) – this does not happen in practice
+
+we cluster placements within ∆t < 0.3 s into one multi-placement event. -- this is implementation detail and should not be part of the paper. It is worth the comment in the code, but paper should consider them as one cluster
+
+Given that we don't use Greenwood, should we remove "pointwise log-log intervals using the Greenwood [Greenwood] variance estimator are equivalent and described in"??? If reviewer asks, we will reply.
+
+
 # PhAIL paper – strategy and positioning
 
 **Last updated:** 2026-05-04. **Authoritative for paper plan:** see `PAPER_PLAN.md` (created 2026-05-03). The "Sharpened headline claim" below has been refined since (hard failures as T=∞ ghost events; %-of-teleop as headline scalar; default-recipe fine-tuning caveat). Where they conflict, `PAPER_PLAN.md` wins.

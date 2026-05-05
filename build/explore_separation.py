@@ -26,7 +26,11 @@ from typing import Sequence
 import configuronic as cfn
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patheffects import withStroke
 from scipy.stats import chi2
+
+# Black text with a thin white stroke -- readable on every cmap background.
+_TEXT_FX = [withStroke(linewidth=2.2, foreground='white')]
 
 from build import common, stats
 from build.markup import loader
@@ -248,9 +252,10 @@ def main(cohort: str, tau: float, n_boot: int, seed: int, out_dir: str):
             if cs['n_events'] > 0:
                 txt = f'{cs["rmst"]:.0f}\n[{cs["rmst_lo"]:.0f},{cs["rmst_hi"]:.0f}]'
                 ax.text(j, i, txt, ha='center', va='center', fontsize=8,
-                        color='white' if cs['rmst'] > (vmin + vmax) / 2 else 'black')
+                        color='black', path_effects=_TEXT_FX)
             else:
-                ax.text(j, i, 'n/a', ha='center', va='center', fontsize=8, color='grey')
+                ax.text(j, i, 'n/a', ha='center', va='center', fontsize=8,
+                        color='black', path_effects=_TEXT_FX)
     plt.colorbar(im, ax=ax, label=f'RMST (s) at τ={tau:.0f}')
     ax.set_title(f'RMST per (model, object) with 95% bootstrap CI — cohort={cohort}')
     fig.tight_layout()
@@ -274,10 +279,11 @@ def main(cohort: str, tau: float, n_boot: int, seed: int, out_dir: str):
         for j in range(len(OBJECTS)):
             v = pct_grid[i, j]
             if np.isnan(v):
-                ax.text(j, i, 'n/a', ha='center', va='center', fontsize=9, color='grey')
+                ax.text(j, i, 'n/a', ha='center', va='center', fontsize=9,
+                        color='black', path_effects=_TEXT_FX)
             else:
                 ax.text(j, i, f'{v:.1f}%', ha='center', va='center', fontsize=10,
-                        color='white' if v > vmax * 0.55 else 'black')
+                        color='black', path_effects=_TEXT_FX)
     plt.colorbar(im, ax=ax, label='% of teleop throughput')
     ax.set_title('Throughput as % of teleop ceiling per (model, object)')
     fig.tight_layout()
@@ -304,7 +310,7 @@ def main(cohort: str, tau: float, n_boot: int, seed: int, out_dir: str):
             txt = f'p={r["p"]:.1e}{star}'
             for ii, jj in ((i, j), (j, i)):
                 ax.text(jj, ii, txt, ha='center', va='center', fontsize=7,
-                        color='white' if -np.log10(max(r['p'], 1e-12)) > 3 else 'black')
+                        color='black', path_effects=_TEXT_FX)
         ax.set_title(title, fontsize=11)
     fig.suptitle('Pairwise logrank: -log10(p), * = Bonferroni-significant (α=0.05)', fontsize=12)
     fig.tight_layout()
