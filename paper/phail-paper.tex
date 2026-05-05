@@ -62,6 +62,14 @@ Empirically, on four frontier VLAs -- OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6
 \paragraph{Scope.} The methodological contribution is the comparison primitive, the ranking procedure, the power budget, and the open framework that makes new claims auditable. The per-model rankings are illustrative of what the methodology can resolve at our depth, not architectural pronouncements; we used each repository's default fine-tuning recipe (\S\ref{sec:phail-finetune}). PhAIL is open to submissions.
 
 %===============================================================================
+\section{Related Work}\label{sec:related}
+%===============================================================================
+
+\paragraph{Existing real-robot evaluation protocols.} RoboArena~\cite{roboarena} and RoboChallenge~\cite{robochallenge} use physical robots but compare via pairwise Elo or scalar success on standardized tasks; neither reports confidence intervals or paired tests on the rankings. Competition-style evaluations (RGMC, OCRTOC~\cite{ocrtoc}, NIST Assembly Task Boards~\cite{nist_atb}, the Real Robot Challenge~\cite{realrobotchallenge}, surveyed in~\cite{sun_competitions_2022}) standardize task scoring without statistical machinery; closest in spirit is the Digital Robot Judge~\cite{so2023}, which builds task-centric performance databases via electronic task boards but reports raw telemetry only. The most rigorous existing real-robot evaluation is the LBM examination~\cite{lbm2026}, which runs blinded same-session A/B at $N{=}50$--$200$ per condition with Bayesian posterior violins on success rate, paired Barnard's exact tests for binary outcomes, Welch's $t$-tests for a scalar task-completion score, and Bonferroni-corrected significance grouping -- a strong precedent for what rigorous real-robot evaluation looks like. PhAIL's contribution is orthogonal to LBM's: a richer primitive (time-to-success CDF with $T{=}\infty$ ghost events, jointly carrying reliability and throughput) and a same-fixture human-reference anchor that turns embodiment-specific timings into a dimensionless ratio. Simulated benchmarks (RoboCasa, CALVIN, ManiSkill, SIMPLER~\cite{robocasa,calvin,maniskill,simpler}) iterate fast but miss real-world perception, latency, and safety; they are complementary, not substitutes.
+
+\paragraph{Methodology critiques.} Kress-Gazit et al.~\cite{kress2024} argue that current real-robot evaluation is statistically anemic and prescribe blinded same-session A/B at hundreds of rollouts; STEP~\cite{snyder2025} concurs (``20--30 real-world trials are insufficient for statistically significant conclusions''). On the ML side, Agarwal et al.~\cite{agarwal2021} are the closest precedent for distributional comparison in evaluation. We extend their distributional approach to time-to-event data with $T{=}\infty$ ghost events and ship a reference implementation that operationalizes Kress-Gazit's prescriptions on a shared station. A 12-paper survey of recent VLA evaluation practice (Appendix~\ref{app:survey}) corroborates: modal per-condition $N$ is 10--20, and 11 of 12 papers report neither confidence intervals nor paired tests; LBM is the single recent counterexample.
+
+%===============================================================================
 \section{Time-to-Success CDF as Evaluation Primitive}\label{sec:framework}
 %===============================================================================
 
@@ -148,7 +156,7 @@ Each rollout has a 30\,s/item time cap ($\sim$10$\times$ the $\sim$2.7\,s/item h
 
 After object/model filtering, $\sim$950 episodes enter the analyses; 386 are human reference rollouts. Annotations come from manual review of rollout video augmented by automated success detection (Appendix~\ref{app:protocol}); both label streams are released alongside the data.
 
-How many rollouts does a ranking claim actually need? Standard power calculations (Appendix~\ref{app:power}) put the field-modal $N{=}10$--$20$ orders of magnitude under-budget: a $\pm 5$\,pp Wilson CI on a single arm needs $N{\approx}380$, and detecting a 5\,pp paired difference between two policies (McNemar, 80\% power, $\alpha{=}0.05$) needs 600--1500 paired rollouts. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below either threshold; \S\ref{sec:res-efficiency} corroborates this empirically with detection-rate-vs-$N$ curves on our data.
+How many rollouts does a ranking claim actually need? Standard power calculations (Appendix~\ref{app:power}) put the field-modal $N{=}10$--$20$ (Appendix~\ref{app:survey}) orders of magnitude under-budget: a $\pm 5$\,pp Wilson CI on a single arm needs $N{\approx}380$, and detecting a 5\,pp paired difference between two policies (McNemar, 80\% power, $\alpha{=}0.05$) needs 600--1500 paired rollouts. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below either threshold; \S\ref{sec:res-efficiency} corroborates this empirically with detection-rate-vs-$N$ curves on our data.
 
 %===============================================================================
 \section{Results}\label{sec:results}
@@ -253,8 +261,6 @@ PhAIL's protocol additionally logs the spatial configuration (camera/tote placem
 \section{Discussion}\label{sec:discussion}
 %===============================================================================
 
-\paragraph{Position against prior benchmarks.} Simulated benchmarks~\cite{robocasa,calvin,maniskill,simpler} iterate fast but miss real-world perception, latency, and safety. Real-hardware benchmarks~\cite{roboarena,robochallenge,ocrtoc,nist_atb,realrobotchallenge,so2023,sun_competitions_2022} compare via pairwise Elo or scalar success on standardized tasks; none reports throughput or reliability distributionally over operations. Methodology-side, Kress-Gazit et al.~\cite{kress2024} and the LBM examination~\cite{lbm2026} are existence proofs that blinded same-session A/B with hundreds of rollouts is feasible; Agarwal et al.~\cite{agarwal2021} are the closest ML-side precedent for distributional comparison. We extend their approach to time-to-event data with $T = \infty$ ghost events and ship a reference implementation.
-
 \paragraph{Limits.} Single embodiment (Franka FR3, fixed cameras), single primitive (bin-to-bin pick-and-place, four trained objects); the framework generalizes to any operation with a human reference and event-time outcome but the empirical validation does not. $N{\approx}35$ per cell is 2--3$\times$ the field median but still below what binary metrics need to rank close pairs (\S\ref{sec:res-efficiency}). The per-model rankings are illustrative; per-model recipe optimization could shift them.
 
 \paragraph{Protocol recommendations.} The single recommendation that does the most work is \textbf{blind, randomized rotation on the same fixture in the same session}: spatial-configuration shifts (Appendix~\ref{app:spatial}) move outcomes by margins comparable to gaps between adjacent models, contaminating the CDF if not controlled. The remaining recommendations -- report the CDF, treat hard failures as ghost events, anchor to a same-fixture human reference, separate reporting from ranking, plan $N$ from detection-rate curves -- are restatements of the contributions in protocol form.
@@ -313,7 +319,7 @@ If the field adopts this methodology, three things change. \textbf{Scalar choice
 \section{Survey of Recent VLA Evaluation Practice}\label{app:survey}
 %===============================================================================
 
-Table~\ref{tab:survey} surveys 13 recent real-robot VLA papers from 2023--2025. Modal per-condition $N$ is 10--20; in 12 of 13 papers no confidence intervals or paired tests are reported. The single recent counter-example is the LBM examination~\cite{lbm2026}, which reports Wilson-score 95\% CIs.
+Table~\ref{tab:survey} surveys 13 recent real-robot VLA papers from 2023--2025. Modal per-condition $N$ is 10--20; in 12 of 13 papers no confidence intervals or paired tests are reported. The single recent counter-example is the LBM examination~\cite{lbm2026}, which reports Bayesian posterior credible regions and paired Barnard's exact / Welch's $t$-tests with Bonferroni-corrected significance grouping at $N{=}50$ real / $200$ simulation per condition.
 
 \begin{table}[h]
 \centering
@@ -336,7 +342,7 @@ DROID~\cite{droid} & 10 rollouts per (task, method) & ``Standard error'' mention
 SmolVLA~\cite{smolvla} & tens per real task & Point estimates \\
 ECoT~\cite{ecot} & $\sim$20/task ($\sim$300 total / policy) & Point estimates \\
 \midrule
-LBM Examination~\cite{lbm2026} & hundreds per condition & Wilson 95\% CIs \\
+LBM Examination~\cite{lbm2026} & 50 real / 200 sim per condition & Bayesian posteriors + paired Barnard / Welch with Bonferroni \\
 \bottomrule
 \end{tabular}
 \normalsize
