@@ -1,21 +1,22 @@
 # PhAIL — Code Companion
 
-Analysis pipeline for the PhAIL benchmark paper. This repository turns
-per-episode rollout data into the figures, tables, and statistical claims
-in the paper. The dataset itself is hosted separately (see step 2 below);
-benchmark and project page live at <https://phail.ai>.
+Anonymous code release accompanying a NeurIPS 2026 Evaluations & Datasets
+track submission. The dataset is hosted separately (URL provided in the
+OpenReview submission as "Dataset URL"). This repository contains the
+analysis pipeline that turns per-episode rollout data into the figures,
+tables, and statistical claims in the paper.
 
-The paper source is `paper/phail-paper.tex`; the compiled PDF sits next to
-it. The methodology lives in `build/markup/loader.py` (data loading + cohort
-selection), `build/stats.py` (Kaplan-Meier, RMST, paired KS, episode-clustered
+The paper is `paper/phail-paper.pdf`. The methodology lives in
+`build/markup/loader.py` (data loading + cohort selection),
+`build/stats.py` (Kaplan-Meier, RMST, paired KS, episode-clustered
 bootstrap), `build/fig_*.py` (figures), `build/tab_*.py` (tables), and
 `build/explore_*.py` (slow analyses).
 
 ---
 
-## Quick start
+## Quick start (reviewer reproduction)
 
-The reproduction path is **install → download data → set env var
+The complete reproduction path is **install → download data → set env var
 → `make figures-paper`**. The four paper figures and the leaderboard table
 write to `out/paper/`.
 
@@ -34,15 +35,15 @@ including `huggingface_hub` for the dataset download.
 
 ### 2. Download the dataset
 
-The dataset is mirrored on Hugging Face. The current canonical URL is
-announced at <https://phail.ai>. Set `<hf-dataset-repo>` below to that
-location (in `<owner>/<name>` form).
+The dataset URL is in the OpenReview submission. Replace
+`<DATASET_REPO>` below with the value from that field (HF `<owner>/<name>`
+form; the URL is `https://huggingface.co/datasets/<DATASET_REPO>`).
 
 For figure regeneration, only per-episode metadata + annotations are
 needed (≈30 MB, downloads in seconds):
 
 ```bash
-uv run hf download <hf-dataset-repo> \
+uv run hf download <DATASET_REPO> \
     --repo-type dataset \
     --local-dir ./phail-data \
     --include "**/static.json" \
@@ -50,7 +51,7 @@ uv run hf download <hf-dataset-repo> \
     --include "annotations/**"
 ```
 
-If you also want the videos and full telemetry (≈43 GB, optional —
+If you also want the videos and full telemetry (≈37 GB, optional —
 not required to reproduce any figure or table), drop the `--include`
 flags or replace them with `--include "**"`.
 
@@ -61,9 +62,7 @@ export PHAIL_DATA_ROOT=$(pwd)/phail-data
 ```
 
 This redirects `build/markup/loader.py` to read per-episode metadata from
-the local download instead of the operator's pos3 cache. The variable
-covers both the public dataset (`s3://positronic-public/datasets/phail/v1.0/`)
-and the pre-release `inference_legacy/` mirror.
+the local download instead of the operator's pos3 cache.
 
 ### 4. Regenerate paper figures and table
 
@@ -126,7 +125,7 @@ paper/
 ├── phail-paper.tex         Paper source (LaTeX, NeurIPS template)
 └── phail-paper.pdf         Compiled paper
 dataset/
-└── croissant.json          Croissant 1.1 dataset metadata
+└── croissant.json          Croissant 1.1 dataset metadata (referenced by paper Q5)
 out/                        Generated outputs (figures, tables, JSON sidecars)
 Makefile                    Build orchestration
 pyproject.toml              Python deps (uv-managed)
@@ -145,9 +144,8 @@ supported:
   `reviewed=true`. Placement timestamps come straight from the JSON.
 - **`mixed`**: union of `manual` plus auto-validated episodes — those
   where the Stage-2 classifier's success count agrees with the operator's
-  logged item count, plus episodes the operator recorded as zero-success
-  (no successes to verify; the episode contributes only censored tail and
-  ghost events).
+  logged item count. Auto-validated timestamps come from the classifier's
+  candidate predictions.
 
 Downstream:
 
@@ -168,15 +166,16 @@ released alongside for transparency.
 
 ---
 
-## Notes
+## Notes for review
 
+- The `paper/phail-paper.pdf` in this repo matches the OpenReview
+  submission. Both are anonymized; URLs to dataset / code / project
+  page are withheld for double-blind review.
+- The full ~37 GB dataset is hosted publicly under the dataset URL
+  field on the OpenReview submission; the `--include` filter in step 2
+  fetches only the metadata reviewers need to regenerate figures.
 - All randomness in the analysis is seeded; the published figures are
   reproducible bit-for-bit modulo matplotlib version drift.
 - The codebase uses [`configuronic`](https://pypi.org/project/configuronic/)
   for CLI argument parsing on most scripts; pass `--help` to any
   `build/*.py` for available knobs.
-- The cohort uses `s3://positronic-public/datasets/phail/v1.0/` (the v1.0
-  public release) plus `s3://inference/phail_act_groot/` (pre-release
-  rollouts mirrored on the public Hugging Face repo under
-  `inference_legacy/phail_act_groot/`). Both prefixes resolve under
-  `PHAIL_DATA_ROOT` when set.
