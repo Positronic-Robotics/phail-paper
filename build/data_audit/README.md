@@ -5,7 +5,7 @@ that the rest of the pipeline (drop-event classifier, etc.) can rely on.
 
 ## What's published
 
-The benchmark is hosted at <https://phail.ai>. The underlying data lives in
+The benchmark is hosted at <URL withheld for double-blind review>. The underlying data lives in
 public Nebius S3:
 
 ```
@@ -19,14 +19,14 @@ It's also reachable over HTTPS without S3 credentials at
 `https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/`
 — that's the URL used by Toloka and the Run explorer videos.
 
-The hosted leaderboard at <https://phail.ai/episodes> is the same dataset:
+The hosted leaderboard at <<URL withheld>/episodes> is the same dataset:
 
 * Concatenation order is `inference + human + training`, so episode index 0 is
   the first inference episode, 524 the first human episode, 564 the first
   training episode.
-* JSON feed: <https://phail.ai/api/episodes> (~170 KB, 1013 rows). Bare
+* JSON feed: <<URL withheld>/api/episodes> (~170 KB, 1013 rows). Bare
   `urllib.request` gets a 403; pass any non-empty User-Agent.
-* Per-episode viewer URL: `https://phail.ai/episode/{idx}` where `{idx}` is the
+* Per-episode viewer URL: `<URL withheld>/episode/{idx}` where `{idx}` is the
   zero-based index in the API response.
 
 Episode layout on disk (one directory per episode under `<source>/<shard>/<idx>/`):
@@ -79,7 +79,7 @@ Files end up under `out/data_audit/` and are *not* committed:
     "rel_path":        "000000000000/000000000017",
     "s3_dir":          "s3://positronic-public/datasets/phail/v1.0/...",
     "https_dir":       "https://storage.eu-north1.nebius.cloud/...",
-    "public_url":      "https://phail.ai/episode/541",
+    "public_url":      "<URL withheld>/episode/541",
     "model":           "Physical Intelligence Open π₀.₅",
     "raw_model_type":  "openpi",          // empty for baselines
     "variant":         "270226-ee_rot6d_rel:150000",  // empty for baselines
@@ -150,7 +150,7 @@ The `inference/` tree has been **prod-filtered** by the release pipeline:
 | `openpi`, `act`, `smolvla` | (no filter) | — |
 
 So `inference/` size = 524 = 151 ACT + 116 SmolVLA + 128 GR00T + 129 OpenPI;
-the leaderboard you see at <https://phail.ai> is exactly this slice.
+the leaderboard you see at <URL withheld for double-blind review> is exactly this slice.
 
 ### Caveats / known imperfections
 
@@ -182,8 +182,8 @@ print(ep['target_grip'])         # commanded gripper signal
 print(ep['robot_state.ee_pose']) # 7-vector pose signal
 print(ep['eval.object'], ep['eval.outcome'])
 
-# Or address a specific public episode by its phail.ai index:
-url = 'https://phail.ai/episode/541'
+# Or address a specific public episode by its public leaderboard index:
+url = '<URL withheld>/episode/541'
 rec = next(r for r in records if r['public_url'] == url)
 print(rec['source'], rec['rel_path'], rec['model'])
 ```

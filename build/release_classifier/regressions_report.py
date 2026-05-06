@@ -455,7 +455,7 @@ def _episode_summary(row: dict[str, str], view: EpisodeView) -> str:
         f'orphan={_h(row["n_orphan_commanded"])}) '
         f'duration={_h(row["duration_s"])}s'
     )
-    link = f'<a href="{html.escape(public_url)}" target="_blank">phail.ai</a>' if public_url else ''
+    link = f'<a href="{html.escape(public_url)}" target="_blank">viewer</a>' if public_url else ''
     return (
         '<summary>'
         f'<span class="tag {row["status"]}">{row["status"].upper()}</span>'
@@ -649,7 +649,7 @@ def _render_intro(manual_blocks: dict[str, str]) -> str:
     )
     parts.append(
         '<p class="meta">Click <span class="meta">view@…</span> on any '
-        f'candidate to open the phail.ai viewer paused {VIEWER_LEAD_IN_S:.1f}s '
+        f'candidate to open the public viewer paused {VIEWER_LEAD_IN_S:.1f}s '
         'before the candidate timestamp. Yellow boxes are editable manual '
         'sections — content between <code>&lt;!-- BEGIN MANUAL: id --&gt;</code> '
         'and <code>&lt;!-- END MANUAL: id --&gt;</code> is preserved across '

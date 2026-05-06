@@ -8,13 +8,13 @@ For each episode under
 we produce one row with:
   - source tree (training / inference / human)
   - relative path under the tree (used to dedupe + locate files)
-  - model display name (matched against the public phail.ai leaderboard)
+  - model display name (matched against the public public leaderboard)
   - eval.object (Towels / Wooden spoons / Scissors / Batteries)
   - eval.tote_placement, eval.external_camera (when present)
   - eval.successful_items, eval.total_items, eval.duration
   - eval.outcome (Success / Fail / Safety) -> derived `status` (Pass / Fail / Safety)
   - episode start timestamp and duration in seconds
-  - public_url -> the phail.ai episode viewer URL when the episode appears in the
+  - public_url -> the public episode viewer URL when the episode appears in the
     leaderboard (training-only DROID episodes are not in the leaderboard, so they
     don't get one); we match by `created_ts_ns` since the leaderboard reorders.
   - https_dir -> direct https URL to the episode directory (videos + parquets)
@@ -82,9 +82,11 @@ MODEL_DISPLAY = {
 # human directly, so both paths are covered.
 SOURCE_DEFAULT_MODEL = {'training': 'Robot teleoperated by Human', 'human': 'Human'}
 
-LEADERBOARD_URL = 'https://phail.ai'
-EPISODE_VIEWER_URL_TEMPLATE = LEADERBOARD_URL + '/episode/{idx}'
-LEADERBOARD_API_URL = LEADERBOARD_URL + '/api/episodes'
+# Public leaderboard URL is withheld for double-blind review; cross-checking
+# against an external leaderboard is disabled in this anonymous build.
+LEADERBOARD_URL = ''
+EPISODE_VIEWER_URL_TEMPLATE = ''
+LEADERBOARD_API_URL = ''
 
 # We only need static.json + meta.json + telemetry parquets. MP4s are gigabytes
 # of video data and we don't need them for the audit / drop-event classifier.
@@ -109,7 +111,7 @@ def _download_metadata() -> dict[str, Path]:
 
 
 def _model_for(source: str, static: dict) -> str:
-    """Display name matching the phail.ai leaderboard."""
+    """Display name matching the public leaderboard."""
     if source in SOURCE_DEFAULT_MODEL:
         return SOURCE_DEFAULT_MODEL[source]
     raw_type = static.get('inference.policy.server.type', '') or static.get('model', '')
@@ -184,7 +186,8 @@ def _fetch_leaderboard(api_url: str) -> dict:
     seconds (== created_ts_ns / 1e9 in the meta), which uniquely identifies each
     episode.
     """
-    # phail.ai blocks the bare urllib User-Agent (403); pass an identifiable UA.
+    if not api_url:
+        return {}
     print(f'  fetching {api_url} ...')
     req = urllib.request.Request(api_url, headers={'User-Agent': 'phail-paper/0.1 (+data_audit)'})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -257,7 +260,7 @@ def build_records(local_paths: dict[str, Path], by_started: dict[float, int]) ->
 
     # Private-source loop: index any configured PRIVATE_SOURCES from the local
     # cache. These records share the public schema but get per-source s3_dir
-    # prefixes and no leaderboard URL (not on phail.ai). _model_for falls
+    # prefixes and no leaderboard URL (not on the public leaderboard). _model_for falls
     # through to inference.policy.server.type since the source name isn't in
     # SOURCE_DEFAULT_MODEL.
     for source, ep_dir, rel, s3_prefix in _iter_private_episodes():
@@ -400,7 +403,7 @@ def main():
         default=Path('out/data_audit'),
         help='directory for episodes.json/summary.json/episodes.csv',
     )
-    parser.add_argument('--skip-leaderboard', action='store_true', help='skip phail.ai API fetch (URLs will be empty)')
+    parser.add_argument('--skip-leaderboard', action='store_true', help='skip leaderboard API fetch (URLs will be empty)')
     args = parser.parse_args()
 
     print('1) Sync metadata + telemetry parquets from S3 (excluding videos)...')

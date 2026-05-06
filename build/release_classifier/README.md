@@ -272,7 +272,7 @@ context; `features` is the `ReleaseFeatures.to_dict()` view keyed by
 {
   "source": "inference",
   "rel_path": "000000000000/000000000000",
-  "public_url": "https://phail.ai/episode/0",
+  "public_url": "<URL withheld>/episode/0",
   "https_dir": "https://storage.../inference/000000000000/000000000000",
   "model": "groot",
   "object": "wooden_spoons",
@@ -324,7 +324,7 @@ by `RecallStatus` — `MISSING` first, then `MATCH`, then `EXTRA`. Each
 episode card has:
 
 * per-episode metadata (model, object, S/N, expected/actual, duration)
-* phail.ai + https_dir + raw MP4 links
+* public viewer + https_dir + raw MP4 links
 * `eval.notes` rendered as a yellow callout when present
 * a per-candidate table with all features and an `image.{exterior,wrist}.mp4#t=`
   link per candidate that jumps the browser straight to that timestamp.
@@ -407,7 +407,7 @@ for `PLATEAU_MIN_MS = 150`).
   above). Resolving them is stage-2 work using `displacement_m` and
   `ee_y_zone`.
 
-The HTML report includes time-jump links into the phail.ai viewer so any
+The HTML report includes time-jump links into the public viewer so any
 disagreement can be verified against the wrist camera in seconds.
 
 ## Known limitations

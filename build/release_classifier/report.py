@@ -1,6 +1,6 @@
 """Render out/release_classifier/report.html — a single self-contained static
 page grouping episodes by recall status (MISSING first), with each candidate
-deep-linking into the phail.ai episode viewer at the right timestamp.
+deep-linking into the public episode viewer at the right timestamp.
 
 The viewer accepts `?t=<seconds>` to open paused at a given offset from the
 start of the episode (see positronic_server.py:545). We seek a small
@@ -137,7 +137,7 @@ VIEWER_LEAD_IN_S: float = 1.5
 
 
 def _viewer_url(public_url: str, ts_s: float) -> str | None:
-    """Build a phail.ai viewer URL paused `ts_s` seconds (minus a small
+    """Build a public viewer URL paused `ts_s` seconds (minus a small
     lead-in) from the start of the episode. The viewer's `?t=` param is
     documented in positronic_server.py.
     """
@@ -204,13 +204,13 @@ def _episode_header_meta(row: dict[str, str]) -> str:
 
 
 def _episode_links(public_url: str) -> list[str]:
-    """Per-episode header links. Only the phail.ai viewer is useful for
+    """Per-episode header links. Only the public viewer is useful for
     review; raw https_dir / MP4 download links are skipped because the
     viewer is what the team actually uses (and the per-candidate links
     below already deep-link into it at the right timestamp)."""
     if not public_url:
         return []
-    return [f'<a href="{html.escape(public_url)}" target="_blank">phail.ai</a>']
+    return [f'<a href="{html.escape(public_url)}" target="_blank">viewer</a>']
 
 
 def _table_header() -> str:
@@ -331,7 +331,7 @@ def _render_intro() -> str:
         '<span class="tag missing">MISSING</span> (n &lt; expected) first, '
         'then <span class="tag match">MATCH</span>, then '
         '<span class="tag extra">EXTRA</span>. Click <span class="meta">view@&hellip;</span> '
-        f'on any candidate row to open the phail.ai viewer paused {VIEWER_LEAD_IN_S:.1f}s before '
+        f'on any candidate row to open the public viewer paused {VIEWER_LEAD_IN_S:.1f}s before '
         'the candidate timestamp. Yellow boxes show <code>eval.notes</code> '
         '(inference only) where they exist.'
         '</p>'
