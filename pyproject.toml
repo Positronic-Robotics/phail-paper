@@ -16,8 +16,5 @@ dependencies = [
     "scipy",
 ]
 
-[tool.uv.sources]
-positronic = { path = "../positronic", editable = true }
-
 [tool.hatch.build.targets.wheel]
 packages = ["build", "toloka"]

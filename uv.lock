@@ -9,7 +9,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-04-29T11:38:11.273417Z"
+exclude-newer = "2026-04-29T21:57:48.792884Z"
 exclude-newer-span = "P7D"
 
 [options.exclude-newer-package]
@@ -1648,7 +1648,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "numpy" },
     { name = "pos3", specifier = ">=0.2.0" },
-    { name = "positronic", editable = "../positronic" },
+    { name = "positronic" },
     { name = "pyarrow", specifier = ">=23.0.1" },
     { name = "scipy" },
 ]
@@ -1778,7 +1778,7 @@ wheels = [
 [[package]]
 name = "positronic"
 version = "0.2.1"
-source = { editable = "../positronic" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "av" },
     { name = "coloredlogs" },
@@ -1809,64 +1809,10 @@ dependencies = [
     { name = "websockets" },
     { name = "zmq" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "av" },
-    { name = "coloredlogs", specifier = ">=15.0.1" },
-    { name = "configuronic", specifier = ">=0.3.1" },
-    { name = "coverage", marker = "extra == 'dev'" },
-    { name = "cvxopt" },
-    { name = "dearpygui" },
-    { name = "dm-control" },
-    { name = "fastapi" },
-    { name = "feetech-servo-sdk", marker = "extra == 'hardware'" },
-    { name = "fire" },
-    { name = "httpx" },
-    { name = "ipython", marker = "extra == 'dev'" },
-    { name = "jinja2" },
-    { name = "jupyter", marker = "extra == 'dev'" },
-    { name = "lerobot", marker = "extra == 'lerobot-0-3-3'", specifier = "==0.3.3" },
-    { name = "lerobot", extras = ["smolvla"], marker = "extra == 'lerobot'", specifier = "==0.4.3" },
-    { name = "linuxpy", marker = "extra == 'hardware'" },
-    { name = "msgpack" },
-    { name = "mujoco" },
-    { name = "numpy" },
-    { name = "opencv-python", marker = "extra == 'dev'" },
-    { name = "opencv-python-headless" },
-    { name = "openpi-client", marker = "extra == 'openpi'", git = "https://github.com/Positronic-Robotics/openpi.git?subdirectory=packages%2Fopenpi-client&rev=main-positronic" },
-    { name = "placo", marker = "extra == 'hardware'" },
-    { name = "plotly", specifier = ">=6.5.0" },
-    { name = "pos3", specifier = ">=0.2.0" },
-    { name = "positronic-franka", marker = "sys_platform == 'linux' and extra == 'hardware'", specifier = ">=0.3.0" },
-    { name = "pre-commit", marker = "extra == 'dev'" },
-    { name = "pyarrow" },
-    { name = "pyaudio", marker = "sys_platform == 'linux' and extra == 'hardware'" },
-    { name = "pydantic" },
-    { name = "pymodbus", marker = "extra == 'hardware'" },
-    { name = "pyserial", marker = "extra == 'hardware'" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'" },
-    { name = "pytest-cov", marker = "extra == 'dev'" },
-    { name = "pytest-timeout", marker = "extra == 'dev'" },
-    { name = "pyturbojpeg", specifier = "<2" },
-    { name = "pyyaml" },
-    { name = "pyzed", marker = "sys_platform == 'linux' and extra == 'hardware'", url = "https://download.stereolabs.com/zedsdk/5.0/whl/linux_x86_64/pyzed-5.0-cp311-cp311-linux_x86_64.whl" },
-    { name = "rerun-sdk", specifier = "==0.30.0" },
-    { name = "rerun-sdk", extras = ["notebook"], marker = "extra == 'dev'" },
-    { name = "robosuite" },
-    { name = "ruckig" },
-    { name = "ruff", marker = "extra == 'dev'" },
-    { name = "scipy" },
-    { name = "starlette", specifier = ">=1.0.0" },
-    { name = "timm", marker = "extra == 'lerobot-0-3-3'" },
-    { name = "torch", marker = "extra == 'lerobot'" },
-    { name = "torch", marker = "extra == 'lerobot-0-3-3'" },
-    { name = "uvicorn", extras = ["standard"] },
-    { name = "websockets", specifier = ">=15.0.1" },
-    { name = "zmq" },
+sdist = { url = "https://files.pythonhosted.org/packages/78/24/2b2df537d6e6492b08f3c48463c23b991e1ce756a79a3252ac3b8301d7ea/positronic-0.2.1.tar.gz", hash = "sha256:06b9303274b7e2bfa974081550cbd5db1940b31fa6ec5a657628339fb2964a4f", size = 31391866, upload-time = "2026-03-31T21:46:07.676Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f4/34/72aba897aeab39f9b0b650cddfc08f64805af730d6fd3f6b86d2c063e92b/positronic-0.2.1-py3-none-any.whl", hash = "sha256:6eb2226118aa90af139f44c67e94076c0aae261d6e5d45acd3a4e45ad021840f", size = 31674338, upload-time = "2026-03-31T21:46:04.77Z" },
 ]
-provides-extras = ["openpi", "hardware", "lerobot-0-3-3", "lerobot", "dev"]
 
 [[package]]
 name = "protobuf"
