@@ -31,7 +31,7 @@ How do you tell whether one robot policy is better than another in the real worl
 \begin{figure}[!t]
   \centering
   \includegraphics[width=\linewidth]{../out/paper/fig_hero.png}
-  \caption{\textbf{(a)} Time-to-success CDFs are richer than any scalar: reliability and throughput on a single axis. The four frontier VLAs all sit far below the human reference -- the best is $\sim$$7\times$ slower. Hard failures (drops outside the workspace, safety stops) become the asymptote below $F=1$ instead of disappearing into a censored tail. \textbf{(b)} Choosing the right \emph{test}, not just running more trials, is what resolves close rankings: paired Kolmogorov--Smirnov on the macro CDF reaches 80\% detection on the borderline pair GR00T vs.\ ACT at $N{=}20$ paired rollouts per (model, object) cell, while binary success-rate-at-threshold ($F(30s)$, $F(60s)$) and integrated RMST stay near the noise floor across the entire $N \le 30$ range. The dominant practice ($F(\tau)$ at modal $N \le 25$) is structurally too coarse to back the rankings it publishes.}
+  \caption{\textbf{(a)} Time-to-success CDFs are richer than any scalar: reliability and throughput on a single axis. The four frontier VLAs all sit far below the human reference -- the best is $\sim$$7\times$ slower. Hard failures (drops outside the workspace, safety stops) become the asymptote below $F=1$ instead of disappearing into a censored tail. \textbf{(b)} Choosing the right \emph{test}, not just running more trials, is what resolves close rankings: paired Kolmogorov--Smirnov on the macro CDF reaches 80\% detection on GR00T vs.\ ACT at $N{=}25$ and on OpenPI vs.\ ACT at $N{=}30$ paired rollouts per (model, object) cell, while binary success-rate-at-threshold ($F(30s)$, $F(60s)$) and integrated RMST fall well short of the target on every close pair across the entire $N \le 30$ range. The dominant practice ($F(\tau)$ at modal $N \le 25$) is structurally too coarse to back the rankings it publishes.}
   \label{fig:hero}
 \end{figure}
 
@@ -45,7 +45,7 @@ The standard fix the field has reached for -- adding a throughput metric (UPH, c
 
 We respond by adopting the time-to-success CDF as the evaluation primitive. Let $T$ be the wall-clock time the policy needs to complete one operation; hard failures (items lost outside the workspace, items dropped on the table at episode end, safety stops) are absorbed as $T = \infty$ ghost events rather than censored tails. The resulting CDF $F(t) = P(T \le t)$ jointly carries reliability (its asymptote below 1 equals the hard-failure rate) and throughput (the median of $T$, and $\text{UPH} \propto 1/E[T \mid T < \infty]$). Standard scalars -- success rate at $\tau$, UPH, MTBF/A, completion fraction, RMST -- are projections of $F$, and the CDF is strictly richer than any of them: when two CDFs cross, no single scalar suffices and reasonable scalars give opposite signs on the same data. We separate two methodological jobs the field blurs together: \emph{reporting} (a scalar with bootstrap CIs -- Human-Relative Throughput, HRT, anchored to a same-fixture human reference) and \emph{ranking} (a paired Kolmogorov--Smirnov test on the CDF). PhAIL is the open real-world inference benchmark that instantiates this methodology on a Franka FR3 across four objects.
 
-Empirically, on four frontier VLAs -- OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6~\cite{groot_n1}, ACT~\cite{act}, SmolVLA~\cite{smolvla} -- the best is roughly $7\times$ slower than the human reference, the top two are statistically indistinguishable on every metric tested, and SmolVLA is clearly worst. Two structural findings result. First, principled aggregation rules over the same CDF (RMST vs.\ AUC-vs-human) yield opposite top-1 rankings -- no single scalar uniquely encodes operational priority. Second, the choice of \emph{test}, not just the choice of $N$, determines what is resolvable: paired KS detects the GR00T-vs-ACT ranking at $N{=}20$ paired rollouts per cell, while binary success rate at a fixed threshold needs roughly $30\times$ more rollouts (600--1500 paired by McNemar) to reach the same 80\% detection. The field's modal $N \le 25$ per condition is two orders of magnitude under-budgeted for the ranking claims it publishes.
+Empirically, on four frontier VLAs -- OpenPI $\pi_{0.5}$~\cite{pi05}, GR00T N1.6~\cite{groot_n1}, ACT~\cite{act}, SmolVLA~\cite{smolvla} -- the best is roughly $7\times$ slower than the human reference, the top two are statistically indistinguishable on every metric tested, and SmolVLA is clearly worst. Two structural findings result. First, principled aggregation rules over the same CDF (RMST vs.\ AUC-vs-human) yield opposite top-1 rankings -- no single scalar uniquely encodes operational priority. Second, the choice of \emph{test}, not just the choice of $N$, determines what is resolvable: paired KS detects the GR00T-vs-ACT ranking at $N{=}25$ and the OpenPI-vs-ACT ranking at $N{=}30$ paired rollouts per cell, while binary success rate at a fixed threshold needs roughly $30\times$ more rollouts (600--1500 paired by McNemar) to reach the same 80\% detection. The field's modal $N \le 25$ per condition is two orders of magnitude under-budgeted for the ranking claims it publishes.
 
 \paragraph{Contributions.}
 
@@ -165,12 +165,12 @@ All numbers below use $\tau = 240$\,s for RMST, $n_{\text{boot}} = 1000$ for epi
 \toprule
 Model & RMST (s) & HRT (\%) & Intervention rate & Episodes \\
 \midrule
-Human reference (teleop) & 10.5 & 100.0 & --- & 392 \\
+Human reference (teleop) & 10.5 & 100.0 & --- & 396 \\
 \midrule
-NVIDIA GR00T N1.6 & 78.3 & \textbf{13.5} & 2.3\% & 171 \\
+NVIDIA GR00T N1.6 & 78.8 & \textbf{13.3} & 3.5\% & 173 \\
 Physical Intelligence Open $\pi_{0.5}$ & 81.1 & 13.0 & 4.5\% & 177 \\
-Action Chunking Transformer & 98.2 & 10.7 & 0.7\% & 148 \\
-Hugging Face SmolVLA & 166.9 & 6.3 & 16.3\% & 123 \\
+Action Chunking Transformer & 102.6 & 10.2 & 1.8\% & 166 \\
+Hugging Face SmolVLA & 169.4 & 6.2 & 17.6\% & 131 \\
 \bottomrule
 \end{tabular}
 \caption{Headline ranking ($\tau = 240$\,s, $N \approx 35$/cell). HRT is the cell-wise reference-to-model RMST ratio, macro-averaged across four trained objects. Intervention rate is (safety stops + stalls) / total episodes (lower bound; drops outside the workspace not included).}
@@ -187,19 +187,19 @@ Pair & $p$ (raw) & $p$ (Bonferroni) & Significance \\
 \midrule
 OpenPI vs.\ SmolVLA & ${<}10^{-15}$ & ${<}10^{-14}$ & *** \\
 GR00T vs.\ SmolVLA & ${<}10^{-15}$ & ${<}10^{-14}$ & *** \\
-ACT vs.\ SmolVLA & $3.3 \times 10^{-16}$ & $2.0 \times 10^{-15}$ & *** \\
-GR00T vs.\ ACT & $2.3 \times 10^{-3}$ & $1.4 \times 10^{-2}$ & * \\
-OpenPI vs.\ ACT & $1.1 \times 10^{-2}$ & $6.7 \times 10^{-2}$ & borderline \\
-OpenPI vs.\ GR00T & $4.5 \times 10^{-1}$ & $1.00$ & n.s. \\
+ACT vs.\ SmolVLA & $8.9 \times 10^{-16}$ & $5.3 \times 10^{-15}$ & *** \\
+GR00T vs.\ ACT & $1.4 \times 10^{-4}$ & $8.7 \times 10^{-4}$ & *** \\
+OpenPI vs.\ ACT & $7.2 \times 10^{-4}$ & $4.3 \times 10^{-3}$ & ** \\
+OpenPI vs.\ GR00T & $5.1 \times 10^{-1}$ & $1.00$ & n.s. \\
 \bottomrule
 \end{tabular}
 \caption{Pooled-across-objects logrank, Bonferroni-corrected over the 6 model-pairs.}
 \label{tab:pairs}
 \end{table}
 
-The top two inference models cluster as statistically indistinguishable; ACT is separable from GR00T and borderline from OpenPI; SmolVLA is distinguishably worst. \textbf{Even at $N \approx 35$/cell -- already 2--3$\times$ the field-modal $N$ -- the closest pair (OpenPI vs.\ GR00T) remains unresolved by pooled logrank.}
+The top two inference models cluster as statistically indistinguishable; ACT is separable from both GR00T and OpenPI; SmolVLA is distinguishably worst. \textbf{Even at $N \approx 40$/cell -- already 2--3$\times$ the field-modal $N$ -- the closest pair (OpenPI vs.\ GR00T) remains unresolved by pooled logrank.}
 
-\paragraph{What the field's standard methodology would have said.} At the modal $\tau{=}30$\,s, the binary leader is GR00T (0.51) with OpenPI (0.46) and ACT (0.44) close behind. Under AUC-vs-human the leader is \emph{ACT} (\S\ref{sec:res-aggregation}); under RMST it is GR00T with OpenPI a hair behind, ACT a clear third. Same data, three principled scalar choices, three different top-1s -- and Table~\ref{tab:efficiency} shows no binary-threshold metric can distinguish the close pairs on the underlying CDF at $N{\le}30$. A field-standard $\tau{=}30$-second leaderboard at $N{=}15$ would publish whichever top-1 the random subsample favored, with no power to defend the choice.
+\paragraph{What the field's standard methodology would have said.} At the modal $\tau{=}30$\,s, the binary leader is GR00T (0.50) with OpenPI (0.46) and ACT (0.43) close behind. Under AUC-vs-human the leader is \emph{ACT} (\S\ref{sec:res-aggregation}); under RMST it is GR00T with OpenPI a hair behind, ACT a clear third. Same data, three principled scalar choices, three different top-1s -- and Table~\ref{tab:efficiency} shows no binary-threshold metric can distinguish the close pairs on the underlying CDF at $N{\le}30$. A field-standard $\tau{=}30$-second leaderboard at $N{=}15$ would publish whichever top-1 the random subsample favored, with no power to defend the choice.
 
 \subsection{Sample Efficiency: The Right Test, Not the Right Scalar}\label{sec:res-efficiency}
 
@@ -208,7 +208,7 @@ The headline above leans on RMST and pooled logrank. We now ask the operational 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{../out/paper/fig_efficiency.png}
-  \caption{Detection rate vs.\ subsample size $N$ per (model, object) cell, on the three close pairs that carry efficiency information (left: OpenPI vs.\ GR00T, the closest pair; centre and right: the two next-closest). Dashed line at 0.8 marks the conventional power target. KS (red) climbs steeply on every close pair while $F(30\,\text{s})$, $F(60\,\text{s})$, and RMST stay near the floor; KS reaches the 80\% target within budget only on GR00T vs.\ ACT (right, $N{=}20$), climbing to 0.75 on OpenPI vs.\ ACT and 0.61 on OpenPI vs.\ GR00T at $N{=}30$ while the others stay below 0.30 across the entire range. The three any-vs-SmolVLA pairs saturate at $N = 5$ for every metric and are deferred to Appendix~\ref{app:percell}. \textbf{The choice of test, not just the choice of $N$, determines what is resolvable.}}
+  \caption{Detection rate vs.\ subsample size $N$ per (model, object) cell, on the three close pairs that carry efficiency information (left: OpenPI vs.\ GR00T, the closest pair; centre and right: the two next-closest). Dashed line at 0.8 marks the conventional power target. KS (red) climbs steeply on every close pair while $F(30\,\text{s})$, $F(60\,\text{s})$, and RMST stay near the floor; KS reaches the 80\% target within budget on two of the three close pairs -- GR00T vs.\ ACT at $N{=}25$ and OpenPI vs.\ ACT at $N{=}30$ -- while OpenPI vs.\ GR00T (the closest pair) remains unresolved at $N{=}30$ with KS at 0.61. The binary baselines fall well short of 0.8 on every close pair across the entire range. The three any-vs-SmolVLA pairs saturate at $N = 5$ for every metric and are deferred to Appendix~\ref{app:percell}. \textbf{The choice of test, not just the choice of $N$, determines what is resolvable.}}
   \label{fig:efficiency}
 \end{figure}
 
@@ -219,26 +219,26 @@ The headline above leans on RMST and pooled logrank. We now ask the operational 
 Pair & $F(30\,\text{s})$ & $F(60\,\text{s})$ & RMST & KS \\
 \midrule
 OpenPI vs.\ GR00T & --- & --- & --- & --- \\
-OpenPI vs.\ ACT & --- & --- & --- & --- \\
+OpenPI vs.\ ACT & --- & --- & --- & \textbf{30} \\
 OpenPI vs.\ SmolVLA & 5 & 5 & 5 & 10 \\
-GR00T vs.\ ACT & --- & --- & --- & \textbf{20} \\
+GR00T vs.\ ACT & --- & --- & --- & \textbf{25} \\
 GR00T vs.\ SmolVLA & 5 & 5 & 5 & 10 \\
-ACT vs.\ SmolVLA & 5 & 5 & 5 & 10 \\
+ACT vs.\ SmolVLA & 5 & 5 & 5 & 15 \\
 \bottomrule
 \end{tabular}
-\caption{Smallest tested $N$ at which detection rate $\ge 0.8$ per (pair, metric). ``---'' means the detection rate did not reach $0.8$ within the tested range $N \le 30$. KS is the only metric that crosses the threshold within budget on a close pair (GR00T vs.\ ACT, $N{=}20$); on the other two close pairs KS reaches detection rates of 0.75 (OpenPI vs.\ ACT) and 0.61 (OpenPI vs.\ GR00T) at $N{=}30$, while every binary-threshold metric stays below 0.30.}
+\caption{Smallest tested $N$ at which detection rate $\ge 0.8$ per (pair, metric). ``---'' means the detection rate did not reach $0.8$ within the tested range $N \le 30$. KS is the only metric that crosses the threshold within budget on a close pair, and does so on two of three: GR00T vs.\ ACT at $N{=}25$ and OpenPI vs.\ ACT at $N{=}30$. The closest pair, OpenPI vs.\ GR00T, remains unresolved at $N{=}30$ (KS reaches 0.61). Every binary-threshold metric falls short of 0.8 on every close pair within budget.}
 \label{tab:efficiency}
 \end{table}
 
-The table reads in three regimes. \textbf{Three saturated pairs} (any inference model vs.\ SmolVLA): all metrics work; effects are large; binary baselines are slightly faster than KS at saturation because the pooled-resample $H_0$ calibration is conservative when effects are huge. \textbf{Three close pairs} (the three top-3 model pairs) -- the bucket where sample efficiency actually matters. Only GR00T vs.\ ACT reaches the 80\% target within budget, on KS at $N{=}20$. KS detection rate at $N = 30$ on the other two pairs is 0.75 (OpenPI vs.\ ACT) and 0.61 (OpenPI vs.\ GR00T), while $F(30\,\text{s})$, $F(60\,\text{s})$, and RMST stay below 0.30 on every close pair. KS dominates the binary baselines by a factor of 3--6 in detection rate at $N \le 30$ across the three close pairs; resolving them to 80\% empirically would require the 600--1500 paired rollouts the analytical power calculation predicts (\S\ref{sec:phail-cohort}).
+The table reads in three regimes. \textbf{Three saturated pairs} (any inference model vs.\ SmolVLA): all metrics work; effects are large; binary baselines are slightly faster than KS at saturation because the pooled-resample $H_0$ calibration is conservative when effects are huge. \textbf{Three close pairs} (the three top-3 model pairs) -- the bucket where sample efficiency actually matters. KS reaches the 80\% target on two of the three: GR00T vs.\ ACT at $N{=}25$ and OpenPI vs.\ ACT at $N{=}30$. The closest pair, OpenPI vs.\ GR00T, remains unresolved within budget (KS at 0.61 at $N=30$), while $F(30\,\text{s})$, $F(60\,\text{s})$, and RMST fall well short of 0.8 on every close pair. KS dominates the binary baselines by a factor of 2--6 in detection rate at $N \le 30$ across the three close pairs; resolving the closest pair to 80\% empirically would require the 600--1500 paired rollouts the analytical power calculation predicts (\S\ref{sec:phail-cohort}).
 
-Detection rate at $N = 30$ averaged across all six pairs: $F(30\,\text{s}) = 0.54$, $F(60\,\text{s}) = 0.60$, RMST $= 0.57$, \textbf{KS $= 0.89$}. The $+29$\,pp gain of KS over $F(60\,\text{s})$ is concentrated entirely on the three close pairs.
+Detection rate at $N = 30$ averaged across all six pairs: $F(30\,\text{s}) = 0.55$, $F(60\,\text{s}) = 0.65$, RMST $= 0.62$, \textbf{KS $= 0.89$}. The $+24$\,pp gain of KS over $F(60\,\text{s})$ is concentrated entirely on the three close pairs.
 
 Two takeaways. First, \textbf{the distributional test (KS) is materially more sample-efficient than any single CDF-derived scalar (RMST or binary thresholds) for ranking.} RMST-as-scalar is essentially tied with $F(60\,\text{s})$; the integration over $[0, \tau]$ does not buy ranking power because the information lives in \emph{where the curves separate} and an integrator smears it. This does not invalidate RMST as our recommended \emph{reporting} scalar (HRT is built on it) -- it just shouldn't carry the burden of \emph{ranking} too: precisely the two-jobs framing of \S\ref{sec:framework}. Second, \textbf{empirical and analytical evidence triangulate.} The closest pair is unresolvable at $N = 30$ by every metric, matching the analytical 600--1500-paired-rollout requirement.
 
 \subsection{Aggregation-Rule Disagreement}\label{sec:res-aggregation}
 
-Both \textbf{integrated RMST} and \textbf{AUC vs.\ human reference} are principled scalars derived from the \emph{same} CDF; the choice of which to extract is itself a methodological commitment. Macro-AUC across objects: ACT $0.138$ [$0.111$, $0.167$] $>$ OpenPI $0.101$ [$0.084$, $0.118$] $\approx$ GR00T $0.096$ [$0.080$, $0.112$] $>$ SmolVLA $0.027$ [$0.017$, $0.038$]. ACT is now \emph{highest} among inference models; under integrated RMST/HRT it sits third behind GR00T and OpenPI. Same data, two principled aggregations, opposite top-1s.
+Both \textbf{integrated RMST} and \textbf{AUC vs.\ human reference} are principled scalars derived from the \emph{same} CDF; the choice of which to extract is itself a methodological commitment. Macro-AUC across objects: ACT $0.134$ [$0.108$, $0.161$] $>$ OpenPI $0.100$ [$0.085$, $0.116$] $\approx$ GR00T $0.095$ [$0.080$, $0.111$] $>$ SmolVLA $0.027$ [$0.016$, $0.037$]. ACT is now \emph{highest} among inference models; under integrated RMST/HRT it sits third behind GR00T and OpenPI. Same data, two principled aggregations, opposite top-1s.
 
 This is outcome (ii) of \S\ref{sec:framework-test}: ACT and OpenPI/GR00T are different (KS rejects) but neither is uniformly better -- their CDFs cross, with ACT winning the early-time region (high AUC) and OpenPI/GR00T winning the integrated region (low RMST). The disagreement is sharpened by the human reference being ${\sim}7\times$ faster than any evaluated VLA, collapsing the AUC integral onto the short-time region where ACT's early-success peak wins more first-success races. \textbf{When CDFs cross, no single scalar can summarize the comparison without weighting one region over another.}
 

@@ -3,90 +3,90 @@
   "tau": 240.0,
   "n_boot": 1000,
   "cells": {
-    "Physical Intelligence Open \u03c0\u2080.\u2085 | Batteries": 0.11190086729350295,
-    "Physical Intelligence Open \u03c0\u2080.\u2085 | Scissors": 0.06171503405876843,
-    "Physical Intelligence Open \u03c0\u2080.\u2085 | Towels": 0.07208248155719492,
-    "Physical Intelligence Open \u03c0\u2080.\u2085 | Wooden spoons": 0.15672919667987675,
-    "NVIDIA GR00T N1.6 | Batteries": 0.10396993640393139,
-    "NVIDIA GR00T N1.6 | Scissors": 0.07489020373307308,
-    "NVIDIA GR00T N1.6 | Towels": 0.08777940591040377,
-    "NVIDIA GR00T N1.6 | Wooden spoons": 0.11706147059721671,
-    "Action Chunking Transformer | Batteries": 0.167125752901425,
-    "Action Chunking Transformer | Scissors": 0.10411529128607784,
-    "Action Chunking Transformer | Towels": 0.09378194207836457,
-    "Action Chunking Transformer | Wooden spoons": 0.18858853196955055,
-    "Hugging Face SmolVLA | Batteries": 0.012293986636971047,
-    "Hugging Face SmolVLA | Scissors": 0.015328866758778904,
-    "Hugging Face SmolVLA | Towels": 0.026253129006654864,
-    "Hugging Face SmolVLA | Wooden spoons": 0.055261569557710936
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Batteries": 0.11028575930490371,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Scissors": 0.06164081816138458,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Towels": 0.07176042800565116,
+    "Physical Intelligence Open \u03c0\u2080.\u2085 | Wooden spoons": 0.15793660204343787,
+    "NVIDIA GR00T N1.6 | Batteries": 0.10214855626600822,
+    "NVIDIA GR00T N1.6 | Scissors": 0.07308094417693746,
+    "NVIDIA GR00T N1.6 | Towels": 0.08739191331258964,
+    "NVIDIA GR00T N1.6 | Wooden spoons": 0.117915264309374,
+    "Action Chunking Transformer | Batteries": 0.1575445770210484,
+    "Action Chunking Transformer | Scissors": 0.09940713673142175,
+    "Action Chunking Transformer | Towels": 0.08993174691016417,
+    "Action Chunking Transformer | Wooden spoons": 0.18812036980543148,
+    "Hugging Face SmolVLA | Batteries": 0.011008412088482708,
+    "Hugging Face SmolVLA | Scissors": 0.014685487865279841,
+    "Hugging Face SmolVLA | Towels": 0.02554888643184331,
+    "Hugging Face SmolVLA | Wooden spoons": 0.05598842085328572
   },
   "macro": {
     "OpenPI": {
-      "auc": 0.10060689489733576,
-      "auc_lo": 0.08443331228907656,
-      "auc_hi": 0.11751700776526196
+      "auc": 0.10040590187884432,
+      "auc_lo": 0.08521309442150894,
+      "auc_hi": 0.11625138535835833
     },
     "GR00T": {
-      "auc": 0.09592525416115624,
-      "auc_lo": 0.0800726937075572,
-      "auc_hi": 0.11189924739081485
+      "auc": 0.09513416951622732,
+      "auc_lo": 0.07992840147503827,
+      "auc_hi": 0.11130067756269837
     },
     "ACT": {
-      "auc": 0.1384028795588545,
-      "auc_lo": 0.11070764446602388,
-      "auc_hi": 0.16712692076691396
+      "auc": 0.13375095761701644,
+      "auc_lo": 0.1081024181576566,
+      "auc_hi": 0.161003559733527
     },
     "SmolVLA": {
-      "auc": 0.027284387990028938,
-      "auc_lo": 0.017170532633268204,
-      "auc_hi": 0.03790394859312329
+      "auc": 0.026807801809722892,
+      "auc_lo": 0.015757692440398006,
+      "auc_hi": 0.0372704646043807
     }
   },
   "pairs": [
     {
-      "auc_a": 0.10060689489733576,
-      "auc_b": 0.09592525416115624,
-      "diff": 0.004681640736179521,
-      "p": 0.683,
+      "auc_a": 0.10040590187884432,
+      "auc_b": 0.09513416951622732,
+      "diff": 0.005271732362617007,
+      "p": 0.616,
       "a": "OpenPI",
       "b": "GR00T"
     },
     {
-      "auc_a": 0.10060689489733576,
-      "auc_b": 0.1384028795588545,
-      "diff": -0.03779598466151873,
-      "p": 0.018,
+      "auc_a": 0.10040590187884432,
+      "auc_b": 0.13375095761701644,
+      "diff": -0.03334505573817212,
+      "p": 0.039,
       "a": "OpenPI",
       "b": "ACT"
     },
     {
-      "auc_a": 0.10060689489733576,
-      "auc_b": 0.027284387990028938,
-      "diff": 0.07332250690730682,
+      "auc_a": 0.10040590187884432,
+      "auc_b": 0.026807801809722892,
+      "diff": 0.07359810006912143,
       "p": 0.0,
       "a": "OpenPI",
       "b": "SmolVLA"
     },
     {
-      "auc_a": 0.09592525416115624,
-      "auc_b": 0.1384028795588545,
-      "diff": -0.042477625397698254,
-      "p": 0.005,
+      "auc_a": 0.09513416951622732,
+      "auc_b": 0.13375095761701644,
+      "diff": -0.038616788100789126,
+      "p": 0.009,
       "a": "GR00T",
       "b": "ACT"
     },
     {
-      "auc_a": 0.09592525416115624,
-      "auc_b": 0.027284387990028938,
-      "diff": 0.0686408661711273,
+      "auc_a": 0.09513416951622732,
+      "auc_b": 0.026807801809722892,
+      "diff": 0.06832636770650442,
       "p": 0.0,
       "a": "GR00T",
       "b": "SmolVLA"
     },
     {
-      "auc_a": 0.1384028795588545,
-      "auc_b": 0.027284387990028938,
-      "diff": 0.11111849156882556,
+      "auc_a": 0.13375095761701644,
+      "auc_b": 0.026807801809722892,
+      "diff": 0.10694315580729355,
       "p": 0.0,
       "a": "ACT",
       "b": "SmolVLA"

@@ -1,15 +1,15 @@
 {
   "cohort": "mixed",
   "tau": 240.0,
-  "n_boot": 100,
+  "n_boot": 1000,
   "cells": {
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Batteries": {
       "n_eps": 43,
       "n_events": 122,
       "n_censored": 41,
       "rmst": 97.2015776412308,
-      "rmst_lo": 76.00148076487865,
-      "rmst_hi": 126.00475268451972,
+      "rmst_lo": 79.79357221227869,
+      "rmst_hi": 121.76903806378358,
       "median_T": 45.221000000000004
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Scissors": {
@@ -17,8 +17,8 @@
       "n_events": 109,
       "n_censored": 35,
       "rmst": 93.77386206532968,
-      "rmst_lo": 74.91279908420805,
-      "rmst_hi": 123.53046256606929,
+      "rmst_lo": 71.92348401070471,
+      "rmst_hi": 119.57734095280334,
       "median_T": 50.964
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Towels": {
@@ -26,8 +26,8 @@
       "n_events": 174,
       "n_censored": 40,
       "rmst": 78.62131869739329,
-      "rmst_lo": 65.24175853492396,
-      "rmst_hi": 97.8466782216191,
+      "rmst_lo": 63.51156874972737,
+      "rmst_hi": 95.98414932746226,
       "median_T": 37.483134002000014
     },
     "Physical Intelligence Open \u03c0\u2080.\u2085 | Wooden spoons": {
@@ -35,8 +35,8 @@
       "n_events": 224,
       "n_censored": 31,
       "rmst": 54.749710990985804,
-      "rmst_lo": 41.76105001230189,
-      "rmst_hi": 69.80070165458717,
+      "rmst_lo": 42.54348494459598,
+      "rmst_hi": 68.75104489176344,
       "median_T": 20.34
     },
     "NVIDIA GR00T N1.6 | Batteries": {
@@ -44,98 +44,98 @@
       "n_events": 155,
       "n_censored": 45,
       "rmst": 88.61893151487186,
-      "rmst_lo": 73.50928730655694,
-      "rmst_hi": 99.75123204751473,
+      "rmst_lo": 72.1411504211701,
+      "rmst_hi": 107.45589123933303,
       "median_T": 33.700386069
     },
     "NVIDIA GR00T N1.6 | Scissors": {
-      "n_eps": 32,
-      "n_events": 57,
-      "n_censored": 32,
-      "rmst": 115.62891822879375,
-      "rmst_lo": 95.77801377012615,
-      "rmst_hi": 134.4819837418246,
-      "median_T": 74.266
+      "n_eps": 33,
+      "n_events": 58,
+      "n_censored": 33,
+      "rmst": 118.62751198947619,
+      "rmst_lo": 98.46645890079675,
+      "rmst_hi": 145.94480720452503,
+      "median_T": 78.135
     },
     "NVIDIA GR00T N1.6 | Towels": {
       "n_eps": 43,
       "n_events": 196,
       "n_censored": 39,
       "rmst": 71.26430040321728,
-      "rmst_lo": 60.88312167573952,
-      "rmst_hi": 85.9198193657836,
+      "rmst_lo": 57.55889693341328,
+      "rmst_hi": 86.36947332834866,
       "median_T": 24.914470685000005
     },
     "NVIDIA GR00T N1.6 | Wooden spoons": {
-      "n_eps": 41,
+      "n_eps": 42,
       "n_events": 208,
-      "n_censored": 30,
-      "rmst": 59.05624683033936,
-      "rmst_lo": 45.41910528429531,
-      "rmst_hi": 75.14211134846462,
-      "median_T": 20.635999999999996
+      "n_censored": 31,
+      "rmst": 59.17218242574107,
+      "rmst_lo": 46.32370998535438,
+      "rmst_hi": 75.21248950856368,
+      "median_T": 20.642082661
     },
     "Action Chunking Transformer | Batteries": {
-      "n_eps": 31,
+      "n_eps": 36,
       "n_events": 75,
-      "n_censored": 30,
-      "rmst": 105.08883572788193,
-      "rmst_lo": 90.41312531731023,
-      "rmst_hi": 124.7794435408707,
-      "median_T": 44.992308111
+      "n_censored": 35,
+      "rmst": 111.47795642282895,
+      "rmst_lo": 92.48398526755886,
+      "rmst_hi": 135.97003709501456,
+      "median_T": 56.83908483300001
     },
     "Action Chunking Transformer | Scissors": {
-      "n_eps": 31,
+      "n_eps": 37,
       "n_events": 102,
-      "n_censored": 30,
-      "rmst": 98.52873363666527,
-      "rmst_lo": 69.2215524922899,
-      "rmst_hi": 134.16014347645608,
-      "median_T": 50.97858614600001
+      "n_censored": 36,
+      "rmst": 105.14330085200478,
+      "rmst_lo": 80.44398453616628,
+      "rmst_hi": 134.3908283373347,
+      "median_T": 56.182
     },
     "Action Chunking Transformer | Towels": {
-      "n_eps": 41,
+      "n_eps": 46,
       "n_events": 88,
-      "n_censored": 41,
-      "rmst": 105.54707933278877,
-      "rmst_lo": 85.81053694035667,
-      "rmst_hi": 124.56418012120254,
-      "median_T": 52.857574721
+      "n_censored": 46,
+      "rmst": 110.97965162154475,
+      "rmst_lo": 93.6473646983584,
+      "rmst_hi": 131.12228220760545,
+      "median_T": 55.177
     },
     "Action Chunking Transformer | Wooden spoons": {
-      "n_eps": 30,
+      "n_eps": 32,
       "n_events": 172,
-      "n_censored": 24,
-      "rmst": 83.08990527527979,
-      "rmst_lo": 44.933541460241436,
-      "rmst_hi": 118.42325958226947,
-      "median_T": 22.643
+      "n_censored": 26,
+      "rmst": 84.73507999728197,
+      "rmst_lo": 48.9310400010861,
+      "rmst_hi": 124.97761607851744,
+      "median_T": 23.569999999999993
     },
     "Hugging Face SmolVLA | Batteries": {
-      "n_eps": 29,
-      "n_events": 36,
-      "n_censored": 29,
-      "rmst": 198.7566031420124,
-      "rmst_lo": 165.09791140231565,
-      "rmst_hi": 220.9279403622334,
+      "n_eps": 34,
+      "n_events": 37,
+      "n_censored": 34,
+      "rmst": 202.43084945309374,
+      "rmst_lo": 174.5400809791829,
+      "rmst_hi": 221.69105956258483,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Scissors": {
-      "n_eps": 24,
+      "n_eps": 26,
       "n_events": 27,
-      "n_censored": 24,
-      "rmst": 169.37552510723276,
-      "rmst_lo": 139.5713891808536,
-      "rmst_hi": 202.42644806835105,
+      "n_censored": 26,
+      "rmst": 171.76565958787305,
+      "rmst_lo": 140.68436822614697,
+      "rmst_hi": 204.00134618541938,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Towels": {
-      "n_eps": 26,
+      "n_eps": 27,
       "n_events": 23,
-      "n_censored": 26,
-      "rmst": 178.18383840736837,
-      "rmst_lo": 136.34170682327036,
-      "rmst_hi": 217.83328137838467,
+      "n_censored": 27,
+      "rmst": 179.90271825277776,
+      "rmst_lo": 145.99257995298717,
+      "rmst_hi": 217.57288592996042,
       "median_T": Infinity
     },
     "Hugging Face SmolVLA | Wooden spoons": {
@@ -143,8 +143,8 @@
       "n_events": 65,
       "n_censored": 29,
       "rmst": 126.67908457782674,
-      "rmst_lo": 95.34615381292646,
-      "rmst_hi": 167.46938216971097,
+      "rmst_lo": 94.89591158250641,
+      "rmst_hi": 165.66940418333058,
       "median_T": 83.557
     },
     "Robot teleoperated by Human | Batteries": {
@@ -152,8 +152,8 @@
       "n_events": 549,
       "n_censored": 0,
       "rmst": 11.325516995340614,
-      "rmst_lo": 10.685704812859976,
-      "rmst_hi": 11.991061617701368,
+      "rmst_lo": 10.577666727885054,
+      "rmst_hi": 12.144798238449047,
       "median_T": 9.483807662
     },
     "Robot teleoperated by Human | Scissors": {
@@ -161,8 +161,8 @@
       "n_events": 788,
       "n_censored": 0,
       "rmst": 11.37949083346065,
-      "rmst_lo": 10.770971479102776,
-      "rmst_hi": 11.806755929492432,
+      "rmst_lo": 10.804088652795537,
+      "rmst_hi": 11.953551413168135,
       "median_T": 9.827596683
     },
     "Robot teleoperated by Human | Towels": {
@@ -170,8 +170,8 @@
       "n_events": 1021,
       "n_censored": 0,
       "rmst": 9.903606435873632,
-      "rmst_lo": 9.521642041769606,
-      "rmst_hi": 10.35316628198561,
+      "rmst_lo": 9.519167908536481,
+      "rmst_hi": 10.32148048065346,
       "median_T": 8.999633524000004
     },
     "Robot teleoperated by Human | Wooden spoons": {
@@ -179,8 +179,8 @@
       "n_events": 1594,
       "n_censored": 0,
       "rmst": 10.20323896366314,
-      "rmst_lo": 9.878188646593616,
-      "rmst_hi": 10.551565011699388,
+      "rmst_lo": 9.901560706245297,
+      "rmst_hi": 10.506461825617412,
       "median_T": 9.214162508999998
     }
   },
@@ -196,81 +196,81 @@
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Action Chunking Transformer",
-        "chi2": 0.044678956239535016,
-        "p": 0.8325954648681608,
+        "chi2": 0.5285295894692507,
+        "p": 0.46722570739331803,
         "p_bonf": 1.0
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Hugging Face SmolVLA",
-        "chi2": 38.98650749428723,
-        "p": 4.267447506478561e-10,
-        "p_bonf": 2.5604685038871366e-09
+        "chi2": 45.16611304250909,
+        "p": 1.8101076193488552e-11,
+        "p_bonf": 1.0860645716093131e-10
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Action Chunking Transformer",
-        "chi2": 1.084735530979151,
-        "p": 0.29764059564047174,
-        "p_bonf": 1.0
+        "chi2": 2.5374306104926228,
+        "p": 0.11117556960483721,
+        "p_bonf": 0.6670534176290233
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Hugging Face SmolVLA",
-        "chi2": 48.996699653114014,
-        "p": 2.5639490530693365e-12,
-        "p_bonf": 1.538369431841602e-11
+        "chi2": 56.25288741075718,
+        "p": 6.372680161348399e-14,
+        "p_bonf": 3.823608096809039e-13
       },
       {
         "a": "Action Chunking Transformer",
         "b": "Hugging Face SmolVLA",
-        "chi2": 30.72416002473923,
-        "p": 2.974384538667607e-08,
-        "p_bonf": 1.7846307232005643e-07
+        "chi2": 31.545400899433723,
+        "p": 1.9483127222663654e-08,
+        "p_bonf": 1.1689876333598193e-07
       }
     ],
     "Scissors": [
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "NVIDIA GR00T N1.6",
-        "chi2": 1.806692156788465,
-        "p": 0.17890554674418202,
-        "p_bonf": 1.0
+        "chi2": 2.463691153016612,
+        "p": 0.11650471375667848,
+        "p_bonf": 0.6990282825400709
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Action Chunking Transformer",
-        "chi2": 0.00019743599921224076,
-        "p": 0.988789139674531,
+        "chi2": 0.29638939470177106,
+        "p": 0.5861548502322989,
         "p_bonf": 1.0
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Hugging Face SmolVLA",
-        "chi2": 17.026264310803462,
-        "p": 3.686632750410368e-05,
-        "p_bonf": 0.00022119796502462208
+        "chi2": 18.631085347333944,
+        "p": 1.586130811281894e-05,
+        "p_bonf": 9.516784867691364e-05
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Action Chunking Transformer",
-        "chi2": 1.3590160309170478,
-        "p": 0.24370808481438688,
+        "chi2": 0.8210651516526762,
+        "p": 0.364868924508726,
         "p_bonf": 1.0
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Hugging Face SmolVLA",
-        "chi2": 9.020071418077295,
-        "p": 0.0026703095944486943,
-        "p_bonf": 0.016021857566692166
+        "chi2": 9.084662042070358,
+        "p": 0.0025776211164934004,
+        "p_bonf": 0.015465726698960403
       },
       {
         "a": "Action Chunking Transformer",
         "b": "Hugging Face SmolVLA",
-        "chi2": 14.749666411197595,
-        "p": 0.00012276924534604383,
-        "p_bonf": 0.000736615472076263
+        "chi2": 13.446570779746033,
+        "p": 0.00024545442535994777,
+        "p_bonf": 0.0014727265521596866
       }
     ],
     "Towels": [
@@ -284,53 +284,53 @@
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Action Chunking Transformer",
-        "chi2": 4.555833907811581,
-        "p": 0.03280678415020222,
-        "p_bonf": 0.1968407049012133
+        "chi2": 6.80103699920344,
+        "p": 0.009110494231072575,
+        "p_bonf": 0.05466296538643545
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Hugging Face SmolVLA",
-        "chi2": 27.606578123426665,
-        "p": 1.4867229636283952e-07,
-        "p_bonf": 8.920337781770371e-07
+        "chi2": 28.943773460080152,
+        "p": 7.450993499968916e-08,
+        "p_bonf": 4.47059609998135e-07
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Action Chunking Transformer",
-        "chi2": 9.827870563271407,
-        "p": 0.001718872308954844,
-        "p_bonf": 0.010313233853729065
+        "chi2": 13.000552074135337,
+        "p": 0.00031139915257694106,
+        "p_bonf": 0.0018683949154616464
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Hugging Face SmolVLA",
-        "chi2": 32.2825870452484,
-        "p": 1.3330259340804673e-08,
-        "p_bonf": 7.998155604482804e-08
+        "chi2": 33.67140067407004,
+        "p": 6.525302409521316e-09,
+        "p_bonf": 3.91518144571279e-08
       },
       {
         "a": "Action Chunking Transformer",
         "b": "Hugging Face SmolVLA",
-        "chi2": 14.410776463416147,
-        "p": 0.00014695890928384525,
-        "p_bonf": 0.0008817534557030715
+        "chi2": 13.384920082176052,
+        "p": 0.00025365545903088815,
+        "p_bonf": 0.001521932754185329
       }
     ],
     "Wooden spoons": [
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "NVIDIA GR00T N1.6",
-        "chi2": 0.46163350971474865,
-        "p": 0.4968615382101469,
+        "chi2": 0.4931837895994428,
+        "p": 0.48251051586906357,
         "p_bonf": 1.0
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Action Chunking Transformer",
-        "chi2": 5.714376366479969,
-        "p": 0.016826540613423258,
-        "p_bonf": 0.10095924368053955
+        "chi2": 6.5842399884568055,
+        "p": 0.010288553311696091,
+        "p_bonf": 0.06173131987017655
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
@@ -342,67 +342,67 @@
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Action Chunking Transformer",
-        "chi2": 3.3399966697135426,
-        "p": 0.06761474590861183,
-        "p_bonf": 0.40568847545167097
+        "chi2": 3.9404163002108565,
+        "p": 0.04713911069373233,
+        "p_bonf": 0.282834664162394
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Hugging Face SmolVLA",
-        "chi2": 30.828114774468563,
-        "p": 2.8192365109092066e-08,
-        "p_bonf": 1.691541906545524e-07
+        "chi2": 30.677758617360276,
+        "p": 3.0463703670768894e-08,
+        "p_bonf": 1.8278222202461336e-07
       },
       {
         "a": "Action Chunking Transformer",
         "b": "Hugging Face SmolVLA",
-        "chi2": 13.42688115163143,
-        "p": 0.00024804415795198764,
-        "p_bonf": 0.0014882649477119259
+        "chi2": 12.55273786574134,
+        "p": 0.0003956262302947655,
+        "p_bonf": 0.002373757381768593
       }
     ],
     "__all__": [
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "NVIDIA GR00T N1.6",
-        "chi2": 0.5659572507976777,
-        "p": 0.4518698843317358,
+        "chi2": 0.4263613045891947,
+        "p": 0.5137798234394436,
         "p_bonf": 1.0
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Action Chunking Transformer",
-        "chi2": 6.436004490642598,
-        "p": 0.011182989999917403,
-        "p_bonf": 0.06709793999950442
+        "chi2": 11.441381822346672,
+        "p": 0.0007182635657106973,
+        "p_bonf": 0.004309581394264184
       },
       {
         "a": "Physical Intelligence Open \u03c0\u2080.\u2085",
         "b": "Hugging Face SmolVLA",
-        "chi2": 112.76680921217223,
+        "chi2": 122.93693586147317,
         "p": 0.0,
         "p_bonf": 0.0
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Action Chunking Transformer",
-        "chi2": 9.30105276184395,
-        "p": 0.0022902221351622787,
-        "p_bonf": 0.013741332810973672
+        "chi2": 14.439049192989009,
+        "p": 0.00014476915515226896,
+        "p_bonf": 0.0008686149309136137
       },
       {
         "a": "NVIDIA GR00T N1.6",
         "b": "Hugging Face SmolVLA",
-        "chi2": 120.09267738847365,
+        "chi2": 129.13844980052653,
         "p": 0.0,
         "p_bonf": 0.0
       },
       {
         "a": "Action Chunking Transformer",
         "b": "Hugging Face SmolVLA",
-        "chi2": 66.77290444331368,
-        "p": 3.3306690738754696e-16,
-        "p_bonf": 1.9984014443252818e-15
+        "chi2": 64.7070998414952,
+        "p": 8.881784197001252e-16,
+        "p_bonf": 5.329070518200751e-15
       }
     ]
   },
