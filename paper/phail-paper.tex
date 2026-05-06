@@ -432,9 +432,6 @@ The framework requires per-episode event logs: place timestamps, intervention co
 
 \paragraph{Manual review.} For every episode where the classifier's success count disagrees with the operator's logged \texttt{eval.successful\_items}, a human annotator reviews each candidate in a custom desktop UI and records per-candidate item counts and timestamps; these confirmed values ground the released annotations. Subsequent PhAIL releases will replace this step with task-specific hardware sensing (e.g., bin-weight sensors for pick-and-place, analogous instrumentation for insertion and assembly) so that operation events are recorded objectively, with no manual-review bias.
 
-\section{Reproducibility}\label{app:reproducibility}
-Software environment: Python 3.13, Linux. Random seeds: 0 throughout. Expected runtimes on a 12-core workstation: figure regeneration $\sim$10 minutes; sample-efficiency experiment (300 outer $\times$ 200 inner bootstrap) $\sim$7 minutes. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at URL withheld for double-blind review.
-
 %===============================================================================
 \section*{NeurIPS Paper Checklist}
 %===============================================================================
@@ -450,7 +447,7 @@ Software environment: Python 3.13, Linux. Random seeds: 0 throughout. Expected r
 \textbf{Answer:} N/A. The paper is empirical and methodological. The statistical estimators used (Kaplan-Meier, restricted-mean survival time, Kolmogorov-Smirnov, episode-clustered bootstrap) are standard and cited (\S\ref{sec:framework-T}, \S\ref{sec:framework-test}); we do not introduce new theoretical results.
 
 \item \textbf{Experimental Result Reproducibility.} \emph{Does the paper fully disclose all the information needed to reproduce the main experimental results?} \\
-\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap), Appendix~\ref{app:power} the power-calculation derivations, Appendix~\ref{app:protocol} the annotation pipeline, and Appendix~\ref{app:reproducibility} the software environment, seeds, and runtimes.
+\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap); Appendix~\ref{app:power} gives the power-calculation derivations and Appendix~\ref{app:protocol} the annotation pipeline. Software environment: Python 3.13, Linux; random seeds: 0 throughout. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at URL withheld for double-blind review.
 
 \item \textbf{Open Access to Data and Code.} \emph{Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results?} \\
 \textbf{Answer:} Yes. The benchmark, evaluation framework, dataset, and per-rollout artifacts (synchronized video, telemetry, annotations) are released at URL withheld for double-blind review. The reference implementation is open source.
@@ -462,7 +459,7 @@ Software environment: Python 3.13, Linux. Random seeds: 0 throughout. Expected r
 \textbf{Answer:} Yes. All reporting scalars and CDF curves carry 95\% paired episode-clustered bootstrap intervals; pairwise tests use stratified logrank with Bonferroni correction (\S\ref{sec:res-headline}, Table~\ref{tab:pairs}); the sample-efficiency study reports detection-rate-vs-$N$ curves with 300 outer trials and 200-rep inner episode-clustered bootstrap (\S\ref{sec:res-efficiency}).
 
 \item \textbf{Experiments Compute Resources.} \emph{For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?} \\
-\textbf{Answer:} Yes. Inference for each VLA was run on the evaluation workstation that hosts the Franka FR3 controller; statistical analyses run in $\sim$10 minutes (figure regeneration) and $\sim$7 minutes (sample-efficiency experiment) on a laptop (Appendix~\ref{app:reproducibility}). No GPU cluster is required to reproduce the analysis pipeline.
+\textbf{Answer:} Yes. Inference for each VLA was run on the evaluation workstation that hosts the Franka FR3 controller; statistical analyses run on a 12-core laptop in $\sim$10 minutes (figure regeneration) and $\sim$7 minutes (sample-efficiency experiment, 300 outer $\times$ 200 inner bootstrap). No GPU cluster is required to reproduce the analysis pipeline.
 
 \item \textbf{Code of Ethics.} \emph{Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics?} \\
 \textbf{Answer:} Yes. The work is benchmark methodology on a controlled laboratory robot evaluating publicly released model checkpoints. No personally identifiable information is collected; no human subjects beyond paid task annotators reading robot video.
