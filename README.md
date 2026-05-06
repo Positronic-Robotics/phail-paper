@@ -42,15 +42,17 @@ For figure regeneration, only per-episode metadata + annotations are
 needed (≈30 MB, downloads in seconds):
 
 ```bash
-uv run huggingface-cli download <hf-dataset-repo> \
+uv run hf download <hf-dataset-repo> \
     --repo-type dataset \
     --local-dir ./phail-data \
-    --include "**/static.json" "**/meta.json" "annotations/**"
+    --include "**/static.json" \
+    --include "**/meta.json" \
+    --include "annotations/**"
 ```
 
 If you also want the videos and full telemetry (≈43 GB, optional —
 not required to reproduce any figure or table), drop the `--include`
-filter or replace it with `--include "**"`.
+flags or replace them with `--include "**"`.
 
 ### 3. Point the loader at the downloaded data
 
