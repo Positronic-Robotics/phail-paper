@@ -7,10 +7,12 @@ name = "phail-paper"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
+    "huggingface-hub>=1.12.2",
     "matplotlib>=3.10.8",
     "numpy",
     "pos3>=0.2.0",
     "positronic",
+    "pyarrow>=23.0.1",
     "scipy",
 ]
 
