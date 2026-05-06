@@ -16,6 +16,7 @@ import shutil
 from pathlib import Path
 
 CACHE = Path.home() / '.cache/positronic/s3/_/positronic-public/datasets/phail/v1.0'
+LEGACY_CACHE = Path.home() / '.cache/positronic/s3/_/inference'
 STAGE = Path('/tmp/phail-staging/upload')
 
 
@@ -65,6 +66,29 @@ def stage_subtree(subtree: str, episodes: list[str] | None = None) -> int:
     return len(eps)
 
 
+def stage_legacy() -> int:
+    """Stage the s3://inference/phail_act_groot/ pre-release rollouts under
+    `inference_legacy/phail_act_groot/` in the upload tree.
+
+    These episodes contribute to the paper's reported cohort but were not part
+    of the v1.0 public release; mirroring them under a sibling prefix lets
+    reviewers reproduce the analysis with the same data the operator used.
+    """
+    src_root = LEGACY_CACHE / 'phail_act_groot'
+    dst_root = STAGE / 'inference_legacy' / 'phail_act_groot'
+    if not src_root.exists():
+        return 0
+    n = 0
+    for batch in sorted(src_root.iterdir()):
+        if not batch.is_dir():
+            continue
+        for ep in sorted(batch.iterdir()):
+            if ep.is_dir():
+                stage_episode(ep, dst_root / batch.name / ep.name)
+                n += 1
+    return n
+
+
 def stage_annotations(repo_root: Path) -> int:
     src = repo_root / 'build/markup/annotations'
     dst = STAGE / 'annotations'
@@ -101,8 +125,13 @@ if __name__ == '__main__':
         for sub in ('inference', 'human', 'training'):
             n = stage_subtree(sub)
             print(f'  {sub}: {n} episodes staged')
+        n_legacy = stage_legacy()
+        print(f'  inference_legacy: {n_legacy} episodes staged')
         n_ann = stage_annotations(repo_root)
         print(f'  annotations: {n_ann} files')
+    elif mode == 'legacy':
+        n = stage_legacy()
+        print(f'inference_legacy: {n} episodes staged')
     else:
         print(f'unknown mode: {mode}', file=sys.stderr)
         sys.exit(1)

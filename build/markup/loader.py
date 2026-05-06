@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -49,6 +50,16 @@ CANDIDATES = REPO / 'out' / 'release_classifier' / 'candidates.jsonl'
 CACHE_ROOT = Path.home() / '.cache' / 'positronic' / 's3'
 CACHE_PUBLIC_PROFILE = CACHE_ROOT / 'positronic-public'
 CACHE_DEFAULT_PROFILE = CACHE_ROOT / '_'
+
+# When set, PHAIL_DATA_ROOT redirects reads of the public PhAIL dataset
+# (s3://positronic-public/datasets/phail/v1.0/...) to a local directory mirror
+# of that subtree. Intended for reviewers who have downloaded the dataset
+# from its public mirror rather than via pos3.
+DATA_ROOT_ENV = 'PHAIL_DATA_ROOT'
+DATASET_S3_PREFIX = 's3://positronic-public/datasets/phail/v1.0/'
+# Pre-release rollouts mirrored under a sibling subtree on the public release.
+LEGACY_S3_PREFIX = 's3://inference/'
+LEGACY_LOCAL_SUBDIR = 'inference_legacy/'
 
 # s3 prefixes that house ablation experiments — same model, different
 # training-data fraction. They share `model_display` with the headline model,
@@ -112,11 +123,22 @@ def _path_to_s3_url(path: Path) -> str:
 
 
 def _s3_url_to_cache_dir(s3_url: str) -> Path:
-    """Map an s3 URL to its local pos3 cache directory.
+    """Map an s3 URL to its local data directory.
 
-    `s3://positronic-public/foo/bar` -> CACHE_ROOT/positronic-public/positronic-public/foo/bar
-    `s3://inference/foo/bar`         -> CACHE_ROOT/_/inference/foo/bar
+    If `PHAIL_DATA_ROOT` is set and the URL is under the public PhAIL dataset
+    prefix, resolve relative to that root. Otherwise fall back to the pos3
+    cache layout:
+        `s3://positronic-public/foo/bar` -> CACHE_ROOT/positronic-public/positronic-public/foo/bar
+        `s3://inference/foo/bar`         -> CACHE_ROOT/_/inference/foo/bar
     """
+    data_root = os.environ.get(DATA_ROOT_ENV)
+    if data_root:
+        if s3_url.startswith(DATASET_S3_PREFIX):
+            rel = s3_url[len(DATASET_S3_PREFIX):]
+            return Path(data_root) / rel
+        if s3_url.startswith(LEGACY_S3_PREFIX):
+            rel = s3_url[len(LEGACY_S3_PREFIX):]
+            return Path(data_root) / LEGACY_LOCAL_SUBDIR / rel
     tail = s3_url.split('://', 1)[1]
     bucket = tail.split('/', 1)[0]
     if bucket == 'positronic-public':
@@ -226,6 +248,32 @@ def _is_ablation(s3_url: str) -> bool:
     return any(s3_url.startswith(p) for p in ABLATION_PREFIXES)
 
 
+def _walk_dataset_inference_urls() -> set[str]:
+    """Walk all `inference/**/static.json` files in the dataset and build s3 URLs.
+
+    Needed by the mixed cohort: episodes for which the classifier produced
+    zero candidates do not appear in `candidates.jsonl` and would otherwise
+    be silently skipped, even when `successful_items == 0` should
+    auto-validate them by rule (b).
+    """
+    urls: set[str] = set()
+    data_root = os.environ.get(DATA_ROOT_ENV)
+    if data_root:
+        root = Path(data_root) / 'inference'
+        prefix_strip = Path(data_root)
+        s3_prefix = DATASET_S3_PREFIX
+    else:
+        root = CACHE_PUBLIC_PROFILE / 'positronic-public' / 'datasets' / 'phail' / 'v1.0' / 'inference'
+        prefix_strip = CACHE_PUBLIC_PROFILE / 'positronic-public'
+        s3_prefix = 's3://positronic-public/'
+    if not root.exists():
+        return urls
+    for p in root.rglob('static.json'):
+        rel = p.parent.relative_to(prefix_strip).as_posix()
+        urls.add(f'{s3_prefix}{rel}')
+    return urls
+
+
 def load(
     cohort: str = 'manual',
     objects: list[str] | None = None,
@@ -266,7 +314,10 @@ def load(
 
     n_missing_static = 0
     if cohort == 'mixed':
-        for url in all_candidate_urls:
+        # Augment with dataset-walk URLs so that complete-failure episodes the
+        # classifier produced no candidates for can still reach rule (b).
+        candidate_urls = all_candidate_urls | _walk_dataset_inference_urls()
+        for url in candidate_urls:
             if url in manual_set:
                 continue
             if not _allowed(url):
