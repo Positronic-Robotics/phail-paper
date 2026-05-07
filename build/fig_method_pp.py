@@ -61,50 +61,50 @@ def _F_on_grid(eps, grid):
     return 1.0 - stats.km_step(t_g, S, grid)
 
 
-def panel_cdf(ax, eps_model, eps_ref, model_short, tau):
-    grid = np.linspace(0, tau, 400)
-    F_ref = _F_on_grid(eps_ref, grid)
-    F_model = _F_on_grid(eps_model, grid)
+def panel_cdf(ax, grid, F_ref, F_model, idx, model_short, tau):
     ax.plot(grid, F_ref, color=COLORS['Human'], linewidth=3.0, label='Human reference')
     ax.plot(grid, F_model, color=COLORS[model_short], linewidth=2.4, label=model_short)
+    t_star = float(grid[idx])
+    f_ref_star = float(F_ref[idx])
+    f_mod_star = float(F_model[idx])
+    ks_val = abs(f_ref_star - f_mod_star)
+    ax.plot([t_star, t_star], [f_mod_star, f_ref_star],
+            color='#d62728', linestyle='--', linewidth=1.0,
+            label=f'sup = {ks_val:.2f}')
     ax.set_xlim(0, tau)
     ax.set_ylim(0, 1.02)
     ax.set_xlabel('Time t (seconds)', fontsize=11)
     ax.set_ylabel('F(t) = P(T ≤ t)', fontsize=11)
-    ax.set_title(f'(a) Time-to-success CDF — {model_short} on {DEFAULT_OBJECT}',
+    ax.set_title(f'(a) Time-to-success CDF — {model_short} on {DEFAULT_OBJECT} pick-and-place',
                  loc='left', fontsize=12, fontweight='bold')
     ax.legend(loc='lower right', fontsize=10, frameon=True)
     ax.grid(True, alpha=0.3)
     ax.tick_params(labelsize=10)
 
 
-def panel_pp(ax, eps_model, eps_ref, model_short, tau):
-    grid = np.linspace(0, tau, 400)
-    F_ref = _F_on_grid(eps_ref, grid)
-    F_model = _F_on_grid(eps_model, grid)
+def panel_pp(ax, F_ref, F_model, idx, model_short):
     ax.plot([0, 1], [0, 1], color='#888888', linestyle='--', linewidth=1.2,
             label='Diagonal (= as fast as reference)')
     ax.fill_between(F_ref, 0, F_model, color=COLORS[model_short], alpha=0.18,
                     label='AUC = P(T_model < T_ref)')
     ax.plot(F_ref, F_model, color=COLORS[model_short], linewidth=2.4,
             label=f'{model_short} vs Human')
-    # KS = max vertical distance from curve to diagonal.
-    # We draw the perpendicular drop from the curve point to the diagonal:
-    # perpendicular distance = KS / sqrt(2). Foot of perpendicular on y=x is
-    # the midpoint of the curve point's vertical projection.
-    idx = int(np.argmax(np.abs(F_ref - F_model)))
     xc, yc = float(F_ref[idx]), float(F_model[idx])
     mid = (xc + yc) / 2.0
     ks_val = abs(yc - xc)
-    ax.plot([xc, mid], [yc, mid], color='#d62728', linewidth=2.6,
-            solid_capstyle='round',
+    ax.plot([xc, mid], [yc, mid], color='#d62728', linestyle='--', linewidth=1.0,
             label=f'KS = {ks_val:.2f}  (⊥ drop = KS/√2)')
+    L = 0.12
+    ax.plot([xc - L, xc + L], [yc - L, yc + L],
+            color='black', linestyle='--', linewidth=1.0,
+            label='Tangent ‖ diagonal at sup')
     ax.scatter([xc], [yc], color='#d62728', s=28, zorder=5)
     ax.set_xlim(0, 1.02)
     ax.set_ylim(0, 1.02)
-    ax.set_xlabel(r'$F_{\mathrm{ref}}(t)$  [Human]', fontsize=11)
-    ax.set_ylabel(rf'$F_{{\mathrm{{model}}}}(t)$  [{model_short}]', fontsize=11)
-    ax.set_title(f'(b) P-P plot — {model_short} vs Human', loc='left', fontsize=12, fontweight='bold')
+    ax.set_xlabel(r'$F_{\mathrm{Human}}(t)$', fontsize=11)
+    ax.set_ylabel(rf'$F_{{\mathrm{{{model_short}}}}}(t)$', fontsize=11)
+    ax.set_title(f'(b) P-P plot — {DEFAULT_OBJECT} pick-and-place',
+                 loc='left', fontsize=12, fontweight='bold')
     ax.legend(loc='upper left', fontsize=9, frameon=True)
     ax.grid(True, alpha=0.3)
     ax.tick_params(labelsize=10)
@@ -129,9 +129,14 @@ def main(cohort: str, model: str, eval_object: str, tau: float, out_dir: str):
         raise SystemExit(f'No episodes for {model} or {TELEOP} on {eval_object}')
 
     short = SHORT.get(model, model)
+    grid = np.linspace(0, tau, 400)
+    F_ref = _F_on_grid(eps_ref, grid)
+    F_model = _F_on_grid(eps_model, grid)
+    idx = int(np.argmax(np.abs(F_ref - F_model)))
+
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    panel_cdf(axes[0], eps_model, eps_ref, short, tau)
-    panel_pp(axes[1], eps_model, eps_ref, short, tau)
+    panel_cdf(axes[0], grid, F_ref, F_model, idx, short, tau)
+    panel_pp(axes[1], F_ref, F_model, idx, short)
     fig.tight_layout()
     p = out / 'fig_method_pp.png'
     fig.savefig(p, dpi=170, bbox_inches='tight')
