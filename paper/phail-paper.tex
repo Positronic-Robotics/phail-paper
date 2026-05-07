@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \PassOptionsToPackage{numbers}{natbib}
-\usepackage[eandd]{neurips_2026}
+\usepackage[eandd,preprint]{neurips_2026}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -16,7 +16,11 @@
 
 \title{PhAIL: A Real-Robot VLA Benchmark and Distributional Methodology}
 
-\author{Anonymous Authors}
+\author{
+  Sergey Arkhangelskiy \\
+  Positronic Robotics \\
+  \texttt{s@positronic.ro}
+}
 
 \date{}
 
@@ -25,7 +29,7 @@
 \maketitle
 
 \begin{abstract}
-How do you tell whether one robot policy is better than another in the real world? Most published evaluations of vision-language-action (VLA) policies answer this with binary success rate at a fixed timeout, no confidence intervals, no paired test, $N{\le}25$ per condition -- under-budgeted by roughly two orders of magnitude for the ranking claims it publishes. We respond with a distributional methodology for VLA evaluation, and release PhAIL -- a real-world inference benchmark that instantiates it. The time-to-success CDF is the evaluation primitive, absorbing hard failures (drops outside the workspace, safety stops) as $T{=}\infty$ ghost events. Reporting and ranking are separated: a scalar with bootstrap intervals (Human-Relative Throughput, HRT) for reporting; paired Kolmogorov--Smirnov on the CDF for ranking. On a Franka FR3 across four objects with $\sim$950 episodes and $\sim$35 paired rollouts per (model, object) cell, we evaluate four frontier VLAs (OpenPI $\pi_{0.5}$, GR00T N1.6, ACT, SmolVLA): the best frontier model is roughly $7\times$ slower than a human teleoperator, the top two are statistically indistinguishable, and SmolVLA is clearly worst. Two structural findings: different reasonable scalars rank the same models in different orders, and a distributional test resolves the closest ranking with ${\sim}30\times$ fewer trials than binary success rate. Benchmark, dataset, and reference implementation: URL withheld for double-blind review.
+How do you tell whether one robot policy is better than another in the real world? Most published evaluations of vision-language-action (VLA) policies answer this with binary success rate at a fixed timeout, no confidence intervals, no paired test, $N{\le}25$ per condition -- under-budgeted by roughly two orders of magnitude for the ranking claims it publishes. We respond with a distributional methodology for VLA evaluation, and release PhAIL -- a real-world inference benchmark that instantiates it. The time-to-success CDF is the evaluation primitive, absorbing hard failures (drops outside the workspace, safety stops) as $T{=}\infty$ ghost events. Reporting and ranking are separated: a scalar with bootstrap intervals (Human-Relative Throughput, HRT) for reporting; paired Kolmogorov--Smirnov on the CDF for ranking. On a Franka FR3 across four objects with $\sim$950 episodes and $\sim$35 paired rollouts per (model, object) cell, we evaluate four frontier VLAs (OpenPI $\pi_{0.5}$, GR00T N1.6, ACT, SmolVLA): the best frontier model is roughly $7\times$ slower than a human teleoperator, the top two are statistically indistinguishable, and SmolVLA is clearly worst. Two structural findings: different reasonable scalars rank the same models in different orders, and a distributional test resolves the closest ranking with ${\sim}30\times$ fewer trials than binary success rate. Benchmark, dataset, and reference implementation: \url{https://phail.ai}.
 \end{abstract}
 
 \begin{figure}[!t]
@@ -137,7 +141,7 @@ The two-jobs framing -- scalar for reporting, KS for the significance gate -- is
 
 \subsection{Platform and Task}\label{sec:phail-platform}
 
-The evaluation station uses a DROID-style configuration~\cite{droid}: a Franka Research 3 with a Robotiq 2F-85 parallel-jaw gripper, plus an over-the-shoulder external RGB camera and a wrist-mounted RGB camera. The first task is bin-to-bin order picking: items move one at a time from an inbound (transparent) tote to an outbound (grey) tote across four object types spanning a useful slice of physical regimes -- wooden spoons (rigid, elongated, multi-grasp), towels (deformable), scissors (articulated, metallic), and batteries (small, rigid). Each rollout episode contains many independent placement operations, which we exploit for sample size; the framework applies just as well to single-operation episodes. Bin-to-bin is deliberately not the most complex task we could put VLAs through; it is the simplest task with unambiguous success/intervention semantics that still carries clear commercial signal (millions of picks per day across warehousing and fulfilment). Subsequent PhAIL releases will add new tasks (insertion, small-part assembly); the methodology is unchanged across additions. The same hardware operates the human reference and every evaluated VLA via an open-source evaluation framework~\cite{positronic} behind a common station interface, so only weights and architecture-specific observation-to-action code differ across submissions. Every evaluated rollout is published with synchronized video, telemetry, and event annotations, browsable in a run-explorer interface (Figure~\ref{fig:platform}, Appendix~\ref{app:hardware}; annotation pipeline in Appendix~\ref{app:protocol}). Benchmark, dataset, and per-rollout artifacts: URL withheld for double-blind review.
+The evaluation station uses a DROID-style configuration~\cite{droid}: a Franka Research 3 with a Robotiq 2F-85 parallel-jaw gripper, plus an over-the-shoulder external RGB camera and a wrist-mounted RGB camera. The first task is bin-to-bin order picking: items move one at a time from an inbound (transparent) tote to an outbound (grey) tote across four object types spanning a useful slice of physical regimes -- wooden spoons (rigid, elongated, multi-grasp), towels (deformable), scissors (articulated, metallic), and batteries (small, rigid). Each rollout episode contains many independent placement operations, which we exploit for sample size; the framework applies just as well to single-operation episodes. Bin-to-bin is deliberately not the most complex task we could put VLAs through; it is the simplest task with unambiguous success/intervention semantics that still carries clear commercial signal (millions of picks per day across warehousing and fulfilment). Subsequent PhAIL releases will add new tasks (insertion, small-part assembly); the methodology is unchanged across additions. The same hardware operates the human reference and every evaluated VLA via the open-source \emph{positronic} framework~\cite{positronic} behind a common station interface, so only weights and architecture-specific observation-to-action code differ across submissions. Every evaluated rollout is published with synchronized video, telemetry, and event annotations, browsable in a run-explorer interface (Figure~\ref{fig:platform}, Appendix~\ref{app:hardware}; annotation pipeline in Appendix~\ref{app:protocol}). Benchmark, dataset, and per-rollout artifacts: \url{https://phail.ai}.
 
 \subsection{Models, Fine-Tuning, and Protocol}\label{sec:phail-finetune}
 
@@ -252,7 +256,7 @@ We introduced PhAIL, an open real-robot benchmark and distributional evaluation 
 
 \paragraph{Limitations.} Single embodiment (Franka FR3, fixed cameras), single primitive (bin-to-bin pick-and-place, four trained objects); the framework generalizes to any operation with a human reference and event-time outcome but the empirical validation does not. $N{\approx}35$ per cell is 2--3$\times$ the field median but still below what binary metrics need to rank close pairs (\S\ref{sec:res-efficiency}); per-model rankings are illustrative. The single protocol recommendation that does the most work is \textbf{blind, randomized rotation on the same fixture in the same session} -- spatial-configuration shifts (Appendix~\ref{app:spatial}) move outcomes by margins comparable to gaps between adjacent models, contaminating the CDF if not controlled.
 
-If the field adopts this methodology, three things change. \textbf{Scalar choice becomes a disclosed commitment} (HRT and AUC-vs-human encode different priorities). \textbf{Ranking claims become falsifiable} via paired KS: ``we cannot rank these at this $N$'' becomes a publishable finding. \textbf{The hidden cost of binary thresholds becomes visible}: on close pairs, no realistic $N$ recovers what a CDF-level test resolves within budget. PhAIL (URL withheld for double-blind review) is open to submissions; insertion and small-part assembly are next.
+If the field adopts this methodology, three things change. \textbf{Scalar choice becomes a disclosed commitment} (HRT and AUC-vs-human encode different priorities). \textbf{Ranking claims become falsifiable} via paired KS: ``we cannot rank these at this $N$'' becomes a publishable finding. \textbf{The hidden cost of binary thresholds becomes visible}: on close pairs, no realistic $N$ recovers what a CDF-level test resolves within budget. PhAIL (\url{https://phail.ai}) is open to submissions; insertion and small-part assembly are next.
 
 %===============================================================================
 \bibliographystyle{plainnat}
@@ -267,7 +271,7 @@ If the field adopts this methodology, three things change. \textbf{Scalar choice
 \bibitem{mcnemar1947} McNemar, Q. Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages. Psychometrika, 12(2):153--157, 1947.
 \bibitem{connor1987} Connor, R.J. Sample Size for Testing Differences in Proportions for the Paired-Sample Design. Biometrics, 43(1):207--211, 1987.
 \bibitem{rerun} Rerun.io. Visualization SDK for Multimodal Data. \url{https://rerun.io}, 2024.
-\bibitem{positronic} Anonymous. Open-source framework for real-robot evaluation and operation. URL withheld for double-blind review, 2025.
+\bibitem{positronic} Positronic Robotics. \emph{positronic}: Open-source framework for real-robot evaluation and operation. \url{https://github.com/Positronic-Robotics/positronic}, 2025.
 \bibitem{droid} Khazatsky et al. DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset. RSS, 2024.
 \bibitem{robochallenge} Tang et al. RoboChallenge: Large-scale Real-robot Evaluation of Embodied Policies. arXiv:2510.17950, 2025.
 \bibitem{roboarena} Atreya et al. RoboArena: Distributed Real-World Evaluation of Generalist Robot Policies. arXiv:2506.18123, 2025.
@@ -447,10 +451,10 @@ The framework requires per-episode event logs: place timestamps, intervention co
 \textbf{Answer:} N/A. The paper is empirical and methodological. The statistical estimators used (Kaplan-Meier, restricted-mean survival time, Kolmogorov-Smirnov, episode-clustered bootstrap) are standard and cited (\S\ref{sec:framework-T}, \S\ref{sec:framework-test}); we do not introduce new theoretical results.
 
 \item \textbf{Experimental Result Reproducibility.} \emph{Does the paper fully disclose all the information needed to reproduce the main experimental results?} \\
-\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap); Appendix~\ref{app:power} gives the power-calculation derivations and Appendix~\ref{app:protocol} the annotation pipeline. Software environment: Python 3.13, Linux; random seeds: 0 throughout. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at URL withheld for double-blind review.
+\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap); Appendix~\ref{app:power} gives the power-calculation derivations and Appendix~\ref{app:protocol} the annotation pipeline. Software environment: Python 3.13, Linux; random seeds: 0 throughout. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at \url{https://phail.ai}.
 
 \item \textbf{Open Access to Data and Code.} \emph{Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results?} \\
-\textbf{Answer:} Yes. The benchmark, evaluation framework, dataset, and per-rollout artifacts (synchronized video, telemetry, annotations) are released at URL withheld for double-blind review. The reference implementation is open source.
+\textbf{Answer:} Yes. The benchmark, evaluation framework, dataset, and per-rollout artifacts (synchronized video, telemetry, annotations) are released at \url{https://phail.ai}. The reference implementation is open source.
 
 \item \textbf{Experimental Setting/Details.} \emph{Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer, etc.) necessary to understand the results?} \\
 \textbf{Answer:} Yes. \S\ref{sec:phail-finetune} specifies that each of the four models was fine-tuned with its repository's default published recipe; we did not perform per-model hyperparameter search. Appendix~\ref{app:dataset} documents the fine-tuning dataset composition.
