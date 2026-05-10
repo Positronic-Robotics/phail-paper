@@ -153,7 +153,7 @@ Each rollout has a 30\,s/item time cap ($\sim$10$\times$ the $\sim$2.7\,s/item h
 
 After object/model filtering, $\sim$950 episodes enter the analyses; 386 are human reference rollouts. Annotations come from manual review of rollout video augmented by automated success detection (Appendix~\ref{app:protocol}); both label streams are released alongside the data.
 
-How many rollouts does a ranking claim actually need? Standard power calculations (Appendix~\ref{app:power}) put the field-modal $N{=}10$--$20$ (Appendix~\ref{app:survey}) orders of magnitude under-budget: a $\pm 5$\,pp Wilson CI on a single arm needs $N{\approx}380$, and detecting a 5\,pp paired difference between two policies (McNemar~\cite{mcnemar1947}, 80\% power, $\alpha{=}0.05$) needs 600--1500 paired rollouts following Connor's~\cite{connor1987} sample-size formula. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below either threshold; \S\ref{sec:res-efficiency} confirms this empirically with detection-rate-vs-$N$ curves on our data.
+How many rollouts does a ranking claim actually need? Standard power calculations (Appendix~\ref{app:power}) put the field-modal $N{=}10$--$20$ (Appendix~\ref{app:survey}) orders of magnitude under-budget: a $\pm 5$\,pp Wilson CI on a single arm needs $N{\approx}380$, detecting a 5\,pp paired difference between two policies (McNemar~\cite{mcnemar1947}, 80\% power, $\alpha{=}0.05$) needs 600--1500 paired rollouts following Connor's~\cite{connor1987} sample-size formula, and the unpaired KS supremum-bound at $\Delta = 0.10$ asks roughly $N \approx 970$ per arm. Our own $N \approx 35$ per cell is 2--3$\times$ the field median but still well below any of these thresholds; \S\ref{sec:res-efficiency} confirms this empirically with detection-rate-vs-$N$ curves on our data.
 
 %===============================================================================
 \section{Results}\label{sec:results}
@@ -238,7 +238,7 @@ The table reads in three regimes. \textbf{Three saturated pairs} (any inference 
 
 Detection rate at $N = 30$ averaged across all six pairs: $F(30\,\text{s}) = 0.55$, $F(60\,\text{s}) = 0.65$, RMST $= 0.62$, \textbf{KS $= 0.89$}. The $+24$\,pp gain of KS over $F(60\,\text{s})$ is concentrated entirely on the three close pairs.
 
-Two takeaways. First, \textbf{the distributional test (KS) is materially more sample-efficient than any single CDF-derived scalar (RMST or binary thresholds) for resolution.} RMST-as-scalar is essentially tied with $F(60\,\text{s})$; the integration over $[0, \tau]$ does not buy ranking power because the information lives in \emph{where the curves separate} and an integrator smears it. This does not invalidate RMST as our recommended \emph{scoring} scalar (HRT is built on it) -- it just shouldn't carry the burden of \emph{resolution} too: precisely the two-jobs framing of \S\ref{sec:framework}. Second, \textbf{empirical and analytical evidence triangulate.} The closest pair is unresolvable at $N = 30$ by every metric, matching the analytical 600--1500-paired-rollout requirement.
+Two takeaways. First, \textbf{the distributional test (KS) is materially more sample-efficient than any single CDF-derived scalar (RMST or binary thresholds) for resolution.} RMST-as-scalar is essentially tied with $F(60\,\text{s})$; the integration over $[0, \tau]$ does not buy ranking power because the information lives in \emph{where the curves separate} and an integrator smears it. This does not invalidate RMST as our recommended \emph{scoring} scalar (HRT is built on it) -- it just shouldn't carry the burden of \emph{resolution} too: precisely the two-jobs framing of \S\ref{sec:framework}. Second, \textbf{empirical and analytical evidence triangulate.} The closest pair is unresolvable at $N = 30$ by every metric tested, matching both the McNemar 600--1500-paired-rollout requirement and the unpaired KS analytical ceiling ($N \approx 970$ at $\Delta = 0.10$, Appendix~\ref{app:power}).
 
 \subsection{Aggregation-Rule Disagreement}\label{sec:res-aggregation}
 
@@ -311,7 +311,7 @@ If the field adopts this methodology, three things change. \textbf{Scalar choice
 
 Table~\ref{tab:survey} surveys 13 recent real-robot VLA papers from 2023--2025; the LBM examination~\cite{lbm2026} is included below the rule as the single recent counter-example. Modal per-condition $N$ is 10--20; none of the 13 standard-practice papers report confidence intervals or paired tests. LBM reports Bayesian posterior credible regions and paired Barnard's exact / Welch's $t$-tests with Bonferroni-corrected significance grouping at $N{=}50$ real / $200$ simulation per condition.
 
-\begin{table}[H]
+\begin{table}[!h]
 \centering
 \small
 \begin{tabular}{p{4.6cm}p{6cm}p{4cm}}
@@ -347,14 +347,14 @@ LBM Examination~\cite{lbm2026} & 50 real / 200 sim per condition & Bayesian post
 
 This appendix supports two claims from the body text. First, the per-(model, object) RMST grid (Figure~\ref{fig:grid-rmst}) substantiates \S\ref{sec:res-headline}'s 19\% per-object HRT ceiling and surfaces the GR00T-vs-ACT object crossing referenced in \S\ref{sec:res-aggregation}. Second, the pairwise P-P plots without the human anchor (Figure~\ref{fig:pp-pairwise}) accompany \S\ref{sec:res-aggregation}'s discussion of how the human-anchored AUC saturates and what removing that anchor reveals about the top-3 pairs.
 
-\begin{figure}[H]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.92\linewidth]{../out/explore/grid_rmst.png}
   \caption{Per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. Crossings exist (most clearly GR00T vs.\ ACT between Batteries and Scissors) but none clears Bonferroni at $\alpha = 0.05/24$. The visible patterns suggest the orderings vary by object; resolving them formally requires the rollout budget that Figure~\ref{fig:efficiency} quantifies.}
   \label{fig:grid-rmst}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.92\linewidth]{../out/explore/pp_pairwise_macro.png}
   \caption{Pairwise model-vs-model P-P plots, top-3 only (SmolVLA excluded as too easily separable to be informative), macro-averaged across the 4 trained objects. The teleop-anchored AUC of \S\ref{sec:res-aggregation} saturates because the human reference is ${\sim}7\times$ faster than any evaluated VLA -- nearly all model events fall in the human's tail, so the AUC integral is dominated by short-time behaviour. Removing the human anchor neutralizes that bias: every top-3 pair falls on or near the diagonal, with macro-AUCs all consistent with $0.5$ (ACT-vs-OpenPI $0.51$\,[$0.45$, $0.56$]; ACT-vs-GR00T $0.50$\,[$0.45$, $0.55$]; OpenPI-vs-GR00T $0.50$\,[$0.46$, $0.54$]).}
@@ -365,7 +365,7 @@ This appendix supports two claims from the body text. First, the per-(model, obj
 
 Every evaluated rollout is published in a run-explorer interface (Figure~\ref{fig:platform}) that synchronizes the exterior and wrist video streams against the 3D end-effector trajectory and the per-channel telemetry: commanded action, gripper target, and measured gripper position. A reader auditing a specific time-to-success annotation against the raw video can replay it frame-accurately and inspect the joint state at any instant. The interface is built on Rerun~\cite{rerun} and runs post-hoc against the released artifacts; it is independent of the operator-side tooling used during rollout collection. We expose this not as part of the methodological contribution but as a transparency mechanism: every annotation in the released dataset is auditable against the raw rollout it was derived from.
 
-\begin{figure}[H]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.9\linewidth]{figures/phail-platform.png}
   \caption{PhAIL platform during a rollout, visualized in the run-explorer interface (built on Rerun~\cite{rerun}): synchronized exterior and wrist video, 3D end-effector trajectory, and telemetry traces (commanded action, gripper target, measured gripper).}
@@ -376,7 +376,7 @@ Every evaluated rollout is published in a run-explorer interface (Figure~\ref{fi
 
 Table~\ref{tab:dataset} summarizes the shared fine-tuning corpus used across all four VLAs (\S\ref{sec:phail-finetune}): 352 demonstration episodes, $\sim$13 hours of robot operation, collected on the same Franka FR3 / Robotiq 2F-85 / dual-camera station as the evaluation rollouts. Episode counts are imbalanced across the four trained objects (wooden spoons are over-represented as the early development task); the full dataset is released alongside the benchmark.
 
-\begin{table}[H]
+\begin{table}[!h]
 \centering
 \begin{tabular}{lrr}
 \toprule
@@ -398,7 +398,7 @@ Total & 352 & $\sim$812 \\
 
 PhAIL's protocol logs the spatial configuration (camera and tote placement) with every episode. Between rollouts we vary outbound tote placement (left/right) and external camera position (left/right), creating four spatial configurations. Table~\ref{tab:spatial} reports completion rate by camera/tote configuration. ``Same-side'' means the external camera and the outbound tote are on the same side of the workspace; ``opposite-side'' means they are on opposite sides, in which case the inbound tote partially occludes the outbound tote from the camera's perspective.
 
-\begin{table}[H]
+\begin{table}[!h]
 \centering
 \begin{tabular}{lrrr}
 \toprule
@@ -426,6 +426,14 @@ N \approx \frac{\big(z_{\alpha/2}\sqrt{p_d} + z_\beta \sqrt{p_d - \Delta^2}\big)
 \]
 At $p_d = 0.10$ this gives $N \approx 600$; at $p_d = 0.25$, $N \approx 1500$. The range 600--1500 cited in the body reflects the realistic span of $p_d$ for top-3 model pairs on our data; a discordance rate of 0.20 gives the central $N \approx 1280$.
 
+\paragraph{Two-sample KS test on the CDF (analytical ceiling).} For an unpaired two-sample Kolmogorov--Smirnov test on equal-sized arms of $N$ rollouts each, the asymptotic null distribution gives critical value $D_\alpha \approx c_\alpha\sqrt{2/N}$ with $c_{0.05} \approx 1.36$. To achieve power $1-\beta$ against a fixed CDF supremum-separation $\Delta = \sup_t |F_a(t) - F_b(t)|$, the required sample size is approximately
+\[
+N \gtrsim \frac{2(c_\alpha + c_\beta)^2}{\Delta^2}
+\;\approx\; \frac{9.68}{\Delta^2}
+\qquad\text{(unpaired; $\alpha{=}0.05$, $1{-}\beta{=}0.80$).}
+\]
+For close-pair separations representative of our data ($\Delta \in [0.10, 0.30]$ on the macro CDF), this gives $N \in [108, 970]$ per arm -- the same order of magnitude as the McNemar requirement above, and \emph{not} a dramatic analytical improvement in the unpaired regime. The empirical detection-rate-vs-$N$ curves in \S\ref{sec:res-efficiency} resolve close pairs at $N \in [25, 30]$ paired rollouts per (model, object) cell, well under this analytical ceiling, because three sources of efficiency compound that the unpaired asymptotic bound does not capture: (i) pairing within (model, object) cells cancels cross-cell variance, (ii) macro-aggregation across the four objects pools the per-cell CDFs into a single curve per arm, and (iii) the episode-clustered bootstrap exploits within-rollout correlation directly rather than treating individual operations as i.i.d. The empirical curves are therefore the operationally relevant power statement for the regime PhAIL submissions live in; the analytical ceiling is a sanity check.
+
 \paragraph{Empirical detection-rate-vs-$N$ curves.} \S\ref{sec:res-efficiency} translates these analytical numbers into empirical detection-rate-vs-$N$ curves on our data via 300 outer subsampling trials, each running a 200-rep inner episode-clustered bootstrap. The full $(N, \text{metric}, \text{pair}, \text{detection rate})$ table for all four metrics ($F(30\text{s})$, $F(60\text{s})$, RMST, KS) and all six model pairs is released alongside the data.
 
 \section{Annotation Protocol}\label{app:protocol}
@@ -436,58 +444,5 @@ The framework requires per-episode event logs: place timestamps, intervention co
 
 \paragraph{Manual review.} For every episode where the classifier's success count disagrees with the operator's logged \texttt{eval.successful\_items}, a human annotator reviews each candidate in a custom desktop UI and records per-candidate item counts and timestamps; these confirmed values ground the released annotations. Subsequent PhAIL releases will replace this step with task-specific hardware sensing (e.g., bin-weight sensors for pick-and-place, analogous instrumentation for insertion and assembly) so that operation events are recorded objectively, with no manual-review bias.
 
-%===============================================================================
-\section*{NeurIPS Paper Checklist}
-%===============================================================================
-
-\begin{enumerate}
-\item \textbf{Claims.} \emph{Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?} \\
-\textbf{Answer:} Yes. The four numbered contributions in \S\ref{sec:intro} (canonical primitive, aggregation-rule disagreement, sample-efficiency from the right test, open benchmark) each map to a specific results subsection (\S\ref{sec:res-headline}, \S\ref{sec:res-aggregation}, \S\ref{sec:res-efficiency}, \S\ref{sec:phail-platform}).
-
-\item \textbf{Limitations.} \emph{Does the paper discuss the limitations of the work performed by the authors?} \\
-\textbf{Answer:} Yes. \S\ref{sec:conclusion} discusses single embodiment, single task primitive (pick-and-place), $N \approx 35$ depth limits, and the constraint that all rankings reflect each model's default open-source fine-tuning recipe rather than per-model optimization.
-
-\item \textbf{Theory, Assumptions, and Proofs.} \emph{For each theoretical result, does the paper provide the full set of assumptions and a complete (and correct) proof?} \\
-\textbf{Answer:} N/A. The paper is empirical and methodological. The statistical estimators used (Kaplan-Meier, restricted-mean survival time, Kolmogorov-Smirnov, episode-clustered bootstrap) are standard and cited (\S\ref{sec:framework-T}, \S\ref{sec:framework-test}); we do not introduce new theoretical results.
-
-\item \textbf{Experimental Result Reproducibility.} \emph{Does the paper fully disclose all the information needed to reproduce the main experimental results?} \\
-\textbf{Answer:} Yes. \S\ref{sec:phail} documents the protocol, models, fine-tuning recipes, and cohort. \S\ref{sec:framework} formalizes the methodology (estimator, ghost-event handling, bootstrap); Appendix~\ref{app:power} gives the power-calculation derivations and Appendix~\ref{app:protocol} the annotation pipeline. Software environment: Python 3.13, Linux; random seeds: 0 throughout. The full evaluation framework, fine-tuning recipes, dataset, per-rollout artifacts, and figure-regeneration scripts are released at \url{https://phail.ai}.
-
-\item \textbf{Open Access to Data and Code.} \emph{Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results?} \\
-\textbf{Answer:} Yes. The benchmark, evaluation framework, dataset, and per-rollout artifacts (synchronized video, telemetry, annotations) are released at \url{https://phail.ai}. The reference implementation is open source.
-
-\item \textbf{Experimental Setting/Details.} \emph{Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer, etc.) necessary to understand the results?} \\
-\textbf{Answer:} Yes. \S\ref{sec:phail-finetune} specifies that each of the four models was fine-tuned with its repository's default published recipe; we did not perform per-model hyperparameter search. Appendix~\ref{app:dataset} documents the fine-tuning dataset composition.
-
-\item \textbf{Experiment Statistical Significance.} \emph{Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?} \\
-\textbf{Answer:} Yes. All scoring scalars and CDF curves carry 95\% paired episode-clustered bootstrap intervals; pairwise tests use stratified logrank with Bonferroni correction (\S\ref{sec:res-headline}, Table~\ref{tab:pairs}); the sample-efficiency study reports detection-rate-vs-$N$ curves with 300 outer trials and 200-rep inner episode-clustered bootstrap (\S\ref{sec:res-efficiency}).
-
-\item \textbf{Experiments Compute Resources.} \emph{For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?} \\
-\textbf{Answer:} Yes. Inference for each VLA was run on the evaluation workstation that hosts the Franka FR3 controller; statistical analyses run on a 12-core laptop in $\sim$10 minutes (figure regeneration) and $\sim$7 minutes (sample-efficiency experiment, 300 outer $\times$ 200 inner bootstrap). No GPU cluster is required to reproduce the analysis pipeline.
-
-\item \textbf{Code of Ethics.} \emph{Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics?} \\
-\textbf{Answer:} Yes. The work is benchmark methodology on a controlled laboratory robot evaluating publicly released model checkpoints. No personally identifiable information is collected and no human subjects are involved.
-
-\item \textbf{Broader Impacts.} \emph{Does the paper discuss both potential positive societal impacts and negative societal impacts of the work performed?} \\
-\textbf{Answer:} Yes. The paper's intended societal impact is improved evaluation rigor for real-robot VLA policies, enabling more honest comparisons in the field. Potential negative impact is limited because no new model checkpoints are released; the contribution is methodological. The benchmark could in principle be used to falsely advertise weak models with cherry-picked metrics, which is exactly the practice the methodology is designed to surface.
-
-\item \textbf{Safeguards.} \emph{Does the paper describe safeguards that have been put in place for responsible release of data or models with a high risk for misuse (e.g., pretrained language models, image generators, or scraped datasets)?} \\
-\textbf{Answer:} N/A. No new model is released. The dataset consists of robot rollout videos and telemetry on a controlled bin-to-bin pick-and-place task with no high-risk content.
-
-\item \textbf{Licenses for Existing Assets.} \emph{Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?} \\
-\textbf{Answer:} Yes. All four evaluated VLAs (OpenPI $\pi_{0.5}$, GR00T N1.6, ACT, SmolVLA) are publicly released under their respective open-source licenses and cited (\S\ref{sec:phail-finetune}); the DROID-style hardware configuration is cited; the Rerun visualizer is cited.
-
-\item \textbf{New Assets.} \emph{Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?} \\
-\textbf{Answer:} Yes. The PhAIL benchmark is released with per-rollout video, telemetry, dataset documentation (Appendix~\ref{app:dataset}), annotation protocol (Appendix~\ref{app:protocol}), and a Croissant metadata file. License is open and declared in the dataset card.
-
-\item \textbf{Crowdsourcing and Research with Human Subjects.} \emph{For crowdsourcing experiments and research with human subjects, does the paper include the full text of instructions given to participants and screenshots, if applicable, as well as details about compensation (if any)?} \\
-\textbf{Answer:} N/A. The annotation pipeline (Appendix~\ref{app:protocol}) does not use crowdsourcing or human subjects: an automated detector and classifier process telemetry, and a single internal annotator manually reviews episodes where the classifier disagrees with the operator's logged item count.
-
-\item \textbf{Institutional Review Board (IRB) Approvals or Equivalent for Research with Human Subjects.} \emph{Does the paper describe potential risks incurred by study participants, whether such risks were disclosed to the subjects, and whether IRB approvals (or an equivalent approval/review based on the requirements of your country or institution) were obtained?} \\
-\textbf{Answer:} N/A. The annotation pipeline does not involve human subjects (Appendix~\ref{app:protocol}); no protected-class data, biometric data, or personally identifiable information is collected.
-
-\item \textbf{Declaration of LLM Usage.} \emph{Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research?} \\
-\textbf{Answer:} N/A. The evaluation methodology and statistical analyses do not involve LLMs. Some of the evaluated VLA architectures use language-conditioned components internally, but those are properties of the evaluated artefacts, not of our methodology.
-\end{enumerate}
 
 \end{document}
