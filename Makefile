@@ -43,8 +43,10 @@ STATS_OUT := $(SEPARATION_OUT) $(PP_OUT) $(PP_PAIR_OUT) $(EFFICIENCY_OUT) $(ROBU
 FIG_HERO       := out/paper/fig_hero.png
 FIG_METHOD_PP  := out/paper/fig_method_pp.png
 FIG_EFFICIENCY := out/paper/fig_efficiency.png
+FIG_QQ         := out/paper/fig_qq_per_object.png
+FIG_UPH_MTBF   := out/paper/fig_uph_mtbf_per_object.png
 TAB_LEADER     := out/paper/tab_leaderboard.md
-PAPER_OUT := $(FIG_HERO) $(FIG_METHOD_PP) $(FIG_EFFICIENCY) $(TAB_LEADER)
+PAPER_OUT := $(FIG_HERO) $(FIG_METHOD_PP) $(FIG_EFFICIENCY) $(FIG_QQ) $(FIG_UPH_MTBF) $(TAB_LEADER)
 
 # ----- engines ---------------------------------------------------------------
 
@@ -130,6 +132,9 @@ $(FIG_METHOD_PP): build/fig_method_pp.py $(LOADER_SRC) $(ANNOTATIONS)
 
 $(FIG_EFFICIENCY): build/fig_efficiency_clean.py $(EFFICIENCY_OUT)
 	uv run python -m build.fig_efficiency_clean
+
+$(FIG_QQ) $(FIG_UPH_MTBF): build/fig_qq_tradeoff.py $(LOADER_SRC) $(ANNOTATIONS)
+	uv run python -m build.fig_qq_tradeoff --cohort $(COHORT)
 
 $(TAB_LEADER): build/tab_leaderboard.py $(LOADER_SRC) $(ANNOTATIONS)
 	uv run python -m build.tab_leaderboard --cohort $(COHORT)

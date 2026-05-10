@@ -93,7 +93,7 @@ For a single rollout episode with multiple operations to perform, we extract a s
 
 \subsection{Scoring: Scalars and Visualizations from the CDF}\label{sec:framework-scoring}
 
-The CDF is the lossless representation. Every standard scalar in published VLA evaluations is a projection of it (Table~\ref{tab:projections}); reporting any single one without the CDF discards information.
+The CDF is the lossless representation. The scalars commonly reported in VLA evaluations are projections of it (Table~\ref{tab:projections}); reporting any single one without the CDF discards information.
 
 \begin{table}[h]
 \centering
@@ -343,24 +343,6 @@ LBM Examination~\cite{lbm2026} & 50 real / 200 sim per condition & Bayesian post
 \paragraph{Concurrent methodology critiques.} Kress-Gazit et al.~\cite{kress2024} explicitly argue that current real-robot evaluations are statistically underpowered. STEP~\cite{snyder2025} concurs: ``20--30 real-world trials are insufficient for statistically significant conclusions.'' These recommend; we ship a metric framework with reference implementation of those recommendations on a shared station.
 
 
-\section{Per-Cell RMST and Pairwise P-P Plots}\label{app:percell}
-
-This appendix supports two claims from the body text. First, the per-(model, object) RMST grid (Figure~\ref{fig:grid-rmst}) substantiates \S\ref{sec:res-headline}'s 19\% per-object HRT ceiling and surfaces the GR00T-vs-ACT object crossing referenced in \S\ref{sec:res-aggregation}. Second, the pairwise P-P plots without the human anchor (Figure~\ref{fig:pp-pairwise}) accompany \S\ref{sec:res-aggregation}'s discussion of how the human-anchored AUC saturates and what removing that anchor reveals about the top-3 pairs.
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=0.92\linewidth]{../out/explore/grid_rmst.png}
-  \caption{Per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. Crossings exist (most clearly GR00T vs.\ ACT between Batteries and Scissors) but none clears Bonferroni at $\alpha = 0.05/24$. The visible patterns suggest the orderings vary by object; resolving them formally requires the rollout budget that Figure~\ref{fig:efficiency} quantifies.}
-  \label{fig:grid-rmst}
-\end{figure}
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=0.92\linewidth]{../out/explore/pp_pairwise_macro.png}
-  \caption{Pairwise model-vs-model P-P plots, top-3 only (SmolVLA excluded as too easily separable to be informative), macro-averaged across the 4 trained objects. The teleop-anchored AUC of \S\ref{sec:res-aggregation} saturates because the human reference is ${\sim}7\times$ faster than any evaluated VLA -- nearly all model events fall in the human's tail, so the AUC integral is dominated by short-time behaviour. Removing the human anchor neutralizes that bias: every top-3 pair falls on or near the diagonal, with macro-AUCs all consistent with $0.5$ (ACT-vs-OpenPI $0.51$\,[$0.45$, $0.56$]; ACT-vs-GR00T $0.50$\,[$0.45$, $0.55$]; OpenPI-vs-GR00T $0.50$\,[$0.46$, $0.54$]).}
-  \label{fig:pp-pairwise}
-\end{figure}
-
 \section{Run-Explorer Visualization}\label{app:hardware}
 
 Every evaluated rollout is published in a run-explorer interface (Figure~\ref{fig:platform}) that synchronizes the exterior and wrist video streams against the 3D end-effector trajectory and the per-channel telemetry: commanded action, gripper target, and measured gripper position. A reader auditing a specific time-to-success annotation against the raw video can replay it frame-accurately and inspect the joint state at any instant. The interface is built on Rerun~\cite{rerun} and runs post-hoc against the released artifacts; it is independent of the operator-side tooling used during rollout collection. We expose this not as part of the methodological contribution but as a transparency mechanism: every annotation in the released dataset is auditable against the raw rollout it was derived from.
@@ -393,6 +375,14 @@ Total & 352 & $\sim$812 \\
 \caption{Fine-tuning dataset (released alongside the benchmark, $\sim$13 hours of robot operation).}
 \label{tab:dataset}
 \end{table}
+
+\section{Annotation Protocol}\label{app:protocol}
+
+The framework requires per-episode event logs: place timestamps, intervention counts, and end-state item counts. The protocol is implementation, not contribution, and is expected to evolve.
+
+\paragraph{Automated detector + classifier.} A multistage release detector reads gripper telemetry (\texttt{target\_grip} edges gated by hold and plateau windows, plus accidental-drop detection on \texttt{grip} slumps from the held band into the fully-closed band) and emits per-candidate features (end-effector zone, hold duration, displacement, a running target-zone ledger); a classifier then assigns each candidate a verdict $\in$ \{success, failure, neutral, unknown\}. Implementation, calibrated thresholds, and unit tests are released alongside the data.
+
+\paragraph{Manual review.} For every episode where the classifier's success count disagrees with the operator's logged \texttt{eval.successful\_items}, a human annotator reviews each candidate in a custom desktop UI and records per-candidate item counts and timestamps; these confirmed values ground the released annotations. Subsequent PhAIL releases will replace this step with task-specific hardware sensing (e.g., bin-weight sensors for pick-and-place, analogous instrumentation for insertion and assembly) so that operation events are recorded objectively, with no manual-review bias.
 
 \section{Spatial Configuration Sensitivity}\label{app:spatial}
 
@@ -436,13 +426,45 @@ For close-pair separations representative of our data ($\Delta \in [0.10, 0.30]$
 
 \paragraph{Empirical detection-rate-vs-$N$ curves.} \S\ref{sec:res-efficiency} translates these analytical numbers into empirical detection-rate-vs-$N$ curves on our data via 300 outer subsampling trials, each running a 200-rep inner episode-clustered bootstrap. The full $(N, \text{metric}, \text{pair}, \text{detection rate})$ table for all four metrics ($F(30\text{s})$, $F(60\text{s})$, RMST, KS) and all six model pairs is released alongside the data.
 
-\section{Annotation Protocol}\label{app:protocol}
+\section{Per-Cell RMST and Pairwise P-P Plots}\label{app:percell}
 
-The framework requires per-episode event logs: place timestamps, intervention counts, and end-state item counts. The protocol is implementation, not contribution, and is expected to evolve.
+This appendix supports two claims from the body text. First, the per-(model, object) RMST grid (Figure~\ref{fig:grid-rmst}) substantiates \S\ref{sec:res-headline}'s 19\% per-object HRT ceiling and surfaces the GR00T-vs-ACT object crossing referenced in \S\ref{sec:res-aggregation}. Second, the pairwise P-P plots without the human anchor (Figure~\ref{fig:pp-pairwise}) accompany \S\ref{sec:res-aggregation}'s discussion of how the human-anchored AUC saturates and what removing that anchor reveals about the top-3 pairs.
 
-\paragraph{Automated detector + classifier.} A multistage release detector reads gripper telemetry (\texttt{target\_grip} edges gated by hold and plateau windows, plus accidental-drop detection on \texttt{grip} slumps from the held band into the fully-closed band) and emits per-candidate features (end-effector zone, hold duration, displacement, a running target-zone ledger); a classifier then assigns each candidate a verdict $\in$ \{success, failure, neutral, unknown\}. Implementation, calibrated thresholds, and unit tests are released alongside the data.
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.92\linewidth]{../out/explore/grid_rmst.png}
+  \caption{Per-(model, object) RMST with 95\% episode-clustered bootstrap CIs. Crossings exist (most clearly GR00T vs.\ ACT between Batteries and Scissors) but none clears Bonferroni at $\alpha = 0.05/24$. The visible patterns suggest the orderings vary by object; resolving them formally requires the rollout budget that Figure~\ref{fig:efficiency} quantifies.}
+  \label{fig:grid-rmst}
+\end{figure}
 
-\paragraph{Manual review.} For every episode where the classifier's success count disagrees with the operator's logged \texttt{eval.successful\_items}, a human annotator reviews each candidate in a custom desktop UI and records per-candidate item counts and timestamps; these confirmed values ground the released annotations. Subsequent PhAIL releases will replace this step with task-specific hardware sensing (e.g., bin-weight sensors for pick-and-place, analogous instrumentation for insertion and assembly) so that operation events are recorded objectively, with no manual-review bias.
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.92\linewidth]{../out/explore/pp_pairwise_macro.png}
+  \caption{Pairwise model-vs-model P-P plots, top-3 only (SmolVLA excluded as too easily separable to be informative), macro-averaged across the 4 trained objects. The teleop-anchored AUC of \S\ref{sec:res-aggregation} saturates because the human reference is ${\sim}7\times$ faster than any evaluated VLA -- nearly all model events fall in the human's tail, so the AUC integral is dominated by short-time behaviour. Removing the human anchor neutralizes that bias: every top-3 pair falls on or near the diagonal, with macro-AUCs all consistent with $0.5$ (ACT-vs-OpenPI $0.51$\,[$0.45$, $0.56$]; ACT-vs-GR00T $0.50$\,[$0.45$, $0.55$]; OpenPI-vs-GR00T $0.50$\,[$0.46$, $0.54$]).}
+  \label{fig:pp-pairwise}
+\end{figure}
+
+\section{Distributional Shape and Scalar Trade-offs}\label{app:morevis}
+
+The figures in this appendix complement the per-cell RMST grid in Appendix~\ref{app:percell} with two derived views of the same per-(model, object) CDFs: (i) a Q-Q view that exposes \emph{where} along the time axis the model lags the human reference, and (ii) a parametric trade-off view that shows two standard scalars (UPH and MTBF/A) pulling in opposite directions as the protocol's $\tau_\text{episode}$ varies.
+
+\paragraph{Q-Q plots: slowdown is tail-heavy.} Figure~\ref{fig:qq-per-object} plots, for each object, $T_\text{Human}(q)$ against $T_\text{model}(q)$ at matched quantile $q$ (i.e., the time by which a fraction $q$ of operations are completed). The dashed diagonal $T_\text{Human}=T_\text{model}$ marks ``as fast as the human reference''; below-diagonal points are model-slower-than-human. A uniform slowdown would trace a straight line through the origin with constant slope; the empirical curves bend away from the diagonal as $q\to 1$, indicating that policies fall behind disproportionately on the slow tail of operations rather than uniformly across the distribution. The open circle on each model curve marks the model's last reachable quantile $q=1-p_\text{fail}$: humans have effectively no hard-failure asymptote, so the human curve runs to $q\approx 1$ uninterrupted, while a model's curve terminates wherever its hard-failure rate cuts the CDF off.
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\textwidth]{../out/paper/fig_qq_per_object.png}
+  \caption{Per-object Q-Q plots, $T_\mathrm{Human}(q)$ vs $T_\mathrm{model}(q)$, all four VLAs on the four bin-to-bin objects. Dashed diagonal $=$ as fast as the human reference; below-diagonal $=$ model is slower. Open circle on each model curve marks $q=1-p_\mathrm{fail}$, the highest quantile the model reaches before its hard-failure asymptote. Curves bending below the diagonal as $q\to 1$ indicate tail-heavy slowdown rather than a uniform multiplicative gap.}
+  \label{fig:qq-per-object}
+\end{figure}
+
+\paragraph{UPH and MTBF/A trade off as $\tau_\mathrm{episode}$ varies.} Figure~\ref{fig:uph-mtbf-per-object} plots, for each object, every model's trajectory in the (UPH, MTBF/A) plane as $\tau_\mathrm{episode}$ sweeps $[30, 240]$ seconds. UPH $\propto 1/\mathrm{RMST}(\tau_\mathrm{episode})$ falls with $\tau_\mathrm{episode}$ because the integration cap charges every hard-failure ghost event the full $\tau_\mathrm{episode}$; MTBF/A $=\mathrm{RMST}(\tau_\mathrm{episode})/\big(1-F(\tau_\mathrm{episode})\big)$ rises with $\tau_\mathrm{episode}$ because the same cap inflates the numerator faster than the (eventually-asymptotic) denominator. The two scalars therefore move in opposite directions, and the order they induce on policies depends on which $\tau_\mathrm{episode}$ a paper picked. This is concrete evidence for the ``no single scalar suffices'' claim of \S\ref{sec:framework-scoring}: any headline scalar that integrates against $\tau_\mathrm{episode}$ implicitly fixes a point on a trade-off curve, and a different but equally defensible $\tau_\mathrm{episode}$ relabels the leaderboard.
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\textwidth]{../out/paper/fig_uph_mtbf_per_object.png}
+  \caption{UPH versus MTBF/A trajectories per object, parametric in $\tau_\mathrm{episode}\in[30, 240]$ seconds. Each curve is one (model, object) cell traced as the episode horizon increases. Trajectories run up-and-left as $\tau_\mathrm{episode}$ rises (UPH falls, MTBF/A rises): the two scalars trade off, and the headline a benchmark publishes therefore depends on a protocol choice rather than only on policy quality.}
+  \label{fig:uph-mtbf-per-object}
+\end{figure}
 
 
 \end{document}
