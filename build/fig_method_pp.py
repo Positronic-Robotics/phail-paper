@@ -61,7 +61,25 @@ def _F_on_grid(eps, grid):
     return 1.0 - stats.km_step(t_g, S, grid)
 
 
-def panel_cdf(ax, grid, F_ref, F_model, idx, model_short, tau):
+def _F_on_grid_with_ci(eps, grid, n_boot=200, seed=0):
+    """Episode-clustered bootstrap CI on the CDF; returns (F, F_lo, F_hi)."""
+    F_point = _F_on_grid(eps, grid)
+    rng = np.random.default_rng(seed)
+    boots = np.empty((n_boot, len(grid)))
+    n = len(eps)
+    for k in range(n_boot):
+        idx = rng.integers(0, n, size=n)
+        eps_b = [eps[i] for i in idx]
+        boots[k] = _F_on_grid(eps_b, grid)
+    F_lo = np.quantile(boots, 0.025, axis=0)
+    F_hi = np.quantile(boots, 0.975, axis=0)
+    return F_point, F_lo, F_hi
+
+
+def panel_cdf(ax, grid, F_ref, F_ref_lo, F_ref_hi, F_model, F_model_lo, F_model_hi,
+              idx, model_short, tau):
+    ax.fill_between(grid, F_ref_lo, F_ref_hi, color=COLORS['Human'], alpha=0.15)
+    ax.fill_between(grid, F_model_lo, F_model_hi, color=COLORS[model_short], alpha=0.15)
     ax.plot(grid, F_ref, color=COLORS['Human'], linewidth=3.0, label='Human reference')
     ax.plot(grid, F_model, color=COLORS[model_short], linewidth=2.4, label=model_short)
     t_star = float(grid[idx])
@@ -70,7 +88,7 @@ def panel_cdf(ax, grid, F_ref, F_model, idx, model_short, tau):
     ks_val = abs(f_ref_star - f_mod_star)
     ax.plot([t_star, t_star], [f_mod_star, f_ref_star],
             color='#d62728', linestyle='--', linewidth=1.0,
-            label=f'sup = {ks_val:.2f}')
+            label=f'KS = {ks_val:.2f}')
     ax.set_xlim(0, tau)
     ax.set_ylim(0, 1.02)
     ax.set_xlabel('Time t (seconds)', fontsize=11)
@@ -130,12 +148,13 @@ def main(cohort: str, model: str, eval_object: str, tau: float, out_dir: str):
 
     short = SHORT.get(model, model)
     grid = np.linspace(0, tau, 400)
-    F_ref = _F_on_grid(eps_ref, grid)
-    F_model = _F_on_grid(eps_model, grid)
+    F_ref, F_ref_lo, F_ref_hi = _F_on_grid_with_ci(eps_ref, grid)
+    F_model, F_model_lo, F_model_hi = _F_on_grid_with_ci(eps_model, grid)
     idx = int(np.argmax(np.abs(F_ref - F_model)))
 
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    panel_cdf(axes[0], grid, F_ref, F_model, idx, short, tau)
+    panel_cdf(axes[0], grid, F_ref, F_ref_lo, F_ref_hi, F_model, F_model_lo, F_model_hi,
+              idx, short, tau)
     panel_pp(axes[1], F_ref, F_model, idx, short)
     fig.tight_layout()
     p = out / 'fig_method_pp.png'

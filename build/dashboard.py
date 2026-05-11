@@ -73,8 +73,20 @@ def _git_status() -> tuple[str, bool]:
     return sha, dirty
 
 
+def _by_obj(eps: list[loader.Episode]) -> dict[str, list[loader.Episode]]:
+    out: dict[str, list[loader.Episode]] = defaultdict(list)
+    for ep in eps:
+        out[ep.eval_object].append(ep)
+    return out
+
+
 def _h1_distinguishability(by_model: dict[str, list[loader.Episode]], n_boot: int, rng: np.random.Generator) -> dict:
-    """Per-pair KS bootstrap on the policy models (excludes Teleop reference)."""
+    """Per-pair per-object macro KS with episode-clustered bootstrap.
+
+    Mirrors the test described in §sec:framework-test of the paper and used by
+    explore_efficiency.py: per-object KS distance, macro-averaged across objects
+    with equal weights; pooled-resample H_0 calibration done per object.
+    """
     pair_results = []
     worst_status = 'HOLDS'
     for a, b in combinations(POLICY_MODELS, 2):
@@ -85,7 +97,7 @@ def _h1_distinguishability(by_model: dict[str, list[loader.Episode]], n_boot: in
         n_a = len(eps_a)
         n_b = len(eps_b)
         underpowered = min(n_a, n_b) < UNDERPOWERED_N
-        D, p = stats.episode_cluster_bootstrap_ks(eps_a, eps_b, n_boot=n_boot, rng=rng)
+        D, p = stats.per_obj_macro_bootstrap_ks(_by_obj(eps_a), _by_obj(eps_b), n_boot=n_boot, rng=rng)
         if underpowered:
             status = 'UNDERPOWERED'
         elif p < KS_HOLDS:

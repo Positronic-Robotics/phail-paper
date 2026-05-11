@@ -12,6 +12,10 @@ Functions:
     rmst(t_grid, S, tau)         -> restricted mean survival time over [0, tau]
     ks_distance(t1, S1, t2, S2)  -> sup |F1 - F2|
     episode_cluster_bootstrap_ks(eps_a, eps_b, n_boot, rng) -> (D, p)
+        single-pool KS: pool all episodes per arm, one KM, one sup.
+    per_obj_macro_bootstrap_ks(eps_a_by_obj, eps_b_by_obj, n_boot, rng) -> (D_macro, p)
+        per-object KS, macro-mean across objects; the test used by
+        explore_efficiency.py and the framework section of the paper.
     pct_of_human(rmst_model, rmst_human) -> 100 * rmst_human / rmst_model
 """
 
@@ -207,6 +211,65 @@ def episode_cluster_bootstrap_ks(
         ta, Sa, _ = kaplan_meier(Ta, Ea)
         tb, Sb, _ = kaplan_meier(Tb, Eb)
         if ks_distance(ta, Sa, tb, Sb) >= obs:
+            count += 1
+    p = (count + 1) / (n_boot + 1)
+    return obs, p
+
+
+def per_obj_macro_bootstrap_ks(
+    eps_a_by_obj: dict[str, list[_TSource]],
+    eps_b_by_obj: dict[str, list[_TSource]],
+    n_boot: int = 2000,
+    rng: np.random.Generator | None = None,
+) -> tuple[float, float]:
+    """Per-object KS, macro-averaged across objects, with episode-clustered
+    pooled-resample bootstrap p-value.
+
+    For each object o present in both arms:
+      - compute KM curves S_a^o, S_b^o on the object's operations,
+      - compute D_o = sup_t |F_a^o(t) - F_b^o(t)|.
+    The reported statistic is the equal-weight macro-mean D = (1/J) sum_o D_o.
+
+    Under H_0: F_a^o = F_b^o for all o, the bootstrap pools each object's
+    episodes from both arms and resamples with replacement at the episode
+    level into fresh arm-A and arm-B episode lists of the original sizes,
+    then recomputes the macro-mean. Returns (observed_macro_D, p_value).
+    """
+    rng = rng or np.random.default_rng(0)
+    objs_both = sorted(set(eps_a_by_obj) & set(eps_b_by_obj))
+    objs_both = [o for o in objs_both if eps_a_by_obj[o] and eps_b_by_obj[o]]
+    if not objs_both:
+        return 0.0, 1.0
+
+    def _macro(a_by_o, b_by_o):
+        vals = []
+        for o in objs_both:
+            T_a, E_a = _collect_T_E(a_by_o[o])
+            T_b, E_b = _collect_T_E(b_by_o[o])
+            if len(T_a) == 0 or len(T_b) == 0:
+                continue
+            t_a, S_a, _ = kaplan_meier(T_a, E_a)
+            t_b, S_b, _ = kaplan_meier(T_b, E_b)
+            vals.append(ks_distance(t_a, S_a, t_b, S_b))
+        return float(np.mean(vals)) if vals else 0.0
+
+    obs = _macro(eps_a_by_obj, eps_b_by_obj)
+
+    pooled_per_obj = {o: eps_a_by_obj[o] + eps_b_by_obj[o] for o in objs_both}
+    n_a_per_obj = {o: len(eps_a_by_obj[o]) for o in objs_both}
+    n_b_per_obj = {o: len(eps_b_by_obj[o]) for o in objs_both}
+
+    count = 0
+    for _ in range(n_boot):
+        a_resampled = {}
+        b_resampled = {}
+        for o in objs_both:
+            pool = pooled_per_obj[o]
+            a_idx = rng.integers(0, len(pool), size=n_a_per_obj[o])
+            b_idx = rng.integers(0, len(pool), size=n_b_per_obj[o])
+            a_resampled[o] = [pool[i] for i in a_idx]
+            b_resampled[o] = [pool[i] for i in b_idx]
+        if _macro(a_resampled, b_resampled) >= obs:
             count += 1
     p = (count + 1) / (n_boot + 1)
     return obs, p
