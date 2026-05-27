@@ -6,3 +6,20 @@ dist/
 build/autopilot/last_validate.jsonl
 build/markup/out/
 .check_counts.stamp
+
+# Editor / OS cruft
+.DS_Store
+.vscode/
+.idea/
+.tmp_diag/
+
+# tectonic / latex build artifacts
+paper/*.log
+paper/*.aux
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+
+# stage-1/2 migration leftovers
+out/release_classifier/*.bak-*
