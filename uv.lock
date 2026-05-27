@@ -9,7 +9,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-04-29T21:57:48.792884Z"
+exclude-newer = "2026-05-20T11:04:31.990303Z"
 exclude-newer-span = "P7D"
 
 [options.exclude-newer-package]
@@ -1648,7 +1648,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "numpy" },
     { name = "pos3", specifier = ">=0.2.0" },
-    { name = "positronic" },
+    { name = "positronic", git = "https://github.com/Positronic-Robotics/positronic.git?branch=main" },
     { name = "pyarrow", specifier = ">=23.0.1" },
     { name = "scipy" },
 ]
@@ -1778,7 +1778,7 @@ wheels = [
 [[package]]
 name = "positronic"
 version = "0.2.1"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/Positronic-Robotics/positronic.git?branch=main#498ef5e0b3710d4678d8acbf94442054a35929ca" }
 dependencies = [
     { name = "av" },
     { name = "coloredlogs" },
@@ -1808,10 +1808,6 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "websockets" },
     { name = "zmq" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/78/24/2b2df537d6e6492b08f3c48463c23b991e1ce756a79a3252ac3b8301d7ea/positronic-0.2.1.tar.gz", hash = "sha256:06b9303274b7e2bfa974081550cbd5db1940b31fa6ec5a657628339fb2964a4f", size = 31391866, upload-time = "2026-03-31T21:46:07.676Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/34/72aba897aeab39f9b0b650cddfc08f64805af730d6fd3f6b86d2c063e92b/positronic-0.2.1-py3-none-any.whl", hash = "sha256:6eb2226118aa90af139f44c67e94076c0aae261d6e5d45acd3a4e45ad021840f", size = 31674338, upload-time = "2026-03-31T21:46:04.77Z" },
 ]
 
 [[package]]

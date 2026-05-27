@@ -18,3 +18,6 @@ dependencies = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["build", "toloka"]
+
+[tool.uv.sources]
+positronic = { git = "https://github.com/Positronic-Robotics/positronic.git", branch = "main" }
