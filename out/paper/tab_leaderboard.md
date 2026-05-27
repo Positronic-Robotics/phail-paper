@@ -2,10 +2,10 @@
 
 | Model | n_eps | n_evt | n_cen | median_T (s) | RMST (s) | % of human | F(20s) | F(30s) | F(60s) | n_safety+stalls | MTBA_safety_stalls (s) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| OpenPI | 177 | 647 | 160 | 34.1 | 81.1 | 13.0% | 0.32 | 0.46 | 0.64 | 8 | 4563 |
-| GR00T | 173 | 628 | 158 | 29.5 | 78.8 | 13.3% | 0.38 | 0.50 | 0.66 | 6 | 6111 |
-| ACT | 166 | 448 | 158 | 44.2 | 102.6 | 10.2% | 0.35 | 0.43 | 0.56 | 3 | 10910 |
-| SmolVLA | 131 | 155 | 131 | inf | 169.4 | 6.2% | 0.12 | 0.17 | 0.25 | 23 | 898 |
+| OpenPI | 165 | 631 | 149 | 33.1 | 77.7 | 13.5% | 0.33 | 0.47 | 0.66 | 7 | 5014 |
+| GR00T | 165 | 620 | 150 | 27.8 | 77.2 | 13.6% | 0.38 | 0.51 | 0.67 | 7 | 5108 |
+| ACT | 151 | 437 | 143 | 42.3 | 100.9 | 10.4% | 0.36 | 0.44 | 0.57 | 3 | 10310 |
+| SmolVLA | 118 | 154 | 118 | inf | 165.8 | 6.3% | 0.12 | 0.18 | 0.26 | 22 | 872 |
 | Teleop | 396 | 3952 | 0 | 9.3 | 10.5 | 100.0% | 0.96 | 0.99 | 1.00 | 0 | inf |
 
-_Total episodes: 1043. %-of-human anchored to Teleop RMST. MTBA only counts Safety + Stalled outcomes (lower bound — drops_outside not included)._
+_Total episodes: 995. %-of-human anchored to Teleop RMST. MTBA only counts Safety + Stalled outcomes (lower bound — drops_outside not included)._

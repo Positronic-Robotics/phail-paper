@@ -1,0 +1,170 @@
+[
+  {
+    "pair": "OpenPI vs GR00T",
+    "N_per_cell": 25,
+    "mean_ops_per_ep_per_obj": 4.732613510520487,
+    "mean_ICC_per_obj": 0.6501759130262701,
+    "Delta_pool": 0.035433487373359385,
+    "Delta_macro_per_obj": 0.1202177023885386,
+    "deltas_per_obj": {
+      "Batteries": 0.11811222855619219,
+      "Scissors": 0.15033832227498745,
+      "Towels": 0.1380681898121061,
+      "Wooden spoons": 0.07435206891086865
+    },
+    "n_eff_pool": 147.45636745630424,
+    "n_eff_per_obj": {
+      "Batteries": 32.03687726908146,
+      "Scissors": 33.74041480687873,
+      "Towels": 48.61294446233004,
+      "Wooden spoons": 33.06613091801402
+    },
+    "A_naive_n_per_cell": 0.1088394324926596,
+    "A_n_eff": 0.1458908449005224,
+    "B_localvar_n_eff": 0.010181336836043926,
+    "C_bridge_n_eff": 0.0262,
+    "D_finiteN_KS_n_eff": 0.0815,
+    "E_per_obj_bridge_macro": 0.3579,
+    "EMPIRICAL": 0.4666666666666667
+  },
+  {
+    "pair": "OpenPI vs GR00T",
+    "N_per_cell": 30,
+    "mean_ops_per_ep_per_obj": 4.732613510520487,
+    "mean_ICC_per_obj": 0.6501759130262701,
+    "Delta_pool": 0.035433487373359385,
+    "Delta_macro_per_obj": 0.1202177023885386,
+    "deltas_per_obj": {
+      "Batteries": 0.11811222855619219,
+      "Scissors": 0.15033832227498745,
+      "Towels": 0.1380681898121061,
+      "Wooden spoons": 0.07435206891086865
+    },
+    "n_eff_pool": 176.9476409475651,
+    "n_eff_per_obj": {
+      "Batteries": 38.44425272289775,
+      "Scissors": 40.48849776825448,
+      "Towels": 58.33553335479605,
+      "Wooden spoons": 39.67935710161682
+    },
+    "A_naive_n_per_cell": 0.11108718389706812,
+    "A_n_eff": 0.15253904046948463,
+    "B_localvar_n_eff": 0.0120155367306093,
+    "C_bridge_n_eff": 0.02925,
+    "D_finiteN_KS_n_eff": 0.0695,
+    "E_per_obj_bridge_macro": 0.4393666666666667,
+    "EMPIRICAL": 0.6166666666666667
+  },
+  {
+    "pair": "OpenPI vs ACT",
+    "N_per_cell": 25,
+    "mean_ops_per_ep_per_obj": 4.732613510520487,
+    "mean_ICC_per_obj": 0.6501759130262701,
+    "Delta_pool": 0.11818879509321478,
+    "Delta_macro_per_obj": 0.13678151519685872,
+    "deltas_per_obj": {
+      "Batteries": 0.12460864527098381,
+      "Scissors": 0.08922101449275366,
+      "Towels": 0.1808865874438832,
+      "Wooden spoons": 0.1524098135798142
+    },
+    "n_eff_pool": 139.4827735825907,
+    "n_eff_per_obj": {
+      "Batteries": 32.92167229898222,
+      "Scissors": 32.72609663138758,
+      "Towels": 40.121186040049295,
+      "Wooden spoons": 33.71381861217162
+    },
+    "A_naive_n_per_cell": 0.1735730029779567,
+    "A_n_eff": 0.3546860579134373,
+    "B_localvar_n_eff": 0.20789360511501348,
+    "C_bridge_n_eff": 0.14715,
+    "D_finiteN_KS_n_eff": 0.366,
+    "E_per_obj_bridge_macro": 0.5143333333333333,
+    "EMPIRICAL": 0.73
+  },
+  {
+    "pair": "OpenPI vs ACT",
+    "N_per_cell": 30,
+    "mean_ops_per_ep_per_obj": 4.732613510520487,
+    "mean_ICC_per_obj": 0.6501759130262701,
+    "Delta_pool": 0.11818879509321478,
+    "Delta_macro_per_obj": 0.13678151519685872,
+    "deltas_per_obj": {
+      "Batteries": 0.12460864527098381,
+      "Scissors": 0.08922101449275366,
+      "Towels": 0.1808865874438832,
+      "Wooden spoons": 0.1524098135798142
+    },
+    "n_eff_pool": 167.37932829910886,
+    "n_eff_per_obj": {
+      "Batteries": 39.50600675877867,
+      "Scissors": 39.271315957665095,
+      "Towels": 48.14542324805915,
+      "Wooden spoons": 40.45658233460595
+    },
+    "A_naive_n_per_cell": 0.18399181188961167,
+    "A_n_eff": 0.3905021585502376,
+    "B_localvar_n_eff": 0.2719228683271088,
+    "C_bridge_n_eff": 0.21565,
+    "D_finiteN_KS_n_eff": 0.465,
+    "E_per_obj_bridge_macro": 0.6399,
+    "EMPIRICAL": 0.78
+  },
+  {
+    "pair": "GR00T vs ACT",
+    "N_per_cell": 25,
+    "mean_ops_per_ep_per_obj": 4.58940316789154,
+    "mean_ICC_per_obj": 0.5701590128843446,
+    "Delta_pool": 0.09246529820099636,
+    "Delta_macro_per_obj": 0.15848917559653028,
+    "deltas_per_obj": {
+      "Batteries": 0.11537040080797267,
+      "Scissors": 0.1526415968085716,
+      "Towels": 0.226966202062858,
+      "Wooden spoons": 0.13897850270671885
+    },
+    "n_eff_pool": 146.67316741858338,
+    "n_eff_per_obj": {
+      "Batteries": 34.847978410034365,
+      "Scissors": 33.592037589047024,
+      "Towels": 46.14492086523027,
+      "Wooden spoons": 32.0882305542717
+    },
+    "A_naive_n_per_cell": 0.1512502923664359,
+    "A_n_eff": 0.2850255827540825,
+    "B_localvar_n_eff": 0.11077547374546048,
+    "C_bridge_n_eff": 0.0872,
+    "D_finiteN_KS_n_eff": 0.2635,
+    "E_per_obj_bridge_macro": 0.8253,
+    "EMPIRICAL": 0.88
+  },
+  {
+    "pair": "GR00T vs ACT",
+    "N_per_cell": 30,
+    "mean_ops_per_ep_per_obj": 4.58940316789154,
+    "mean_ICC_per_obj": 0.5701590128843446,
+    "Delta_pool": 0.09246529820099636,
+    "Delta_macro_per_obj": 0.15848917559653028,
+    "deltas_per_obj": {
+      "Batteries": 0.11537040080797267,
+      "Scissors": 0.1526415968085716,
+      "Towels": 0.226966202062858,
+      "Wooden spoons": 0.13897850270671885
+    },
+    "n_eff_pool": 176.00780090230003,
+    "n_eff_per_obj": {
+      "Batteries": 41.817574092041234,
+      "Scissors": 40.310445106856434,
+      "Towels": 55.37390503827632,
+      "Wooden spoons": 38.50587666512604
+    },
+    "A_naive_n_per_cell": 0.15868345969120623,
+    "A_n_eff": 0.3118551826859801,
+    "B_localvar_n_eff": 0.14551145220067963,
+    "C_bridge_n_eff": 0.1261,
+    "D_finiteN_KS_n_eff": 0.297,
+    "E_per_obj_bridge_macro": 0.9105333333333333,
+    "EMPIRICAL": 0.95
+  }
+]

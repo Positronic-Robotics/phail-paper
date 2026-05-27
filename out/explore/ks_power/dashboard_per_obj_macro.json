@@ -1,0 +1,71 @@
+{
+  "rows": [
+    {
+      "pair": [
+        "OpenPI",
+        "GR00T"
+      ],
+      "n_a": 165,
+      "n_b": 165,
+      "D_macro_per_obj": 0.12391553589925894,
+      "p": 0.11944027986006997,
+      "status": "WEAK"
+    },
+    {
+      "pair": [
+        "OpenPI",
+        "ACT"
+      ],
+      "n_a": 165,
+      "n_b": 151,
+      "D_macro_per_obj": 0.14179755022503066,
+      "p": 0.10294852573713144,
+      "status": "WEAK"
+    },
+    {
+      "pair": [
+        "OpenPI",
+        "SmolVLA"
+      ],
+      "n_a": 165,
+      "n_b": 118,
+      "D_macro_per_obj": 0.4654550298864024,
+      "p": 0.0004997501249375312,
+      "status": "HOLDS"
+    },
+    {
+      "pair": [
+        "GR00T",
+        "ACT"
+      ],
+      "n_a": 165,
+      "n_b": 151,
+      "D_macro_per_obj": 0.17540928625103427,
+      "p": 0.015992003998001,
+      "status": "HOLDS"
+    },
+    {
+      "pair": [
+        "GR00T",
+        "SmolVLA"
+      ],
+      "n_a": 165,
+      "n_b": 118,
+      "D_macro_per_obj": 0.4343981522594673,
+      "p": 0.0004997501249375312,
+      "status": "HOLDS"
+    },
+    {
+      "pair": [
+        "ACT",
+        "SmolVLA"
+      ],
+      "n_a": 151,
+      "n_b": 118,
+      "D_macro_per_obj": 0.3607332691290364,
+      "p": 0.0004997501249375312,
+      "status": "HOLDS"
+    }
+  ],
+  "compared_against": "/Users/vertix/Documents/dev/phail-paper/out/paper/dashboard.json"
+}

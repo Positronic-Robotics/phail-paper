@@ -52,14 +52,15 @@ CACHE_PUBLIC_PROFILE = CACHE_ROOT / 'positronic-public'
 CACHE_DEFAULT_PROFILE = CACHE_ROOT / '_'
 
 # When set, PHAIL_DATA_ROOT redirects reads of the public PhAIL dataset
-# (s3://positronic-public/datasets/phail/v1.0/...) to a local directory mirror
+# (s3://positronic-public/phail/v1.0/dataset/...) to a local directory mirror
 # of that subtree. Intended for reviewers who have downloaded the dataset
 # from its public mirror rather than via pos3.
+#
+# TODO: import DATASET_S3_PREFIX from `positronic.cfg.phail.v1_0` once that
+# module is published on PyPI (currently only on positronic main, not in
+# the v0.2.1 release this repo depends on).
 DATA_ROOT_ENV = 'PHAIL_DATA_ROOT'
-DATASET_S3_PREFIX = 's3://positronic-public/datasets/phail/v1.0/'
-# Pre-release rollouts mirrored under a sibling subtree on the public release.
-LEGACY_S3_PREFIX = 's3://inference/'
-LEGACY_LOCAL_SUBDIR = 'inference_legacy/'
+DATASET_S3_PREFIX = 's3://positronic-public/phail/v1.0/dataset/'
 
 # s3 prefixes that house ablation experiments — same model, different
 # training-data fraction. They share `model_display` with the headline model,
@@ -132,13 +133,9 @@ def _s3_url_to_cache_dir(s3_url: str) -> Path:
         `s3://inference/foo/bar`         -> CACHE_ROOT/_/inference/foo/bar
     """
     data_root = os.environ.get(DATA_ROOT_ENV)
-    if data_root:
-        if s3_url.startswith(DATASET_S3_PREFIX):
-            rel = s3_url[len(DATASET_S3_PREFIX):]
-            return Path(data_root) / rel
-        if s3_url.startswith(LEGACY_S3_PREFIX):
-            rel = s3_url[len(LEGACY_S3_PREFIX):]
-            return Path(data_root) / LEGACY_LOCAL_SUBDIR / rel
+    if data_root and s3_url.startswith(DATASET_S3_PREFIX):
+        rel = s3_url[len(DATASET_S3_PREFIX):]
+        return Path(data_root) / rel
     tail = s3_url.split('://', 1)[1]
     bucket = tail.split('/', 1)[0]
     if bucket == 'positronic-public':
@@ -249,7 +246,7 @@ def _is_ablation(s3_url: str) -> bool:
 
 
 def _walk_dataset_inference_urls() -> set[str]:
-    """Walk all `inference/**/static.json` files in the dataset and build s3 URLs.
+    """Walk all `rollouts/**/static.json` files in the dataset and build s3 URLs.
 
     Needed by the mixed cohort: episodes for which the classifier produced
     zero candidates do not appear in `candidates.jsonl` and would otherwise
@@ -259,11 +256,11 @@ def _walk_dataset_inference_urls() -> set[str]:
     urls: set[str] = set()
     data_root = os.environ.get(DATA_ROOT_ENV)
     if data_root:
-        root = Path(data_root) / 'inference'
+        root = Path(data_root) / 'rollouts'
         prefix_strip = Path(data_root)
         s3_prefix = DATASET_S3_PREFIX
     else:
-        root = CACHE_PUBLIC_PROFILE / 'positronic-public' / 'datasets' / 'phail' / 'v1.0' / 'inference'
+        root = CACHE_PUBLIC_PROFILE / 'positronic-public' / 'phail' / 'v1.0' / 'dataset' / 'rollouts'
         prefix_strip = CACHE_PUBLIC_PROFILE / 'positronic-public'
         s3_prefix = 's3://positronic-public/'
     if not root.exists():

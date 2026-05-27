@@ -34,25 +34,29 @@ including `huggingface_hub` for the dataset download.
 
 ### 2. Download the dataset
 
-The dataset is mirrored on Hugging Face. The current canonical URL is
-announced at <https://phail.ai>. Set `<hf-dataset-repo>` below to that
-location (in `<owner>/<name>` form).
+The v1.0 dataset is mirrored at `s3://positronic-public/phail/v1.0/dataset/`
+on a public bucket. The full canonical recipe (including model weights and
+the docker tags for rerunning inference) lives at
+<https://phail.ai/releases/v1.0>.
 
-For figure regeneration, only per-episode metadata + annotations are
-needed (≈30 MB, downloads in seconds):
+For figure regeneration only the per-episode metadata sidecars are needed
+(≈30 MB; videos and telemetry are optional). The simplest path uses
+[`pos3`](https://pypi.org/project/pos3/) (already installed by `uv sync`):
 
 ```bash
-uv run hf download <hf-dataset-repo> \
-    --repo-type dataset \
-    --local-dir ./phail-data \
-    --include "**/static.json" \
-    --include "**/meta.json" \
-    --include "annotations/**"
+uv run python -c "
+import pos3
+with pos3.mirror():
+    pos3.download(
+        's3://positronic-public/phail/v1.0/dataset/',
+        local='./phail-data',
+        exclude=['*.parquet', '*.mp4'],
+    )
+"
 ```
 
-If you also want the videos and full telemetry (≈43 GB, optional —
-not required to reproduce any figure or table), drop the `--include`
-flags or replace them with `--include "**"`.
+To pull the full dataset (videos + telemetry, ≈40 GB), drop the `exclude`
+argument.
 
 ### 3. Point the loader at the downloaded data
 
@@ -61,9 +65,7 @@ export PHAIL_DATA_ROOT=$(pwd)/phail-data
 ```
 
 This redirects `build/markup/loader.py` to read per-episode metadata from
-the local download instead of the operator's pos3 cache. The variable
-covers both the public dataset (`s3://positronic-public/datasets/phail/v1.0/`)
-and the pre-release `inference_legacy/` mirror.
+the local download instead of the operator's pos3 cache.
 
 ### 4. Regenerate paper figures and table
 
@@ -175,8 +177,8 @@ released alongside for transparency.
 - The codebase uses [`configuronic`](https://pypi.org/project/configuronic/)
   for CLI argument parsing on most scripts; pass `--help` to any
   `build/*.py` for available knobs.
-- The cohort uses `s3://positronic-public/datasets/phail/v1.0/` (the v1.0
-  public release) plus `s3://inference/phail_act_groot/` (pre-release
-  rollouts mirrored on the public Hugging Face repo under
-  `inference_legacy/phail_act_groot/`). Both prefixes resolve under
-  `PHAIL_DATA_ROOT` when set.
+- The cohort uses `s3://positronic-public/phail/v1.0/dataset/` (the v1.0
+  public release: `rollouts/` for inference, `teleoperation/` for the
+  training corpus, `human/` for the same-fixture human reference).
+  Resolves under `PHAIL_DATA_ROOT` when set; otherwise the loader falls
+  back to the standard pos3 cache layout.

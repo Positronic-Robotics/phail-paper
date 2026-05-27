@@ -16,19 +16,19 @@ sup |F_a-F_b| over [0,τ]. Detection rate is the fraction of trials with p<0.05.
 | Pair | F30 | F60 | RMST | KS |
 |---|---|---|---|---|
 | OpenPI vs GR00T | — | — | — | — |
-| OpenPI vs ACT | — | — | — | 30 |
-| OpenPI vs SmolVLA | 5 | 5 | 5 | 10 |
+| OpenPI vs ACT | — | — | — | — |
+| OpenPI vs SmolVLA | 5 | 5 | 5 | 5 |
 | GR00T vs ACT | — | — | — | 25 |
-| GR00T vs SmolVLA | 5 | 5 | 5 | 10 |
-| ACT vs SmolVLA | 5 | 5 | 5 | 15 |
+| GR00T vs SmolVLA | 5 | 5 | 5 | 5 |
+| ACT vs SmolVLA | 5 | 5 | 5 | 10 |
 
 ## Observations
 
 - F30: 3/6 pairs detectable; median N₀.₈ = 5
 - F60: 3/6 pairs detectable; median N₀.₈ = 5
 - RMST: 3/6 pairs detectable; median N₀.₈ = 5
-- KS: 5/6 pairs detectable; median N₀.₈ = 15
-- Mean detection rate at N=30 across all 6 pairs: F30=0.55, F60=0.65, RMST=0.62, KS=0.89.
+- KS: 4/6 pairs detectable; median N₀.₈ = 10
+- Mean detection rate at N=30 across all 6 pairs: F30=0.55, F60=0.66, RMST=0.63, KS=0.89.
 
 ## Honest assessment
 
