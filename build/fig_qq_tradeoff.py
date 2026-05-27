@@ -172,6 +172,48 @@ def _draw_uph_mtbf(by_model_obj, t_grid, out_path: Path):
     print(f'wrote {out_path}')
 
 
+def _draw_uph_mtbf_macro(by_model_obj, t_grid, out_path: Path):
+    """Macro-averaged across objects: at each tau_episode, average the 4 per-object
+    (UPH, MTBF/A) points for each model, then plot the resulting trajectory."""
+    fig, ax = plt.subplots(1, 1, figsize=(8.5, 6.5))
+    mask = t_grid >= TAU_MIN_DISPLAY
+
+    for full_name, short in MODELS:
+        uphs, mtbfs, n_tot = [], [], 0
+        for obj in OBJECTS:
+            eps_m = by_model_obj.get((full_name, obj), [])
+            if not eps_m:
+                continue
+            F_m = _F_on_grid(eps_m, t_grid)
+            RMST = _rmst_cumulative(t_grid, F_m)
+            one_minus_F = np.maximum(1.0 - F_m, 1e-9)
+            uphs.append(3600.0 / np.maximum(RMST, 1e-6))
+            mtbfs.append(RMST / one_minus_F)
+            n_tot += len(eps_m)
+        if not uphs:
+            continue
+        uph_macro = np.mean(np.stack(uphs), axis=0)
+        mtbf_macro = np.mean(np.stack(mtbfs), axis=0)
+        ax.plot(uph_macro[mask], mtbf_macro[mask], color=COLORS[short],
+                linewidth=2.4, label=f'{short} (n={n_tot})')
+
+    ax.set_xlim(0, None)
+    ax.set_ylim(0, None)
+    ax.grid(True, alpha=0.3)
+    ax.set_xlabel('UPH (units / hour)', fontsize=11)
+    ax.set_ylabel('MTBF/A (seconds)', fontsize=11)
+    ax.set_title('UPH vs MTBF/A, macro-averaged across 4 objects',
+                 loc='left', fontsize=12, fontweight='bold')
+    ax.legend(loc='upper right', fontsize=10, frameon=True)
+    fig.suptitle(
+        rf'parametric in $\tau_\mathrm{{episode}}\in[{int(TAU_MIN_DISPLAY)}, {int(TAU_MAX)}]$ seconds',
+        fontsize=11, y=0.99)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=160, bbox_inches='tight')
+    plt.close(fig)
+    print(f'wrote {out_path}')
+
+
 @cfn.config(cohort='mixed', out_dir=str(OUT))
 def main(cohort: str, out_dir: str):
     out = Path(out_dir)
@@ -185,6 +227,7 @@ def main(cohort: str, out_dir: str):
     t_grid = np.linspace(0.0, TAU_MAX, GRID_N)
     _draw_qq(by_model_obj, t_grid, out / 'fig_qq_per_object.png')
     _draw_uph_mtbf(by_model_obj, t_grid, out / 'fig_uph_mtbf_per_object.png')
+    _draw_uph_mtbf_macro(by_model_obj, t_grid, out / 'fig_uph_mtbf_macro.png')
 
 
 if __name__ == '__main__':

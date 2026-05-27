@@ -5,3 +5,4 @@ dist/
 .venv/
 build/autopilot/last_validate.jsonl
 build/markup/out/
+.check_counts.stamp
