@@ -40,20 +40,26 @@ the docker tags for rerunning inference) lives at
 <https://phail.ai/releases/v1.0>.
 
 For figure regeneration only the per-episode metadata sidecars are needed
-(≈30 MB; videos and telemetry are optional). The simplest path uses
+(≈180 MB; videos and telemetry are optional). The simplest path uses
 [`pos3`](https://pypi.org/project/pos3/) (already installed by `uv sync`):
 
 ```bash
 uv run python -c "
 import pos3
+from positronic.cfg.ds import PUBLIC
 with pos3.mirror():
     pos3.download(
         's3://positronic-public/phail/v1.0/dataset/',
         local='./phail-data',
         exclude=['*.parquet', '*.mp4'],
+        profile=PUBLIC,
     )
 "
 ```
+
+`profile=PUBLIC` requests anonymous (unsigned) access to the public
+bucket; without it, `boto3` tries to sign requests with your default
+credentials and fails on a fresh clone.
 
 To pull the full dataset (videos + telemetry, ≈40 GB), drop the `exclude`
 argument.
