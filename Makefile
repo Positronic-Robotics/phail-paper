@@ -2,7 +2,6 @@
 #
 #   make                -> figures, then PDF (default = `make all`)
 #   make pdf            -> compile the PDF
-#   make companion      -> compile the Russian technical companion (paper/companion-ru.pdf)
 #   make figures        -> regenerate every figure and table the paper cites
 #   make figures-stats  -> only the slow statistical analyses (explore_*)
 #   make figures-paper  -> only the fast paper-ready outputs (fig_*, tab_*)
@@ -16,9 +15,6 @@
 PAPER_DIR := paper
 TEX       := $(PAPER_DIR)/phail-paper.tex
 PDF       := $(PAPER_DIR)/phail-paper.pdf
-
-COMPANION_TEX := $(PAPER_DIR)/companion-ru.tex
-COMPANION_PDF := $(PAPER_DIR)/companion-ru.pdf
 
 COHORT ?= mixed
 N_BOOT ?= 1000
@@ -65,14 +61,12 @@ LATEXMK  := $(shell command -v latexmk 2>/dev/null)
 
 # ----- top-level targets -----------------------------------------------------
 
-.PHONY: all pdf companion figures figures-stats figures-paper require-data \
+.PHONY: all pdf figures figures-stats figures-paper require-data \
         check-counts watch clean distclean help
 
 all: figures pdf
 
 pdf: $(PDF)
-
-companion: $(COMPANION_PDF)
 
 figures: figures-stats figures-paper
 
@@ -113,18 +107,6 @@ endif
 $(CHECK_COUNTS_STAMP): $(CHECK_COUNTS_INPUTS)
 	uv run python -m build.check_counts
 	@touch $@
-
-# Russian-language companion document (technical explainer for the author).
-# Standalone — no dependency on figures or stats outputs.
-$(COMPANION_PDF): $(COMPANION_TEX)
-ifdef TECTONIC
-	cd $(PAPER_DIR) && tectonic --keep-logs companion-ru.tex
-else ifdef LATEXMK
-	cd $(PAPER_DIR) && latexmk -xelatex -interaction=nonstopmode companion-ru.tex
-else
-	@echo "ERROR: neither tectonic nor latexmk found. Install one: brew install tectonic" >&2
-	@exit 1
-endif
 
 # ----- statistical analyses (one rule per script) ----------------------------
 
@@ -174,7 +156,7 @@ else
 endif
 
 clean:
-	rm -f $(PDF) $(COMPANION_PDF)
+	rm -f $(PDF)
 	rm -f $(PAPER_DIR)/*.aux $(PAPER_DIR)/*.log $(PAPER_DIR)/*.out
 	rm -f $(PAPER_DIR)/*.bbl $(PAPER_DIR)/*.blg $(PAPER_DIR)/*.toc
 	rm -f $(CHECK_COUNTS_STAMP)
