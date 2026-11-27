@@ -79,57 +79,57 @@
       "@type": "cr:FileSet",
       "@id": "inference-telemetry",
       "name": "inference-telemetry",
-      "description": "Per-episode telemetry (parquet) for VLA inference rollouts: end-effector pose, joint state, gripper command, gripper measurement, action chunks. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "description": "Per-episode telemetry (parquet) for VLA inference rollouts: end-effector pose, joint state, gripper command, gripper measurement, action chunks. Hosted at https://data.phail.ai/datasets/phail/v1.0/inference/.",
       "encodingFormat": "application/x-parquet",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/*.parquet"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/inference/**/*.parquet"
     },
     {
       "@type": "cr:FileSet",
       "@id": "inference-video",
       "name": "inference-video",
-      "description": "Per-episode synchronized exterior and wrist RGB video for VLA inference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "description": "Per-episode synchronized exterior and wrist RGB video for VLA inference rollouts. Hosted at https://data.phail.ai/datasets/phail/v1.0/inference/.",
       "encodingFormat": "video/mp4",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/*.mp4"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/inference/**/*.mp4"
     },
     {
       "@type": "cr:FileSet",
       "@id": "inference-meta",
       "name": "inference-meta",
-      "description": "Per-episode metadata for VLA inference rollouts: static.json (operator-recorded eval fields including model, object, outcome, item counts) and meta.json (durations, timestamps). Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/.",
+      "description": "Per-episode metadata for VLA inference rollouts: static.json (operator-recorded eval fields including model, object, outcome, item counts) and meta.json (durations, timestamps). Hosted at https://data.phail.ai/datasets/phail/v1.0/inference/.",
       "encodingFormat": "application/json",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/inference/**/static.json"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/inference/**/static.json"
     },
     {
       "@type": "cr:FileSet",
       "@id": "human-telemetry",
       "name": "human-telemetry",
-      "description": "Per-episode telemetry for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "description": "Per-episode telemetry for the teleoperated human reference rollouts. Hosted at https://data.phail.ai/datasets/phail/v1.0/human/.",
       "encodingFormat": "application/x-parquet",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/*.parquet"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/human/**/*.parquet"
     },
     {
       "@type": "cr:FileSet",
       "@id": "human-video",
       "name": "human-video",
-      "description": "Per-episode synchronized exterior and wrist RGB video for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "description": "Per-episode synchronized exterior and wrist RGB video for the teleoperated human reference rollouts. Hosted at https://data.phail.ai/datasets/phail/v1.0/human/.",
       "encodingFormat": "video/mp4",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/*.mp4"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/human/**/*.mp4"
     },
     {
       "@type": "cr:FileSet",
       "@id": "human-meta",
       "name": "human-meta",
-      "description": "Per-episode metadata for the teleoperated human reference rollouts. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/.",
+      "description": "Per-episode metadata for the teleoperated human reference rollouts. Hosted at https://data.phail.ai/datasets/phail/v1.0/human/.",
       "encodingFormat": "application/json",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/human/**/static.json"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/human/**/static.json"
     },
     {
       "@type": "cr:FileSet",
       "@id": "training-data",
       "name": "training-data",
-      "description": "352-episode fine-tuning dataset released as the training corpus for the four evaluated VLAs. Contains the same per-episode artifacts (telemetry, video, metadata) as the inference and human subtrees. Hosted at https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/training/.",
+      "description": "352-episode fine-tuning dataset released as the training corpus for the four evaluated VLAs. Contains the same per-episode artifacts (telemetry, video, metadata) as the inference and human subtrees. Hosted at https://data.phail.ai/datasets/phail/v1.0/training/.",
       "encodingFormat": "application/octet-stream",
-      "includes": "https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/training/**"
+      "includes": "https://data.phail.ai/datasets/phail/v1.0/training/**"
     }
   ],
 
