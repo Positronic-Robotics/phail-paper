@@ -73,8 +73,7 @@ sync. To force a re-download, delete that cache directory.
 
 ## Outputs
 
-Files end up under `out/data_audit/`. The repository tracks them, so a new run
-shows its changes in `git diff`:
+Files end up under `out/data_audit/` and are *not* committed:
 
 * `episodes.json` — list of 1013 records, one per episode. Schema:
   ```jsonc
