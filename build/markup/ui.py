@@ -75,7 +75,7 @@ import pos3
 # Public-S3 profile so pos3 syncs with the phail dataset bucket without
 # needing AWS credentials. Mirrors `build/data_audit/build_index.py`.
 PUBLIC_PROFILE = pos3.Profile(
-    local_name='positronic-public', endpoint='https://storage.eu-north1.nebius.cloud', public=True, region='eu-north1'
+    local_name='positronic-public', endpoint='https://s3.phail.ai', public=True, region='auto'
 )
 
 from positronic.dataset.local_dataset import DiskEpisode

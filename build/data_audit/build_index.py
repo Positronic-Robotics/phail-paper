@@ -45,7 +45,7 @@ from pathlib import Path
 import pos3
 
 PUBLIC_PROFILE = pos3.Profile(
-    local_name='positronic-public', endpoint='https://storage.eu-north1.nebius.cloud', public=True, region='eu-north1'
+    local_name='positronic-public', endpoint='https://s3.phail.ai', public=True, region='auto'
 )
 
 PHAIL_VERSION = 'v1.0'
