@@ -19,8 +19,9 @@ It's also reachable over HTTPS without S3 credentials at
 `https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/`
 — that's the URL used by Toloka and the Run explorer videos. A copy of the
 bucket serves the same keys at `https://data.phail.ai/datasets/phail/v1.0/`,
-and `build_index.py` writes links to that copy. The copy serves single files
-only: it does not list a prefix.
+and `build_index.py` writes links to that copy. That host serves single files
+only. `https://s3.phail.ai` serves the read-only S3 API of the copy with no key,
+and `build_index.py` lists the bucket through it.
 
 The hosted leaderboard at <https://phail.ai/episodes> is the same dataset:
 
