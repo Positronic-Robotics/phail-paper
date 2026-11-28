@@ -273,7 +273,7 @@ context; `features` is the `ReleaseFeatures.to_dict()` view keyed by
   "source": "inference",
   "rel_path": "000000000000/000000000000",
   "public_url": "https://phail.ai/episode/0",
-  "https_dir": "https://storage.../inference/000000000000/000000000000",
+  "https_dir": "https://data.phail.ai/datasets/phail/v1.0/inference/000000000000/000000000000",
   "model": "groot",
   "object": "wooden_spoons",
   "tote_placement": "left",

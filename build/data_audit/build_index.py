@@ -50,7 +50,7 @@ PUBLIC_PROFILE = pos3.Profile(
 
 PHAIL_VERSION = 'v1.0'
 S3_ROOT = f's3://positronic-public/datasets/phail/{PHAIL_VERSION}'
-HTTPS_ROOT = f'https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/{PHAIL_VERSION}'
+HTTPS_ROOT = f'https://data.phail.ai/datasets/phail/{PHAIL_VERSION}'
 
 SOURCES = ('training', 'inference', 'human')
 

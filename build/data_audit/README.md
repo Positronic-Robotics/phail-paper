@@ -17,7 +17,10 @@ s3://positronic-public/datasets/phail/v1.0/
 
 It's also reachable over HTTPS without S3 credentials at
 `https://storage.eu-north1.nebius.cloud/positronic-public/datasets/phail/v1.0/`
-— that's the URL used by Toloka and the Run explorer videos.
+— that's the URL used by Toloka and the Run explorer videos. A copy of the
+bucket serves the same keys at `https://data.phail.ai/datasets/phail/v1.0/`,
+and `build_index.py` writes links to that copy. The copy serves single files
+only: it does not list a prefix.
 
 The hosted leaderboard at <https://phail.ai/episodes> is the same dataset:
 
@@ -78,7 +81,7 @@ Files end up under `out/data_audit/` and are *not* committed:
     "source":          "training" | "inference" | "human",
     "rel_path":        "000000000000/000000000017",
     "s3_dir":          "s3://positronic-public/datasets/phail/v1.0/...",
-    "https_dir":       "https://storage.eu-north1.nebius.cloud/...",
+    "https_dir":       "https://data.phail.ai/...",
     "public_url":      "https://phail.ai/episode/541",
     "model":           "Physical Intelligence Open π₀.₅",
     "raw_model_type":  "openpi",          // empty for baselines
